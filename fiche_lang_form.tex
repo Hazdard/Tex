@@ -1,0 +1,34 @@
+\documentclass[11pt,a4paper]{article}
+\textheight245mm
+\textwidth170mm
+\hoffset-21mm
+\voffset-15mm
+\parindent0pt
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{dsfont}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\renewcommand{\headrulewidth}{1pt}
+\fancyhead[C]{Languages formels}
+\fancyhead[L]{L3 - 2022/2023}
+\fancyhead[R]{D.E.R Informatique}
+
+\renewcommand{\footrulewidth}{1pt}
+\fancyfoot[C]{\thepage} 
+\fancyfoot[L]{Sacha Ben-Arous}
+\fancyfoot[R]{E.N.S Paris-Saclay}
+
+\begin{document}
+
+\section{Définitions :}
+- Un \textit{automate fini déterministe} est un 4-uplet $\mathcal{A} = (Q,\delta, i, F)$ où $Q$ est un ensemble \textit{fini} d'états, $\delta : Q \times \Sigma \to Q \ $ est la fonction de transition, $i$ l'état initial, et $F \subseteq Q$ l'ensemble des états finaux. \\
+
+- Le \textit{language reconnu} par $\mathcal{A}$ est $\mathcal{L}(\mathcal{A}) := \{u \in \Sigma^* \ | \ \delta(i,u) \in F\}$. \\
+
+- Un \textit{automate fini non-déterministe} est un 4-uplet $\mathcal{A} = (Q,T, i, F)$ où $Q$ est un ensemble \textit{fini} d'états, $ T \subseteq Q \times \Sigma	\times Q$ est la table de transition, $i$ l'état initial, et $F \subseteq Q$ l'ensemble des états finaux. \\
+
+\end{document}

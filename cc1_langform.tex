@@ -1,0 +1,41 @@
+\documentclass[10pt,a4paper]{article}
+\textheight245mm
+\textwidth170mm
+\hoffset-21mm
+\voffset-15mm
+\parindent0pt
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{dsfont}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\renewcommand{\headrulewidth}{1pt}
+\fancyhead[C]{Contrôle continu : Langages formels}
+\fancyhead[L]{L3 - 2022/2023}
+\fancyhead[R]{D.E.R Informatique}
+
+\renewcommand{\footrulewidth}{1pt}
+\fancyfoot[C]{\thepage} 
+\fancyfoot[L]{Sacha Ben-Arous}
+\fancyfoot[R]{E.N.S Paris-Saclay}
+
+\begin{document}
+
+\textbf{Exercice 4 : \\} 
+
+En partant de l'automate reconnaissant $L$, on le déterminise (calculable), puis on retire tous les états qui ne sont pas co-accessibles (l'accessibilité étant calculable). On parcourt le graphe à partir de l'état initial en ajoutant chaque lettre qu'on rencontre sur une transition, et dès que l'on rencontre un embranchement, on s'arrête. Le mot ainsi construit correspond au plus grand préfixe commun à tous les mots de $L$.\\
+
+\textbf{Exercice 5 : \\}
+
+1) \ \ \ (a) $\Sigma^*= \overline{\emptyset} $ est \textit{star-free}, donc $a\Sigma^* + b\Sigma^*$ l'est aussi, donc donc son complémentaire est \textit{star-free}, or ce dernier est l'ensemble des mots qui ne commencent ni par $a$, ni par $b$, donc $\{\epsilon\}$. \\
+
+\ \ \ \ \ \ \ (b) Il s'agit du langage $\Sigma^*bab\Sigma^*$ qui est \textit{star-free} d'après ce qui précède. \\
+
+2) $b\Sigma^* + \Sigma^*a + \Sigma^*aa\Sigma^* + \Sigma^*bb\Sigma^*$ est \textit{star-free} d'après ce qui précède, et son complémentaire est l'ensemble des mot qui : ne commencent pas par $b$ (resp. finissent pas par $a$), donc commencent par $a$ (resp. finissent par $b$), et ne contiennent pas les facteurs $aa$ et $bb$. Ses seuls facteurs possibles sont donc $ab$ ou $ba$, or il ne peut commencer par $bab$, donc commence forcément par $ab$, et par récurrence immédiate sur la longueur des mots présent dans ce langage, on montre qu'il est exactement égal à $(ab)^*$ qui est donc \textit{star-free}. \\
+
+3) Montrer que $L_2$ est \textit{star-free} est équivalent à montrer que $(b^* + ab)^*$ est \textit{star-free}. Or c'est exactement les mots tels que tout $a$ est suivi d'un $b$. Son complémentaire est donc $ \Sigma^*aa\Sigma^* + \Sigma^*a $ qui est \textit{star-free}. On en déduit que $L_2$ est \textit{star-free}.
+
+\end{document}

@@ -1,0 +1,145 @@
+\documentclass[11pt,a4paper]{article}
+\textheight245mm
+\textwidth170mm
+\hoffset-21mm
+\voffset-15mm
+\parindent0pt
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{dsfont}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+
+\usepackage{array,multirow,makecell}
+\setcellgapes{4pt}
+\makegapedcells
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash }b{#1}}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash }b{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash }b{#1}}
+
+
+\renewcommand{\headrulewidth}{1pt}
+\fancyhead[C]{Logique}
+\fancyhead[L]{L3 - 2022/2023}
+\fancyhead[R]{D.E.R Informatique}
+
+\renewcommand{\footrulewidth}{1pt}
+\fancyfoot[C]{\thepage} 
+\fancyfoot[L]{Sacha Ben-Arous}
+\fancyfoot[R]{E.N.S Paris-Saclay}
+
+\begin{document}
+
+\section{Définitions}
+
+\ \ \ \ \ - Les \textbf{règles d'inférence} permettent de définir la plus petite relation (rappel : il faut voir une relation comme une partie de l'espace produit) qui vérifie un certain nombre de règles précises. Une règle d'inférence se note { \Large $\frac{t_1 \in R \ \dots \ t_n \in R}{t \in R}$ } \ avec les hypothèses au numérateur et la conclusion au dénominateur. \\
+
+\ \ \ \ \ - Les \textbf{expressions} sont construites à partir de \textbf{symboles primitifs} et éventuellement de \textbf{variables}. \\
+
+\ \ \ \ \ - Pour définir les expressions correctes (on dira aussi terme), on part de
+symboles et de contraintes sur ces symboles.
+\begin{itemize}
+\item{} $\mathcal{S}$ ensemble fini de symboles (appelés \textbf{sortes}) qui permettent de classifier les expressions (syntaxiquement).
+\item{} $\mathcal{F}$ ensemble (fini ou infini) de symboles primitifs, chaque symbole est associé à une \textbf{arité} de la forme $ \langle s_1, \ \dots	\ , s_n, s \rangle$ avec $n \in \mathbb{N}$ (le nombre d’arguments du symbole) et $s_i, s \in \mathcal{S}$. La sorte $s$ résultat, représente la sorte de l’objet qui est construit par le symbole. L’ensemble $\mathcal{F}$ s’appelle la \textbf{signature} du langage.
+\item{} $ \mathcal{X}$ ensemble infini de \textbf{variables}, à chaque variable est associée une sorte.
+On notera $\mathcal{X}_s$ l’ensemble des variables de sorte $s$.
+\end{itemize}
+
+\ \ \ \ \ - Au lieu de définir un ensemble particulier pour les propositions, on peut les traiter comme un cas particulier d’expression. On ajoute une sorte spécifique PROP, et on ajoute des symboles pour les opérateurs logiques : 
+\begin{itemize}
+\item $\bot$ (absurde, faux), $\top$ (tautologie, vrai) ont pour arité $\langle \text{PROP} \rangle$ 
+\item $\lnot$  (négation, non) a pour arité $ \langle \text{PROP}, \text{PROP} \rangle  $
+\item $\land$ (conjonction, et), $\Rightarrow$ (implication, si/alors), $\lor$ (disjonction, ou) ont pour arité $\langle \text{PROP}, \text{PROP}, \text{PROP} \rangle $
+\end{itemize}
+
+
+\section{Règles de la déduction naturelle}
+
+\begin{tabular}{|C{3cm}|C{6cm}|C{7cm}|}
+  \hline
+  hyp & \multicolumn{2}{c|}{ {\Large $\frac{}{\Gamma \ \vdash A}$}$(A \in \Gamma) $}  \\
+  \hline
+  & Introduction & Élimination \\
+  \hline
+  $\top$ & {\Large $\frac{}{\Gamma \ \vdash \top }$} & \\
+  \hline
+  $\bot$ & & {\Large $\frac{\Gamma,\ \{\lnot C \} \ \vdash \bot}{\Gamma \ \vdash \ C}$} \\
+  \hline
+  $\land$ & {\Large $\frac{\Gamma \ \vdash A \ \ \ \Gamma \ \vdash B}{\Gamma \ \vdash \ A \land B}$} & {\Large $\frac{\Gamma \  \vdash \ A\land B }{\Gamma \  \vdash \ A }$} $ \ \ $ {\Large $\frac{\Gamma \  \vdash \ A\land B }{\Gamma \  \vdash \ B }$} \\
+  \hline
+  $\lor$ & {\Large $\frac{\Gamma \  \vdash \ A }{\Gamma \  \vdash \ A\lor B }$} $ \ \ $ {\Large $\frac{\Gamma \  \vdash \ B }{\Gamma \  \vdash \ A\lor B }$} & {\Large $\frac{\Gamma \  \vdash \ A \lor B \ \ \Gamma,A \ \vdash \ C \ \ \Gamma,B \ \vdash \ C}{\Gamma \  \vdash \ C  }$} \\
+  \hline
+  $\lnot$ & {\Large $\frac{\Gamma,A \  \vdash \ \bot  }{\Gamma \  \vdash \ \lnot A }$}  & {\Large $\frac{\Gamma \ \vdash \ \lnot A \ \ \ \Gamma \ \vdash \ A \  }{\Gamma \  \vdash \ C }$} \\
+  \hline
+  $\Rightarrow$ & {\Large $\frac{\Gamma,A \  \vdash \ B }{\Gamma \  \vdash \ A \Rightarrow B  }$} & {\LARGE $\frac{\Gamma \  \vdash \ A \Rightarrow B \ \ \ \Gamma \ \vdash \ A }{\Gamma \  \vdash \ B }$} \\
+  \hline
+  $\forall$ & {\LARGE $\frac{\Gamma \  \vdash \ P }{\Gamma \  \vdash \  \forall x, \ P}$}$(x \notin Vl(\Gamma))$ & {\LARGE $\frac{\Gamma \  \vdash \ \forall x, \ P }{\Gamma \  \vdash \ P[x \leftarrow t]  }$}\\
+  \hline
+  $\exists$ & {\LARGE $\frac{\Gamma \  \vdash \ P[x\leftarrow t] }{\Gamma \  \vdash \ \exists x, \ P }$} & {\LARGE $\frac{\Gamma \  \vdash \ \exists x, \ P \ \ \ \Gamma, P \ \vdash \ C  }{\Gamma \  \vdash \ C }$}$(x \notin Vl(\Gamma,C))$ \\
+  \hline
+\end{tabular}
+
+\section{Logique dans une théorie}
+
+\ \ \ \ \ - Une \textbf{théorie} est définie par un ensemble de symboles de fonctions et de prédicats (la \textbf{signature} de la théorie) et un ensemble de formules closes (sans variables libres) construites sur ce langage, appelés les \textbf{axiomes} de la théorie. Formules prouvable dans une théorie $\mathcal{A}$ : $\Gamma \ \vdash_\mathcal{A} \ A \ $ ou $\Gamma,\mathcal{A} \ \vdash \ A \ $. \\
+Ajout de la règle Axiome : \ {\Large $\frac{}{\Gamma \ \vdash_\mathcal{A} \ A}$}($A \in \mathcal{A}$) \\
+
+\ \ \ \ \ - Une théorie est \textbf{récursive} s'il existe un algorithme qui étant donné une formule $P$ détermine si $P \in \mathcal{A}$ \\
+
+\ \ \ \ \ - Une théorie est \textbf{contradictoire} si elle vérifie l'une des trois propriétés équivalentes suivantes : 
+\begin{itemize}
+\item Il existe une formule $A$ telle que $\mathcal{A} \ \vdash A \ $ et $\mathcal{A} \ \vdash \lnot A \ $.
+\item Il existe une preuve de l'absurde : $\mathcal{A} \ \vdash \bot$ .
+\item Toutes les propositions sont démontrables : $\mathcal{A} \ \vdash A$ .
+\end{itemize}
+Une théorie qui n'est pas contadictoire est dite \textbf{cohérente}. \\
+
+\ \ \ \ \ - Une théorie est \textbf{décidable} s'il existe un algorithme qui étant donné une formule $P$ détermine si $P$ est démontrable dans la théorie ou non. \\
+
+\ \ \ \ \ - Une théorie est \textbf{complète} si pour toute formule $P$, $P$ ou $\lnot P$ est démontrable dans la théorie.
+
+\section{Théorie de l'égalité}
+
+\ \ \ \ \ - On considère un symbole binaire quelconque, noté $=$ de manière infixe, qui :
+\begin{itemize}
+\item  est réflexif, symétrique, transitif (relation d'équivalence)
+\item Vérifie la congruence/symboles de fonction $f$ (d'arité $n$ quelconque) : \\
+$ \forall \ x_1, \dots , x_n \ y_1 \dots y_n \ (x_1=y_1 \land \dots \land x_n = y_n) \Rightarrow f(x_1, \dots , x_n) = f(y_1, \dots , y_n)  $
+\item Vérifie la congruence/symboles de prédicat $P$ (d'arité $n$ quelconque) : \\
+$ \forall \ x_1, \dots , x_n \ y_1 \dots y_n \ (x_1=y_1 \land \dots \land x_n = y_n) \Rightarrow P(x_1, \dots , x_n) = P(y_1, \dots , y_n)  $
+\end{itemize}
+
+\section{Théorie arithmétique de Peano}
+
+\ \ \ \ \ - On se munit d'un symbole $0$, d'une opération unaire de successeur $S$, d'un prédicat d'égalité, et des axiomes suivants :
+\begin{itemize}
+\item Axiomes pour l'infini : $\begin{cases} \forall x, \ S(x) \neq 0 \\ \forall x,y \ S(x)=S(y) \Rightarrow x=y \end{cases}$
+\item Pas d'autres objets que ceux construits par 0 et $S$ : $ \forall x, \ x=0 \lor \exists y,  x=S(y)$
+\item Schéma d'axiome de récurrence (pour chaque formule $\Phi$) : \\
+$ \forall x_1,\dots,x_n \ \Phi[x\leftarrow 0] \Rightarrow ( \forall x, \ \Phi \Rightarrow \Phi[x\leftarrow S(x)]) \Rightarrow \forall x, \Phi$
+\item Axiome de minimalité (dans une sur-théorie/théorie des classes) : \\
+$\forall_\kappa C, \ 0 \in C \Rightarrow ( \forall x, \ (x \in C \Rightarrow S(x) \in C) \Rightarrow \forall x, x \in C$
+\\
+\\
+\\
+\\
+\end{itemize} 
+\ \ \ \ \ - On se munit des opérations binaires usuelles $+$ et $\times$, définies par :
+\begin{itemize}
+\item $\forall x, \ x + 0 = x$
+\item $\forall x,y, \ x+S(y)=S(x+y)$
+\item $\forall x, \ x \times 0 = 0$
+\item $\forall x,y, \ x\times S(y)=(x \times y)+ x$
+
+\end{itemize}  
+
+
+
+
+
+
+
+\end{document}
