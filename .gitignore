@@ -1,3 +1,5 @@
+mtheme/
+*.sty
 *.gz
 *.aux
 *.log
