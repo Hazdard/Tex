@@ -1,4 +1,8 @@
 mtheme/
+*.nav
+*.out
+*.snm
+*.toc
 *.sty
 *.gz
 *.aux
