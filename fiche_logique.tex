@@ -137,6 +137,74 @@ $\forall_\kappa C, \ 0 \in C \Rightarrow ( \forall x, \ (x \in C \Rightarrow S(x
 \end{itemize}  
 
 
+\section{Interprétation et Environnement}
+
+\ \ \ \ \ - On se munit des \textbf{booléens} $\mathbb{B} = \{V, F \}$ \\
+
+\ \ \ \ \ - On parle de \textbf{sémantique} (sens de la formule) par opposition à la \textbf{syntaxe}
+(forme). On ne connaît la vérité d’une formule qu’après avoir défini l’interprétation
+des symboles (sémantique). \\
+
+\ \ \ \ \ - Si on connait les formules atomiques vraies alors la logique nous dit si
+une \textbf{formule propositionnelle} est vraie ou fausse. \\
+
+\ \ \ \ \ - On note $\mathcal{R}$ l'ensemble des symboles de prédicats (= fonction dont l'arité est $\langle \ \dots , \text{PROP} \rangle \ $) \\
+
+\ \ \ \ \ - Une \textbf{interprétation} $I$ de la signature $(\mathcal{S},\mathcal{F},\mathcal{R})$ est donnée par :
+
+\begin{itemize}
+\item[•] Pour chaque sorte $s$, un ensemble $\mathcal{D}_s$ non vide, appelé \textbf{domaine} d'interpréation (de la sorte $s$).
+\item[•] Pour chaque symbole de fonction $f$ d'arité $\langle s_1, \dots,s_n ,s \rangle $, une fonction $f_I \in \mathcal{D}_{s_1} \times \dots \times \mathcal{D}_{s_n} \to \mathcal{D}_{s}$
+\item[•] Pour chaque symbole de prédicat $R$ d'arité $\langle s_1, \dots,s_n , \text{PROP} \rangle $, une relation $R_I \subseteq \mathcal{D}_{s_1} \times \dots \times \mathcal{D}_{s_n}$
+\end{itemize}
+
+On parlera aussi de \textbf{modèle} ou de \textbf{structure}. \\
+
+\ \ \ \ \ - Un \textbf{environnement} (ou \textbf{valuation}) est une application $\rho$ qui associe un élément de $\mathcal{D}_s$ à chaque variable de $\mathcal{X}$ de sorte $s$. \\
+On note $\mathcal{D} := \bigcup\limits_{s \in S} \mathcal{D}_s$, et on a $\rho \in \mathcal{X} \to \mathcal{D}$. On note $\rho+\{x\to d\}$ l'environnement qui vaut $d$ pour la variable $x$, et $\rho(y)$ pour toute autre variable $y$. \\
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
