@@ -153,7 +153,7 @@ une \textbf{formule propositionnelle} est vraie ou fausse. \\
 \ \ \ \ \ - Une \textbf{interprétation} $I$ de la signature $(\mathcal{S},\mathcal{F},\mathcal{R})$ est donnée par :
 
 \begin{itemize}
-\item[•] Pour chaque sorte $s$, un ensemble $\mathcal{D}_s$ non vide, appelé \textbf{domaine} d'interpréation (de la sorte $s$).
+\item[•] Pour chaque sorte $s$, un ensemble $\mathcal{D}_s$ non vide, appelé \textbf{domaine} d'interprétation (de la sorte $s$).
 \item[•] Pour chaque symbole de fonction $f$ d'arité $\langle s_1, \dots,s_n ,s \rangle $, une fonction $f_I \in \mathcal{D}_{s_1} \times \dots \times \mathcal{D}_{s_n} \to \mathcal{D}_{s}$
 \item[•] Pour chaque symbole de prédicat $R$ d'arité $\langle s_1, \dots,s_n , \text{PROP} \rangle $, une relation $R_I \subseteq \mathcal{D}_{s_1} \times \dots \times \mathcal{D}_{s_n}$
 \end{itemize}
@@ -206,7 +206,13 @@ $A$ et $B$ sont des formules logiques \textbf{équivalentes} si l'une est consé
 
 \section{Correction et Complétude}
 
-\textbf{Théorème :} Soient $\Lambda$ est un ensemble fini de formules,et $P$ une formule. Si $ \Lambda \vdash P$ est prouvable en déduction naturelle, alors $\Lambda \models P$.
+\textbf{Théorème (Correction) : }Soient $\Gamma$ est un ensemble fini de formules, et $P$ une formule. Si $ \Gamma \vdash P$ est prouvable en déduction naturelle, alors $\Gamma \models P$. \\
+Rq : Cela reste trivialement vrai si l'on se donne des axiomes. \\
+Rq : Si une théorie a un modèle, alors elle est cohérente. \\
+
+\textbf{Théorème (Complétude) : }Soient une théorie $\mathcal{A}$, et une formule $P$. Si $P$ est vraie dans toute interprétation qui rend vraies les formules de $\mathcal{A}$, alors la formule $P$ 	admet une preuve en déduction naturelle dans la théorie $\mathcal{A}$. \\
+Rq : Il s'agit de la réciproque du théorème précédent. \\
+Rq : Ce théorème est donc équivalent à : Si $\mathcal{A}$ est cohérente, alors elle admet un modèle.
 
 
 
