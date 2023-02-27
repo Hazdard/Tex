@@ -184,7 +184,7 @@ On se donne $a$ et $b$ des constantes, $f$ un symbole de fonction.
 
 \ \ \ \ \ - Soit $\rho \in \mathcal{X} \to \mathcal{D}$ un environnement. \\
 
-On définie $\text{val}_I(\rho,t)$ la \textbf{valeur d'un terme} $t \in \mathcal{T}(\mathcal{F},\mathcal{X})$ de sorte $s$ dans l'interprétation $I$ et l'environnement $\rho$. C'est un élément du domaine $\mathcal{D}_s$ : \[\text{val}_I(\rho,x):=x \ \ ; \ \ \text{val}_I(\rho,f(t_1,\dots,t_n)):=f_I(\text{val}_I(\rho,t_1),\dots,\text{val}_I(\rho,t_n))\]
+On définie $\text{val}_I(\rho,t)$ la \textbf{valeur d'un terme} $t \in \mathcal{T}(\mathcal{F},\mathcal{X})$ de sorte $s$ dans l'interprétation $I$ et l'environnement $\rho$. C'est un élément du domaine $\mathcal{D}_s$ : \[\text{val}_I(\rho,x):=\rho(x) \ \ ; \ \ \text{val}_I(\rho,f(t_1,\dots,t_n)):=f_I(\text{val}_I(\rho,t_1),\dots,\text{val}_I(\rho,t_n))\]
 On définie $\text{val}_I(\rho,P)$ la \textbf{valeur d'une formule} $P$ dans l'interprétation $I$ et l'environnement $\rho$ :
 \begin{itemize}
 \item[•]$\text{val}_I(\rho,\bot) =\ $F
@@ -194,8 +194,8 @@ On définie $\text{val}_I(\rho,P)$ la \textbf{valeur d'une formule} $P$ dans l'i
 \item[•]$\text{val}_I(\rho,\lnot A) = \begin{cases} V \ \text{si } \text{val}_I(\rho,A) = F \\ F \ \text{sinon} \end{cases} $
 \item[•]$\text{val}_I(\rho,A \land B) = \begin{cases} \text{val}_I(\rho,B) \ \text{si } \text{val}_I(\rho,A) = V \\ F \ \text{sinon} \end{cases} $
 \item[•]$\text{val}_I(\rho,A \Rightarrow B) = \begin{cases} \text{val}_I(\rho,B) \ \text{si } \text{val}_I(\rho,A) = V \\ V \ \text{sinon} \end{cases} $
-\item[•]$\text{val}_I(\rho,\forall x, A) = \begin{cases} V \ \text{si } \{\text{val}_I(\rho+\{x \to d\},A) \ | \ d \in \mathcal{D} \} = \{V\} \\ F \ \text{sinon} \end{cases} $
-\item[•]$\text{val}_I(\rho,\exists x, A) = \begin{cases} V \ \text{si } V \in \{\text{val}_I(\rho+\{x \to d\},A) \ | \ d \in \mathcal{D} \} \\ F \ \text{sinon} \end{cases} $
+\item[•]$\text{val}_I(\rho,\forall x \ A) = \begin{cases} V \ \text{si } \{\text{val}_I(\rho+\{x \to d\},A) \ | \ d \in \mathcal{D} \} = \{V\} \\ F \ \text{sinon} \end{cases} $
+\item[•]$\text{val}_I(\rho,\exists x \ A) = \begin{cases} V \ \text{si } V \in \{\text{val}_I(\rho+\{x \to d\},A) \ | \ d \in \mathcal{D} \} \\ F \ \text{sinon} \end{cases} $
 \end{itemize} 
 
 On note $I,\rho	\models A$ lorsque la formule $A$ est vraie dans l'interprétation $I$ et l'environnement $\rho$ (resp.  $I,\rho \not\models A$ lorsque $A$ est fausse). Si $A$ est close, alors sa valeur dans une interprétation ne dépend pas de l’environnement et on écrira simplement $I \models A$. \\
@@ -207,13 +207,25 @@ $A$ et $B$ sont des formules logiques \textbf{équivalentes} si l'une est consé
 \section{Correction et Complétude}
 
 \textbf{Théorème (Correction) : }Soient $\Gamma$ est un ensemble fini de formules, et $P$ une formule. Si $ \Gamma \vdash P$ est prouvable en déduction naturelle, alors $\Gamma \models P$. \\
-Rq : Cela reste trivialement vrai si l'on se donne des axiomes. \\
-Rq : Si une théorie a un modèle, alors elle est cohérente. \\
+
+\underline{Rq} : Cela reste trivialement vrai si l'on rajoute des axiomes. \\
+\underline{Rq} : Si une théorie a un modèle, alors elle est cohérente. \\
 
 \textbf{Théorème (Complétude) : }Soient une théorie $\mathcal{A}$, et une formule $P$. Si $P$ est vraie dans toute interprétation qui rend vraies les formules de $\mathcal{A}$, alors la formule $P$ 	admet une preuve en déduction naturelle dans la théorie $\mathcal{A}$. \\
-Rq : Il s'agit de la réciproque du théorème précédent. \\
-Rq : Ce théorème est donc équivalent à : Si $\mathcal{A}$ est cohérente, alors elle admet un modèle.
 
+\underline{Rq} : Il s'agit de la réciproque du théorème précédent. \\
+\underline{Rq} : Ce théorème est donc équivalent à : Si $\mathcal{A}$ est cohérente, alors elle admet un modèle.
+\underline{Rq} : La preuve de ce derneir théorème repose entièremment sur le fait qu'il y a un nombre dénombrable de formules atomiques.\\
+
+\ \ \ \ \ - Soit $A$ une formule sur une signature $(\mathcal{S},\mathcal{F},\mathcal{R})$. On a les définitions suivantes :
+\begin{itemize}
+\item[•] $A$ est \textbf{valide} si pour toute interprétation $I$ et environnement $\rho$, on a que : $I,\rho \models A$. \\ On écrit alors $\models A$.
+\item[•] $A$ est \textbf{satisfiable} si il existe une interprétation $I$ et un environnement $\rho$ tels qu'on ait : $I,\rho \models A$. \\ Une interprétation et un environnement qui rendent vraie la formule forment un \textbf{modèle} de la formule.
+\item[•]  $A$ est \textbf{contradictoire} (ou \textbf{insatisfiable}) si pour toute interprétation $I$ et environnement $\rho$, on a que : $I,\rho \not\models A$.
+\end{itemize}
+Ces définitions s'étendent au cas d'un ensemble de formules $\mathcal{E}$. \\
+
+\underline{Rq} : $P$ est valide ssi $\lnot P$ est insatisfiable ssi $\lnot P$ n'est pas satisfiable.
 
 
 
