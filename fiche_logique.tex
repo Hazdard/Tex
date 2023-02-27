@@ -163,14 +163,50 @@ On parlera aussi de \textbf{modèle} ou de \textbf{structure}. \\
 \ \ \ \ \ - Un \textbf{environnement} (ou \textbf{valuation}) est une application $\rho$ qui associe un élément de $\mathcal{D}_s$ à chaque variable de $\mathcal{X}$ de sorte $s$. \\
 On note $\mathcal{D} := \bigcup\limits_{s \in S} \mathcal{D}_s$, et on a $\rho \in \mathcal{X} \to \mathcal{D}$. On note $\rho+\{x\to d\}$ l'environnement qui vaut $d$ pour la variable $x$, et $\rho(y)$ pour toute autre variable $y$. \\
 
+\ \ \ \ \ - Le \textbf{domaine de Herbrand} d'un language logique de signature $\mathcal{F}$ est donné pour chaque sorte $s$ par l'ensemble $\mathcal{T}(\mathcal{F},s)$ des termes clos de sorte $s$ formés à partir des symboles de $\mathcal{F}$. \\
+Si il n'y a pas de constante dans la signature (i.e de termes d'arité $1$), alors cet ensemble est vide. Dans la suite, on suppose donc que $\mathcal{F}$ contient au moins une constante de chaque sorte $s$. \\
 
+\ \ \ \ \ - Une \textbf{interprétation de Herbrand} est une interprétation $H$ construite sur le domaine $\mathcal{T}(\mathcal{F},s)$ dans laquelle chaque symbole de fonction $f$, d'arité $\langle s_1, \dots,s_n ,s \rangle $ est interprété par une fonction $f_H$ définie par : $f_H(t_1, \dots , t_n) := f(t_1,\dots, t_n)$, avec $t_i \in \mathcal{T}(\mathcal{F},s_i)$. \\
 
+\ \ \ \ \ - La \textbf{base de Herbrand} est l'ensemble des formules atomiques closes construites sur le langage. \\
 
+\ \ \ \ \ - Un \textbf{modèle de Herbrand} est défini en assignant des valeurs de vérité à
+chacune des formules de la base de Herbrand (i.e à chaque formule
+atomique close). \\ \\ \\ \\
 
+\textbf{Exemples : } 
+On se donne $a$ et $b$ des constantes, $f$ un symbole de fonction.
+\begin{itemize}
+\item[•] Pour la formule : $\forall x ,y \ R(x,a) \land \lnot R(b,y)$, \ on a  $\begin{cases} D_H = \{ a,b \} \\ B_H =\{ R(a,a),R(a,b),R(b,a),R(b,b) \} \end{cases}$
+\item[•] Pour la formule : $\forall x,y \ R(x,a) \Rightarrow R(y,f(y))$, \ on a $\begin{cases} D_H = \{ a,f(a),f^2(a), \dots \} \\ B_H =\{ R(a,a),R(a,f(a)),R(f(a),a),R(f(a),f(a)),\dots\} \end{cases}$
+\\
+\end{itemize} 
 
+\ \ \ \ \ - Soit $\rho \in \mathcal{X} \to \mathcal{D}$ un environnement. \\
 
+On définie $\text{val}_I(\rho,t)$ la \textbf{valeur d'un terme} $t \in \mathcal{T}(\mathcal{F},\mathcal{X})$ de sorte $s$ dans l'interprétation $I$ et l'environnement $\rho$. C'est un élément du domaine $\mathcal{D}_s$ : \[\text{val}_I(\rho,x):=x \ \ ; \ \ \text{val}_I(\rho,f(t_1,\dots,t_n)):=f_I(\text{val}_I(\rho,t_1),\dots,\text{val}_I(\rho,t_n))\]
+On définie $\text{val}_I(\rho,P)$ la \textbf{valeur d'une formule} $P$ dans l'interprétation $I$ et l'environnement $\rho$ :
+\begin{itemize}
+\item[•]$\text{val}_I(\rho,\bot) =\ $F
+\item[•]$\text{val}_I(\rho,\top) =\ $V
+\item[•]$\text{val}_I(P[x \leftarrow t]) = \text{val}_I(\rho+\{x \to \text{val}_I(\rho,t)\},P) \} $
+\item[•]$\text{val}_I(\rho,R(t_1,\dots,t_n)) = \begin{cases} V \ \text{si } R_I(\text{val}_I(\rho,t_1),\dots,\text{val}_I(\rho,t_n)) \\ F \ \text{sinon} \end{cases} $
+\item[•]$\text{val}_I(\rho,\lnot A) = \begin{cases} V \ \text{si } \text{val}_I(\rho,A) = F \\ F \ \text{sinon} \end{cases} $
+\item[•]$\text{val}_I(\rho,A \land B) = \begin{cases} \text{val}_I(\rho,B) \ \text{si } \text{val}_I(\rho,A) = V \\ F \ \text{sinon} \end{cases} $
+\item[•]$\text{val}_I(\rho,A \Rightarrow B) = \begin{cases} \text{val}_I(\rho,B) \ \text{si } \text{val}_I(\rho,A) = V \\ V \ \text{sinon} \end{cases} $
+\item[•]$\text{val}_I(\rho,\forall x, A) = \begin{cases} V \ \text{si } \{\text{val}_I(\rho+\{x \to d\},A) \ | \ d \in \mathcal{D} \} = \{V\} \\ F \ \text{sinon} \end{cases} $
+\item[•]$\text{val}_I(\rho,\exists x, A) = \begin{cases} V \ \text{si } V \in \{\text{val}_I(\rho+\{x \to d\},A) \ | \ d \in \mathcal{D} \} \\ F \ \text{sinon} \end{cases} $
+\end{itemize} 
 
+On note $I,\rho	\models A$ lorsque la formule $A$ est vraie dans l'interprétation $I$ et l'environnement $\rho$ (resp.  $I,\rho \not\models A$ lorsque $A$ est fausse). Si $A$ est close, alors sa valeur dans une interprétation ne dépend pas de l’environnement et on écrira simplement $I \models A$. \\
 
+\ \ \ \ \ - Si $\mathcal{E}$ est un ensemble de formules, on note $I,\rho \models \mathcal{E}$ le fait que : $\forall P \in \mathcal{E}, I,\rho \models P$. \\
+Si $A$ est une formule, on dit que \textbf{$A$ est une conséquence logique} de $\mathcal{E}$ si pour toute interprétation $I$ et environnement $\rho$, on a $I, \rho \models \mathcal{E} \Rightarrow I,\rho \models A$. \\
+$A$ et $B$ sont des formules logiques \textbf{équivalentes} si l'une est conséquence de l'autre et réciproquement. \\
+
+\section{Correction et Complétude}
+
+\textbf{Théorème :} Soient $\Lambda$ est un ensemble fini de formules,et $P$ une formule. Si $ \Lambda \vdash P$ est prouvable en déduction naturelle, alors $\Lambda \models P$.
 
 
 
