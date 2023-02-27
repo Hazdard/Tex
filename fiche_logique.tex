@@ -255,10 +255,16 @@ Cette transformation s'appelle la \textbf{skolémisation}, et $\forall \ x_1,\do
 
 \textbf{Théorème (Compacité) :} Soit $\mathcal{E}$ un ensemble de formules propositionnelles. Si $\mathcal{E}$ est insatisfiable, alors il existe un sous-ensemble fini de $\mathcal{E}$ qui est insatisfaisable. \\
 
-\underline{Rq} : La preuve est ridicule, on utilise au moins deux fois l'axiome du choix (dont une fois passée sous silence...), en gros il faut considérer d'abord le cas dénombrable et se représenter l'hypothèse sous la forme d'un arbre. Généralisation avec zornette.
+\underline{Rq} : La preuve est ridicule, on utilise au moins deux fois l'axiome du choix (dont une fois passée sous silence ...), en gros il faut considérer d'abord le cas dénombrable et se représenter l'hypothèse sous la forme d'un arbre. Généralisation avec zornette. \\
 
+\ \ \ \ \ - Une formule logique est dite \textbf{universelle} si elle est de la forme \[\forall x_1,\dots,x_n \ A\] avec $A$ une formule sans quantificateurs. \\
 
+\textbf{Lemme :} Une formule universelle close est satisfaisable si et seulement si il existe une interprétation de Herbrand qui rend vraie la formule. \\
 
+\ \ \ \ \ - Si $A$ est une formule dont les variables libres sont $\{x_1,\dots,x_n\}$, alors une formule $A[x_1 \leftarrow t_1, \dots, x_n \leftarrow t_n]$ où $t_1,\dots,t_n \in \mathcal{T}(\mathcal{F})$ est appelée \textbf{instance close} de $A$. \\
+
+\textbf{Théorème (Herbrand) :} Si $B:=\forall x_1,\dots,x_n \ A$ est une \textit{formule universelle close} avec $A$ sans quantificateurs, alors :
+\[B \ \text{satisfaisable} \Leftrightarrow \text{Tout sous-ensemble fini} \  \{A_1,\dots,A_p\} \text{ d'instances closes de } A \text{ est satisfaisable.} \]
 
 
 
