@@ -214,8 +214,8 @@ $A$ et $B$ sont des formules logiques \textbf{équivalentes} si l'une est consé
 \textbf{Théorème (Complétude) : }Soient une théorie $\mathcal{A}$, et une formule $P$. Si $P$ est vraie dans toute interprétation qui rend vraies les formules de $\mathcal{A}$, alors la formule $P$ 	admet une preuve en déduction naturelle dans la théorie $\mathcal{A}$. \\
 
 \underline{Rq} : Il s'agit de la réciproque du théorème précédent. \\
-\underline{Rq} : Ce théorème est donc équivalent à : Si $\mathcal{A}$ est cohérente, alors elle admet un modèle.
-\underline{Rq} : La preuve de ce derneir théorème repose entièremment sur le fait qu'il y a un nombre dénombrable de formules atomiques.\\
+\underline{Rq} : On déduit à partir d'une remarque précédente que : $\mathcal{A}$ est cohérente $\Leftrightarrow$ $\mathcal{A}$ admet un modèle. \\
+\underline{Rq} : La preuve de ce derneir théorème repose entièremment sur le fait qu'il y ait un nombre dénombrable de formules atomiques.\\
 
 \ \ \ \ \ - Soit $A$ une formule sur une signature $(\mathcal{S},\mathcal{F},\mathcal{R})$. On a les définitions suivantes :
 \begin{itemize}
@@ -225,15 +225,37 @@ $A$ et $B$ sont des formules logiques \textbf{équivalentes} si l'une est consé
 \end{itemize}
 Ces définitions s'étendent au cas d'un ensemble de formules $\mathcal{E}$. \\
 
-\underline{Rq} : $P$ est valide ssi $\lnot P$ est insatisfiable ssi $\lnot P$ n'est pas satisfiable.
+\underline{Rq} : $P$ est valide $\Leftrightarrow$ $\lnot P$ est insatisfiable $\Leftrightarrow$ $\lnot P$ n'est pas satisfiable. \\
 
+\ \ \ \ \ - Une formule est dite en \textbf{forme normale de négation} si elle ne contient que les connecteurs logiques $\land$, $\lor$, les quantificateurs $\forall$, $\exists$ et que le symbole de négation $\lnot$ n’apparait que devant une formule atomique $R(t_1, . . . , t_n)$. \\
 
+\section{Skolemisation}
 
+\ \ \ \ \ - Soit $A$ en forme normale de négation dans laquelle apparaît une sous-formule $\exists y, B$. On procède de la manière suivante pour \textbf{éliminer le quantificateur existentiel} :
+\begin{enumerate}
+\item Indentification des variables libres de $\exists y, B$ : $\{x_1, \dots, x_n \}$
+\item On introduit un nouveau symbole de fonction $f$ à $n$ arguments
+\item On remplace la formule $\exists y, B$ par $B[y \leftarrow f(x_1,\dots,x_n)]$
+\end{enumerate}
+Alors, si on note $A'$ la formule obtenue, on a que $A' \models A$. De plus, tout modèle de $A$ peut être transformé en un modèle de $A'$ qui coincide avec celui de $A$, sauf pour l'interprétation du nouveau symbole $f$. \\ \\
 
+\ \ \ \ \ - Soit $A$ une formule en forme normale de négation, et $B$ une formule obtenue par élimination des quantificateurs existentiels de $A$. Alors on a que si $B$ est valide (resp. satisfiable) (resp. insatisfiable) alors $A$ l'est aussi. 
+\\
 
+\ \ \ \ \ - Soit $A$ une formule \textit{close}, alors il existe une formule $B$ en forme normale de négation, et sans quantificateurs, telle que si $Vl(B)=\{x_1,\dots,x_n\}$, on a :
+\begin{itemize}
+\item $\forall \ x_1,\dots,x_n \ B \models A$
+\item Si $A$ a un modèle, alors $\forall \ x_1,\dots,x_n \ B $ aussi.
+\end{itemize}
+Cette transformation s'appelle la \textbf{skolémisation}, et $\forall \ x_1,\dots,x_n \ B$ est la \textbf{forme de Skolem} de $A$. \\
 
+\underline{Rq} : On a ainsi que : $A$ est valide $\Leftrightarrow$ La forme skolémisée de $\lnot A$ est insatisfaisable.
 
+\section{Compacité et Satisfaisabilité}
 
+\textbf{Théorème (Compacité) :} Soit $\mathcal{E}$ un ensemble de formules propositionnelles. Si $\mathcal{E}$ est insatisfiable, alors il existe un sous-ensemble fini de $\mathcal{E}$ qui est insatisfaisable. \\
+
+\underline{Rq} : La preuve est ridicule, on utilise au moins deux fois l'axiome du choix (dont une fois passée sous silence...), en gros il faut considérer d'abord le cas dénombrable et se représenter l'hypothèse sous la forme d'un arbre. Généralisation avec zornette.
 
 
 
