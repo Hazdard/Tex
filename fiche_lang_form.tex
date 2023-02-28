@@ -13,7 +13,7 @@
 \pagestyle{fancy}
 
 \renewcommand{\headrulewidth}{1pt}
-\fancyhead[C]{Languages formels}
+\fancyhead[C]{Langages formels}
 \fancyhead[L]{L3 - 2022/2023}
 \fancyhead[R]{D.E.R Informatique}
 
@@ -24,11 +24,86 @@
 
 \begin{document}
 
-\section{Définitions :}
-- Un \textit{automate fini déterministe} est un 4-uplet $\mathcal{A} = (Q,\delta, i, F)$ où $Q$ est un ensemble \textit{fini} d'états, $\delta : Q \times \Sigma \to Q \ $ est la fonction de transition, $i$ l'état initial, et $F \subseteq Q$ l'ensemble des états finaux. \\
+\section{Introduction}
+\ \ \ \ \ - Un \textbf{automate fini déterministe} est un 4-uplet $\mathcal{A} = (Q,\delta, i, F)$ où $Q$ est un ensemble \textit{fini} d'états, $\delta : Q \times \Sigma \to Q \ $ est la fonction de transition, $i$ l'état initial, et $F \subseteq Q$ l'ensemble des états finaux. \\
 
-- Le \textit{language reconnu} par $\mathcal{A}$ est $\mathcal{L}(\mathcal{A}) := \{u \in \Sigma^* \ | \ \delta(i,u) \in F\}$. \\
+\ \ \ \ \ - Le \textbf{language reconnu} par $\mathcal{A}$ est $\mathcal{L}(\mathcal{A}) := \{u \in \Sigma^* \ | \ \delta(i,u) \in F\}$. Un langage $L \subseteq \Sigma^*$ est dit \textbf{reconnaissable} si il existe un automate fini $\mathcal{A}$ tel que $L = \mathcal{L}(\mathcal{A})$\\
 
-- Un \textit{automate fini non-déterministe} est un 4-uplet $\mathcal{A} = (Q,T, i, F)$ où $Q$ est un ensemble \textit{fini} d'états, $ T \subseteq Q \times \Sigma	\times Q$ est la table de transition, $i$ l'état initial, et $F \subseteq Q$ l'ensemble des états finaux. \\
+\ \ \ \ \ - Un \textbf{automate fini non-déterministe} est un 4-uplet $\mathcal{A} = (Q,T, i, F)$ où $Q$ est un ensemble \textit{fini} d'états, $ T \subseteq Q \times \Sigma	\times Q$ est la table de transition, $i$ l'état initial, et $F \subseteq Q$ l'ensemble des états finaux. \\
+
+\ \ \ \ \ - On peut \textbf{déterminiser} tout automate fini. \\
+
+\underline{Rq} : La preuve se fait à l'aide de l'automate des parties. \\
+\underline{Rq} : On peut tester en $O(|\omega|\cdot|Q|^2)$ si $\omega \in \mathcal{L}(\mathcal{A})$\\
+
+\ \ \ \ \ - On peut \textbf{émonder} tout automate fini. \\
+
+\ \ \ \ \ - Les automates avec des $\epsilon$-transitions sont équivalents aux automates classiques.  \\
+
+\underline{Rq} : On note $Rec(\Sigma^*)$ la famille des langages reconnaissable sur $\Sigma^*$. \\
+
+\ \ \ \ \ - $Rec(\Sigma^*)$ est \textbf{fermée} par union, intersection, complément et quotient. \\
+
+\underline{Rappel} : $K^{-1}L := \{\omega \in \Sigma^*\ | \ \exists (k,l) \in K\times L, \ \omega =kl \}$ est appelé quotient (à gauche) de $L \in Rec(\Sigma^*)$ par $K \subseteq \Sigma^*$.  \\
+\underline{Rq} : Rec($\Sigma^*$) est de même fermée par préfixe, suffixe et facteur. \\
+
+\ \ \ \ \ - Soit $f : A^* \to B^*$ un morphisme, $L_1 \in$ Rec($A^*$),  $L_2 \in$ Rec($B^*$), on a : $\begin{cases} f(L_1) \in \text{Rec}(B^*) \\ f^{-1}(L_2) \in \text{Rec}(A^*) \end{cases}$. \\
+
+\ \ \ \ \ - Une \textbf{substitution} est une application $\sigma : A \to \mathcal{P}(B^*)$. Elle s'étend naturellement en morphisme de $A^*$ vers $\mathcal{P}(B^*)$. \\ On adopte les notations suivantes : $\begin{cases} \text{Pour } L \subseteq A^*, \ \sigma(L) := \bigcup\limits_{u \in L} \sigma(u) \\ \text{Pour } L \subseteq B^*, \ \sigma^{-1}(L) := \{u \in A^* \ | \ \sigma(u)\cap L \neq \emptyset \} \end{cases}$ \\
+Une substitution est \textbf{rationnelle} si elle est définie par une application $\sigma : A \to \text{Rec}(B^*)$. \\
+
+\ \ \ \ \ - La famille des langages reconnaissables est fermée par substitution rationnelle et substitution rationnelle inverse, i.e si $\sigma : A \to \text{Rec}(B^*)$, on a :$\begin{cases} \forall L \in \text{Rec}(A^*), \sigma(L) \in \text{Rec}(B^*) \\ \forall L \in \text{Rec}(B^*), \sigma^{-1}(L) \in \text{Rec}(A^*) \end{cases}$. \\
+
+\underline{Résumé :} Les langages reconnaissables sont clos par union, intersection, complément, quotient, préfixe, suffixe, facteur, morphisme et substitution (inverses). \\ \\ \\ \\ \\
+
+\section{Langages rationnels}
+\ \ \ \ \ - L'ensemble des expressions \textbf{rationnelles} $\mathcal{E}$ est le plus petit ensemble qui contient $\Sigma$, et qui est stable par $+, \cdot$ et  $*$. Un langage $L$ est dit \textbf{rationnel} si il existe une expression rationnelle $e$ telle que $L = \mathcal{L}(e)$. On définit : $ \begin{cases} \mathcal{L}(e+f) :=\mathcal{L}(e)\cup \mathcal{L}(f) \\ \mathcal{L}(e) \cdot \mathcal{L}(f):= \mathcal{L}(e)\cdot \mathcal{L}(f) \\ \mathcal{L}(e^*):=\mathcal{L}(e)^* \end{cases}$ \\
+
+\underline{Rq} : Deux e.r sont dites \textbf{équivalentes} si leurs langages sont égaux. \\
+
+\textbf{Théorème (Kleene) :} Rec$(\Sigma^*) = $ Rat$(\Sigma^*)$ \\
+
+\underline{Rq} : Une démonstration du sens réciproque peut se faire avec l'algo de McNaughton-Yamada, décrit ci-dessous. \\
+
+\textbf{Algorithme (McNaughton-Yamada) :}
+
+\ \ \ \ \ \ Soit $\mathcal{A} = \lbrace Q,T,I,F \rbrace $ un automate ND. On va construire $e\in \mathcal{E}$ telle que $\mathcal{L}(e)=\mathcal{L}(\mathcal{A})$. \\
+On dénote les états de $\mathcal{A}$  par $\{1,\dots,n\}$. On note $L_{p,q}$ (resp. $L_{p,q}^{(k)}$) le langage accepté par $\mathcal{A}$ avec $p$ initial et $q$ final (resp. et ne passant que par les états $1,\dots, k$ entre $p$ et $q$). \\
+On va exprimer $L_{p,q}^{(k)}$ par une expression rationnelle $e_{p,q}^{(k)}$, calculée récursivement :
+\begin{itemize}
+\item $e_{p,q}^{(0)} = \Sigma\{a \ | \ p \xrightarrow{a} q \}$
+\item Pour $ 1 \leq k \leq n$, $e_{p,q}^{(k)}$ = $e_{p,q}^{(k-1)} + e_{p,q}^{(k-1)}(e_{k,k}^{(k-1)})^*e_{p,q}^{(k-1)}$ 
+\end{itemize}
+Alors, $L_{p,q}^{(k)} = \begin{cases} \mathcal{L}(e_{p,q}^{(n)}) \ \ \ \text{si} \ p \neq q \\ \mathcal{L}(e_{p,q}^{(n)} + \emptyset^*) \ \ \ \text{si} \ p = q \end{cases}$, et donc $\mathcal{L}(\mathcal{A})=\bigcup\limits_{i \in I}\bigcup\limits_{f \in F} L_{i,f}$ .
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \end{document}

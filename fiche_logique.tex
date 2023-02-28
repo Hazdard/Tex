@@ -256,7 +256,7 @@ Cette transformation s'appelle la \textbf{skolémisation}, et $\forall \ x_1,\do
 
 \underline{Rq} : Ce théorème est aussi valide dans le cas de formule du calcul des prédicats, grâce au théorème de Herbrand.
 
-\underline{Rq} : La preuve est ridicule, on utilise au moins deux fois l'axiome du choix (dont une fois passée sous silence ...), en gros il faut considérer d'abord le cas dénombrable et se représenter l'hypothèse sous la forme d'un arbre binaire. Généralisation avec zornette. \\
+\underline{Rq} : La preuve est ridicule, on utilise au moins deux fois l'axiome du choix (dont une fois passée sous silence ...), en gros il faut considérer d'abord le cas dénombrable et se représenter l'hypothèse sous la forme d'un arbre binaire, puis König. Généralisation avec zornette. \\
 
 \ \ \ \ \ - Une formule logique est dite \textbf{universelle} si elle est de la forme \[\forall x_1,\dots,x_n \ A\] avec $A$ une formule sans quantificateurs. \\
 
@@ -273,7 +273,9 @@ Cette transformation s'appelle la \textbf{skolémisation}, et $\forall \ x_1,\do
 
 \section{Indécidabilité et incomplétude}
 
-\textbf{Théorème (Indécidabilité de la logique du 1er ordre) :} Les problèmes de satisfaisabilité ainsi que de validité d’une formule du calcul des prédicats sont indécidables dans une théorie sans axiome.
+\textbf{Théorème (Indécidabilité de la logique du 1er ordre) :} Les problèmes de satisfaisabilité ainsi que de validité d’une formule du calcul des prédicats sont indécidables dans une théorie sans axiome. \\
+
+\underline{Rq} : La preuve consiste à se rammener à un problème indécidable, typiquement Halt ou Post (cf slides). \\
 
 
 
