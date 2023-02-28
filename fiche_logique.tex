@@ -137,7 +137,7 @@ $\forall_\kappa C, \ 0 \in C \Rightarrow ( \forall x, \ (x \in C \Rightarrow S(x
 \end{itemize}  
 
 
-\section{Interprétation et Environnement}
+\section{Interprétation et environnement}
 
 \ \ \ \ \ - On se munit des \textbf{booléens} $\mathbb{B} = \{V, F \}$ \\
 
@@ -170,9 +170,7 @@ Si il n'y a pas de constante dans la signature (i.e de termes d'arité $1$), alo
 
 \ \ \ \ \ - La \textbf{base de Herbrand} est l'ensemble des formules atomiques closes construites sur le langage. \\
 
-\ \ \ \ \ - Un \textbf{modèle de Herbrand} est défini en assignant des valeurs de vérité à
-chacune des formules de la base de Herbrand (i.e à chaque formule
-atomique close). \\ \\ \\ \\
+\ \ \ \ \ - Un \textbf{modèle de Herbrand} est défini en assignant des valeurs de vérité à chacune des formules de la base de Herbrand (i.e à chaque formule atomique close). \\ \\ \\ \\
 
 \textbf{Exemples : } 
 On se donne $a$ et $b$ des constantes, $f$ un symbole de fonction.
@@ -189,7 +187,7 @@ On définie $\text{val}_I(\rho,P)$ la \textbf{valeur d'une formule} $P$ dans l'i
 \begin{itemize}
 \item[•]$\text{val}_I(\rho,\bot) =\ $F
 \item[•]$\text{val}_I(\rho,\top) =\ $V
-\item[•]$\text{val}_I(P[x \leftarrow t]) = \text{val}_I(\rho+\{x \to \text{val}_I(\rho,t)\},P) \} $
+\item[•]$\text{val}_I(\rho,P[x \leftarrow t]) = \text{val}_I(\rho+\{x \to \text{val}_I(\rho,t)\},P) \} $
 \item[•]$\text{val}_I(\rho,R(t_1,\dots,t_n)) = \begin{cases} V \ \text{si } R_I(\text{val}_I(\rho,t_1),\dots,\text{val}_I(\rho,t_n)) \\ F \ \text{sinon} \end{cases} $
 \item[•]$\text{val}_I(\rho,\lnot A) = \begin{cases} V \ \text{si } \text{val}_I(\rho,A) = F \\ F \ \text{sinon} \end{cases} $
 \item[•]$\text{val}_I(\rho,A \land B) = \begin{cases} \text{val}_I(\rho,B) \ \text{si } \text{val}_I(\rho,A) = V \\ F \ \text{sinon} \end{cases} $
@@ -204,7 +202,7 @@ On note $I,\rho	\models A$ lorsque la formule $A$ est vraie dans l'interprétati
 Si $A$ est une formule, on dit que \textbf{$A$ est une conséquence logique} de $\mathcal{E}$ si pour toute interprétation $I$ et environnement $\rho$, on a $I, \rho \models \mathcal{E} \Rightarrow I,\rho \models A$. \\
 $A$ et $B$ sont des formules logiques \textbf{équivalentes} si l'une est conséquence de l'autre et réciproquement. \\
 
-\section{Correction et Complétude}
+\section{Correction et complétude}
 
 \textbf{Théorème (Correction) : }Soient $\Gamma$ est un ensemble fini de formules, et $P$ une formule. Si $ \Gamma \vdash P$ est prouvable en déduction naturelle, alors $\Gamma \models P$. \\
 
@@ -220,12 +218,12 @@ $A$ et $B$ sont des formules logiques \textbf{équivalentes} si l'une est consé
 \ \ \ \ \ - Soit $A$ une formule sur une signature $(\mathcal{S},\mathcal{F},\mathcal{R})$. On a les définitions suivantes :
 \begin{itemize}
 \item[•] $A$ est \textbf{valide} si pour toute interprétation $I$ et environnement $\rho$, on a que : $I,\rho \models A$. \\ On écrit alors $\models A$.
-\item[•] $A$ est \textbf{satisfiable} si il existe une interprétation $I$ et un environnement $\rho$ tels qu'on ait : $I,\rho \models A$. \\ Une interprétation et un environnement qui rendent vraie la formule forment un \textbf{modèle} de la formule.
-\item[•]  $A$ est \textbf{contradictoire} (ou \textbf{insatisfiable}) si pour toute interprétation $I$ et environnement $\rho$, on a que : $I,\rho \not\models A$.
+\item[•] $A$ est \textbf{satisfaisable} si il existe une interprétation $I$ et un environnement $\rho$ tels qu'on ait : $I,\rho \models A$. \\ Une interprétation et un environnement qui rendent vraie la formule forment un \textbf{modèle} de la formule.
+\item[•]  $A$ est \textbf{contradictoire} (ou \textbf{insatisfaisable}) si pour toute interprétation $I$ et environnement $\rho$, on a que : $I,\rho \not\models A$.
 \end{itemize}
 Ces définitions s'étendent au cas d'un ensemble de formules $\mathcal{E}$. \\
 
-\underline{Rq} : $P$ est valide $\Leftrightarrow$ $\lnot P$ est insatisfiable $\Leftrightarrow$ $\lnot P$ n'est pas satisfiable. \\
+\underline{Rq} : $P$ est valide $\Leftrightarrow$ $\lnot P$ est insatisfaisable $\Leftrightarrow$ $\lnot P$ n'est pas satisfaisable. \\
 
 \ \ \ \ \ - Une formule est dite en \textbf{forme normale de négation} si elle ne contient que les connecteurs logiques $\land$, $\lor$, les quantificateurs $\forall$, $\exists$ et que le symbole de négation $\lnot$ n’apparait que devant une formule atomique $R(t_1, . . . , t_n)$. \\
 
@@ -249,13 +247,16 @@ Alors, si on note $A'$ la formule obtenue, on a que $A' \models A$. De plus, tou
 \end{itemize}
 Cette transformation s'appelle la \textbf{skolémisation}, et $\forall \ x_1,\dots,x_n \ B$ est la \textbf{forme de Skolem} de $A$. \\
 
-\underline{Rq} : On a ainsi que : $A$ est valide $\Leftrightarrow$ La forme skolémisée de $\lnot A$ est insatisfaisable.
+\underline{Rq} : On a ainsi que : $A$ est valide $\Leftrightarrow$ La forme skolémisée de $\lnot A$ est insatisfaisable. \\
+\underline{Rappel} : Une formule propositionnelle est sans quantificateurs, un prédicat est une formuel quelconque. \\
 
-\section{Compacité et Satisfaisabilité}
+\section{Compacité et satisfaisabilité}
 
-\textbf{Théorème (Compacité) :} Soit $\mathcal{E}$ un ensemble de formules propositionnelles. Si $\mathcal{E}$ est insatisfiable, alors il existe un sous-ensemble fini de $\mathcal{E}$ qui est insatisfaisable. \\
+\textbf{Théorème (Compacité) :} Soit $\mathcal{E}$ un ensemble de formules propositionnelles. Si $\mathcal{E}$ est insatisfaisable, alors il existe un sous-ensemble fini de $\mathcal{E}$ qui est insatisfaisable. \\
 
-\underline{Rq} : La preuve est ridicule, on utilise au moins deux fois l'axiome du choix (dont une fois passée sous silence ...), en gros il faut considérer d'abord le cas dénombrable et se représenter l'hypothèse sous la forme d'un arbre. Généralisation avec zornette. \\
+\underline{Rq} : Ce théorème est aussi valide dans le cas de formule du calcul des prédicats, grâce au théorème de Herbrand.
+
+\underline{Rq} : La preuve est ridicule, on utilise au moins deux fois l'axiome du choix (dont une fois passée sous silence ...), en gros il faut considérer d'abord le cas dénombrable et se représenter l'hypothèse sous la forme d'un arbre binaire. Généralisation avec zornette. \\
 
 \ \ \ \ \ - Une formule logique est dite \textbf{universelle} si elle est de la forme \[\forall x_1,\dots,x_n \ A\] avec $A$ une formule sans quantificateurs. \\
 
@@ -265,6 +266,18 @@ Cette transformation s'appelle la \textbf{skolémisation}, et $\forall \ x_1,\do
 
 \textbf{Théorème (Herbrand) :} Si $B:=\forall x_1,\dots,x_n \ A$ est une \textit{formule universelle close} avec $A$ sans quantificateurs, alors :
 \[B \ \text{satisfaisable} \Leftrightarrow \text{Tout sous-ensemble fini} \  \{A_1,\dots,A_p\} \text{ d'instances closes de } A \text{ est satisfaisable.} \]
+
+\ \ \ \ \ - Si $P$ est une formule logique dont les variables libres sont $\{x_1,\dots,x_n\}$, on note $\forall(P)$ la \textbf{fermeture universelle} de $P$, qui correspond à la formule $\forall x_1, \dots , x_n \ P$. \\
+
+\textbf{Théorème (Lowenheim-Skolem) :} Si une théorie $\mathcal{A}$ admet un modèle infini, alors elle a des modèles avec des cardinaux arbitrairement grands. \\ \\ \\
+
+\section{Indécidabilité et incomplétude}
+
+\textbf{Théorème (Indécidabilité de la logique du 1er ordre) :} Les problèmes de satisfaisabilité ainsi que de validité d’une formule du calcul des prédicats sont indécidables dans une théorie sans axiome.
+
+
+
+
 
 
 
