@@ -21,7 +21,7 @@
 \fancyfoot[C]{\thepage} 
 \fancyfoot[L]{Sacha Ben-Arous}
 \fancyfoot[R]{E.N.S Paris-Saclay}
-
+\newcommand{\squo}[2]{{\raisebox{.2em}{$#1$}\left/\raisebox{-.2em}{$#2$}\right.}}
 \begin{document}
 
 \section{Introduction}
@@ -40,9 +40,9 @@
 
 \ \ \ \ \ - Les automates avec des $\epsilon$-transitions sont équivalents aux automates classiques.  \\
 
-\underline{Rq} : On note $Rec(\Sigma^*)$ la famille des langages reconnaissable sur $\Sigma^*$. \\
+\underline{Rq} : On note Rec$(\Sigma^*)$ la famille des langages reconnaissable sur $\Sigma^*$. \\
 
-\ \ \ \ \ - $Rec(\Sigma^*)$ est \textbf{fermée} par union, intersection, complément et quotient. \\
+\ \ \ \ \ - Rec$(\Sigma^*)$ est \textbf{fermée} par union, intersection, complément et quotient. \\
 
 \underline{Rappel} : $K^{-1}L := \{\omega \in \Sigma^*\ | \ \exists (k,l) \in K\times L, \ \omega =kl \}$ est appelé quotient (à gauche) de $L \in Rec(\Sigma^*)$ par $K \subseteq \Sigma^*$.  \\
 \underline{Rq} : Rec($\Sigma^*$) est de même fermée par préfixe, suffixe et facteur. \\
@@ -50,6 +50,7 @@
 \ \ \ \ \ - Soit $f : A^* \to B^*$ un morphisme, $L_1 \in$ Rec($A^*$),  $L_2 \in$ Rec($B^*$), on a : $\begin{cases} f(L_1) \in \text{Rec}(B^*) \\ f^{-1}(L_2) \in \text{Rec}(A^*) \end{cases}$. \\
 
 \ \ \ \ \ - Une \textbf{substitution} est une application $\sigma : A \to \mathcal{P}(B^*)$. Elle s'étend naturellement en morphisme de $A^*$ vers $\mathcal{P}(B^*)$. \\ On adopte les notations suivantes : $\begin{cases} \text{Pour } L \subseteq A^*, \ \sigma(L) := \bigcup\limits_{u \in L} \sigma(u) \\ \text{Pour } L \subseteq B^*, \ \sigma^{-1}(L) := \{u \in A^* \ | \ \sigma(u)\cap L \neq \emptyset \} \end{cases}$ \\
+
 Une substitution est \textbf{rationnelle} si elle est définie par une application $\sigma : A \to \text{Rec}(B^*)$. \\
 
 \ \ \ \ \ - La famille des langages reconnaissables est fermée par substitution rationnelle et substitution rationnelle inverse, i.e si $\sigma : A \to \text{Rec}(B^*)$, on a :$\begin{cases} \forall L \in \text{Rec}(A^*), \sigma(L) \in \text{Rec}(B^*) \\ \forall L \in \text{Rec}(B^*), \sigma^{-1}(L) \in \text{Rec}(A^*) \end{cases}$. \\
@@ -74,20 +75,99 @@ On va exprimer $L_{p,q}^{(k)}$ par une expression rationnelle $e_{p,q}^{(k)}$, c
 \item $e_{p,q}^{(0)} = \Sigma\{a \ | \ p \xrightarrow{a} q \}$
 \item Pour $ 1 \leq k \leq n$, $e_{p,q}^{(k)}$ = $e_{p,q}^{(k-1)} + e_{p,q}^{(k-1)}(e_{k,k}^{(k-1)})^*e_{p,q}^{(k-1)}$ 
 \end{itemize}
-Alors, $L_{p,q}^{(k)} = \begin{cases} \mathcal{L}(e_{p,q}^{(n)}) \ \ \ \text{si} \ p \neq q \\ \mathcal{L}(e_{p,q}^{(n)} + \emptyset^*) \ \ \ \text{si} \ p = q \end{cases}$, et donc $\mathcal{L}(\mathcal{A})=\bigcup\limits_{i \in I}\bigcup\limits_{f \in F} L_{i,f}$ .
+Alors, $L_{p,q}^{(k)} = \begin{cases} \mathcal{L}(e_{p,q}^{(n)}) \ \ \ \text{si} \ p \neq q \\ \mathcal{L}(e_{p,q}^{(n)} + \emptyset^*) \ \ \ \text{si} \ p = q \end{cases}$ et donc $\mathcal{L}(\mathcal{A})=\bigcup\limits_{i \in I}\bigcup\limits_{f \in F} L_{i,f}$ . \\ \\
 
 
+\ \ \ \ \ \ - \textbf{Lemme (Étoile) :} Si $L \in$ Rec$(\Sigma^*)$, alors il existe $N \geq 0$ tel que pour tout $x \in L$, on ait :
+\begin{itemize}
+\item Si $|x| \geq N$, alors $\exists u_1, u_2, u_3 \in \Sigma^*$ tels que $x=u_1u_2u_3$, $u_2 \neq \epsilon$ et $u_1u_2^*u_3 \subseteq L$
+\item Si $x=w_1w_2w_3$ avec $|w_2| \geq N$ alors $\exists u_1, u_2, u_3 \in \Sigma^*$ tels que $w_2=u_1u_2u_3$,$u_2 \neq \epsilon$ et $w_1u_1u_2^*u_3w_3\subseteq L$
+\item Si $x=u_1v_1\dots v_Nw$ avec $|v_i| \geq 1$ alors il existe $0 \leq j < k \leq N$ tels que \\ $u_1v_1\dots v_j(v_{j+1}\dots v_k)^*v_{k+1}\dots v_Nw \subseteq L$ \\
+\end{itemize}
 
 
+\section{Résiduels et congruences}
+
+\ \ \ \ \ \ - Soient $u \in \Sigma^*$, et $L \subseteq \Sigma^*$. Le \textbf{résiduel} de $L$ par $u$ est le quotient $u^{-1}L=\{v \in \Sigma^* \ | \ uv \in L \}$. \\
+
+\ \ \ \ \ \ - Soit $L \subseteq \Sigma^*$. L'\textbf{automate des résiduels} de $L$ est $\mathcal{R}(L) = (Q_L, \delta_L, i_L, F_L)$ avec : \\
+ $\begin{cases} Q_L = \{u^{-1}L \ | \ u \in \Sigma^* \} \\ \delta_L(u^{-1}L,a)=a^{-1}(u^{-1}L)=(ua)^{-1}L \\ i_L = L = \epsilon^{-1}L \\ F_L = \{u^{-1}L \ | \ \epsilon \in u^{-1}L \} = \{u^{-1}L \ | \ u \in L \} \end{cases}$ \\ \\
+
+\textbf{Théorème :} Un langage est reconnaissable ssi il a un nombre fini de résiduels. \\ 
+
+\ \ \ \ \ \ - Soit $\mathcal{A}$ un automate DC. Une relation d'équivalence $\sim$ sur $Q$ est une congruence si :
+\begin{itemize}
+\item $\forall p,q \in Q, \ \forall a \in \Sigma, \ p \sim q \Rightarrow \delta(p,a) \sim \delta(q,a)$
+\item $F$ est saturé par $\sim$, i.e : $\forall p \in F, \ [p]=\{q \in Q \ | \ p \sim q \} \subseteq F$
+\end{itemize}
+Le \textbf{quotient} de $\mathcal{A}$ par $\sim$ est $A/\mathord\sim = (Q/\mathord\sim,\delta_{\sim},[i],F/\mathord\sim)$, où $\delta_{\sim}$ est définie par $\delta_{\sim}([p],a)=[\delta	(p,a)]$ \\
+
+\textbf{Théorème :} $\mathcal{L}(\mathcal{A}/\mathord\sim) = \mathcal{L}(\mathcal{A})$ \\
+
+\ \ \ \ \ \ - Soit $\mathcal{A}=(Q,\delta,i,F)$ un automate DCA (DC et accessible) reconnaissant $L$. Pour $q \in Q$, on note $\mathcal{L}(\mathcal{A},q)=\{u \in \Sigma^* \ | \ \delta(q,u) \in F \}$. L'\textbf{équivalence de Nerode} de $\mathcal{A}$ est définie par $p \sim q$ si $\mathcal{L}(\mathcal{A},p)=\mathcal{L}(\mathcal{A},q)$.
+\begin{itemize}
+\item L'équivalence de Nerode est une congruence. 
+\item L'automate $\mathcal{A}/\mathord\sim$ est appelé \textbf{quotient de Nerode} de $\mathcal{A}$. \\
+\end{itemize}
+
+\textbf{Théorème :}  $\mathcal{A}/\mathord\sim = \mathcal{R}(L)$, i.e : Le quotient de Nerode est isomorphe à l'automate des résiduels. \\
+$\varphi : Q/\mathord\sim \to Q_L$ définie par $\varphi([q]) = \mathcal{L}(\mathcal{A},q)$ est un isomorphisme de $\mathcal{A}/\mathord\sim$ sur $\mathcal{R}(L)$. \\
+
+\textbf{Théorème :} Soit $L \in $ Rec$(\Sigma^*)$.
+\begin{itemize}
+\item Si $\mathcal{A}$ est un automate DCA qui reconnaît $L$, alors $\mathcal{R}(L)$ est un quotient de $\mathcal{A}$.
+\item $\mathcal{R}(L)$ est minimal parmis les automates DCA reconnaissant L (en nombre d'états).
+\item Si $\mathcal{A}$ est un automate DC reconnaissant $L$ avec un nombre minimal d'états, alors $\mathcal{A}$ est isomorphe à $\mathcal{R}(L)$ (i.e l'automate minimal est unique). \\
+\end{itemize}
+
+\textbf{Algorithme de Moore :} Pour $n \geq 0$, on définie $\sim_n$ sur $Q$ par:  $p \sim_n q $ si $\mathcal{L}(\mathcal{A},p)\cap \Sigma^{\leq n} = \mathcal{L}(\mathcal{A},q)\cap \Sigma^{\leq n} $ \\
+Alors, en notant $\sim\  = \bigcap\limits_{n\geq 0} \sim_n$ , on a les propriétés suivantes :
+\begin{itemize}
+\item $p \sim_{n+1} q  \ \Leftrightarrow \ p \sim_n q $ et $  \forall a \in \Sigma, \ \delta(p,a) \sim_n \delta(q,a)$
+\item Si $\sim_n \ = \ \sim_{n+1}$ alors $\sim \ = \ \sim_n$
+\item $\sim \ = \ \sim_{|Q|-2}$ \\
+\end{itemize}
+
+\underline{Rq} : $\sim_0$ a pour classes d'équivalences $F$ et $Q \setminus F$. 
+
+\section{Monoïdes et congruences}
+
+\ \ \ \ \ \ - Soit $M$ un monoïde fini, $\varphi : \Sigma^* \to M$ un morphisme, et $L \subseteq \Sigma^*$. On donne les définitions suivantes : 
+\begin{itemize}
+\item $L$ est \textbf{reconnu} (ou saturé) par $\varphi$ si $L = \varphi^{-1}(\varphi(L))$ ($\subseteq$ est toujours vraie)
+\item Un langage est reconnu par un monoïde fini si il existe un morphisme de ce monoïde qui reconnait ce langage.
+\item Un langage est \textbf{reconnaissable par morphisme} si il existe un monoïde fini qui reconnait ce langage. \\
+\end{itemize}
 
 
+\ \ \ \ \ \ - Soit $\mathcal{A} = (Q,\delta, i, F)$ un automate DC. Le \textbf{monoïde de transitions} de $\mathcal{A}$ est le sous monoïde de $(Q^Q,*)$ engendré par les applications $\delta_a : Q \to Q \ (a \in \Sigma) $ définies par $\delta_a(q)=\delta(q,a)$ et muni de la composition. \\
 
+\textbf{Lemme :} Le monoïde de transitions de $\mathcal{A}$ reconnait $\mathcal{L}(\mathcal{A})$. \\
 
+\underline{Rq} : Si $L$ est reconnu par $\varphi : \Sigma^* \to M$, alors l'automate $\mathcal{A}=(M,\delta,\varphi(\epsilon),\varphi(L))$, avec $\delta(m,a) := m \cdot \varphi(a)$ reconnaît $L$.
 
+\textbf{Théorème :} Un langage est reconnaissable par morphisme ssi il est reconnaissable par automate. \\
 
+\underline{Rq} : On en déduit que Rec$(\Sigma^*)$ est fermé par morphisme inverse. \\
 
+\ \ \ \ \ \ - Une relation d'équivalecne $\equiv$ sur $\Sigma^*$ s'appelle \textbf{congruence} si : $u \equiv v \Rightarrow \forall x,y \ xuy \equiv xvy$. \\
 
+\ \ \ \ \ \ - Soit $L \subseteq \Sigma^*$ et $\equiv$ une congruence sur $\Sigma^*$. $L$ est \textbf{saturé} par $\equiv$ si : $\forall u,v \in \Sigma^*, u \equiv v \Rightarrow (u\in L \Leftrightarrow v \in L)$ \\
 
+\textbf{Théorème :} Soit $L \subseteq \Sigma^*$. $L$ est reconnaissable ssi $L$ est saturé par une congruence d'index fini. \\
+
+\ \ \ \ \ \ - Soit $L \subseteq \Sigma^*$ , on considère $\equiv_L$ définie par $u \equiv_L v$ si $\forall x,y \in\Sigma^*, xuy \in L \Leftrightarrow xvy \in L$. On a les propriétés suivantes :
+\begin{itemize}
+\item $\equiv_L$ est une congruence qui sature $L$
+\item  $\equiv_L$ est la plus grande congruence qui sature $L$
+\item $L$ est reconnaissable ss $\equiv_L$ est d'index fini. \\
+\end{itemize}
+
+\ \ \ \ \ \ - Soit $L \subseteq \Sigma^*$, on considère $M_L = \Sigma^*/\mathord\equiv_L$. On a les propriétés suivantes :
+\begin{itemize}
+\item $M_L$ est le monoïde des transitions de l'automate minimal de $L$.
+\item $M_L$ divise (i.e est quotient d'un sous-monoïde) tout monoïde qui reconnaît $L$.
+\end{itemize}
 
 
 
