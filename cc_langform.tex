@@ -1,0 +1,36 @@
+\documentclass[11pt,a4paper]{article}
+\textheight245mm
+\textwidth170mm
+\hoffset-21mm
+\voffset-15mm
+\parindent0pt
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{dsfont}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\renewcommand{\headrulewidth}{1pt}
+\fancyhead[C]{}
+\fancyhead[L]{L3 - 2022/2023}
+\fancyhead[R]{D.E.R Informatique}
+
+\renewcommand{\footrulewidth}{1pt}
+\fancyfoot[C]{\thepage} 
+\fancyfoot[L]{Sacha Ben-Arous}
+\fancyfoot[R]{E.N.S Paris-Saclay}
+
+\begin{document}
+\textbf{Exercice 4 :} \\
+
+1) ($\Rightarrow$) Supposons que $L$ est apériodique. Raisonnons par l'absurde en supposant que son automate minimal a un compteur (on adopte les notations de la définition). Alors on a que la suite $(\varphi(w^k))_{k \in \mathbb{N}}=(\varphi(w)^k)_{k \in \mathbb{N}}$, où $\varphi$ est le morphisme de transitions de l'automate minimal, n'est pas constante a.p.c.r par hypothèses sur les $(q_j)_{0 \leq j \leq n-1}$ qui sont tous distincts. En effet, si c'était le cas, on aurait l'existence d'un $n_0$ tel que $\varphi(w^{n_0})=\varphi(w^{n_0 +1})$, ce qui donne en particulier $\varphi(w^{n_0})(q_0)=\varphi(w^{n_0 +1})(q_0)$, soit $q_{n_0} = q_{n_0 +1}$.\\
+ Donc le monoïde de transitions de $L$ n'est pas aperiodique. Or le monoïde syntaxique coïncide avec le monoïde des transitions de l’automate minimal. On obtient donc la contradiction voulue. \\
+ 
+($\Leftarrow$) Supposons maintenant que l'automate minimal de $L$ n'a pas de compteur. Raisonnons encore par l'absurde en supposant que $L$ n'est pas apériodique, i.e : il existe $x$ dans le monoïde syntaxique $M$ tel que : $\forall n \in \mathbb{N}, x^n \neq x^{n+1}$.\\ De plus, $M$ étant fini, par lemme des tiroirs, il existe $j,k$ tels que $x^j=x^k$, et avec ce qui précède, on a aussi que  $|j-k| > 1$. On suppose sans perte de généralité que $j \leq k$ et on note $n := k-j > 1$. Comme par hypothèse $\forall n \in \mathbb{N}, x^n \neq x^{n+1}$, on a que, en notant $0$ l'état initial, tels que $x^i(0) \neq x^{i+1}(0)$ pour $i \leq n-1$. Alors, comme il existe $w \in \Sigma^*$ tel que $x = \delta(w,\_)$, en notant $q_i :=  x^i(0) $, on a bien l'existence d'un compteur dans l'automate minimal de $L$, ce qui contredit l'hypothèse initiale.
+
+
+
+
+\end{document}
