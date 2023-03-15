@@ -38,5 +38,8 @@ Le langage reconnu par cette grammaire est inclus dans $L_5$ car à chaque réé
 \item On suppose que tous les mots de $L_5$ de taille $ \leq 2n$ sont reconnus par la grammaire. On se donne $w=w_1\dots w_{2n+2}$ (les mots de $L_5$ étant forcément de taille paire). On considère alors $n_0 := \text{inf}\{\  k \leq 2n+2 \ | \ w_1\dots w_k \in L_5 \}$. Si $k<2n+2$, en commençant par $(8)$, puis en appliquant l'hypothèse de récurrence à $w_1\dots w_k$ et $w_{k+1}\dots w_{2n+2}$, on conclut. Sinon, si $k=2n+2$, alors le mot commence par $aa$ et fini par $bb$ (resp. commence par $bb$ et fini par $aa$). On applique alors deux fois $(5)$ (resp. $(6)$), puis on applique l'hypothèse de récurrence à $w_3\dots w_{2n}$.
 \end{itemize}
 Donc $L_5$ est reconnu par la grammaire ci-dessus, et est donc algébrique.
+\\
+
+\underline{Rq} : On peut sans doute s'en sortir avec beaucoup moins de règles, mais au moins ici la preuve est facile.
 
 \end{document}
