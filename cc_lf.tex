@@ -13,7 +13,7 @@
 \pagestyle{fancy}
 
 \renewcommand{\headrulewidth}{1pt}
-\fancyhead[C]{Contrôle continu : Langages formels}
+\fancyhead[C]{Contrôle continu du 23/03 : Langages formels}
 \fancyhead[L]{L3 - 2022/2023}
 \fancyhead[R]{D.E.R Informatique}
 
@@ -35,7 +35,8 @@ Cette grammaire reconnait clairement $L_4$ qui est donc algébrique.
 Le langage reconnu par cette grammaire est inclus dans $L_5$ car à chaque réécriture, on ajoute autant de $a$ que de $b$. Réciproquement, on montre par une récurrence forte sur la taille des mots que $L_5$ est inclus dans le langage reconnu par cette grammaire.
 \begin{itemize}
 \item $L_5$ n'a aucun mot de taille $1$, et les mots de taille $2$ sont obtenus en faisant : $(1) | (2) \to (7)$.
-\item On suppose que tous les mots de $L_5$ de taille $ \leq 2n$ sont reconnus par la grammaire. On se donne $w=w_1\dots w_{2n+2}$ (les mots de $L_5$ étant forcément de taille paire). On considère alors $n_0 := \text{inf}\{\  k \leq 2n+2 \ | \ w_1\dots w_k \in L_5 \}$. Si $k<2n+2$, en commençant par $(8)$, puis en appliquant l'hypothèse de récurrence à $w_1\dots w_k$ et $w_{k+1}\dots w_{2n+2}$, on conclut. Sinon, si $k=2n+2$ 
+\item On suppose que tous les mots de $L_5$ de taille $ \leq 2n$ sont reconnus par la grammaire. On se donne $w=w_1\dots w_{2n+2}$ (les mots de $L_5$ étant forcément de taille paire). On considère alors $n_0 := \text{inf}\{\  k \leq 2n+2 \ | \ w_1\dots w_k \in L_5 \}$. Si $k<2n+2$, en commençant par $(8)$, puis en appliquant l'hypothèse de récurrence à $w_1\dots w_k$ et $w_{k+1}\dots w_{2n+2}$, on conclut. Sinon, si $k=2n+2$, alors le mot commence par $aa$ et fini par $bb$ (resp. commence par $bb$ et fini par $aa$). On applique alors deux fois $(5)$ (resp. $(6)$), puis on applique l'hypothèse de récurrence à $w_3\dots w_{2n}$.
 \end{itemize}
+Donc $L_5$ est reconnu par la grammaire ci-dessus, et est donc algébrique.
 
 \end{document}
