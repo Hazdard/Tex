@@ -23,10 +23,19 @@
 \fancyfoot[R]{E.N.S Paris-Saclay}
 
 \begin{document}
-1) On considère les règles suivantes : $(1) \ S \to aA  \ ; (2)  \ S \to Bb \ ; (3) \ A \to aA \ ; (4) \ B \to Bb \ ; (5) \ A \to X \ ; (6) \ B \to X \ ; (7) \ X \to aXb \ ; (8) \ X \to \epsilon$. \\
+1) On considère les règles suivantes : $(1) \ S \to aA  \ ; (2)  \ S \to Bb \ ; (3) \ A \to aA \ ; (4) \ B \to Bb \ ; (5) \ A \to X \ ; (6) \ B \to X \ ; (7) \ X \to aXb \ ; (8) \ X \to \epsilon$. \\ 
+Tout d'abord, il est clair que $L_1$ est inclu dans le langage engendré par cette grammaire. Réciproquement, quand l'on crée un mot à partir des règles ci-dessus, on commence soit par mettre seulement des $a$, (resp. seulement des $b$). Une fois que l'on convertit $A$ (resp. $B$) en $X$, on ne peut alors ajouter que le même nombre des $a$ et de $b$ de chaque côté, donc on a un mot de la forme $a^{k+n}b^n$ (resp. $a^nb^{k+n}$), où $k>0$. Finalement, le langage reconnu par cette grammaire est exactement $L_1$, qui est donc algébrique.
+\\
 
-4) On considère les règles suivantes : $ (1) \ S \to aSa \ ; (2) \ S \to bSb \ ; (3) \ S \to \epsilon$. \\
+4) On considère les règles suivantes : $ (1) \ S \to aSa \ ; (2) \ S \to bSb \ ; (3) \ S \to \epsilon$. \\ 
+Cette grammaire reconnait clairement $L_4$ qui est donc algébrique.
+\\
 
-5) On considère les règles suivantes : $(1) \ S \to abS \ ; (2) \ S \to baS \ ; (3) \ S \to Sba \ ; (4) \ S \to Sab \ ; (5) \ S \to aSb \ ; (6) \ S \to bSa \ ; (7) \ S \to \epsilon $.
+5) On considère les règles suivantes : $(1) \ S \to abS \ ; (2) \ S \to baS \ ; (3) \ S \to Sba \ ; (4) \ S \to Sab \ ; (5) \ S \to aSb \ ; (6) \ S \to bSa \ ; (7) \ S \to \epsilon \ ; (8) \ S \to SS $. \\
+Le langage reconnu par cette grammaire est inclus dans $L_5$ car à chaque réécriture, on ajoute autant de $a$ que de $b$. Réciproquement, on montre par une récurrence forte sur la taille des mots que $L_5$ est inclus dans le langage reconnu par cette grammaire.
+\begin{itemize}
+\item $L_5$ n'a aucun mot de taille $1$, et les mots de taille $2$ sont obtenus en faisant : $(1) | (2) \to (7)$.
+\item On suppose que tous les mots de $L_5$ de taille $ \leq 2n$ sont reconnus par la grammaire. On se donne $w=w_1\dots w_{2n+2}$ (les mots de $L_5$ étant forcément de taille paire). On considère alors $n_0 := \text{inf}\{\  k \leq 2n+2 \ | \ w_1\dots w_k \in L_5 \}$. Si $k<2n+2$, en commençant par $(8)$, puis en appliquant l'hypothèse de récurrence à $w_1\dots w_k$ et $w_{k+1}\dots w_{2n+2}$, on conclut. Sinon, si $k=2n+2$ 
+\end{itemize}
 
 \end{document}
