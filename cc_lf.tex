@@ -27,6 +27,14 @@
 Tout d'abord, il est clair que $L_1$ est inclu dans le langage engendré par cette grammaire. Réciproquement, quand l'on crée un mot à partir des règles ci-dessus, on commence soit par mettre seulement des $a$, (resp. seulement des $b$). Une fois que l'on convertit $A$ (resp. $B$) en $X$, on ne peut alors ajouter que le même nombre des $a$ et de $b$ de chaque côté, donc on a un mot de la forme $a^{k+n}b^n$ (resp. $a^nb^{k+n}$), où $k>0$. Finalement, le langage reconnu par cette grammaire est exactement $L_1$, qui est donc algébrique.
 \\
 
+2) On a vu en cours que ce langage n'est pas reconnaissable par un automate à pile (via le lemme de pompage). On en déduit qu'en particulier il n'est pas algébrique. \\
+
+3) Idem que pour 2) \\
+
+%On va montrer que $L_2$ n'est pas algébrique, et on se propose de le faire en raisonnant par l'absurde. On suppose donc qu'il existe une grammaire hors-contexte qui reconnaît $L_2$ et on considère $n_0 := \text{inf}\{n\in \mathbb{N} \ | \ \exists w=w_1\dots w_l,j<l, (S \to^* w \to^* a^{2n} ) \land (S \to^* w_1\dots w_j) \} $. \\ 
+
+%$n_0$ représente le plus petit entier tel qu'il existe un prédécesseur de $a^{2n_0}$ qui est accessible depuis $S$ et qui admet un préfixe stricte accessible depuis $S$. L'inf existe car l'ensemble est non vide (et même infini) : en effet, si ce n'était pas le cas, on aurait que tous les $a^{2n}$ sont atteints directement depuis $S$, ou d'une unique variable. Or cela représente un ensemble fini de prédécesseurs, et il y a un nombre infini de $a^{2n}$, donc cela implique qu'il y aurait un nombre infini de règles, ce qui est impossible. \\
+
 4) On considère les règles suivantes : $ (1) \ S \to aSa \ ; (2) \ S \to bSb \ ; (3) \ S \to \epsilon$. \\ 
 Cette grammaire reconnait clairement $L_4$ qui est donc algébrique.
 \\
