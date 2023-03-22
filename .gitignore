@@ -7,7 +7,6 @@ mtheme/
 *.gz
 *.aux
 *.log
-*.pdf
 *.bbl
 *.dvi
 *.blg
