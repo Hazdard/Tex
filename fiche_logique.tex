@@ -12,6 +12,7 @@
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 
+\newcommand\ddfrac[2]{\frac{\displaystyle #1}{\displaystyle #2}}
 
 \usepackage{array,multirow,makecell}
 \setcellgapes{4pt}
@@ -60,7 +61,7 @@ On notera $\mathcal{X}_s$ l’ensemble des variables de sorte $s$.
 
 \begin{tabular}{|C{3cm}|C{6cm}|C{7cm}|}
   \hline
-  hyp & \multicolumn{2}{c|}{ {\Large $\frac{}{\Gamma \ \vdash A}$}$(A \in \Gamma) $}  \\
+  Hyp & \multicolumn{2}{c|}{ {\Large $\frac{}{\Gamma \ \vdash A}$}$(A \in \Gamma) $}  \\
   \hline
   & Introduction & Élimination \\
   \hline
@@ -278,9 +279,44 @@ Cette transformation s'appelle la \textbf{skolémisation}, et $\forall \ x_1,\do
 \underline{Rq} : La preuve consiste à se rammener à un problème indécidable, typiquement Halt ou Post (cf slides). \\
 
 
+\section{Système G}
 
+\textbf{Définition :} Un séquent à conclusions multiples est formé de deux ensembles finis de formules : $\Gamma$ (les hypothèses), et $\Delta$ (les conclusions). On le note $\Gamma	\vdash \Delta$. \\
+La formule associée à $P_1,\dots ,P_n \vdash Q_1,\dots, Q_n$ est : $(P_1\land \dots \land P_n) \Rightarrow (Q_1 \lor \dots \lor Q_n)$. \\
 
+\underline{Rq }: Le séquent $\Gamma \vdash \Delta$ est dit valide si sa formule associée l'est, i.e : pour toute interprétation $I$ telle que $I \models \Gamma$, il existe $Q\in \Delta$ tel que $I \models Q$.\\
+\underline{Rq }: Si $\Delta$ (resp. $\Gamma$) $= \emptyset$, le membre de droite (resp. gauche) est remplacée par $\bot$ (resp. $\top$). \\
 
+\begin{tabular}{|C{3cm}|C{6cm}|C{7cm}|}
+  \hline
+  Hyp & \multicolumn{2}{c|}{ {\Large $\frac{}{A,\Gamma \ \vdash \ \Delta, A}$}}  \\
+  \hline
+  Axiome & \multicolumn{2}{c|}{ {\Large $\frac{\Gamma,A \ \vdash \ \Delta}{\Gamma \ \vdash \Delta}$ }$(A\in \mathcal{A})$}  \\
+  \hline
+  & Cas hypothèse & Cas conclusion \\
+  \hline
+  $\bot$ & {\Large $\frac{}{\bot , \Gamma \ \vdash \ \Delta}$} & {\Large $\frac{\Gamma \ \vdash \ \Delta}{\Gamma \ \vdash \ \Delta, \bot}$} \\
+  \hline
+  $\top$ & {\Large $\frac{\Gamma \ \vdash \ \Delta}{\top,\Gamma \ \vdash \Delta}$} & {\Large $\frac{}{\Gamma \ \vdash \ \Delta, \top}$}  \\
+  \hline
+  $\lnot$ & {\Large $\frac{\Gamma \  \vdash \ \Delta,A  }{\lnot A,\Gamma \  \vdash \ \Delta}$}  & {\Large $\frac{A,\Gamma \ \vdash \ \Delta}{\Gamma \  \vdash \ \Delta, \lnot A }$} \\
+  \hline
+  $\land$ & {\Large $\frac{A,B,\Gamma \ \vdash \ \Delta}{A\land B, \Gamma \ \vdash \ \Delta}$} & {\Large $\frac{\Gamma \  \vdash \ \Delta,A \ \ \ \Gamma \ \vdash \ \Delta, B }{\Gamma \  \vdash \ \Delta, A\land B }$} \\
+  \hline
+  $\lor$ & {\Large $\frac{A,\Gamma \  \vdash \ \Delta \ \ \ B,\Gamma \ \vdash \ \Delta}{A\lor B,\Gamma \  \vdash \ \Delta }$} & {\Large $\frac{\Gamma \  \vdash \ \Delta,A,B}{\Gamma \  \vdash \Delta,A\lor B  }$} \\
+  \hline
+  $\Rightarrow$ & {\Large $\frac{A,\Gamma \  \vdash \ \Delta	 \ \ \ B,\Gamma \ \vdash \ \Delta}{A \Rightarrow B,\Gamma \  \vdash \ \Delta}$} & {\Large $\frac{A,\Gamma \  \vdash \ \Delta,B}{\Gamma \  \vdash \ \Delta,A \Rightarrow B}$} \\
+  \hline
+  $\forall$ & {\Large $\frac{P[x \leftarrow t], (\forall x \ P), \Gamma \ \vdash \ \Delta}{(\forall x \ P),\Gamma \  \vdash \  \Delta}$} & {\Large $\frac{\Gamma \  \vdash \ \Delta,P}{\Gamma \  \vdash \ \Delta,(\forall x \ P) }$}$(x \notin Vl(\Gamma, \Delta))$\\
+  \hline
+  $\exists$ & {\Large $\frac{P,\Gamma \ \vdash \ \Delta }{(\exists x \ P),\Gamma \  \vdash \ \Delta}$}$(x \notin Vl(\Gamma,\Delta))$ & {\Large $\frac{\Gamma \ \vdash \ (\exists x \ P),P[x \leftarrow t]}{\Gamma \  \vdash \ \Delta,(\exists x \ P)}$} \\
+  \hline
+\end{tabular}
+\\
+\\
+
+\underline{Rq} : Le tier exclu est directement déductible du système ci-dessus : 
+$\text{Hyp}\cfrac{}{\lnot_d \ \cfrac{P \ \vdash \ P}{\lor_d \ \cfrac{\vdash P, \lnot P}{\vdash P \lor \lnot P}}}$
 
 
 
