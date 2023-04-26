@@ -274,7 +274,7 @@ Cette transformation s'appelle la \textbf{skolémisation}, et $\forall \ x_1,\do
 
 \section{Indécidabilité et incomplétude}
 
-\textbf{Théorème (Indécidabilité de la logique du 1er ordre) :} Les problèmes de satisfaisabilité ainsi que de validité d’une formule du calcul des prédicats sont indécidables dans une théorie sans axiome. \\
+\textbf{Théorème (Indécidabilité de la logique du 1er ordre) :} Les problèmes de satisfaisabilité ainsi que de validité d’une formule du calcul des prédicats sont indécidables dans une théorie sans axiomes. \\
 
 \underline{Rq} : La preuve consiste à se rammener à un problème indécidable, typiquement Halt ou Post (cf slides). \\
 
@@ -284,8 +284,10 @@ Cette transformation s'appelle la \textbf{skolémisation}, et $\forall \ x_1,\do
 \textbf{Définition :} Un séquent à conclusions multiples est formé de deux ensembles finis de formules : $\Gamma$ (les hypothèses), et $\Delta$ (les conclusions). On le note $\Gamma	\vdash \Delta$. \\
 La formule associée à $P_1,\dots ,P_n \vdash Q_1,\dots, Q_n$ est : $(P_1\land \dots \land P_n) \Rightarrow (Q_1 \lor \dots \lor Q_n)$. \\
 
-\underline{Rq }: Le séquent $\Gamma \vdash \Delta$ est dit valide si sa formule associée l'est, i.e : pour toute interprétation $I$ telle que $I \models \Gamma$, il existe $Q\in \Delta$ tel que $I \models Q$.\\
+\underline{Rq }: Le séquent $\Gamma \vdash \Delta$ est dit \textbf{valide} si sa formule associée l'est, i.e : pour toute interprétation $I$ telle que $I \models \Gamma$, il existe $Q\in \Delta$ tel que $I \models Q$.\\
 \underline{Rq }: Si $\Delta$ (resp. $\Gamma$) $= \emptyset$, le membre de droite (resp. gauche) est remplacée par $\bot$ (resp. $\top$). \\
+
+- \ Le système G est composé des règles suivantes : \\
 
 \begin{tabular}{|C{3cm}|C{6cm}|C{7cm}|}
   \hline
@@ -307,27 +309,86 @@ La formule associée à $P_1,\dots ,P_n \vdash Q_1,\dots, Q_n$ est : $(P_1\land 
   \hline
   $\Rightarrow$ & {\Large $\frac{A,\Gamma \  \vdash \ \Delta	 \ \ \ B,\Gamma \ \vdash \ \Delta}{A \Rightarrow B,\Gamma \  \vdash \ \Delta}$} & {\Large $\frac{A,\Gamma \  \vdash \ \Delta,B}{\Gamma \  \vdash \ \Delta,A \Rightarrow B}$} \\
   \hline
-  $\forall$ & {\Large $\frac{P[x \leftarrow t], (\forall x \ P), \Gamma \ \vdash \ \Delta}{(\forall x \ P),\Gamma \  \vdash \  \Delta}$} & {\Large $\frac{\Gamma \  \vdash \ \Delta,P}{\Gamma \  \vdash \ \Delta,(\forall x \ P) }$}$(x \notin Vl(\Gamma, \Delta))$\\
-  \hline
-  $\exists$ & {\Large $\frac{P,\Gamma \ \vdash \ \Delta }{(\exists x \ P),\Gamma \  \vdash \ \Delta}$}$(x \notin Vl(\Gamma,\Delta))$ & {\Large $\frac{\Gamma \ \vdash \ (\exists x \ P),P[x \leftarrow t]}{\Gamma \  \vdash \ \Delta,(\exists x \ P)}$} \\
-  \hline
 \end{tabular}
 \\
 \\
 
 \underline{Rq} : Le tier exclu est directement déductible du système ci-dessus : 
-$\text{Hyp}\cfrac{}{\lnot_d \ \cfrac{P \ \vdash \ P}{\lor_d \ \cfrac{\vdash P, \lnot P}{\vdash P \lor \lnot P}}}$
+$\text{Hyp}\cfrac{}{\lnot_d \ \cfrac{P \ \vdash \ P}{\lor_d \ \cfrac{\vdash P, \lnot P}{\vdash P \lor \lnot P}}}$ \\
+
+\textbf{Propriété :} Toutes les règles du système G sont \textbf{correctes} et \textbf{inversibles}, i.e une conclusion est vraie ssi toutes les hypothèses qui permettent d'y aboutir sont vraies. \\
+
+\textbf{Propriété :} Le système G est \textbf{complet}
+
+\textbf{Propriété (Automatisation) :} Soit un arbre de dérivation suivant les règles du système G pour un séquent $\Gamma \ \vdash \Delta$ dont les feuilles ne contiennent plus de connecteurs logiques. Le séquent $\Gamma \ \vdash \Delta$ est valide (dans la théorie vide) ssi la règle hypothèse s’applique à chacune des feuilles. \\
+
+\underline{Rq} : Cela permet d'automatiser les preuves dans le système en G, car chaque séquent en prémisse d’une règle d’inférence contient moins de connecteurs logiques que celui qui est en conclusion, donc il suffit de construire l'arbre de preuve jusqu'à ce qu'aucune règle ne s'appliquent, et vérifier si toutes les feuilles sont des tautologies. \\
+
+- \ On peut de plus rajouter les règles suivantes qui permettent de manipuler les quantificateurs classiques : \\
 
 
+\begin{tabular}{|C{3cm}|C{6cm}|C{7cm}|}
+  \hline
+  & Cas hypothèse & Cas conclusion \\
+  \hline
+  $\forall$ & {\Large $\frac{P[x \leftarrow t], (\forall x \ P), \Gamma \ \vdash \ \Delta}{(\forall x \ P),\Gamma \  \vdash \  \Delta}$} & {\Large $\frac{\Gamma \  \vdash \ \Delta,P}{\Gamma \  \vdash \ \Delta,(\forall x \ P) }$}$(x \notin Vl(\Gamma, \Delta))$\\
+  \hline
+  $\exists$ & {\Large $\frac{P,\Gamma \ \vdash \ \Delta }{(\exists x \ P),\Gamma \  \vdash \ \Delta}$}$(x \notin Vl(\Gamma,\Delta))$ & {\Large $\frac{\Gamma \ \vdash \ (\exists x \ P),P[x \leftarrow t]}{\Gamma \  \vdash \ \Delta,(\exists x \ P)}$} \\
+  \hline
+  Contraction & {\Large $\frac{A,A,\Gamma \ \vdash \ \Delta}{A,\Gamma \ \vdash \ \Delta }$} & {\Large $\frac{\Gamma \ \vdash \ A,A,\Delta}{\Gamma \ \vdash \ A,\Delta }$ } \\
+  \hline 
+\end{tabular}
+\\
+\\
 
+\underline{Rq} : On peut "oublier" la propriété initiale quand on remonte dans les $\forall_g$ et $\exists_d$. \\
 
+- \ On peut aussi rajouter les règles dérivées suivantes :
+\begin{itemize}
+\item \textbf{Affaiblissement :} si $\Gamma\ \vdash \ \Delta$ alors $\Gamma,\Gamma' \ \vdash \Delta,\Delta'$
+\item \textbf{Substitution :} si $\Gamma\ \vdash \ \Delta$ alors $\Gamma[x \leftarrow t] \ \vdash \Delta[x \leftarrow t]$ \\
+\end{itemize} 
 
+\textbf{Définition :} Une \textbf{substitution} est une application $\sigma \in \mathcal{X} \rightarrow \mathcal{T}(\mathcal{F},\mathcal{X})$ à support fini, i.e $\sigma(x)=x$ sauf pour un nombre fini de variables. \\
 
+\underline{Rq }: On peut donc représenter un substitution par $\{x \leftarrow \sigma(x) \ | \ x\in \mathcal{X} \land \sigma(x)\neq x \}$. \\
 
+\underline{Rq }: Une substitution définie une application de $\mathcal{T}(\mathcal{F},\mathcal{X})       \rightarrow \mathcal{T}(\mathcal{F},\mathcal{X})$ qui à un terme $t$ associe $t[\sigma]$, dans lequel chaque variable $x$ est remplacée par $\sigma	(x)$. \\
+On note $t[\sigma_1\sigma_2] := (t[\sigma_1])[\sigma_2]$. \\
 
+\textbf{Définition :} Un problème d'\textbf{unification} noté $t \stackrel{?}{=} u$, consiste à chercher $\sigma$ telle que $t[\sigma]=u[\sigma]$, ou de manière plus générale, pour un ensemble $\{(t_i\stackrel{?}{=}u_i) \ | \ i \in I \}$ avec $t_i[\sigma]=u_i[\sigma]$.
 
+\textbf{Définition :} Une subsitution $\sigma$ est \textbf{plus générale} que $\tau$ si il existe $\sigma'$ telle que $\sigma\sigma'=\tau$. \\
 
+\underline{Rq }: Si un problème d'unification a une solution, alors il existe une solution qui est plus
+générale que toutes les autres, appelée \textbf{unificateur principal}. \\
 
+\textbf{Algorithme de Robinson :} On peut de plus calculer récursivement cet unificateur principal. Pour un problème d'unification $E = \{ t_i\stackrel{?}{=} u_i \ | \ i \in I \}$ donné, on procède de la manière suivante :
+\begin{enumerate}
+\item $unif(\emptyset)=\{\}$
+\item $unif(\{x \stackrel{?}{=}x \} \cup E)=unif(E)$
+\item $unif(\{x \stackrel{?}{=}t \} \cup E)=\textbf{echec}$ \ \ \ $x \in \text{vars}(t), t\neq x$
+\item $unif(\{x \stackrel{?}{=}t \} \cup E)=\{x \leftarrow t\}unif(E[x\leftarrow t])$ \ \ \ $x \notin \text{vars}(t)$
+\item $unif(\{t \stackrel{?}{=} x \} \cup E)=unif(\{x \leftarrow t\}\cup E)$ \ \ \ $t \notin \mathcal{X}$
+\item $unif(\{f(t_1,\dots,f_n)\stackrel{?}{=}g(u_1,\dots,u_n)\}\cup E)=\textbf{echec}$ \ \ \ $f \neq g$
+\item $unif(\{f(t_1,\dots,f_n)\stackrel{?}{=}f(u_1,\dots,u_n)\}\cup E)=unif(\{t_1\stackrel{?}{=}u_1),\dots,t_n\stackrel{?}{=}u_n\}\cup E)$ \\
+\end{enumerate}
+
+\textbf{Théorème :} Ça marche (si une solution est trouvée, il s’agit bien de l’unificateur principal).\\
+
+\underline{Rq }: On peut généraliser à des formules atomiques, en ajoutant les symboles de prédicats à la signature de la théorie. \\
+
+\underline{Rq }: Dans le pire cas, l'algo est exponentiel (cf. slides), pour un algo plus efficace, voir la méthode des tableaux (c le projet logique mdr).
+
+\section{Transformation de preuves}
+
+\ \ \ \ \ - On note $\Gamma \vdash_N P$ un séquent prouvable en déduction naturelle, et $\Gamma \vdash_G \Delta$ un séquent (généralisé) prouvable dans le système G. On aimerait relier ces deux systèmes de preuve de la manière suivante :
+\begin{itemize}
+\item Si $\Gamma \vdash_N P$ alors $\Gamma \vdash_G P$
+\item Si $\Gamma \vdash_G \Delta$ alors $\Gamma, \lnot \Delta \vdash_N \bot$ \\
+\end{itemize}
+
+En gros ça se fait avec la règle de coupure mais j'ai pas compris du coup flemme d'écrire la démo.
 
 
 
