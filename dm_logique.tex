@@ -1,0 +1,132 @@
+\documentclass[11pt,a4paper]{article}
+\textheight245mm
+\textwidth170mm
+\hoffset-21mm
+\voffset-15mm
+\parindent0pt
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{dsfont}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{fancyhdr}
+\usepackage{proof}
+\pagestyle{fancy}
+
+\newcommand\ddfrac[2]{\frac{\displaystyle #1}{\displaystyle #2}}
+
+\usepackage{array,multirow,makecell}
+\setcellgapes{4pt}
+\makegapedcells
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash }b{#1}}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash }b{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash }b{#1}}
+
+
+\renewcommand{\headrulewidth}{1pt}
+\fancyhead[C]{}
+\fancyhead[L]{L3 - 2022/2023}
+\fancyhead[R]{D.E.R Informatique}
+
+\renewcommand{\footrulewidth}{1pt}
+\fancyfoot[C]{\thepage} 
+\fancyfoot[L]{Sacha Ben-Arous}
+\fancyfoot[R]{E.N.S Paris-Saclay}
+
+\begin{document}
+\textbf{Exercice 1 :}\\
+1) \\
+2) \\
+3) \\
+4) On va montrer que $((\forall x, P(x))\Rightarrow C) \Rightarrow (\exists x, (P(x) \Rightarrow C)) $ n'est pas prouvable en logique intuitionniste. Pour cela, on considère deux interprétations $I$ et $J$, de domaines $\mathcal{D}_I = \{x\}$ et $\mathcal{D}_J =\{x,y\}$, avec les valeures de vérité suivantes :
+\begin{enumerate}
+\item $I \models P(x)$
+\item $I \not\models C$
+\item $J \models P(x)$
+\item $J \not\models P(y)$
+\item $J \models C$
+\end{enumerate} 
+On a bien que $I \preceq J$. Alors, $J \not\models ((\forall x, P(x))\Rightarrow C)$, donc $I \not\models ((\forall x, P(x))\Rightarrow C)$. Ensuite, 
+
+\textbf{Exercice 4 :} \\
+
+1) \begin{itemize}
+\item $A_0:=\top$
+\item Pour $n \geq 1, $ $\displaystyle A_n := \exists x_1,\dots,x_n \ \bigwedge_{1\leq i<j \leq n}\lnot(x_i=x_j)$
+\end{itemize} 
+Il suffit de poser ensuite $B_n := \lnot A_{n+1}$ . \\
+
+2) On sait que $F$ peut s'écrire sous forme normale disjonctive : $\displaystyle \bigvee \bigwedge_{i \in I} C_i $ où les $C_i$ sont de la forme 
+\begin{enumerate}
+\item $x_k=x_l$
+\item $x_k\neq x_l$
+\item $x\neq x_k$
+\item $x=x_k$
+\end{enumerate}
+Quitte à renommer les termes, on sépare chacunes des conjonctions en trois morceaux : un qui ne comprend aucun $x$, un avec uniquement des formules de la forme $(3)$, et un dernier avec les formules de la forme $(4)$. \\ 
+Ensuite, en utilisant que ($\exists x P(x) \lor Q) \Leftrightarrow (\exists x P(x))\lor Q$, on peut distribuer et simplifier le $\exists$ pour traiter le premier morceau de chaque conjonction. \\
+ Finalement, en rassemblant les termes similaires,  il reste à traiter les termes de la forme $\exists x, \bigwedge_{i \in I} x\neq x_i$ ou $\exists x, \bigwedge_{i \in I} x= x_i$. Dans le premier cas, c'est le terme voulu, et dans le second, on peut choisir un $i\in I$, et on ré-écrit les égalités en remplaçant $x$ par $x_i$, ce qui donne une formule équivalente qui ne dépend plus de $x$, et on élimine alors le $\exists$ pour obtenir la forme voulue. \\
+ 
+ 3) a- Il y a $5$ partitions possibles : $\{\{1\},\{2,3\}\}$ ; $\{\{2\},\{1,3\}\}$ ; $\{\{3\},\{1,2\}\}$ ; $\{\{1,2,3\}\}$ et $\{\{1\},\{2\},\{3\}\}$. \\
+Dans le premier cas ($2$ éléments), $\chi_p = (x_2 = x_3)\land (x_1 \neq x_2 \land x_1 \neq x_3)$ \\
+Dans l'avant-dernier cas ($1$ élément), $\chi_p = (x_1 = x_2)\land(x_1=x_3)\land(x_2=x_3)$\\
+Dans le dernier cas ($3$ élément), $\chi_p = (x_1 \neq x_2)\land(x_1 \neq x_3)\land(x_2 \neq x_3)$\\
+
+b- Dans le sens direct, cette formule exprime que, en se donnant une partition d'un ensemble $\{x_1,\dots,x_n\}$ en $p$ classes, on a moins $p$ élément distincts dans cet ensemble, et donc si on trouve un nouvel élément distinct de ceux considérés précédemment, on a alors au moins $p+1$ éléments distincts. \\
+Dans le sens réciproque, cette formule signifie que, toujours en se donnant une partition d'un ensemble $\{x_1,\dots,x_n\}$ en $p$ classes, si l'on sait qu'il existe au moins $p+1$ éléments distincts, ceux précédemments évoqués se réduisant à exactement $p$ éléments distincts, il doit alors exister un autre élément différent des $x_i$ pour qu'il y ait au moins $p+1$ éléments distincts dans l'interprétation.  \\
+
+c- La relation $=$ étant une relation d'équivalence, on peut partitionner l'ensemble des éléments par cette relation, et ainsi obtenir la partition associée. Alors au moins un terme dans la disjonction est vrai, donc la disjonction globale est vraie. \\
+
+d- Pour montrer le sens direct de l'équivalence, on suppose donc que $\exists x, \bigwedge_{i \in I} x \neq x_i$ est vraie et on veut montrer que pour toute partition $P$, $\chi_P \Rightarrow A_{p+1}$, on suppose donc aussi que $\chi_P$ est vraie. Alors, on a directement que $A_{p+1}$ est vraie en appliquant le sens direct de la question 3)b-. \\
+Réciproquement, on suppose que la conjonction $\bigwedge \chi_P \Rightarrow A_{p+1}$ est vraie. Alors, en utilisant le résultat de 3)c-, on a qu'il existe au moins une partition $P$ telle que $\chi_p$ est vraie. Alors par hypothèse, comme $\chi_P \Rightarrow A_{p+1}$, on a que $A_{p+1}$ est vraie, et donc en appliquant le sens réciproque de 3)b-, on a bien que $\exists x, \bigwedge_{i \in I} x \neq x_i$ est vraie. \\
+
+4)
+
+$\infer[test]{a}{b & c}$
+
+
+
+
+
+
+
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

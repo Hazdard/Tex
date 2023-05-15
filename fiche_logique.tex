@@ -369,7 +369,7 @@ générale que toutes les autres, appelée \textbf{unificateur principal}. \\
 \item $unif(\{x \stackrel{?}{=}x \} \cup E)=unif(E)$
 \item $unif(\{x \stackrel{?}{=}t \} \cup E)=\textbf{echec}$ \ \ \ $x \in \text{vars}(t), t\neq x$
 \item $unif(\{x \stackrel{?}{=}t \} \cup E)=\{x \leftarrow t\}unif(E[x\leftarrow t])$ \ \ \ $x \notin \text{vars}(t)$
-\item $unif(\{t \stackrel{?}{=} x \} \cup E)=unif(\{x \leftarrow t\}\cup E)$ \ \ \ $t \notin \mathcal{X}$
+\item $unif(\{t \stackrel{?}{=} x \} \cup E)=unif(\{x \stackrel{?}{=} t\}\cup E)$ \ \ \ $t \notin \mathcal{X}$
 \item $unif(\{f(t_1,\dots,f_n)\stackrel{?}{=}g(u_1,\dots,u_n)\}\cup E)=\textbf{echec}$ \ \ \ $f \neq g$
 \item $unif(\{f(t_1,\dots,f_n)\stackrel{?}{=}f(u_1,\dots,u_n)\}\cup E)=unif(\{t_1\stackrel{?}{=}u_1),\dots,t_n\stackrel{?}{=}u_n\}\cup E)$ \\
 \end{enumerate}
