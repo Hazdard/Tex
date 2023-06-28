@@ -11,6 +11,8 @@
 \usepackage{caption}
 \usepackage{fancyhdr}
 \usepackage[francais]{babel}
+\usepackage[maxalphanames=99, maxnames=99, backend=bibtex, style=alphabetic, sorting=ynt]{biblatex}
+\addbibresource{rapport-stage.bib}
 \usepackage[hidelinks]{hyperref} 
 \hypersetup{
   colorlinks   = true,    % Colours links instead of ugly boxes
@@ -37,7 +39,6 @@
 \fancyfoot[L]{Sacha Ben-Arous}
 \fancyfoot[R]{E.N.S Paris-Saclay}
 
-
 \title{\textbf{Étude du problème MP-LWE}}
 \date{}
 \author{Sacha Ben-Arous, sous la direction d'Alice Pellet-Mary}
@@ -51,27 +52,21 @@ Insérer abstract ici \\
 \newpage
 \section{Introduction}
 \ \ \ \ \ Les réseaux euclidiens sont une construction algébrique permettant entre autres de définir des problèmes mathématiques dont la résolution algorithmique est conjecturée difficile, même pour des ordinateurs quantiques.
-
-Deux exemples fondamentaux de problèmes sont le \textit{Small Integer Solutions problem} (SIS) introduit par Ajtai en 1996, et le \textit{Learning With Errors problem} (LWE), découvert par Regev en 2009. 
-
-Durant mon stage, j'ai travaillé sur la variante \textit{Middle-Product Learning With Errors} (MP-LWE) du problème de Regev, initialement présenté par Roşca \textit{et al.} [RSSS17]
+Deux exemples fondamentaux de problèmes sont le \textit{Small Integer Solutions problem} (SIS) introduit par Ajtai en 1996, et le \textit{Learning With Errors problem} (LWE), découvert par Regev en 2009. \\
+Durant mon stage, j'ai travaillé sur la variante \textit{Middle-Product Learning With Errors} (MP-LWE) du problème de Regev, initialement présenté par Roşca \textit{et al.} \cite{mplwe}
 \\
 
 \textbf{Définition :} Un \textit{réseau euclidien} de $\mathbb{R}^m$ est l'ensemble des combinaisons à coefficients entiers de vecteurs linéairements indépendants $b_1, \dots, b_n$, que l'on note :
 \[\mathcal{L}(b_1,\dots,b_n) := \left\{ \sum_{i=1}^n x_ib_i, x_i \in \mathbb{Z} \right\} \]
 
-Le réseau est alors de \textit{dimension} $n$, et la famille des $(b_i)_{1\leq i \leq n}$ est appelée \textit{base} de ce réseau.
+Le réseau est alors de \textit{dimension} $n$, et la famille des $(b_i)_{1\leq i \leq n}$ est appelée \textit{base} de ce réseau. \\
+
+En notant $B:=[b_1,\dots,b_n]$ la matrice formée par les $(b_i)_{1\leq i \leq n}$, on considérera de même : \[\mathcal{L}(B) := \left\{ Bx, x \in \mathbb{Z}^n \right\} \]
 
 
 
 
-\section{Références}
-
-[RSSS17] M. Rosca, A. Sakzad, D. Stehlé, and R. Steinfeld. Middle-product learning with errors. In
-CRYPTO, pages 283–297. 2017.
-
-
-
+\printbibliography[heading=bibintoc, title={Références}]
 \end{document}
 
 

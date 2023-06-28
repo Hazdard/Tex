@@ -10,3 +10,7 @@ mtheme/
 *.bbl
 *.dvi
 *.blg
+*.xml
+*.bcf
+*-blx.bib
+

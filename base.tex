@@ -10,6 +10,8 @@
 \usepackage{graphicx}
 \usepackage{caption}
 \usepackage{fancyhdr}
+\usepackage[maxalphanames=99, maxnames=99, backend=bibtex, style=alphabetic, sorting=ynt]{biblatex}
+\addbibresource{}
 \usepackage[hidelinks]{hyperref} 
 \hypersetup{
   colorlinks   = true,    % Colours links instead of ugly boxes
@@ -39,4 +41,7 @@
 
 \begin{document}
 ayaya
+
+
+\printbibliography[heading=bibintoc, title={Références}]
 \end{document}
