@@ -1,0 +1,115 @@
+%%% Code by Zéphyr Salvy
+
+%%% Packages that might be interesting anyway
+\usepackage{xcolor}
+\usepackage[bibliography=common]{apxproof}
+\renewcommand{\appendixsectionformat}[2]{Additional content for Section~#1\ (#2)}
+\definecolor{monbleu}{RGB}{34,199,221}
+\definecolor{monjaune}{RGB}{241,196,46}
+\definecolor{monviolet}{RGB}{175,156,252}
+
+%%% Packages for theorems etc
+% cf https://tex.stackexchange.com/questions/292083/mdframed-and-skipbelow/292090#292090
+% solves problems of bad breaks
+
+\usepackage{amsthm}
+\usepackage{mdframed}
+\usepackage{xpatch} 
+\makeatletter
+\AtBeginDocument{\xpatchcmd{\@thm}{\thm@headpunct{.}}{\thm@headpunct{}}{}{}}
+\makeatother
+
+% Theorem box    
+\mdfdefinestyle{eBox}{skipabove=7pt,
+skipbelow=7pt,
+rightline=false,
+leftline=true,
+topline=false,
+bottomline=false,
+backgroundcolor=monbleu!10,
+linecolor=monbleu,
+innerleftmargin=5pt,
+innerrightmargin=5pt,
+innertopmargin=0pt,
+innerbottommargin=5pt,
+leftmargin=0cm,
+rightmargin=0cm,
+linewidth=4pt}
+
+% Definition box
+\mdfdefinestyle{dBox}{skipabove=7pt,
+skipbelow=7pt,
+rightline=false,
+leftline=true,
+topline=false,
+bottomline=false,
+linecolor=monjaune,
+backgroundcolor=monjaune!10,
+innerleftmargin=5pt,
+innerrightmargin=5pt,
+innertopmargin=0pt,
+leftmargin=0cm,
+rightmargin=0cm,
+linewidth=4pt,
+%innerbottommargin=0pt
+}
+
+% Remark box
+\mdfdefinestyle{rBox}{skipabove=7pt,
+skipbelow=7pt,
+rightline=false,
+leftline=true,
+topline=false,
+bottomline=false,
+linecolor=monviolet,
+backgroundcolor=monviolet!10,
+innerleftmargin=5pt,
+innerrightmargin=5pt,
+innertopmargin=0pt,
+leftmargin=0cm,
+rightmargin=0cm,
+linewidth=4pt,
+%innerbottommargin=0pt
+}
+
+% Lemma, proposition etc
+\mdfdefinestyle{pBox}{skipabove=7pt,
+skipbelow=7pt,
+rightline=false,
+leftline=true,
+topline=false,
+bottomline=false,
+linecolor=monbleu,
+innerleftmargin=5pt,
+innerrightmargin=5pt,
+innertopmargin=0pt,
+leftmargin=0cm,
+rightmargin=0cm,
+linewidth=4pt,
+innerbottommargin=0pt}
+
+\theoremstyle{definition}
+\newtheorem{defin}{Definition}[section]
+\surroundwithmdframed[style=dBox]{defin}
+
+\newtheorem{rem}{Remark}[section]
+\surroundwithmdframed[style=rBox]{rem}
+
+\newtheorem{conj}{Conjecture}[section]
+\surroundwithmdframed[style=eBox]{conj}
+
+\newtheoremrep{proposition}{Proposition}[section]
+\surroundwithmdframed[style=pBox]{proposition}
+\surroundwithmdframed[style=pBox]{axp@propositionrp}
+
+\newtheoremrep{lemma}[proposition]{Lemma}[section]
+\surroundwithmdframed[style=pBox]{lemma}
+\surroundwithmdframed[style=pBox]{axp@lemmarp}
+
+\newtheoremrep{corollary}[proposition]{Corollary}[section]
+\surroundwithmdframed[style=pBox]{corollary}
+\surroundwithmdframed[style=pBox]{axp@corollaryrp}
+
+\newtheoremrep{theorem}{Theorem}[section]
+\surroundwithmdframed[style=eBox]{theorem}
+\surroundwithmdframed[style=eBox]{axp@theoremrp}
