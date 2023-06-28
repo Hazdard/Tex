@@ -5,13 +5,12 @@
 \voffset-15mm
 \parindent0pt
 \usepackage[utf8]{inputenc}
-\usepackage{amsmath,amsfonts,amssymb}
 \usepackage{dsfont}
 \usepackage{graphicx}
 \usepackage{caption}
 \usepackage{fancyhdr}
-\usepackage{zephyr}
-\usepackage[francais]{babel}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage[french]{babel}
 \usepackage[maxalphanames=99, maxnames=99, backend=bibtex, style=alphabetic, sorting=ynt]{biblatex}
 \addbibresource{rapport-stage.bib}
 \usepackage[hidelinks]{hyperref} 
@@ -21,6 +20,7 @@
   linkcolor    = black,    % Colour of internal links
   citecolor    = black      % Colour of citations
 }
+\usepackage{zephyr}
 \pagestyle{fancy}
 
 \usepackage{array,multirow,makecell}
@@ -53,7 +53,7 @@ Insérer abstract ici \\
 \newpage
 \section{Introduction}
 \; Les réseaux euclidiens sont une construction algébrique permettant entre autres de définir des problèmes mathématiques dont la résolution algorithmique est conjecturée difficile, même pour des ordinateurs quantiques. Cela les rend donc particulièrement intéressants pour construire des protocoles sûrs en cryptographie post-quantique. \\
-Deux exemples fondamentaux de problèmes sur les réseaux sont le \textit{Small Integer Solutions problem} (SIS) introduit par Ajtai en 1996, et le \textit{Learning With Errors problem} (LWE), découvert par Regev en 2009. \\
+Deux exemples fondamentaux de problèmes sur les réseaux sont le \textit{Small Integer Solutions problem} (SIS) introduit par Ajtai en 1996, et le \textit{Learning With Errors problem} (LWE), découvert par Regev en 2005. \\
 Durant mon stage, j'ai travaillé sur la variante \textit{Middle-Product Learning With Errors} (MP-LWE) du problème de Regev, initialement présenté par Roşca \textit{et al.} \cite{mplwe}
 \\
 
@@ -61,10 +61,11 @@ Durant mon stage, j'ai travaillé sur la variante \textit{Middle-Product Learnin
 Un \textit{réseau euclidien} de $\mathbb{R}^m$ est l'ensemble des combinaisons à coefficients entiers de vecteurs linéairements indépendants $b_1, \dots, b_n$, que l'on note :
 \[\mathcal{L}(b_1,\dots,b_n) := \left\{ \sum_{i=1}^n x_ib_i, x_i \in \mathbb{Z} \right\} \]
 
-Le réseau est alors de \textit{dimension} $n$, et la famille des $(b_i)_{1\leq i \leq n}$ est appelée \textit{base} de ce réseau.
-\end{defin}
+Le réseau est alors de \textit{dimension} $n$, et la famille des $(b_i)_{1\leq i \leq n}$ est appelée \textit{base} de ce réseau. \\
 
 En notant $B:=[b_1,\dots,b_n]$ la matrice dont les colonnes sont formées par les $(b_i)_{1\leq i \leq n}$, on considérera de manière équivalente : \[\mathcal{L}(B) := \left\{ Bx, x \in \mathbb{Z}^n \right\} \]
+\end{defin}
+
 \textbf{Définition :} Soit $B$ une base d'un réseau de dimension $n$, et $\delta \in \mathbb{R}^+$. Une instance du problème \textit{Bounded Distance Decoding}
 
 

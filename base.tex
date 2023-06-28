@@ -5,12 +5,12 @@
 \voffset-15mm
 \parindent0pt
 \usepackage[utf8]{inputenc}
-\usepackage{amsmath,amsfonts,amssymb}
 \usepackage{dsfont}
-\usepackage{zephyr}
 \usepackage{graphicx}
 \usepackage{caption}
 \usepackage{fancyhdr}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage[french]{babel}
 \usepackage[maxalphanames=99, maxnames=99, backend=bibtex, style=alphabetic, sorting=ynt]{biblatex}
 \addbibresource{}
 \usepackage[hidelinks]{hyperref} 
@@ -20,6 +20,7 @@
   linkcolor    = black,    % Colour of internal links
   citecolor    = black      % Colour of citations
 }
+\usepackage{zephyr}
 \pagestyle{fancy}
 
 \usepackage{array,multirow,makecell}
@@ -28,7 +29,6 @@
 \newcolumntype{R}[1]{>{\raggedleft\arraybackslash }b{#1}}
 \newcolumntype{L}[1]{>{\raggedright\arraybackslash }b{#1}}
 \newcolumntype{C}[1]{>{\centering\arraybackslash }b{#1}}
-
 
 \renewcommand{\headrulewidth}{1pt}
 \fancyhead[C]{}
