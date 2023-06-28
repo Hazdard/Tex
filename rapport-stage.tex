@@ -11,9 +11,14 @@
 \usepackage{caption}
 \usepackage{fancyhdr}
 \usepackage[francais]{babel}
+\usepackage[hidelinks]{hyperref} 
+\hypersetup{
+  colorlinks   = true,    % Colours links instead of ugly boxes
+  urlcolor     = blue,    % Colour for external hyperlinks
+  linkcolor    = black,    % Colour of internal links
+  citecolor    = black      % Colour of citations
+}
 \pagestyle{fancy}
-
-\newcommand\ddfrac[2]{\frac{\displaystyle #1}{\displaystyle #2}}
 
 \usepackage{array,multirow,makecell}
 \setcellgapes{4pt}
@@ -21,7 +26,6 @@
 \newcolumntype{R}[1]{>{\raggedleft\arraybackslash }b{#1}}
 \newcolumntype{L}[1]{>{\raggedright\arraybackslash }b{#1}}
 \newcolumntype{C}[1]{>{\centering\arraybackslash }b{#1}}
-
 
 \renewcommand{\headrulewidth}{1pt}
 \fancyhead[C]{}
@@ -43,7 +47,68 @@
 \begin{abstract}
 Insérer abstract ici \\
 \end{abstract}
-
 \tableofcontents
+\newpage
+\section{Introduction}
+\ \ \ \ \ Les réseaux euclidiens sont une construction algébrique permettant entre autres de définir des problèmes mathématiques dont la résolution algorithmique est conjecturée difficile, même pour des ordinateurs quantiques.
+
+Deux exemples fondamentaux de problèmes sont le \textit{Small Integer Solutions problem} (SIS) introduit par Ajtai en 1996, et le \textit{Learning With Errors problem} (LWE), découvert par Regev en 2009. 
+
+Durant mon stage, j'ai travaillé sur la variante \textit{Middle-Product Learning With Errors} (MP-LWE) du problème de Regev, initialement présenté par Roşca \textit{et al.} [RSSS17]
+\\
+
+\textbf{Définition :} Un \textit{réseau euclidien} de $\mathbb{R}^m$ est l'ensemble des combinaisons à coefficients entiers de vecteurs linéairements indépendants $b_1, \dots, b_n$, que l'on note :
+\[\mathcal{L}(b_1,\dots,b_n) := \left\{ \sum_{i=1}^n x_ib_i, x_i \in \mathbb{Z} \right\} \]
+
+Le réseau est alors de \textit{dimension} $n$, et la famille des $(b_i)_{1\leq i \leq n}$ est appelée \textit{base} de ce réseau.
+
+
+
+
+\section{Références}
+
+[RSSS17] M. Rosca, A. Sakzad, D. Stehlé, and R. Steinfeld. Middle-product learning with errors. In
+CRYPTO, pages 283–297. 2017.
+
+
 
 \end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

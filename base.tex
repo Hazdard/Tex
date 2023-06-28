@@ -10,9 +10,14 @@
 \usepackage{graphicx}
 \usepackage{caption}
 \usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref} 
+\hypersetup{
+  colorlinks   = true,    % Colours links instead of ugly boxes
+  urlcolor     = blue,    % Colour for external hyperlinks
+  linkcolor    = black,    % Colour of internal links
+  citecolor    = black      % Colour of citations
+}
 \pagestyle{fancy}
-
-\newcommand\ddfrac[2]{\frac{\displaystyle #1}{\displaystyle #2}}
 
 \usepackage{array,multirow,makecell}
 \setcellgapes{4pt}
