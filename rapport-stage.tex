@@ -66,7 +66,50 @@ Le réseau est alors de \textit{dimension} $n$, et la famille des $(b_i)_{1\leq 
 En notant $B:=[b_1,\dots,b_n]$ la matrice dont les colonnes sont formées par les $(b_i)_{1\leq i \leq n}$, on considérera de manière équivalente : \[\mathcal{L}(B) := \left\{ Bx, x \in \mathbb{Z}^n \right\} \]
 \end{defin}
 
-\textbf{Définition :} Soit $B$ une base d'un réseau de dimension $n$, et $\delta \in \mathbb{R}^+$. Une instance du problème \textit{Bounded Distance Decoding}
+On peut alors considérer le problème algorithmique suivant, qui apparait lors de l'étude des réseaux sur lesquels se basent les protocoles utilisant LWE : 
+
+\begin{defin} 
+Soit $B$ une base d'un réseau de dimension $n$, et $\delta \in \mathbb{R}^+$. Une instance du problème \textit{Bounded Distance Decoding} est un vecteur $t \in \mathbb{R}^m$ de la forme $t=x+e$, où $x\in \mathcal{L}(B)$ et $e \leq \delta$. Le problème consiste à retrouver $x$ (ou $e$) à partir de $t$.
+\end{defin}
+
+\begin{conj}
+Dans des réseaux de dimension $n$, pour $\delta$ polynomial en $n$, le problème BDD est conjecturé exponentiellement (en $n$) dur à résoudre, même sur des ordinateurs quantiques.
+\end{conj}
+
+
+\section{Développements}
+\subsection{Preuve de correction}
+On se propose tout d'abord de détailler la preuve de correction du schéma de chiffrement proposé dans \cite{mplwe} : \\
+
+On rappelle le cadre de la preuve : $s \hookleftarrow \mathcal{U}(\mathbb{Z}^{n+d+k-1}[X])$, pour $i\leq t$ on a $a_i \hookleftarrow \mathcal{U}(\mathbb{Z}^n[X])$ ; $e_i \hookleftarrow \lfloor D_{\alpha q} \rceil$ et finalement $r_i \hookleftarrow \mathcal{U}(\{0,1\}^{k+1}[X])$. On note $e_i(j)$ le $j$-ème coefficient de $e_i$. Le but est d'avoir avec bonne probabilité que : 
+\[\|\mu + 2\sum_{i \leq t}r_i \odot_d e_i  \|_\infty \leq q/2 \] où $\mu$ est le message à chiffrer. 
+
+Les paramètres de sécurité choisis sont les suivants : 
+$n \geq \lambda$, $k=d=n/2$, $q = \Theta(n^{5/2 + c}\sqrt{\log{n}})$, $t= \Theta(\log{n})$ et $\alpha = \Theta(1/n\sqrt{\log{n}})$. 
+On commence par donner une borne classique sur la distribution gaussienne : 
+\begin{eqnarray*}
+\mathbb{P}(X \geq M)_{X \hookleftarrow \mathcal{N}(0,\alpha q)} &=& \frac{1}{\alpha q \sqrt{2 \pi}} \int_{M}^\infty e^{-\frac{t^2}{2 \alpha q}} \, \mathrm{d}t \\
+&\leq &  \frac{\alpha q}{\alpha q \sqrt{2 \pi}}\int_{M}^\infty \frac{t}{\alpha q M} e^{-\frac{t^2}{2 \alpha q}} \, \mathrm{d}t \\
+& \leq & \frac{1}{M \sqrt{2 \pi}} [-e^{-\frac{t^2}{2 \alpha q}}]_M^\infty \\
+& \leq & \frac{1}{M \sqrt{2 \pi}} e^{-\frac{M^2}{2 \alpha q}}
+\end{eqnarray*}
+
+Alors, on obtient que : 
+\begin{eqnarray*}
+\mathbb{P}(\|\mu + 2\sum_{i \leq t}r_i \odot_d e_i  \|_\infty \geq q/2 ) &=& \mathbb{P}(\bigcup_{l\leq d} |(\mu + 2\sum_{i \leq t}r_i \odot_d e_i)_{l\text{-eme}}| \geq q/2 ) \\
+&\leq& d \ \mathbb{P}(|(\mu + 2\sum_{i \leq t}r_i \odot_d e_i)_{l\text{-eme}}| \geq q/2 )
+\end{eqnarray*}
+
+Or si on note $E := \max_{i,j} e_i(j)$, on a clairement $|(\sum_{i \leq t}r_i \odot_d e_i)_{l\text{-eme}}|\leq t(k+d)E$. \\ Donc : 
+\begin{eqnarray*}
+\mathbb{P}(\|\mu + 2\sum_{i \leq t}r_i \odot_d e_i  \|_\infty \geq q/2 ) &\leq& d \ \mathbb{P}(E \geq \frac{q}{4t(k+d)}) \\
+&\leq& d(k+1)t \ \mathbb{P}(X \geq \frac{q}{4t(k+d)})_{X \hookleftarrow \mathcal{N}(0,\alpha q)} \\
+&\leq& \frac{2dt^2(k+1)(k+d)}{q \sqrt{2\pi}} e^{-(\frac{q}{4\alpha q (k+d) t})^2} \\
+&\leq& \frac{2dt^2(k+1)(k+d)}{q \sqrt{2\pi}} e^{-\frac{1}{(4\alpha (k+d) t)^2}} \\
+\end{eqnarray*}
+
+De plus, les hypothèses du théorème sont que $\alpha \leq 1/(16\sqrt{\lambda t k})$ et $q \geq 16t(k+1)$. En injectant alors les ordres de grandeurs des facteurs de sécurité, on obtient que le facteur devant l'exponentielle est de la forme $o(d)$, et que l'exposant est de la forme $\frac{1}{16 \alpha^2 n^2 \log{n}^2}$. Il suffit alors de renforcer la première hypothèse, par exemple en $\alpha \leq 1/(16\lambda\sqrt{t k})$ pour finalement avoir \[\mathbb{P}(\|\mu + 2\sum_{i \leq t}r_i \odot_d e_i  \|_\infty \geq q/2 ) \leq d \ e^{- \frac{\lambda^2}{n\log{n}}}\] et un choix de $\lambda$ adapté (par exemple $\lambda = n^{\frac{2}{3}}$) permet d'obtenir la borne souhaitée.
+
 
 
 
