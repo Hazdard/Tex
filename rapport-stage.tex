@@ -54,9 +54,11 @@ Insérer abstract ici \\
 \section{Introduction}
 \; Les réseaux euclidiens sont une construction algébrique permettant entre autres de définir des problèmes mathématiques dont la résolution algorithmique est conjecturée difficile, même pour des ordinateurs quantiques. Cela les rend donc particulièrement intéressants pour construire des protocoles sûrs en cryptographie post-quantique. \\
 Deux exemples fondamentaux de problèmes sur les réseaux sont le \textit{Small Integer Solutions problem} (SIS) introduit par Ajtai en 1996, et le \textit{Learning With Errors problem} (LWE), découvert par Regev en 2005. \\
-Le problème LWE est privilégié dans la construction de schémas de chiffrements car il été démontré \cite{wcac} que résoudre une instance aléatoire de LWE est aussi dur que résoudre la pire instance d'un problème dur (cf suite). On dit que LWE bénéficie d'une réduction \textit{pire-cas moyen-cas}. \\
-Cependant, si l'on utilise la version standard de LWE pour construire des protocoles, ces derniers auront une efficacité très réduite à cause d'opérations faisant intervenir de grandes matrices aléatoires. La variante \textit{Polynomial Learning With Errors}, proposée par Stehlé \textit{et al.} \cite{plwe}, résout ce problème en utilisant des réseaux structurés : les calculs matriciels correspondent alors à des produits de polynômes, calculables très efficacement. \\
-Durant mon stage, j'ai travaillé sur la variante \textit{Middle-Product Learning With Errors} (MP-LWE) du problème de Regev, initialement présentée par Roşca \textit{et al.} \cite{mplwe}. \\
+Le problème LWE est privilégié dans la construction de schémas de chiffrement car il été prouvé \cite{wcac} que résoudre une instance aléatoire de LWE est aussi dur que résoudre la pire instance d'un problème dur (cf suite). On dit que LWE bénéficie d'une réduction \textit{pire-cas moyen-cas}. \\
+Cependant, si l'on utilise la version standard de LWE pour construire des protocoles, ces derniers auront une efficacité très réduite à cause d'opérations faisant intervenir de grandes matrices aléatoires. La variante \textit{Polynomial Learning With Errors}, proposée par Stehlé \textit{et al.} \cite{plwe}, résout ce problème en utilisant des réseaux structurés : les calculs matriciels correspondent alors à des produits de polynômes, calculables très efficacement. Cependant, ce gain d'efficacité se fait au détriment de garanties de sécurité : les polynômes sont manipulés dans $\mathbb{Z}_p[X]/f$ et la complexité de la variante est directement liée au $f$ choisi. \\
+Ainsi, afin de se débarasser de cette dépendance, Roşca \textit{et al.} introduisent le \textit{Middle-Product Learning With Errors problem} (MP-LWE) \cite{mplwe} dont l'intérêt est d'être aussi dur que des classes exponentiellement grandes de problèmes PLWE($f$) (dont on espère qu'elles contiennent au moins une instance difficile), tout en conservant l'efficacité des réseaux structurés. \\
+
+Durant mon stage, j'ai donc travaillé sur la variante MP-LWE du problème de Regev, et plus particulièrement sur les effets de la réduction de PLWE vers MP-LWE.
 \\
 
 \section{Préliminaires}
@@ -69,11 +71,34 @@ Le réseau est alors de \textit{dimension} $n$, et la famille des $(b_i)_{1\leq 
 En notant $B:=[b_1,\dots,b_n]$ la matrice dont les colonnes sont formées par les $(b_i)_{1\leq i \leq n}$, on considérera de manière équivalente : \[\mathcal{L}(B) := \left\{ Bx, x \in \mathbb{Z}^n \right\} \]
 \end{defin}
 
+Dans ce qui suit, on notera $\mathbb{Z}_q$ (resp. $\mathbb{R}_q$) le quotient $\mathbb{Z}/q\mathbb{Z}$ (resp. $\mathbb{R}/q\mathbb{Z}$).
+
+\subsection{Problème LWE et variantes}
+\begin{defin}[Distribution LWE] 
+Soient $q\geq 2$, $m\geq 1$, $\chi$ une distribution de probabilité sur $\mathbb{T}:=\mathbb{R}/\mathbb{Z}$. À partir de $s\in \mathbb{Z}_q^m$, on définit $\mathcal{D}_{q,\chi,m}$ la distribution sur $\mathbb{Z}_q^m\times\mathbb{R}_q^m$ obtenue en choisissant $a \hookleftarrow \mathcal{U}(\mathbb{Z}_q^m)$, $e\hookleftarrow \chi^m$, et qui renvoie $(a,b):=(a,\left<a,s\right> +e)$.
+\end{defin}
+
+\begin{defin}[Problèmes LWE]
+Soient $q\geq 2$, $m\geq 1$, $\chi$. Munis de la distribution $\mathcal{D}_{q,\chi,m}$ précédente, on peut alors définir deux problèmes : 
+\begin{enumerate}
+\item[•]\textbf{LWE-Décisionnel} consiste à un distinguer un nombre arbitraire d'échantillons de $\mathcal{D}_{q,\chi,m}$ et le même nombre d'échantillons de $\mathcal{U}(\mathbb{Z}_q^m)\times\mathcal{U}(\mathbb{R}_q^m)$.
+\item[•]\textbf{LWE-Calculatoire} consiste à retrouver le secret $s$ à partir d'un nombre $t$ d'échantillons $ $
+\end{enumerate}
+\end{defin}
+
+
+
+
+
+
+
+
+
 \begin{defin}
 Dans un réseau $\Lambda$, on note $\lambda_i := \inf\{r,\dim(\text{Vect}(\Lambda\cap\mathcal{B}(0,r))=i\}$ le i-ème minimum du réseau. En particulier, on a $\lambda_1 = \inf\{\|v\| ,  v \in \mathcal{L}(B)/\{0\}\}$
 \end{defin}
-\begin{rem} : $\lambda_i$ s'interprète comme le rayon de la plus petite boule centrée à l'origine qui contient $i$ vecteurs indépendants du réseau. \\ Le calcul effectif de ces minimums semble très dur : les meilleurs algorithmes polynomiaux (en la dimension du réseau) connus calculant $\lambda_1$ ont un facteur d'approximation exponentiel.
-\end{rem}
+
+\underline{Rq} : $\lambda_i$ s'interprète comme le rayon de la plus petite boule centrée à l'origine qui contient $i$ vecteurs indépendants du réseau. \\ Le calcul effectif de ces minimums semble très dur : les meilleurs algorithmes polynomiaux (en la dimension du réseau) connus calculant $\lambda_1$ ont un facteur d'approximation exponentiel. \\
 
 On peut alors considérer le problème algorithmique suivant, qui apparait lors de l'étude des réseaux reliés aux protocoles utilisant LWE : 
 
