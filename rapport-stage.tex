@@ -86,7 +86,7 @@ Soient $q\geq 2$, $m\geq 1$, $\chi$. Muni de la distribution $\mathcal{D}_{q,\ch
 \end{enumerate}
 \end{defin}
 
-
+En notant $A$ la matrice dont les lignes sont formées des ($a_i)_{i\leq t}$, $e:=(e_i)_{i\leq t}$ et $b:=(b_i)_{i\leq t}$ ($t$ représente le nombre d'échantillons), on a : $b=As +e \text{ mod } q$.
 
 
 
@@ -95,16 +95,18 @@ Soient $q\geq 2$, $m\geq 1$, $\chi$. Muni de la distribution $\mathcal{D}_{q,\ch
 
 
 \begin{defin}
-Dans un réseau $\Lambda$, on note $\lambda_i := \inf\{r,\dim(\text{Vect}(\Lambda\cap\mathcal{B}(0,r))=i\}$ le i-ème minimum du réseau. En particulier, on a $\lambda_1 = \inf\{\|v\| ,  v \in \mathcal{L}(B)/\{0\}\}$
+Dans un réseau $\Lambda$, on note $\lambda_i := \inf\{r,\dim(\text{Vect}(\Lambda\cap\mathcal{B}(0,r))=i\}$ le i-ème minimum du réseau. En particulier, on a $\lambda_1 = \inf\{\|v\| ,  v \in \mathcal{L}(B)/\{0\}\}$ qui est le plus court vecteur non nul du réseau.
 \end{defin}
 
-\underline{Rq} : $\lambda_i$ s'interprète comme le rayon de la plus petite boule centrée à l'origine qui contient $i$ vecteurs indépendants du réseau. \\ Le calcul effectif de ces minimums semble très dur : les meilleurs algorithmes polynomiaux (en la dimension du réseau) connus calculant $\lambda_1$ ont un facteur d'approximation exponentiel. \\
+\underline{Rq} : $\lambda_i$ s'interprète comme le rayon de la plus petite boule centrée à l'origine qui contient $i$ vecteurs indépendants du réseau. \\ Le calcul effectif de ces minimums semble très dur : les meilleurs algorithmes polynomiaux connus calculant $\lambda_1$ ont un facteur d'approximation exponentiel. \\
 
 On peut alors considérer le problème algorithmique suivant, qui apparait lors de l'étude des réseaux reliés aux protocoles utilisant LWE : 
 
 \begin{defin} 
 Soit $B$ une base d'un réseau de dimension $n$, et $\gamma \in \mathbb{R}^+$. Une instance du problème \textit{Bounded Distance Decoding} est un vecteur $t \in \mathbb{R}^m$ de la forme $t=x+e$, où $x\in \mathcal{L}(B)$ et $\|e\| \leq \lambda_1/\gamma$. Le problème consiste à retrouver $x$ (ou $e$) à partir de $t$.
 \end{defin}
+
+En revenant au problème LWE-Décisionnel, on constate que ce dernier se réduit à une instance de BDD dans le réseau engendré par les colonnes de $[A,qI_t]$.
 
 \begin{conj}
 Dans un réseau de dimension $n$, pour $\gamma$ polynomial en $n$, le problème BDD est conjecturé exponentiellement (en $n$) dur à résoudre, même sur des ordinateurs quantiques.
