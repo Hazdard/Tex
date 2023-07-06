@@ -54,9 +54,12 @@ Insérer abstract ici \\
 \section{Introduction}
 \; Les réseaux euclidiens sont une construction algébrique permettant entre autres de définir des problèmes mathématiques dont la résolution algorithmique est conjecturée difficile, même pour des ordinateurs quantiques. Cela les rend donc particulièrement intéressants pour construire des protocoles sûrs en cryptographie post-quantique. \\
 Deux exemples fondamentaux de problèmes sur les réseaux sont le \textit{Small Integer Solutions problem} (SIS) introduit par Ajtai en 1996, et le \textit{Learning With Errors problem} (LWE), découvert par Regev en 2005. \\
-Durant mon stage, j'ai travaillé sur la variante \textit{Middle-Product Learning With Errors} (MP-LWE) du problème de Regev, initialement présenté par Roşca \textit{et al.} \cite{mplwe}
+Le problème LWE est privilégié dans la construction de schémas de chiffrements car il été démontré \cite{wcac} que résoudre une instance aléatoire de LWE est aussi dur que résoudre la pire instance d'un problème dur (cf suite). On dit que LWE bénéficie d'une réduction \textit{pire-cas moyen-cas}. \\
+Durant mon stage, j'ai travaillé sur la variante \textit{Middle-Product Learning With Errors} (MP-LWE) du problème de Regev, initialement présenté par Roşca \textit{et al.} \cite{mplwe}. \\
+Cette construction a été motivée par le problème suivant : si l'on utilise la version standard de LWE pour construire des protocoles, ces derniers auront une efficacité très réduite à cause d'opérations faisant intervenir de grandes matrices aléatoires. Une solution, proposée par Stehlé \textit{et al.} \cite{plwe},  dldnsqkjdnqs
 \\
 
+\section{Préliminaires}
 \begin{defin} 
 Un \textit{réseau euclidien} de $\mathbb{R}^m$ est l'ensemble des combinaisons à coefficients entiers de vecteurs linéairements indépendants $b_1, \dots, b_n$, que l'on note :
 \[\mathcal{L}(b_1,\dots,b_n) := \left\{ \sum_{i=1}^n x_ib_i, x_i \in \mathbb{Z} \right\} \]
@@ -66,14 +69,20 @@ Le réseau est alors de \textit{dimension} $n$, et la famille des $(b_i)_{1\leq 
 En notant $B:=[b_1,\dots,b_n]$ la matrice dont les colonnes sont formées par les $(b_i)_{1\leq i \leq n}$, on considérera de manière équivalente : \[\mathcal{L}(B) := \left\{ Bx, x \in \mathbb{Z}^n \right\} \]
 \end{defin}
 
-On peut alors considérer le problème algorithmique suivant, qui apparait lors de l'étude des réseaux sur lesquels se basent les protocoles utilisant LWE : 
+\begin{defin}
+Dans un réseau $\Lambda$, on note $\lambda_i := \inf\{r,\dim(\text{Vect}(\Lambda\cap\mathcal{B}(0,r))=i\}$ le i-ème minimum du réseau. En particulier, on a $\lambda_1 = \inf\{\|v\| ,  v \in \mathcal{L}(B)/\{0\}\}$
+\end{defin}
+\begin{rem} : $\lambda_i$ s'interprète comme le rayon de la plus petite boule centrée à l'origine qui contient $i$ vecteurs indépendants du réseau. \\ Le calcul effectif de ces minimums semble très dur : les meilleurs algorithmes polynomiaux (en la dimension du réseau) connus calculant $\lambda_1$ ont un facteur d'approximation exponentiel.
+\end{rem}
+
+On peut alors considérer le problème algorithmique suivant, qui apparait lors de l'étude des réseaux reliés aux protocoles utilisant LWE : 
 
 \begin{defin} 
-Soit $B$ une base d'un réseau de dimension $n$, et $\delta \in \mathbb{R}^+$. Une instance du problème \textit{Bounded Distance Decoding} est un vecteur $t \in \mathbb{R}^m$ de la forme $t=x+e$, où $x\in \mathcal{L}(B)$ et $e \leq \delta$. Le problème consiste à retrouver $x$ (ou $e$) à partir de $t$.
+Soit $B$ une base d'un réseau de dimension $n$, et $\delta \in \mathbb{R}^+$. Une instance du problème \textit{Bounded Distance Decoding} est un vecteur $t \in \mathbb{R}^m$ de la forme $t=x+e$, où $x\in \mathcal{L}(B)$ et $\|e\| \leq \lambda_1/\delta$. Le problème consiste à retrouver $x$ (ou $e$) à partir de $t$.
 \end{defin}
 
 \begin{conj}
-Dans des réseaux de dimension $n$, pour $\delta$ polynomial en $n$, le problème BDD est conjecturé exponentiellement (en $n$) dur à résoudre, même sur des ordinateurs quantiques.
+Dans un réseau de dimension $n$, pour $\delta$ polynomial en $n$, le problème BDD est conjecturé exponentiellement (en $n$) dur à résoudre, même sur des ordinateurs quantiques.
 \end{conj}
 
 
@@ -84,7 +93,7 @@ On se propose tout d'abord de détailler la preuve de correction du schéma de c
 On rappelle le cadre de la preuve : $s \hookleftarrow \mathcal{U}(\mathbb{Z}^{n+d+k-1}[X])$, pour $i\leq t$ on a $a_i \hookleftarrow \mathcal{U}(\mathbb{Z}^n[X])$ ; $e_i \hookleftarrow \lfloor D_{\alpha q}\rceil[X]^{<k+d}$ et finalement $r_i \hookleftarrow \mathcal{U}(\{0,1\}^{<k+1}[X])$. On note $e_i(j)$ le $j$-ème coefficient de $e_i$. Le but est d'avoir avec bonne probabilité que : 
 \[\|\mu + 2\sum_{i \leq t}r_i \odot_d e_i  \|_\infty < q/2 \] où $\mu$ est le message à chiffrer. 
 \begin{theorem}
-Si $\alpha \leq \frac{1}{64(k+1)t\sqrt{\lambda}}$ et $t(k+d)\leq e^\lambda$, alors tout texte $\mu$, avec une probabilité $\geq 1 - 2^{-\Omega(\lambda)}$ sur $\texttt{(sk,pk)}\hookleftarrow\texttt{KeyGen} $, on a $\texttt{Decrypt(sk,Encrypt(pk,mu))= mu}$ 
+Si $\alpha \leq \frac{1}{64(k+1)t\sqrt{\lambda}}$ et $t(k+d)\leq e^\lambda$, alors tout texte $\mu$, avec probabilité $\geq 1 - 2^{-\Omega(\lambda)}$ sur $\texttt{(sk,pk)}\hookleftarrow\texttt{KeyGen} $, on a $\texttt{Decrypt(sk,Encrypt(pk,mu))= mu}$ 
 \end{theorem}
 \textbf{Preuve :}
 On commence par donner une borne classique sur la distribution gaussienne : 
