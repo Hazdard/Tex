@@ -55,8 +55,8 @@ Insérer abstract ici \\
 \; Les réseaux euclidiens sont une construction algébrique permettant entre autres de définir des problèmes mathématiques dont la résolution algorithmique est conjecturée difficile, même pour des ordinateurs quantiques. Cela les rend donc particulièrement intéressants pour construire des protocoles sûrs en cryptographie post-quantique. \\
 Deux exemples fondamentaux de problèmes sur les réseaux sont le \textit{Small Integer Solutions problem} (SIS) introduit par Ajtai en 1996, et le \textit{Learning With Errors problem} (LWE), découvert par Regev en 2005. \\
 Le problème LWE est privilégié dans la construction de schémas de chiffrements car il été démontré \cite{wcac} que résoudre une instance aléatoire de LWE est aussi dur que résoudre la pire instance d'un problème dur (cf suite). On dit que LWE bénéficie d'une réduction \textit{pire-cas moyen-cas}. \\
-Durant mon stage, j'ai travaillé sur la variante \textit{Middle-Product Learning With Errors} (MP-LWE) du problème de Regev, initialement présenté par Roşca \textit{et al.} \cite{mplwe}. \\
-Cette construction a été motivée par le problème suivant : si l'on utilise la version standard de LWE pour construire des protocoles, ces derniers auront une efficacité très réduite à cause d'opérations faisant intervenir de grandes matrices aléatoires. Une solution, proposée par Stehlé \textit{et al.} \cite{plwe},  dldnsqkjdnqs
+Cependant, si l'on utilise la version standard de LWE pour construire des protocoles, ces derniers auront une efficacité très réduite à cause d'opérations faisant intervenir de grandes matrices aléatoires. La variante \textit{Polynomial Learning With Errors}, proposée par Stehlé \textit{et al.} \cite{plwe}, résout ce problème en utilisant des réseaux structurés : les calculs matriciels correspondent alors à des produits de polynômes, calculables très efficacement. \\
+Durant mon stage, j'ai travaillé sur la variante \textit{Middle-Product Learning With Errors} (MP-LWE) du problème de Regev, initialement présentée par Roşca \textit{et al.} \cite{mplwe}. \\
 \\
 
 \section{Préliminaires}
