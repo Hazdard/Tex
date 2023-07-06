@@ -71,18 +71,18 @@ Le réseau est alors de \textit{dimension} $n$, et la famille des $(b_i)_{1\leq 
 En notant $B:=[b_1,\dots,b_n]$ la matrice dont les colonnes sont formées par les $(b_i)_{1\leq i \leq n}$, on considérera de manière équivalente : \[\mathcal{L}(B) := \left\{ Bx, x \in \mathbb{Z}^n \right\} \]
 \end{defin}
 
-Dans ce qui suit, on notera $\mathbb{Z}_q$ (resp. $\mathbb{R}_q$) le quotient $\mathbb{Z}/q\mathbb{Z}$ (resp. $\mathbb{R}/q\mathbb{Z}$).
+Dans ce qui suit, on note $\mathbb{Z}_q$ (resp. $\mathbb{R}_q$) le quotient $\mathbb{Z}/q\mathbb{Z}$ (resp. $\mathbb{R}/q\mathbb{Z}$), et $\|.\|$ désigne la norme euclidienne.
 
 \subsection{Problème LWE et variantes}
 \begin{defin}[Distribution LWE] 
-Soient $q\geq 2$, $m\geq 1$, $\chi$ une distribution de probabilité sur $\mathbb{T}:=\mathbb{R}/\mathbb{Z}$. À partir de $s\in \mathbb{Z}_q^m$, on définit $\mathcal{D}_{q,\chi,m}$ la distribution sur $\mathbb{Z}_q^m\times\mathbb{R}_q^m$ obtenue en choisissant $a \hookleftarrow \mathcal{U}(\mathbb{Z}_q^m)$, $e\hookleftarrow \chi^m$, et qui renvoie $(a,b):=(a,\left<a,s\right> +e)$.
+Soient $q\geq 2$, $m\geq 1$, $\chi$ une distribution de probabilité sur $\mathbb{Z}$. À partir de $s\in \mathbb{Z}_q^m$, on définit $\mathcal{D}_{q,\chi,m}$ la distribution sur $\mathbb{Z}_q^m\times\mathbb{Z}_q^m$ obtenue en choisissant $a \hookleftarrow \mathcal{U}(\mathbb{Z}_q^m)$, $e\hookleftarrow \chi$, et qui renvoie $(a,b):=(a,\left<a,s\right> +e \text{ mod } q)$.
 \end{defin}
 
 \begin{defin}[Problèmes LWE]
-Soient $q\geq 2$, $m\geq 1$, $\chi$. Munis de la distribution $\mathcal{D}_{q,\chi,m}$ précédente, on peut alors définir deux problèmes : 
+Soient $q\geq 2$, $m\geq 1$, $\chi$. Muni de la distribution $\mathcal{D}_{q,\chi,m}$ précédente, on peut alors définir deux problèmes : 
 \begin{enumerate}
-\item[•]\textbf{LWE-Décisionnel} consiste à un distinguer un nombre arbitraire d'échantillons de $\mathcal{D}_{q,\chi,m}$ et le même nombre d'échantillons de $\mathcal{U}(\mathbb{Z}_q^m)\times\mathcal{U}(\mathbb{R}_q^m)$.
-\item[•]\textbf{LWE-Calculatoire} consiste à retrouver le secret $s$ à partir d'un nombre $t$ d'échantillons $ $
+\item[•]\textbf{LWE-Décisionnel} consiste à un distinguer un nombre arbitraire d'échantillons de $\mathcal{D}_{q,\chi,m}$ et le même nombre d'échantillons de $\mathcal{U}(\mathbb{Z}_q^m)\times\mathcal{U}(\mathbb{Z}_q^m)$.
+\item[•]\textbf{LWE-Calculatoire} consiste à retrouver le secret $s$ à partir d'un nombre fixé d'échantillons indépendants.
 \end{enumerate}
 \end{defin}
 
@@ -103,11 +103,11 @@ Dans un réseau $\Lambda$, on note $\lambda_i := \inf\{r,\dim(\text{Vect}(\Lambd
 On peut alors considérer le problème algorithmique suivant, qui apparait lors de l'étude des réseaux reliés aux protocoles utilisant LWE : 
 
 \begin{defin} 
-Soit $B$ une base d'un réseau de dimension $n$, et $\delta \in \mathbb{R}^+$. Une instance du problème \textit{Bounded Distance Decoding} est un vecteur $t \in \mathbb{R}^m$ de la forme $t=x+e$, où $x\in \mathcal{L}(B)$ et $\|e\| \leq \lambda_1/\delta$. Le problème consiste à retrouver $x$ (ou $e$) à partir de $t$.
+Soit $B$ une base d'un réseau de dimension $n$, et $\gamma \in \mathbb{R}^+$. Une instance du problème \textit{Bounded Distance Decoding} est un vecteur $t \in \mathbb{R}^m$ de la forme $t=x+e$, où $x\in \mathcal{L}(B)$ et $\|e\| \leq \lambda_1/\gamma$. Le problème consiste à retrouver $x$ (ou $e$) à partir de $t$.
 \end{defin}
 
 \begin{conj}
-Dans un réseau de dimension $n$, pour $\delta$ polynomial en $n$, le problème BDD est conjecturé exponentiellement (en $n$) dur à résoudre, même sur des ordinateurs quantiques.
+Dans un réseau de dimension $n$, pour $\gamma$ polynomial en $n$, le problème BDD est conjecturé exponentiellement (en $n$) dur à résoudre, même sur des ordinateurs quantiques.
 \end{conj}
 
 
