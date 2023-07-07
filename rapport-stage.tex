@@ -106,7 +106,7 @@ On peut alors considérer le problème algorithmique suivant, qui apparait lors 
 Soit $B$ une base d'un réseau de dimension $n$, et $\gamma \in \mathbb{R}^+$. Une instance du problème \textit{Bounded Distance Decoding} est un vecteur $t \in \mathbb{R}^m$ de la forme $t=x+e$, où $x\in \mathcal{L}(B)$ et $\|e\| \leq \lambda_1/\gamma$. Le problème consiste à retrouver $x$ (ou $e$) à partir de $t$.
 \end{defin}
 
-En revenant au problème LWE-Décisionnel, on constate que ce dernier se réduit à une instance de BDD dans le réseau engendré par les colonnes de $[A,qI_t]$.
+En revenant au problème LWE-Décisionnel, on constate que ce dernier se réduit à une instance de BDD dans le réseau engendré par les colonnes de $[A^\top,qI_m]$.
 
 \begin{conj}
 Dans un réseau de dimension $n$, pour $\gamma$ polynomial en $n$, le problème BDD est conjecturé exponentiellement (en $n$) dur à résoudre, même sur des ordinateurs quantiques.
@@ -120,7 +120,7 @@ On se propose tout d'abord de détailler la preuve de correction du schéma de c
 On rappelle le cadre de la preuve : $s \hookleftarrow \mathcal{U}(\mathbb{Z}^{n+d+k-1}[X])$, pour $i\leq t$ on a $a_i \hookleftarrow \mathcal{U}(\mathbb{Z}^n[X])$ ; $e_i \hookleftarrow \lfloor D_{\alpha q}\rceil[X]^{<k+d}$ et finalement $r_i \hookleftarrow \mathcal{U}(\{0,1\}^{<k+1}[X])$. On note $e_i(j)$ le $j$-ème coefficient de $e_i$. Le but est d'avoir avec bonne probabilité que : 
 \[\|\mu + 2\sum_{i \leq t}r_i \odot_d e_i  \|_\infty < q/2 \] où $\mu$ est le message à chiffrer. 
 \begin{theorem}
-Si $\alpha \leq \frac{1}{16(k+1)t\sqrt{\lambda}}$ et  $24td(k+1)\leq qd\leq e^\lambda$, alors pour tout texte $\mu$, avec probabilité $\geq 1 - 2^{-\Omega(\lambda)}$ sur $\texttt{(sk,pk)}\hookleftarrow\texttt{KeyGen} $, on a $\texttt{Decrypt(sk,Encrypt(pk,mu))= mu}$ 
+Si $\alpha \leq \frac{1}{16(k+1)t\sqrt{\lambda}}$ et  $12td(k+1)\leq qd\leq e^\lambda$, alors pour tout texte $\mu$, avec probabilité $\geq 1 - 2^{-\Omega(\lambda)}$ sur $\texttt{(sk,pk)}\hookleftarrow\texttt{KeyGen} $, on a $\texttt{Decrypt(sk,Encrypt(pk,mu))= mu}$ 
 \end{theorem}
 \textbf{Preuve :}
 On commence par donner une borne classique sur la distribution gaussienne : 
@@ -153,12 +153,12 @@ En appliquant les hypothèses sur les paramètres de sécurité, on obtient l'in
 
 \[
 \frac{1}{2(\alpha q)^2}(\frac{q}{4t(k+1)}-\frac{3}{2})^2 \geq \frac{16^2\lambda t^2(k+1)^2}{2q^2}(\frac{q}{4t(k+1)}-\frac{3}{2})^2 
-\geq \frac{\lambda}{2}(4-\frac{24t(k+1)}{q})
-\geq \frac{3\lambda}{2}
+\geq \frac{\lambda}{2}(4-\frac{24t(k+1)}{q})^2
+\geq 2\lambda
 \]
 \\
 
-Ensuite on majore le facteur pré-exponentiel :
+On majore ensuite le facteur pré-exponentiel :
 
 \[
 \frac{8t^2(k+1)(k+d)\alpha q}{q - 6t(k+1)} \leq \frac{8t^2(k+1)(k+d)\alpha q}{6t(k+1)}
@@ -170,8 +170,8 @@ Ensuite on majore le facteur pré-exponentiel :
 
 Finalement on obtient la borne voulue :
 \begin{eqnarray*}
-\mathbb{P}(\|\mu + 2\sum_{i \leq t}r_i \odot_d e_i  \|_\infty \geq q/2 ) &\leq&  \frac{qd}{12\sqrt{\lambda}}e^{-\frac{3\lambda}{2}} \\
-&\leq& e^{-\frac{\lambda}{2}-\log(12\sqrt{\lambda})} \\
+\mathbb{P}(\|\mu + 2\sum_{i \leq t}r_i \odot_d e_i  \|_\infty \geq q/2 ) &\leq&  \frac{qd}{12\sqrt{\lambda}}e^{-2\lambda} \\
+&\leq& e^{-\lambda-\log(12\sqrt{\lambda})} \\
 &\leq& 2^{-\Omega(\lambda)}
 \end{eqnarray*}
 $\hfill \square$
