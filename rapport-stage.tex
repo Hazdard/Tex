@@ -56,9 +56,9 @@ Insérer abstract ici \\
 Deux exemples fondamentaux de problèmes sur les réseaux sont le \textit{Small Integer Solutions problem} (SIS) introduit par Ajtai en 1996, et le \textit{Learning With Errors problem} (LWE), découvert par Regev en 2005. \\
 Le problème LWE est privilégié dans la construction de schémas de chiffrement car il été prouvé \cite{wcac} que résoudre une instance aléatoire de LWE est aussi dur que résoudre la pire instance d'un problème dur (cf suite). On dit que LWE bénéficie d'une réduction \textit{pire-cas moyen-cas}. \\
 Cependant, si l'on utilise la version standard de LWE pour construire des protocoles, ces derniers auront une efficacité très réduite à cause d'opérations faisant intervenir de grandes matrices aléatoires. La variante \textit{Polynomial Learning With Errors}, proposée par Stehlé \textit{et al.} \cite{plwe}, résout ce problème en utilisant des réseaux structurés : les calculs matriciels correspondent alors à des produits de polynômes, calculables très efficacement. Cependant, ce gain d'efficacité se fait au détriment de garanties de sécurité : les polynômes sont manipulés dans $\mathbb{Z}_p[X]/f$ et la complexité de la variante est directement liée au $f$ choisi. \\
-Ainsi, afin de se débarasser de cette dépendance, Roşca \textit{et al.} introduisent le \textit{Middle-Product Learning With Errors problem} (MP-LWE) \cite{mplwe} dont l'intérêt est d'être aussi dur que des classes exponentiellement grandes de problèmes PLWE($f$) (dont on espère qu'elles contiennent au moins une instance difficile), tout en conservant l'efficacité des réseaux structurés. \\
+Afin de se débarasser de cette dépendance, Roşca \textit{et al.} introduisent le \textit{Middle-Product Learning With Errors problem} (MP-LWE) \cite{mplwe} dont l'intérêt est d'être aussi dur que des classes exponentiellement grandes de problèmes PLWE($f$) (dont on espère qu'elles contiennent au moins une instance difficile), tout en conservant l'efficacité des réseaux structurés. \\
 
-Durant mon stage, j'ai donc travaillé sur la variante MP-LWE du problème de Regev, et plus particulièrement sur les effets de la réduction de PLWE vers MP-LWE.
+Durant mon stage, j'ai donc travaillé sur la variante MP-LWE du problème de Regev, et plus particulièrement sur les effets de la réduction de PLWE vers MP-LWE proposée par \cite{mplwe}.
 \\
 
 \section{Préliminaires}
@@ -120,7 +120,7 @@ On se propose tout d'abord de détailler la preuve de correction du schéma de c
 On rappelle le cadre de la preuve : $s \hookleftarrow \mathcal{U}(\mathbb{Z}^{n+d+k-1}[X])$, pour $i\leq t$ on a $a_i \hookleftarrow \mathcal{U}(\mathbb{Z}^n[X])$ ; $e_i \hookleftarrow \lfloor D_{\alpha q}\rceil[X]^{<k+d}$ et finalement $r_i \hookleftarrow \mathcal{U}(\{0,1\}^{<k+1}[X])$. On note $e_i(j)$ le $j$-ème coefficient de $e_i$. Le but est d'avoir avec bonne probabilité que : 
 \[\|\mu + 2\sum_{i \leq t}r_i \odot_d e_i  \|_\infty < q/2 \] où $\mu$ est le message à chiffrer. 
 \begin{theorem}
-Si $\alpha \leq \frac{1}{64(k+1)t\sqrt{\lambda}}$ et $t(k+d)\leq e^\lambda$, alors tout texte $\mu$, avec probabilité $\geq 1 - 2^{-\Omega(\lambda)}$ sur $\texttt{(sk,pk)}\hookleftarrow\texttt{KeyGen} $, on a $\texttt{Decrypt(sk,Encrypt(pk,mu))= mu}$ 
+Si $\alpha \leq \frac{1}{16(k+1)t\sqrt{\lambda}}$ et  $24td(k+1)\leq qd\leq e^\lambda$, alors pour tout texte $\mu$, avec probabilité $\geq 1 - 2^{-\Omega(\lambda)}$ sur $\texttt{(sk,pk)}\hookleftarrow\texttt{KeyGen} $, on a $\texttt{Decrypt(sk,Encrypt(pk,mu))= mu}$ 
 \end{theorem}
 \textbf{Preuve :}
 On commence par donner une borne classique sur la distribution gaussienne : 
@@ -143,18 +143,35 @@ Donc $|(\sum_{i \leq t}r_i \odot_d e_i)_{l\text{-eme}}|\leq t(k+1)E$. \\
 
 Alors, on obtient que : 
 \begin{eqnarray*}
-\mathbb{P}(\|\mu + 2\sum_{i \leq t}r_i \odot_d e_i  \|_\infty \geq q/2 ) &\leq& \mathbb{P}(E \geq \frac{q}{4t(k+1)}) \\
-&\leq& \mathbb{P}(\bigcup_{i,j}|e_i(j)| \geq \frac{q}{4t(k+1)}) \\
-&\leq& (k+d)t \ \mathbb{P}_{X \hookleftarrow \mathcal{N}(\alpha^2 q^2)}(X \geq \frac{q}{4t(k+1)}) \\
-&\leq& \frac{8t^2(k+1)(k+d)\alpha q}{q \sqrt{2\pi}} e^{-\frac{q^2}{32(\alpha q (k+1) t)^2}} \\
-&\leq& \frac{8t^2(k+1)(k+d)\alpha}{\sqrt{2\pi}} e^{-\frac{1}{32(\alpha (k+1) t)^2}} \\
+\mathbb{P}(\|\mu + 2\sum_{i \leq t}r_i \odot_d e_i  \|_\infty \geq q/2 ) &\leq& \mathbb{P}(1+2E \geq \frac{q}{2t(k+1)}) \\
+&\leq& \mathbb{P}(\bigcup_{i,j}|e_i(j)| \geq \frac{q}{4t(k+1)} - \frac{1}{2}) \\
+&\leq& (k+d)t \ \mathbb{P}_{X \hookleftarrow \mathcal{N}(\alpha^2 q^2)}(|X| \geq \frac{q}{4t(k+1)} - \frac{3}{2}) \\
+&\leq& \frac{8t^2(k+1)(k+d)\alpha q}{q - 6t(k+1)} e^{-\frac{1}{2(\alpha q)^2}(\frac{q}{4t(k+1)}-\frac{3}{2})^2} \\
 \end{eqnarray*}
 
-En appliquant les hypothèses sur les paramètres de sécurité, on obtient finalement :
+En appliquant les hypothèses sur les paramètres de sécurité, on obtient l'inégalité suivante sur l'exposant :
 
+\[
+\frac{1}{2(\alpha q)^2}(\frac{q}{4t(k+1)}-\frac{3}{2})^2 \geq \frac{16^2\lambda t^2(k+1)^2}{2q^2}(\frac{q}{4t(k+1)}-\frac{3}{2})^2 
+\geq \frac{\lambda}{2}(4-\frac{24t(k+1)}{q})
+\geq \frac{3\lambda}{2}
+\]
+\\
+
+Ensuite on majore le facteur pré-exponentiel :
+
+\[
+\frac{8t^2(k+1)(k+d)\alpha q}{q - 6t(k+1)} \leq \frac{8t^2(k+1)(k+d)\alpha q}{6t(k+1)}
+\leq \frac{4t(k+d)q}{3}\frac{1}{16(k+1)t\sqrt{\lambda}} 
+\leq \frac{(k+d)q}{12(k+1)\sqrt{\lambda}}
+\leq \frac{qd}{12\sqrt{\lambda}}
+\]
+\\
+
+Finalement on obtient la borne voulue :
 \begin{eqnarray*}
-\mathbb{P}(\|\mu + 2\sum_{i \leq t}r_i \odot_d e_i  \|_\infty \geq q/2 ) &\leq& \frac{t(k+d)}{8\sqrt{2\pi\lambda}}e^{-2\lambda} \\
-&\leq& e^{-\lambda-\log(8\sqrt{2\pi\lambda})} \\
+\mathbb{P}(\|\mu + 2\sum_{i \leq t}r_i \odot_d e_i  \|_\infty \geq q/2 ) &\leq&  \frac{qd}{12\sqrt{\lambda}}e^{-\frac{3\lambda}{2}} \\
+&\leq& e^{-\frac{\lambda}{2}-\log(12\sqrt{\lambda})} \\
 &\leq& 2^{-\Omega(\lambda)}
 \end{eqnarray*}
 $\hfill \square$
