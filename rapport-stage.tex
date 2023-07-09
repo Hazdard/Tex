@@ -74,25 +74,20 @@ En notant $B:=[b_1,\dots,b_n]$ la matrice dont les colonnes sont formées par le
 Dans ce qui suit, on note $\mathbb{Z}_q$ (resp. $\mathbb{R}_q$) le quotient $\mathbb{Z}/q\mathbb{Z}$ (resp. $\mathbb{R}/q\mathbb{Z}$), et $\|.\|$ désigne la norme euclidienne.
 
 \subsection{Problème LWE et variantes}
+
 \begin{defin}[Distribution LWE] 
-Soient $q\geq 2$, $m\geq 1$, $\chi$ une distribution de probabilité sur $\mathbb{Z}$. À partir de $s\in \mathbb{Z}_q^m$, on définit $\mathcal{D}_{q,\chi,m}$ la distribution sur $\mathbb{Z}_q^m\times\mathbb{Z}_q^m$ obtenue en choisissant $a \hookleftarrow \mathcal{U}(\mathbb{Z}_q^m)$, $e\hookleftarrow \chi$, et qui renvoie $(a,b):=(a,\left<a,s\right> +e \text{ mod } q)$.
+Soient $q\geq 2$, $m\geq 1$, $\chi$ une distribution de probabilité sur $\mathbb{Z}$. À partir de $s\in \mathbb{Z}_q^m$, on définit $\mathcal{D}_{q,\chi,m}$ la distribution sur $\mathbb{Z}_q^m\times\mathbb{Z}_q$ obtenue en choisissant $a \hookleftarrow \mathcal{U}(\mathbb{Z}_q^m)$, $e\hookleftarrow \chi$, et qui renvoie $(a,b):=(a,\left<a,s\right> +e \text{ mod } q)$.
 \end{defin}
 
 \begin{defin}[Problèmes LWE]
 Soient $q\geq 2$, $m\geq 1$, $\chi$. Muni de la distribution $\mathcal{D}_{q,\chi,m}$ précédente, on peut alors définir deux problèmes : 
 \begin{enumerate}
-\item[•]\textbf{LWE-Décisionnel} consiste à un distinguer un nombre arbitraire d'échantillons de $\mathcal{D}_{q,\chi,m}$ et le même nombre d'échantillons de $\mathcal{U}(\mathbb{Z}_q^m)\times\mathcal{U}(\mathbb{Z}_q^m)$.
+\item[•]\textbf{LWE-Décisionnel} consiste à un distinguer un nombre arbitraire d'échantillons de $\mathcal{D}_{q,\chi,m}$ et le même nombre d'échantillons de $\mathcal{U}(\mathbb{Z}_q^m)\times\mathcal{U}(\mathbb{Z}_q)$.
 \item[•]\textbf{LWE-Calculatoire} consiste à retrouver le secret $s$ à partir d'un nombre fixé d'échantillons indépendants.
 \end{enumerate}
 \end{defin}
 
 En notant $A$ la matrice dont les lignes sont formées des ($a_i)_{i\leq t}$, $e:=(e_i)_{i\leq t}$ et $b:=(b_i)_{i\leq t}$ ($t$ représente le nombre d'échantillons), on a : $b=As +e \text{ mod } q$.
-
-
-
-
-
-
 
 \begin{defin}
 Dans un réseau $\Lambda$, on note $\lambda_i := \inf\{r,\dim(\text{Vect}(\Lambda\cap\mathcal{B}(0,r))=i\}$ le i-ème minimum du réseau. En particulier, on a $\lambda_1 = \inf\{\|v\| ,  v \in \mathcal{L}(B)/\{0\}\}$ qui est le plus court vecteur non nul du réseau.
@@ -106,7 +101,7 @@ On peut alors considérer le problème algorithmique suivant, qui apparait lors 
 Soit $B$ une base d'un réseau de dimension $n$, et $\gamma \in \mathbb{R}^+$. Une instance du problème \textit{Bounded Distance Decoding} est un vecteur $t \in \mathbb{R}^m$ de la forme $t=x+e$, où $x\in \mathcal{L}(B)$ et $\|e\| \leq \lambda_1/\gamma$. Le problème consiste à retrouver $x$ (ou $e$) à partir de $t$.
 \end{defin}
 
-En revenant au problème LWE-Décisionnel, on constate que ce dernier se réduit à une instance de BDD dans le réseau engendré par les colonnes de $[A^\top,qI_m]$.
+En revenant au problème LWE-Décisionnel, on constate que ce dernier se réduit à une instance de BDD dans le réseau engendré par les colonnes de $[A,qI_t]$.
 
 \begin{conj}
 Dans un réseau de dimension $n$, pour $\gamma$ polynomial en $n$, le problème BDD est conjecturé exponentiellement (en $n$) dur à résoudre, même sur des ordinateurs quantiques.
@@ -126,7 +121,7 @@ Si $\alpha \leq \frac{1}{16(k+1)t\sqrt{\lambda}}$ et  $12td(k+1)\leq qd\leq e^\l
 On commence par donner une borne classique sur la distribution gaussienne : 
 \begin{eqnarray*}
 \mathbb{P}_{X \hookleftarrow \mathcal{N}(\sigma^2)}(|X| \geq M) &=& \frac{2}{\sigma \sqrt{2 \pi}} \int_{M}^\infty e^{-\frac{t^2}{2 \sigma^2}} \, \mathrm{d}t \\
-&\leq &  \frac{2\sigma^2}{\sigma \sqrt{2 \pi}}\int_{M}^\infty \frac{t}{\sigma^2 M} e^{-\frac{t^2}{2 \sigma^2}} \, \mathrm{d}t \\
+&\leq &  \frac{2}{\sigma \sqrt{2 \pi}}\int_{M}^\infty \frac{t}{M} e^{-\frac{t^2}{2 \sigma^2}} \, \mathrm{d}t \\
 & \leq & \frac{2\sigma}{M \sqrt{2 \pi}} [-e^{-\frac{t^2}{2 \sigma^2}}]_M^\infty \\
 & \leq & \frac{2\sigma}{M \sqrt{2 \pi}} e^{-\frac{M^2}{2 \sigma^2}}
 \end{eqnarray*}
@@ -158,7 +153,7 @@ En appliquant les hypothèses sur les paramètres de sécurité, on obtient l'in
 \]
 \\
 
-On majore ensuite le facteur pré-exponentiel :
+On majore de même le facteur pré-exponentiel :
 
 \[
 \frac{8t^2(k+1)(k+d)\alpha q}{q - 6t(k+1)} \leq \frac{8t^2(k+1)(k+d)\alpha q}{6t(k+1)}
