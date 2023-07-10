@@ -73,13 +73,13 @@ En notant $B:=[b_1,\dots,b_n]$ la matrice dont les colonnes sont formées par le
 
 Dans ce qui suit, on note $\mathbb{Z}_q$ (resp. $\mathbb{R}_q$) le quotient $\mathbb{Z}/q\mathbb{Z}$ (resp. $\mathbb{R}/q\mathbb{Z}$), et $\|.\|$ désigne la norme euclidienne.
 
-\subsection{Problème LWE et variantes}
+\subsection{Problème LWE et difficulté}
 
-\begin{defin}[Distribution LWE] 
+\begin{defin}\textbf{(Distribution LWE)}
 Soient $q\geq 2$, $m\geq 1$, $\chi$ une distribution de probabilité sur $\mathbb{Z}$. À partir de $s\in \mathbb{Z}_q^m$, on définit $\mathcal{D}_{q,\chi,m}$ la distribution sur $\mathbb{Z}_q^m\times\mathbb{Z}_q$ obtenue en choisissant $a \hookleftarrow \mathcal{U}(\mathbb{Z}_q^m)$, $e\hookleftarrow \chi$, et qui renvoie $(a,b):=(a,\left<a,s\right> +e \text{ mod } q)$.
 \end{defin}
 
-\begin{defin}[Problèmes LWE]
+\begin{defin}\textbf{(Problèmes LWE)}
 Soient $q\geq 2$, $m\geq 1$, $\chi$. Muni de la distribution $\mathcal{D}_{q,\chi,m}$ précédente, on peut alors définir deux problèmes : 
 \begin{enumerate}
 \item[•]\textbf{LWE-Décisionnel} consiste à un distinguer un nombre arbitraire d'échantillons de $\mathcal{D}_{q,\chi,m}$ et le même nombre d'échantillons de $\mathcal{U}(\mathbb{Z}_q^m)\times\mathcal{U}(\mathbb{Z}_q)$.
@@ -97,7 +97,7 @@ Dans un réseau $\Lambda$, on note $\lambda_i := \inf\{r,\dim(\text{Vect}(\Lambd
 
 On peut alors considérer le problème algorithmique suivant, qui apparait lors de l'étude des réseaux reliés aux protocoles utilisant LWE : 
 
-\begin{defin} 
+\begin{defin}\textbf{(BDD)}
 Soit $B$ une base d'un réseau de dimension $n$, et $\gamma \in \mathbb{R}^+$. Une instance du problème \textit{Bounded Distance Decoding} est un vecteur $t \in \mathbb{R}^m$ de la forme $t=x+e$, où $x\in \mathcal{L}(B)$ et $\|e\| \leq \lambda_1/\gamma$. Le problème consiste à retrouver $x$ (ou $e$) à partir de $t$.
 \end{defin}
 
@@ -107,9 +107,44 @@ En revenant au problème LWE-Décisionnel, on constate que ce dernier se réduit
 Dans un réseau de dimension $n$, pour $\gamma$ polynomial en $n$, le problème BDD est conjecturé exponentiellement (en $n$) dur à résoudre, même sur des ordinateurs quantiques.
 \end{conj}
 
+\subsection{Variantes structurées}
 
-\section{Développements}
+On considère la variante polynomiale du problème LWE :
+\begin{defin}\textbf{(Distribution PLWE)}
+Soient $q \geq 2$, $m>0$, $f$ polynôme de degré $m$, $\chi$ une distribution sur $\mathbb{R}_q[X]/f$. À partir de $s\in \mathbb{Z}_q[X]/f$, on défini la distribution $\text{P}^{(f)}_{q,\chi}(s)$ sur $\mathbb{Z}_q[X]/f \times \mathbb{R}_q[X]/f$ obtenue en tirant $a \hookleftarrow \mathcal{U}(\mathbb{Z}_q[X]/f)$, $e\hookleftarrow \chi$ et qui renvoie $(a,b=a\cdot s+e)$.
+\end{defin}
+
+Ensuite, on définit un nouveau produit sur les polynômes : 
+\begin{defin}\textbf{(Middle-Product)}
+Soient $d_a,d_b,d,k \in \mathbb{N}$ tels que $d_a+d_b-1=d+2k$. Alors le \textit{middle-product} $\odot_d : \mathbb{R}^{<d_a}[X]\times\mathbb{R}^{<d_b}[X]\to\mathbb{R}^{<d}[X]$ est la fonction :
+\[(a,b) \mapsto a \odot_d b = \lfloor \frac{(a\cdot b)\text{ mod }x^{k+d}}{x^k} \rfloor\]
+\end{defin}
+
+On construit alors une distribution plus générale utilisant le produit précédent : 
+\begin{defin}\textbf{(Distribution MP-LWE)}
+Soient $n,d >0$, $q\geq 2$ et $\chi$ une distribution sur $\mathbb{R}_q^{<d}[X]$. Pour $s\in \mathbb{Z}^{n+d-1}$, on définit la distribution $\text{MP}_{q,n,d,\chi}(s)$ sur $\mathbb{Z}_q^{<n}[X]\times\mathbb{R}_q^{<d}$ obtenu en tirant $a \hookleftarrow \mathcal{U}(\mathbb{Z}_q^{<n}[X])$, $e\hookleftarrow \chi$ et qui renvoie $(a,b=a\odot_d s+e)$.
+\end{defin}
+
+Les problèmes calculatoires et décisionnels associés peuvent se définir ensuite de manière parfaitement analogue au cas LWE classique. \\
+
+Afin de manipuler les réseaux sous-jacents à ces variantes, il est nécessaire de défnir les objets suivants : 
+
+\begin{defin} Soient $f,a\in \mathbb{R}_d[X]$ de degré $m$ et $n$, et $d\leq m$
+\begin{enumerate}
+\item[•] On note $\text{Rot}^d_f(a) \in \mathbb{R}^{d\times m}$ la matrice dont la $i$-ème ligne est constituée des coefficients de $a\cdot x^{i-1}\text{ mod } f$. On écrira $\text{Rot}_f(a)$ pour  $\text{Rot}^m_f(a)$
+\item[•] On note $\text{Toep}^{d,n}(a) \in \mathbb{R}^{d\times(n+d-1)}$ la matrice dont la $i$-ème ligne est constituée des coefficients de $a\cdot x^{i-1}$.
+\item[•] On note $M_f \in \mathbb{R}^{m\times m}$ la matrice dont l'entrée $(i,j)$ est le coefficient constant de $x^{i+j-2}\text{ mod }f$
+\end{enumerate}
+\end{defin}
+
+\begin{th}
+
+\section{Étude de la réduction}
+
+\section{Schéma de chiffrement}
+
 \subsection{Preuve de correction}
+
 On se propose tout d'abord de détailler la preuve de correction du schéma de chiffrement proposé dans \cite{mplwe} : \\
 
 On rappelle le cadre de la preuve : $s \hookleftarrow \mathcal{U}(\mathbb{Z}^{n+d+k-1}[X])$, pour $i\leq t$ on a $a_i \hookleftarrow \mathcal{U}(\mathbb{Z}^n[X])$ ; $e_i \hookleftarrow \lfloor D_{\alpha q}\rceil[X]^{<k+d}$ et finalement $r_i \hookleftarrow \mathcal{U}(\{0,1\}^{<k+1}[X])$. On note $e_i(j)$ le $j$-ème coefficient de $e_i$. Le but est d'avoir avec bonne probabilité que : 
