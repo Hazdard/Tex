@@ -125,11 +125,30 @@ On construit alors une distribution plus générale utilisant le produit précé
 Soient $n,d >0$, $q\geq 2$ et $\chi$ une distribution sur $\mathbb{R}_q^{<d}[X]$. Pour $s\in \mathbb{Z}^{n+d-1}$, on définit la distribution $\text{MP}_{q,n,d,\chi}(s)$ sur $\mathbb{Z}_q^{<n}[X]\times\mathbb{R}_q^{<d}$ obtenu en tirant $a \hookleftarrow \mathcal{U}(\mathbb{Z}_q^{<n}[X])$, $e\hookleftarrow \chi$ et qui renvoie $(a,b=a\odot_d s+e)$.
 \end{defin}
 
-Les problèmes calculatoires et décisionnels associés peuvent se définir ensuite de manière parfaitement analogue au cas LWE classique. \\
+Les problèmes décisionnels $\text{PLWE}^{(f)}_{q,\chi}$ et $\text{MP-LWE}_{q,n,d,\chi}$ associés peuvent se définir ensuite de manière parfaitement analogue au cas LWE classique. \\
+
+\begin{defin} Soit $\sigma >0$ et $m \in \mathbb{N}$
+\begin{enumerate}
+\item[•] On note $D_\sigma$ la gaussienne en dimension $n$ dont la matrice de covariance est $\sigma^2\text{Id}_n$.
+\item[•] Soit $f \in \mathbb{Z}[X]$ de degré $m$. On définit le \textit{facteur d'expansion} de $f$ 
+par\\ $EF(f) :=\displaystyle \max_{\substack{g\in \mathbb{Z}^{2m-1}[X] \\ g \neq 0}}(\frac{\|g\text{ mod }f \|_\infty}{\|g\|_\infty})$
+\end{enumerate}
+\end{defin}
+
+% EXEMPLE FACTEURS DEXP BORNEE
+
+
+\begin{theorem}
+Soient $n,d >0$, $q\geq 2$, et $\alpha \in (0,1)$. Pour $S>0$, on note $\mathcal{F}(S,d,n)$ les polynômes de $\mathbb{Z}[X]$ unitaires, dont le coefficient constant est inversible dans $\mathbb{Z}_q$, de degré $m$ vérifiant $d\leq m\leq n$, et tels que $\text{EF}(f)\leq S$. Il existe une réduction \textit{ppt} depuis $\text{PLWE}^{(f)}_{q,D_{\alpha q}}$ pour tout $f\in\mathcal{F}(S,d,n)$ vers  $\text{MP-LWE}_{q,n,d,D_{\alpha' q}}$, où $\alpha' = \alpha d S$.
+\end{theorem}
+
+Il s'agit du résultat principal de \cite{mplwe}. Durant mon stage, j'ai étudié comment la réduction explicitée dans la preuve du théorème agit géométriquement sur les réseaux sous-jacents aux problèmes de manière à augmenter la difficulté.
+
+\section{Étude de la réduction}
 
 Afin de manipuler les réseaux sous-jacents à ces variantes, il est nécessaire de défnir les objets suivants : 
 
-\begin{defin} Soient $f,a\in \mathbb{R}_d[X]$ de degré $m$ et $n$, et $d\leq m$
+\begin{defin} Soient $f,a\in \mathbb{R}_d[X]$ de degré $m$ et $n$, et $d \in \mathbb{N}$
 \begin{enumerate}
 \item[•] On note $\text{Rot}^d_f(a) \in \mathbb{R}^{d\times m}$ la matrice dont la $i$-ème ligne est constituée des coefficients de $a\cdot x^{i-1}\text{ mod } f$. On écrira $\text{Rot}_f(a)$ pour  $\text{Rot}^m_f(a)$
 \item[•] On note $\text{Toep}^{d,n}(a) \in \mathbb{R}^{d\times(n+d-1)}$ la matrice dont la $i$-ème ligne est constituée des coefficients de $a\cdot x^{i-1}$.
@@ -137,9 +156,15 @@ Afin de manipuler les réseaux sous-jacents à ces variantes, il est nécessaire
 \end{enumerate}
 \end{defin}
 
-\begin{th}
+Dans la suite, on notera de manière identique un polynôme et le vecteur de ses coefficients. De plus, pour un vecteur $a$, on notera $\bar a$ ce vecteur renversé. \\
 
-\section{Étude de la réduction}
+\begin{lemma} Soient $d,k >0$, et $a \in \mathbb{R}^{<k+1}[X]$, $b \in \mathbb{R}^{<k+d}[X]$  alors :
+\begin{enumerate}
+\item[•]$\text{Rot}^d_f(a) = \text{Toep}^{d,k+1}(a)\cdot\text{Rot}^{k+d}_f(1)$
+\item[•] $a\odot_d b = \overline{\text{Toep}^{d,k+1}(a)\cdot \bar{b}}$
+\end{enumerate}
+
+\end{lemma}
 
 \section{Schéma de chiffrement}
 
