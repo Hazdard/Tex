@@ -53,7 +53,7 @@
 % EXEMPLES FACTEUR DEXP BORNE
 % PARLER DE LYUBASHEVSKI
 % METTRE DES HYPER LIENS 
-
+%PARLER DU SCHEMA DE CHIFFREMENT ?
 
 
 
@@ -119,7 +119,7 @@ On peut alors considérer le problème algorithmique suivant, qui apparait lors 
 Soit $B$ une base d'un réseau de dimension $n$, et $\gamma \in \mathbb{R}^+$. Une instance du problème \textit{Bounded Distance Decoding} est un vecteur $t \in \mathbb{R}^m$ de la forme $t=x+e$, où $x\in \mathcal{L}(B)$ et $\|e\| \leq \lambda_1/\gamma$. Le problème consiste à retrouver $x$ (ou $e$) à partir de $t$.
 \end{defin}
 
-En revenant au problème LWE-Décisionnel, on constate que ce dernier se réduit à une instance de BDD dans le réseau engendré par les colonnes de $[A,qI_t]$.
+En revenant au problème LWE-Décisionnel, on constate que ce dernier se réduit à une instance de BDD dans le réseau engendré par les colonnes de $[A|qId_t]$.
 
 \begin{conj}
 Dans un réseau de dimension $n$, pour $\gamma$ polynomial en $n$, le problème BDD est conjecturé exponentiellement (en $n$) dur à résoudre, même sur des ordinateurs quantiques.
@@ -211,12 +211,30 @@ Ensuite, on constate que le nouveau secret est encore fortement lié au secret d
 On a de plus que, en notant $J \in \mathbb{R}^{d\times d}$ la matrice qui a des $1$ sur son anti-diagonale et des $0$ ailleurs, la nouvelle distribution de l'erreur est $J\cdot\text{M}_f^d\cdot D_{\alpha q}$. Pour obtenir à nouveau une gaussienne dont la matrice de covariance est diagonale, il suffit alors de majorer les valeurs singulières de la nouvelle distribution, et de choisir le majorant comme variance de la gaussienne diagonale. Or dans notre cas, on a clairement $\|J\|=1$ et $\|\text{M}_f\| \leq d\text{EF}(f)=dS$, d'où $\alpha'=\alpha d S$, comme annoncé dans le Théorème 2.1. \\
 \newpage
 \subsection{Effets géométriques}
+
+Si $(A_i)_{i \leq t}$ est une famille de matrices, on désigne par $[A_{i\leq t}]$ la matrice par blocs qui correspond à l'empilement des  $(A_i)_{i \leq t}$ . \\
+Pour $A$ et $B$ des matrices, on désigne par $[A|B]$ la matrice dont les colonnes sont celles de $A$, puis celles de $B$. \\
+
 Afin d'étudier les effets de cette réduction, on remarque que $3$ réseaux distincts apparaissent : 
 \begin{itemize}
-\item Le réseau initial $\mathcal{L}_0 = \{ y \in \mathbb{Z}^t \ | \ \exists x\in \mathbb{Z}^m,\ y=[(\text{Rot}_f(a_i))_{i\leq t}]\cdot x \text{ mod }q \}$
-\item Le réseau intermédiaire $\mathcal{L}_1 =\{ y \in \mathbb{Z}^t \ | \ \exists x\in \mathbb{Z}^d,\ y=[(\text{Rot}_f^d(a_i))_{i\leq t}]\cdot x \text{ mod }q \}$  qui correspond au projeté en dimension $d$ du réseau initial
-\item Le réseau final $\mathcal{L}_2 = \{ y \in \mathbb{Z}^t \ | \ \exists x\in \mathbb{Z}^d,\ y=[(\text{Toep}^{d,n}(a'_i))_{i\leq t}]\cdot x \text{ mod }q\}$
+\item Le réseau initial $\mathcal{L}_0 = \{ y \in \mathbb{Z}^t \ | \ \exists x\in \mathbb{Z}^m,\ y=[\text{Rot}_f(a_i)_{i\leq t}]\cdot x \text{ mod }q \}$
+\item Le réseau intermédiaire $\mathcal{L}_1 =\{ y \in \mathbb{Z}^t \ | \ \exists x\in \mathbb{Z}^d,\ y=[\text{Rot}_f^d(a_i)_{i\leq t}]\cdot x \text{ mod }q \}$  qui correspond au projeté en dimension $d$ du réseau initial
+\item Le réseau final $\mathcal{L}_2 = \{ y \in \mathbb{Z}^t \ | \ \exists x\in \mathbb{Z}^d,\ y=[\text{Toep}^{d,n}(a'_i)_{i\leq t}]\cdot x \text{ mod }q\}$ \\
 \end{itemize}
+
+
+On clairement que $\mathcal{L}_0$ est engendré par les colonnes de la matrice $[[\text{Rot}_f(a_i)_{i\leq t}] \ |\ q\text{Id}_t]$. En particulier, son sous-espace engendré est égal à l'espace entier (ou encore son rang est égal à la dimension ambiente), on dit que c'est un réseau de \textit{rang plein}. De plus, ce réseau contient les $(0,\dots,q,\dots,0)^\top$, dans ce cas il est dit \textit{q-aire}.\\
+
+\begin{lemma}
+Si $a_0$ est non nul, alors $\mathcal{L}_0$ est engendré par 
+$$ \left[\begin{array}{c|ccc}
+\text{Id}_m & 0 &\cdots &0\\
+\text{Rot}_f(a_2)\cdot\text{Rot}_f(a_1)^{-1}&q&\cdots & 0\\
+\vdots & &\ddots & \vdots\\
+\text{Rot}_f(a_t)\cdot\text{Rot}_f(a_1)^{-1}& 0 & \cdots &q\\
+\end{array}\right] $$
+
+\end{lemma}
 
 \section{Schéma de chiffrement}
 
