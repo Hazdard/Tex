@@ -226,15 +226,17 @@ Afin d'étudier les effets de cette réduction, on remarque que $3$ réseaux dis
 On clairement que $\mathcal{L}_0$ est engendré par les colonnes de la matrice $[[\text{Rot}_f(a_i)_{i\leq t}] \ |\ q\text{Id}_t]$. En particulier, son sous-espace engendré est égal à l'espace entier (ou encore son rang est égal à la dimension ambiente), on dit que c'est un réseau de \textit{rang plein}. De plus, ce réseau contient les $(0,\dots,q,\dots,0)^\top$, dans ce cas il est dit \textit{q-aire}.\\
 
 \begin{lemma}
-Si $a_0$ est non nul, alors $\mathcal{L}_0$ est engendré par 
+Si $a_1$ est non nul, alors $\mathcal{L}_0$ est engendré par 
 $$ \left[\begin{array}{c|ccc}
 \text{Id}_m & 0 &\cdots &0\\
 \text{Rot}_f(a_2)\cdot\text{Rot}_f(a_1)^{-1}&q&\cdots & 0\\
 \vdots & &\ddots & \vdots\\
 \text{Rot}_f(a_t)\cdot\text{Rot}_f(a_1)^{-1}& 0 & \cdots &q\\
 \end{array}\right] $$
-
 \end{lemma}
+\textbf{Preuve :} \\
+Pour alléger les notations, on pose $A_i := \text{Rot}_f(a_i)$. Premièrement, si $a_i$ est non nul, alors $A_i$ est inversible (la preuve est \hyperref[sec:inv]{ici} en annexe).
+
 
 \section{Schéma de chiffrement}
 
@@ -300,7 +302,11 @@ Finalement on obtient la borne voulue :
 \end{eqnarray*}
 $\hfill \square$
 
-
+\section*{Annexe}
+\label{sec:inv} 
+\begin{theorem}
+Test
+\end{theorem}
 
 \printbibliography[heading=bibintoc, title={Références}]
 \end{document}
