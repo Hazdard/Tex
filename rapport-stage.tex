@@ -213,9 +213,9 @@ On a de plus que, en notant $J \in \mathbb{R}^{d\times d}$ la matrice qui a des 
 \subsection{Effets géométriques}
 Afin d'étudier les effets de cette réduction, on remarque que $3$ réseaux distincts apparaissent : 
 \begin{itemize}
-\item Le réseau initial $\mathcal{L}_0 = \{ [(\text{Rot}_f(a_i))_{i\leq t}]\cdot x \text{ mod }q, \ x\in \mathbb{Z}^m \}$
-\item Le réseau intermédiaire $\mathcal{L}_1 = \{ [(\text{Rot}_f^d(a_i))_{i\leq t}]\cdot x \text{ mod }q, \ x\in \mathbb{Z}^d \}$  qui correspond au projeté en dimension $d$ du réseau initial
-\item Le réseau final $\mathcal{L}_2 = \{ [(\text{Toep}^{d,n}(a'_i))_{i\leq t}]\cdot x \text{ mod }q, \ x\in \mathbb{Z}^d \}$
+\item Le réseau initial $\mathcal{L}_0 = \{ y \in \mathbb{Z}^t \ | \ \exists x\in \mathbb{Z}^m,\ y=[(\text{Rot}_f(a_i))_{i\leq t}]\cdot x \text{ mod }q \}$
+\item Le réseau intermédiaire $\mathcal{L}_1 =\{ y \in \mathbb{Z}^t \ | \ \exists x\in \mathbb{Z}^d,\ y=[(\text{Rot}_f^d(a_i))_{i\leq t}]\cdot x \text{ mod }q \}$  qui correspond au projeté en dimension $d$ du réseau initial
+\item Le réseau final $\mathcal{L}_2 = \{ y \in \mathbb{Z}^t \ | \ \exists x\in \mathbb{Z}^d,\ y=[(\text{Toep}^{d,n}(a'_i))_{i\leq t}]\cdot x \text{ mod }q\}$
 \end{itemize}
 
 \section{Schéma de chiffrement}
