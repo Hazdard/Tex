@@ -200,11 +200,23 @@ Ce qui donne, en conservant la première colonne (i.e en multipliant par $(1,0,\
 &=& \text{Toep}^{d,n}(a'_i)\cdot\text{Rot}^{d+n-1}_f(1)\cdot\text{M}_f^d\cdot s +\text{M}_f^d\cdot e_i  \\
 \overline{b'_i}&=& \text{Toep}^{d,n}(a'_i)\cdot\overline{s'} + \overline{e'_i}
 \end{eqnarray*}
-en notant $\begin{cases} b'_i = \overline{\text{M}_f^d\cdot b_i} \\ s' = \overline{\text{Rot}^{d+n-1}_f(1)\cdot\text{M}_f^d\cdot s} \\ e'_i = \overline{\text{M}_f^d\cdot e_i} \end{cases}$ \\
+où on a noté $\begin{cases} b'_i = \overline{\text{M}_f^d\cdot b_i} \\ s' = \overline{\text{Rot}^{d+n-1}_f(1)\cdot\text{M}_f^d\cdot s} \\ e'_i = \overline{\text{M}_f^d\cdot e_i} \end{cases}$ \\
 
 Alors on a, toujours en utilisant le Lemme 3.1, que $b'_i = a'_i \odot_d s' + e'_i$ \\
 
-On obtient que $b'_i$ est uniformément distribué car $b_i$ l'est, et que $\text{M}_f$ est inversible modulo $q$. Cette dernière affirmation repose sur l'hypothèse que le coefficient constant de $f$ est inversible modulo $q$.
+On obtient que $b'_i$ est uniformément distribué car $b_i$ l'est, et que $\text{M}_f$ est inversible modulo $q$. Cette dernière affirmation repose sur l'hypothèse que le coefficient constant de $f$ est inversible modulo $q$. \\
+
+Ensuite, on constate que le nouveau secret est encore fortement lié au secret de l'ancien réseau. Pour régler ce problème, on prend $s'' \hookleftarrow \mathcal{U}(\mathbb{Z}_q^{n+d-1}[X])$ et on en sortie, on ajoute à chaque $(a'_i,b'_i)$ le couple $(0,a'_i\odot_d s'')$, de manière à re-randomiser le secret, i.e : le nouveau secret $\tilde s = s'+s''$ est maintenant uniforme dans le nouveau réseau.  \\
+
+On a de plus que, en notant $J \in \mathbb{R}^{d\times d}$ la matrice qui a des $1$ sur son anti-diagonale et des $0$ ailleurs, la nouvelle distribution de l'erreur est $J\cdot\text{M}_f^d\cdot D_{\alpha q}$. Pour obtenir à nouveau une gaussienne dont la matrice de covariance est diagonale, il suffit alors de majorer les valeurs singulières de la nouvelle distribution, et de choisir le majorant comme variance de la gaussienne diagonale. Or dans notre cas, on a clairement $\|J\|=1$ et $\|\text{M}_f\| \leq d\text{EF}(f)=dS$, d'où $\alpha'=\alpha d S$, comme annoncé dans le Théorème 2.1. \\
+\newpage
+\subsection{Effets géométriques}
+Afin d'étudier les effets de cette réduction, on remarque que $3$ réseaux distincts apparaissent : 
+\begin{itemize}
+\item Le réseau initial $\mathcal{L}_0 = \{ [(\text{Rot}_f(a_i))_{i\leq t}]\cdot x \text{ mod }q, \ x\in \mathbb{Z}^m \}$
+\item Le réseau intermédiaire $\mathcal{L}_1 = \{ [(\text{Rot}_f^d(a_i))_{i\leq t}]\cdot x \text{ mod }q, \ x\in \mathbb{Z}^d \}$  qui correspond au projeté en dimension $d$ du réseau initial
+\item Le réseau final $\mathcal{L}_2 = \{ [(\text{Toep}^{d,n}(a'_i))_{i\leq t}]\cdot x \text{ mod }q, \ x\in \mathbb{Z}^d \}$
+\end{itemize}
 
 \section{Schéma de chiffrement}
 
