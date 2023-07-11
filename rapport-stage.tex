@@ -16,7 +16,7 @@
 \usepackage[hidelinks]{hyperref} 
 \hypersetup{
   colorlinks   = true,    % Colours links instead of ugly boxes
-  urlcolor     = blue,    % Colour for external hyperlinks
+  urlcolor     = black,    % Colour for external hyperlinks
   linkcolor    = black,    % Colour of internal links
   citecolor    = black      % Colour of citations
 }
@@ -43,6 +43,24 @@
 \title{\textbf{Étude du problème MP-LWE}}
 \date{}
 \author{Sacha Ben-Arous, sous la direction d'Alice Pellet-Mary}
+
+
+
+
+
+
+
+% EXEMPLES FACTEUR DEXP BORNE
+% PARLER DE LYUBASHEVSKI
+% METTRE DES HYPER LIENS 
+
+
+
+
+
+
+
+
 
 \begin{document}
 \maketitle 
@@ -135,14 +153,12 @@ par\\ $EF(f) :=\displaystyle \max_{\substack{g\in \mathbb{Z}^{2m-1}[X] \\ g \neq
 \end{enumerate}
 \end{defin}
 
-% EXEMPLE FACTEURS DEXP BORNEE
-
 
 \begin{theorem}
 Soient $n,d >0$, $q\geq 2$, et $\alpha \in (0,1)$. Pour $S>0$, on note $\mathcal{F}(S,d,n)$ les polynômes de $\mathbb{Z}[X]$ unitaires, dont le coefficient constant est inversible dans $\mathbb{Z}_q$, de degré $m$ vérifiant $d\leq m\leq n$, et tels que $\text{EF}(f)\leq S$. Il existe une réduction \textit{ppt} depuis $\text{PLWE}^{(f)}_{q,D_{\alpha q}}$ pour tout $f\in\mathcal{F}(S,d,n)$ vers  $\text{MP-LWE}_{q,n,d,D_{\alpha' q}}$, où $\alpha' = \alpha d S$.
 \end{theorem}
 
-Il s'agit du résultat principal de \cite{mplwe}. Durant mon stage, j'ai étudié comment la réduction explicitée dans la preuve du théorème agit géométriquement sur les réseaux sous-jacents aux problèmes de manière à augmenter la difficulté.
+Il s'agit du résultat principal de \cite{mplwe}. Durant mon stage, j'ai étudié comment la réduction explicitée dans la preuve du théorème agit géométriquement sur les réseaux sous-jacents aux problèmes de manière à en augmenter la complexité.
 
 \section{Étude de la réduction}
 
@@ -152,20 +168,33 @@ Afin de manipuler les réseaux sous-jacents à ces variantes, il est nécessaire
 \begin{enumerate}
 \item[•] On note $\text{Rot}^d_f(a) \in \mathbb{R}^{d\times m}$ la matrice dont la $i$-ème ligne est constituée des coefficients de $a\cdot x^{i-1}\text{ mod } f$. On écrira $\text{Rot}_f(a)$ pour  $\text{Rot}^m_f(a)$
 \item[•] On note $\text{Toep}^{d,n}(a) \in \mathbb{R}^{d\times(n+d-1)}$ la matrice dont la $i$-ème ligne est constituée des coefficients de $a\cdot x^{i-1}$.
-\item[•] On note $M_f \in \mathbb{R}^{m\times m}$ la matrice dont l'entrée $(i,j)$ est le coefficient constant de $x^{i+j-2}\text{ mod }f$
+\item[•] On note $\text{M}_f^d \in \mathbb{R}^{d\times m}$ la matrice dont l'entrée $(i,j)$ est le coefficient constant de $x^{i+j-2}\text{ mod }f$. On écrira $\text{M}_f$ pour  $\text{M}_f^m$.
 \end{enumerate}
 \end{defin}
 
 Dans la suite, on notera de manière identique un polynôme et le vecteur de ses coefficients. De plus, pour un vecteur $a$, on notera $\bar a$ ce vecteur renversé. \\
 
-\begin{lemma} Soient $d,k >0$, et $a \in \mathbb{R}^{<k+1}[X]$, $b \in \mathbb{R}^{<k+d}[X]$  alors :
+\begin{lemma} Soient $d,k >0$, et $a \in \mathbb{R}^{<k+1}[X]$, $b \in \mathbb{R}^{<k+d}[X]$ et $f \in \mathbb{R}[X]$ de degré $m$, alors :
 \begin{enumerate}
-\item[•]$\text{Rot}^d_f(a) = \text{Toep}^{d,k+1}(a)\cdot\text{Rot}^{k+d}_f(1)$
-\item[•] $a\odot_d b = \overline{\text{Toep}^{d,k+1}(a)\cdot \bar{b}}$
+\item[(1)]$\text{Rot}^d_f(a) = \text{Toep}^{d,k+1}(a)\cdot\text{Rot}^{k+d}_f(1)$
+\item[(2)] $a\odot_d b = \overline{\text{Toep}^{d,k+1}(a)\cdot \bar{b}}$
+\item[(3)] $\text{Rot}_f^d(a\cdot b)=\text{Rot}_f^d(a)\cdot\text{Rot}_f^d(b)$
+\item[(4)] Si $\text{deg}(a) < m$, $\text{Rot}_f(a)\cdot(1,0,\dots,0)^\top = \text{M}_f\cdot a$
 \end{enumerate}
-
 \end{lemma}
 
+Les preuves calculatoires sont fournies dans \cite{mplwe}.
+
+
+
+\subsection{Principes de la réduction}
+% a_i puis b_i puis secret puis distrib	
+Soient $q \geq 2$, $\alpha \in (0,1)$, $f$ polynôme vérifiant les hypothèses du Théorème 2.1, dont on gardera les notations. \\
+ À partir de $s\in \mathbb{Z}_q[X]/f$, on se donne initialement un nombre $t$ d'échantillons $(a_i,b_i)_{i\leq t}$ de $\text{P}^{(f)}_{q,D_{\alpha q}}(s)$. Le but est de construire $t$ échantillons $(a'_i,b'_i)_{i\leq t}$ de $\text{MP}_{q,n,d,D_{\alpha'q}}(s)$. Dans un premier temps, on va "prolonger" les $a_i$ dans un espace de polynômes de plus grand degré. Ensuite grâce au Lemme 3.1 on passera du produit usuel dans l'espace quotient au middle-product. Il faudra alors re-randomiser le secret, et éliminer la dernière dépendance en $f$ dans la distribution de la nouvelle erreur. \\
+
+Tout d'abord, on tire $(r_i)_{i\leq t} \hookleftarrow \mathcal{U}(\mathbb{Z}_q^{<n-m}[X])$, et on définit $a'_i := a_i + f\cdot r_i \in \mathbb{Z}_q^{<n}[X]$. On a alors que, les $a_i$ et $r_i$ étant uniformes, les $a'_i$ le sont aussi. Moralement, on rajoute la partie des $a_i$ qui a été oubliée en passant au quotient. La preuve formelle se fait par récurrence, en utilisant de manière cruciale que $f$ est unitaire, et consitue le Lemme 2.1 de \cite{psis}. \\
+
+Ensuite, en utilisant le Lemme 3.1 et 
 \section{Schéma de chiffrement}
 
 \subsection{Preuve de correction}
