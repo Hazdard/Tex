@@ -172,8 +172,8 @@ Afin de manipuler les réseaux sous-jacents à ces variantes, il est nécessaire
 \end{enumerate}
 \end{defin}
 
-Dans la suite, on notera de manière identique un polynôme et le vecteur de ses coefficients. De plus, pour un vecteur $a$, on notera $\bar a$ ce vecteur renversé. \\
 
+Dans la suite, on notera de manière identique un polynôme et le vecteur de ses coefficients. De plus, pour un vecteur $a$, on notera $\bar a$ ce vecteur renversé. \\
 \begin{lemma} Soient $d,k >0$, et $a \in \mathbb{R}^{<k+1}[X]$, $b \in \mathbb{R}^{<k+d}[X]$ et $f \in \mathbb{R}[X]$ de degré $m$, alors :
 \begin{enumerate}
 \item[(1)]$\text{Rot}^d_f(a) = \text{Toep}^{d,k+1}(a)\cdot\text{Rot}^{k+d}_f(1)$
@@ -182,23 +182,33 @@ Dans la suite, on notera de manière identique un polynôme et le vecteur de ses
 \item[(4)] Si $\text{deg}(a) < m$, $\text{Rot}_f(a)\cdot(1,0,\dots,0)^\top = \text{M}_f\cdot a$
 \end{enumerate}
 \end{lemma}
-
 Les preuves calculatoires sont fournies dans \cite{mplwe}.
 
-
-
-\subsection{Principes de la réduction}
+\subsection{Principe de la réduction}
 % a_i puis b_i puis secret puis distrib	
 Soient $q \geq 2$, $\alpha \in (0,1)$, $f$ polynôme vérifiant les hypothèses du Théorème 2.1, dont on gardera les notations. \\
  À partir de $s\in \mathbb{Z}_q[X]/f$, on se donne initialement un nombre $t$ d'échantillons $(a_i,b_i)_{i\leq t}$ de $\text{P}^{(f)}_{q,D_{\alpha q}}(s)$. Le but est de construire $t$ échantillons $(a'_i,b'_i)_{i\leq t}$ de $\text{MP}_{q,n,d,D_{\alpha'q}}(s)$. Dans un premier temps, on va "prolonger" les $a_i$ dans un espace de polynômes de plus grand degré. Ensuite grâce au Lemme 3.1 on passera du produit usuel dans l'espace quotient au middle-product. Il faudra alors re-randomiser le secret, et éliminer la dernière dépendance en $f$ dans la distribution de la nouvelle erreur. \\
 
-Tout d'abord, on tire $(r_i)_{i\leq t} \hookleftarrow \mathcal{U}(\mathbb{Z}_q^{<n-m}[X])$, et on définit $a'_i := a_i + f\cdot r_i \in \mathbb{Z}_q^{<n}[X]$. On a alors que, les $a_i$ et $r_i$ étant uniformes, les $a'_i$ le sont aussi. Moralement, on rajoute la partie des $a_i$ qui a été oubliée en passant au quotient. La preuve formelle se fait par récurrence, en utilisant de manière cruciale que $f$ est unitaire, et consitue le Lemme 2.1 de \cite{psis}. \\
+Tout d'abord, on tire $(r_i)_{i\leq t} \hookleftarrow \mathcal{U}(\mathbb{Z}_q^{<n-m}[X])$, et on définit $a'_i := a_i + f\cdot r_i \in \mathbb{Z}_q^{<n}[X]$. On a alors que, les $a_i$ et $r_i$ étant uniformes, les $a'_i$ le sont aussi. Moralement, on rajoute la partie des $a_i$ qui a été oubliée en passant au quotient. La preuve formelle consitue le Lemme 2.1 de \cite{psis}. Elle se fait par récurrence, en utilisant de manière cruciale que $f$ est unitaire. \\
 
-Ensuite, en utilisant le Lemme 3.1 et 
+Ensuite, en utilisant le Lemme 3.1 et la définition des $(b_i)_{i\leq t}$, on a 
+\[\text{Rot}_f(b_i)=\text{Rot}_f(a_i)\cdot\text{Rot}_f(s)+\text{Rot}_f(e_i)\]
+Ce qui donne, en conservant la première colonne (i.e en multipliant par $(1,0,\dots,0)^\top$) et les $d$ premières lignes :
+\begin{eqnarray*}
+\text{M}_f^d\cdot b_i &=& \text{Rot}_f^d(a_i)\cdot\text{M}_f^d\cdot s +\text{M}_f^d\cdot e_i \\
+&=& \text{Rot}_f^d(a'_i)\cdot\text{M}_f^d\cdot s +\text{M}_f^d\cdot e_i  \\
+&=& \text{Toep}^{d,n}(a'_i)\cdot\text{Rot}^{d+n-1}_f(1)\cdot\text{M}_f^d\cdot s +\text{M}_f^d\cdot e_i  \\
+\overline{b'_i}&=& \text{Toep}^{d,n}(a'_i)\cdot\overline{s'} + \overline{e'_i}
+\end{eqnarray*}
+en notant $\begin{cases} b'_i = \overline{\text{M}_f^d\cdot b_i} \\ s' = \overline{\text{Rot}^{d+n-1}_f(1)\cdot\text{M}_f^d\cdot s} \\ e'_i = \overline{\text{M}_f^d\cdot e_i} \end{cases}$ \\
+
+Alors on a, toujours en utilisant le Lemme 3.1, que $b'_i = a'_i \odot_d s' + e'_i$ \\
+
+On obtient que $b'_i$ est uniformément distribué car $b_i$ l'est, et que $\text{M}_f$ est inversible modulo $q$. Cette dernière affirmation repose sur l'hypothèse que le coefficient constant de $f$ est inversible modulo $q$.
+
 \section{Schéma de chiffrement}
 
 \subsection{Preuve de correction}
-
 On se propose tout d'abord de détailler la preuve de correction du schéma de chiffrement proposé dans \cite{mplwe} : \\
 
 On rappelle le cadre de la preuve : $s \hookleftarrow \mathcal{U}(\mathbb{Z}^{n+d+k-1}[X])$, pour $i\leq t$ on a $a_i \hookleftarrow \mathcal{U}(\mathbb{Z}^n[X])$ ; $e_i \hookleftarrow \lfloor D_{\alpha q}\rceil[X]^{<k+d}$ et finalement $r_i \hookleftarrow \mathcal{U}(\{0,1\}^{<k+1}[X])$. On note $e_i(j)$ le $j$-ème coefficient de $e_i$. Le but est d'avoir avec bonne probabilité que : 
@@ -242,7 +252,7 @@ En appliquant les hypothèses sur les paramètres de sécurité, on obtient l'in
 \]
 \\
 
-On majore de même le facteur pré-exponentiel :
+On majore de même le facteur pré-exponentiel : 
 
 \[
 \frac{8t^2(k+1)(k+d)\alpha q}{q - 6t(k+1)} \leq \frac{8t^2(k+1)(k+d)\alpha q}{6t(k+1)}
