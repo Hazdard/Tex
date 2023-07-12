@@ -48,7 +48,9 @@
 
 
 
-
+%Simul pour unif et comparer avec notre cas
+% Proba que colonnes indeps
+%Rot(a)^-1 = Rot(a^-1)
 
 % EXEMPLES FACTEUR DEXP BORNE
 % PARLER DE LYUBASHEVSKI
@@ -226,7 +228,7 @@ Afin d'étudier les effets de cette réduction, on remarque que $3$ réseaux dis
 On clairement que $\mathcal{L}_0$ est engendré par les colonnes de la matrice $[[\text{Rot}_f(a_i)_{i\leq t}] \ |\ q\text{Id}_t]$. En particulier, son sous-espace engendré est égal à l'espace entier (ou encore son rang est égal à la dimension ambiente), on dit que c'est un réseau de \textit{rang plein}. De plus, ce réseau contient les $(0,\dots,q,\dots,0)^\top$, dans ce cas il est dit \textit{q-aire}.\\
 
 \begin{lemma}
-Si $a_1$ est non nul, alors $\mathcal{L}_0$ est engendré par 
+Si $a_1$ est inversible modulo $f$, alors $\mathcal{L}_0$ est engendré par 
 $$ \left[\begin{array}{c|ccc}
 \text{Id}_m & 0 &\cdots &0\\
 \text{Rot}_f(a_2)\cdot\text{Rot}_f(a_1)^{-1}&q&\cdots & 0\\
@@ -235,12 +237,25 @@ $$ \left[\begin{array}{c|ccc}
 \end{array}\right] $$
 \end{lemma}
 \textbf{Preuve :} \\
-Pour alléger les notations, on pose $A_i := \text{Rot}_f(a_i)$. Premièrement, si $a_i$ est non nul, alors $A_i$ est inversible (la preuve est \hyperref[sec:inv]{ici} en annexe). Alors : 
-\begin{eqnarray*}
-y \in \mathcal{L}_0 &\Leftrightarrow& alq,d
-\end{eqnarray*}
+Pour alléger les notations, on pose $A_i := \text{Rot}_f(a_i)$ et $A:=[\text{Rot}_f(a_i)_{i\leq t}]$. Premièrement, si $a_1$ est inversible modulo $f$, alors $A_1$ est inversible. En effet, on a $\text{Rot}_f(a)\cdot\text{Rot}_f(a^{-1})=\text{Rot}_f(a\cdot a^{-1})=\text{Rot}_f(1)=\text{Id}_m$, d'où $\text{Rot}_f(a)^{-1}=\text{Rot}_f(a^{-1})$. On peut alors remarquer que : \\
 
+$(\subseteq)$ Si $y \in \mathcal{L}_0$, alors il existe $x$ tel que $y=Ax \text{ mod q}$, donc en notant $x':=\text{Rot}_f(a)\cdot x$, on a \\ $y=A\cdot\text{Rot}_f(a)^{-1}\cdot x' \text{ mod q}$, d'où 
+$$ \left[\begin{array}{c|cccc}
+\text{Id}_m \\
+\text{Rot}_f(a_2)\cdot\text{Rot}_f(a_1)^{-1} & & q\cdot \text{Id}\\
+\vdots &\\
+\text{Rot}_f(a_t)\cdot\text{Rot}_f(a_1)^{-1}&\\
+\end{array}\right] $$
+engendre $\mathcal{L}_0$. Alors, des combinaisons linéaires des colonnes du bloc de gauche permettent de retirer les $m$ premières colonnes du bloc de droites, ces dernières étant engendré modulo $q$ par le bloc de gauche. Finalement, on a bien que les vecteurs voulus engendrent $\mathcal{L}_0$. \\
 
+$(\supseteq)$ Réciproquement, il suffit de remonter les calculs, tout étant inversible.
+
+\begin{theorem}
+
+Si l'un des $a_i$ est inversible modulo $f$, alors $\text{vol}(\mathcal{L}_0) = q^{td-m}$
+\end{theorem}
+\textbf{Preuve :}\\
+On commence par remarquer que quitte à permuter les $a_i$, la forme précédente est valable dès qu'au moins l'un d'entre eux est inversible modulo $f$. Il suffit alors de dire que les colonnes de la matrice constituée sont linéairement indépendantes. Or la matrice est échelonnée, donc ses colonnes sont libres, et de plus son déterminant vaut le produit des termes diagonaux, ce qui achève la preuve.
 \section{Schéma de chiffrement}
 
 \subsection{Preuve de correction}
@@ -306,11 +321,6 @@ Finalement on obtient la borne voulue :
 $\hfill \square$
 
 \section*{Annexe}
-\label{sec:inv} 
-\begin{theorem}
-Si $p\in \mathbb{Z}[X]$ est non nul, alors $ \text{Rot}_f(p)$ est inversible.
-\end{theorem}
-\textbf{Preuve :} c long
 
 \printbibliography[heading=bibintoc, title={Références}]
 \end{document}
