@@ -180,7 +180,7 @@ Dans la suite, on notera de manière identique un polynôme et le vecteur de ses
 \begin{enumerate}
 \item[(1)]$\text{Rot}^d_f(a) = \text{Toep}^{d,k+1}(a)\cdot\text{Rot}^{k+d}_f(1)$
 \item[(2)] $a\odot_d b = \overline{\text{Toep}^{d,k+1}(a)\cdot \bar{b}}$
-\item[(3)] $\text{Rot}_f^d(a\cdot b)=\text{Rot}_f^d(a)\cdot\text{Rot}_f^d(b)$
+\item[(3)] $\text{Rot}_f(a\cdot b)=\text{Rot}_f(a)\cdot\text{Rot}_f(b)$
 \item[(4)] Si $\text{deg}(a) < m$, $\text{Rot}_f(a)\cdot(1,0,\dots,0)^\top = \text{M}_f\cdot a$
 \end{enumerate}
 \end{lemma}
@@ -214,16 +214,36 @@ On a de plus que, en notant $J \in \mathbb{R}^{d\times d}$ la matrice qui a des 
 \newpage
 \subsection{Effets géométriques}
 
+Comme on a pu le voir dans la définition du problème BDD, la difficulté d'une instance $x$ dans un réseau $\mathcal{L}$ est reliée au facteur $\gamma$, que l'on peut écrire $\gamma = \frac{\lambda_1}{\text{dist}(x,\mathcal{L})}$. Plus $\gamma$ est petit, plus l'instance est difficile, et inversement. 
+
+\begin{defin}
+On appelle volume d'un réseau $\mathcal{L}=\mathcal{L}(B)$ la quantité $\sqrt{\det{B}}$. Elle ne dépend pas de la base choisie.
+\end{defin}
+
+Le théorème suivant donne alors une première borne sur $\lambda_1$ :
+\begin{theorem}\textbf{(Minkowski)}
+Dans un réseau $\mathcal{L}$ de dimension $n$, $\lambda_1 \leq \sqrt{n}\cdot\text{vol}(\mathcal{L})^\frac{1}{n}$
+\end{theorem}
+
+De plus, dans des réseaux aléatoires, on a l'estimation suivante : 
+\begin{theorem}
+Dans un réseau aléatoire, $\lambda_1$ est en moyenne de l'ordre de la borne de Minkowski, i.e $\lambda_1 \simeq \text{vol}(\mathcal{L})^\frac{1}{n}$
+\end{theorem}
+
+On admet pour l'instant que ce second théorème s'applique dans notre cas particulier de réseaux structurés, et on conclut donc que : $\gamma = \frac{\text{vol}(\mathcal{L})^\frac{1}{n}}{\text{dist}(x,\mathcal{L})}$. \\
+
+Ainsi, les deux caractéristiques des réseaux permettant d'estimer la complexité du problème BDD associé sont leur volume, et la distance moyenne du point choisi.  Dans ce qui suit, on se propose donc d'étudier ces deux quantités dans le cadre de la réduction précédemment présentée.
+
+\subsubsection{Évolution du volume }
 Si $(A_i)_{i \leq t}$ est une famille de matrices, on désigne par $[A_{i\leq t}]$ la matrice par blocs qui correspond à l'empilement des  $(A_i)_{i \leq t}$ . \\
 Pour $A$ et $B$ des matrices, on désigne par $[A|B]$ la matrice dont les colonnes sont celles de $A$, puis celles de $B$. \\
 
-Afin d'étudier les effets de cette réduction, on remarque que $3$ réseaux distincts apparaissent : 
+Afin d'étudier les effets de cette réduction, on remarque que $3$ réseaux distincts apparaissent, et on se propose donc d'en étudier les propriétés : 
 \begin{itemize}
 \item Le réseau initial $\mathcal{L}_0 = \{ y \in \mathbb{Z}^t \ | \ \exists x\in \mathbb{Z}^m,\ y=[\text{Rot}_f(a_i)_{i\leq t}]\cdot x \text{ mod }q \}$
 \item Le réseau intermédiaire $\mathcal{L}_1 =\{ y \in \mathbb{Z}^t \ | \ \exists x\in \mathbb{Z}^d,\ y=[\text{Rot}_f^d(a_i)_{i\leq t}]\cdot x \text{ mod }q \}$  qui correspond au projeté en dimension $d$ du réseau initial
 \item Le réseau final $\mathcal{L}_2 = \{ y \in \mathbb{Z}^t \ | \ \exists x\in \mathbb{Z}^d,\ y=[\text{Toep}^{d,n}(a'_i)_{i\leq t}]\cdot x \text{ mod }q\}$ \\
 \end{itemize}
-
 
 On clairement que $\mathcal{L}_0$ est engendré par les colonnes de la matrice $[[\text{Rot}_f(a_i)_{i\leq t}] \ |\ q\text{Id}_t]$. En particulier, son sous-espace engendré est égal à l'espace entier (ou encore son rang est égal à la dimension ambiente), on dit que c'est un réseau de \textit{rang plein}. De plus, ce réseau contient les $(0,\dots,q,\dots,0)^\top$, dans ce cas il est dit \textit{q-aire}.\\
 
@@ -237,7 +257,7 @@ $$ \left[\begin{array}{c|ccc}
 \end{array}\right] $$
 \end{lemma}
 \textbf{Preuve :} \\
-Pour alléger les notations, on pose $A_i := \text{Rot}_f(a_i)$ et $A:=[\text{Rot}_f(a_i)_{i\leq t}]$. Premièrement, si $a_1$ est inversible modulo $f$, alors $A_1$ est inversible. En effet, on a $\text{Rot}_f(a)\cdot\text{Rot}_f(a^{-1})=\text{Rot}_f(a\cdot a^{-1})=\text{Rot}_f(1)=\text{Id}_m$, d'où $\text{Rot}_f(a)^{-1}=\text{Rot}_f(a^{-1})$. On peut alors remarquer que : \\
+Pour alléger les notations, on pose $A_i := \text{Rot}_f(a_i)$ et $A:=[\text{Rot}_f(a_i)_{i\leq t}]$. Premièrement, si $a_1$ est inversible modulo $f$, alors $A_1$ est inversible. En effet, on a $\text{Rot}_f(a_1)\cdot\text{Rot}_f(a_1^{-1})=\text{Rot}_f(a_1\cdot a_1^{-1})=\text{Rot}_f(1)=\text{Id}_m$, d'où $\text{Rot}_f(a_1)^{-1}=\text{Rot}_f(a_1^{-1})$. On peut alors remarquer que : \\
 
 $(\subseteq)$ Si $y \in \mathcal{L}_0$, alors il existe $x$ tel que $y=Ax \text{ mod q}$, donc en notant $x':=\text{Rot}_f(a)\cdot x$, on a \\ $y=A\cdot\text{Rot}_f(a)^{-1}\cdot x' \text{ mod q}$, d'où 
 $$ \left[\begin{array}{c|cccc}
@@ -246,16 +266,16 @@ $$ \left[\begin{array}{c|cccc}
 \vdots &\\
 \text{Rot}_f(a_t)\cdot\text{Rot}_f(a_1)^{-1}&\\
 \end{array}\right] $$
-engendre $\mathcal{L}_0$. Alors, des combinaisons linéaires des colonnes du bloc de gauche permettent de retirer les $m$ premières colonnes du bloc de droites, ces dernières étant engendré modulo $q$ par le bloc de gauche. Finalement, on a bien que les vecteurs voulus engendrent $\mathcal{L}_0$. \\
+engendre $\mathcal{L}_0$. Alors, des combinaisons linéaires des colonnes du bloc de gauche permettent de retirer les $m$ premières colonnes du bloc de droite (ces dernières étant engendrées modulo $q$ par le bloc de gauche). Finalement, on a bien que les vecteurs voulus engendrent $\mathcal{L}_0$. \\
 
 $(\supseteq)$ Réciproquement, il suffit de remonter les calculs, tout étant inversible.
 
 \begin{theorem}
 
-Si l'un des $a_i$ est inversible modulo $f$, alors $\text{vol}(\mathcal{L}_0) = q^{td-m}$
+Si l'un des $a_i$ est inversible modulo $f$, alors $\text{vol}(\mathcal{L}_0) = q^{m(t-1)}$
 \end{theorem}
 \textbf{Preuve :}\\
-On commence par remarquer que quitte à permuter les $a_i$, la forme précédente est valable dès qu'au moins l'un d'entre eux est inversible modulo $f$. Il suffit alors de dire que les colonnes de la matrice constituée sont linéairement indépendantes. Or la matrice est échelonnée, donc ses colonnes sont libres, et de plus son déterminant vaut le produit des termes diagonaux, ce qui achève la preuve.
+On commence par remarquer que quitte à permuter les $a_i$, la forme précédente est valable dès qu'au moins l'un d'entre eux est inversible modulo $f$. Il suffit alors de dire que les colonnes de la matrice constituée sont linéairement indépendantes. Or cette matrice est triangulaire inférieure (à termes diagonaux non nuls), donc ses colonnes sont libres, et de plus son déterminant vaut le produit des termes diagonaux, ce qui achève la preuve.
 \section{Schéma de chiffrement}
 
 \subsection{Preuve de correction}
