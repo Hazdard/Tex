@@ -46,11 +46,14 @@
 
 
 
-
-
+%changer distrib erreur -> réelle
+% On tire s unfi dans les pb LWE
+% volume normalisé + proba en log log + réductions dans lautre sens 
+%regarder lambda_1 par rapport a minkowski
 % Simul pour unif et comparer avec notre cas
 % Proba que colonnes indeps
-% Rot(a)^-1 = Rot(a^-1)
+% Mettre une matrice "empilée" pour bien faire comprendre 
+% Rapeller tous les ordres (et odg) avant de se lancer dans le dur de la partie 3
 
 
 % EXEMPLES FACTEUR DEXP BORNE
@@ -189,7 +192,6 @@ Dans la suite, on notera de manière identique un polynôme et le vecteur de ses
 Les preuves calculatoires sont fournies dans \cite{mplwe}.
 
 \subsection{Principe de la réduction}
-% a_i puis b_i puis secret puis distrib	
 Soient $q \geq 2$, $\alpha \in (0,1)$, $f$ polynôme vérifiant les hypothèses du Théorème 2.1, dont on gardera les notations. \\
  À partir de $s\in \mathbb{Z}_q[X]/f$, on se donne initialement un nombre $t$ d'échantillons $(a_i,b_i)_{i\leq t}$ de $\text{P}^{(f)}_{q,D_{\alpha q}}(s)$. Le but est de construire $t$ échantillons $(a'_i,b'_i)_{i\leq t}$ de $\text{MP}_{q,n,d,D_{\alpha'q}}(s)$. Dans un premier temps, on va "prolonger" les $a_i$ dans un espace de polynômes de plus grand degré. Ensuite grâce au Lemme 3.1 on passera du produit usuel dans l'espace quotient au middle-product. Il faudra alors re-randomiser le secret, et éliminer la dernière dépendance en $f$ dans la distribution de la nouvelle erreur. \\
 
@@ -280,15 +282,26 @@ Si l'un des $a_i$ est inversible modulo $f$, alors $\text{vol}(\mathcal{L}_0) = 
 On commence par remarquer que quitte à permuter les $a_i$, la forme précédente est valable dès qu'au moins l'un d'entre eux est inversible modulo $f$. Il suffit alors de dire que les colonnes de la matrice constituée sont linéairement indépendantes pour obtenir une base du réseau. Or cette matrice est triangulaire inférieure à termes diagonaux non nuls, donc ses colonnes sont libres, et de plus son déterminant vaut le produit des termes diagonaux, ce qui achève la preuve. \\
 
 On aimerait pouvoir utiliser la même preuve dans le cas des réseaux $\mathcal{L}_1$ et $\mathcal{L}_2$, cependant cela n'est pas possible car les matrices composant le bloc de gauche sont rectangulaires, donc n'admettent pas d'inverse. On peut cependant justifier que cette colonne est de rang plein, ce qui permettra d'obtenir un résultat sur le volume analogue à celui qui précède.
-
-\begin{theorem}
-Avec une probabilité $\geq 1 - \frac{n+d-1}{q}^{\frac{td}{n+2d}}$, on a que $\text{vol}(\mathcal{L}_2)=q^{td-(n+d-1)}$.\\ Si on utilise les ordres de grandeurs proposés dans le schéma de chiffrement de \cite{mplwe}, on a : 
-\[\mathbb{P}(\text{vol}(\mathcal{L}_2)=q^{td-(n+d-1)}) \geq 1 - (\frac{1}{n^\frac{3}{2}\sqrt{\log{n}}})^{\log{n}}\]
-\end{theorem}
 \newpage
-\textbf{Preuve :} Il suffit de montrer qu'avec bonne probabilité, $A_2:=[\text{Toep}^{d,n}(a'_i)_{i\leq t}]$ est de rang plein. \\
-On commence par rappeller de lemme de Schwartz-Zippel : Pour un polynôme multivarié de degré $n$, à coefficients dans $\mathbb{Z}/p\mathbb{Z}$, la probabilité d'annuler le polynôme en choisissant les variables uniformément est au plus $\frac{n}{p}$. \\
-On considère donc la matrice carré constituée des $n+d-1$ premières lignes de $A_2$, que l'on note $A_2(1)$. Le déterminant de cette sous-matrice est un polynôme à plusieurs variables, de degré $n+d-1$, dont les variables sont choisies uniforméments dans $\mathbb{Z}_q$. Alors, d'après le lemme , on a que : \\ $\mathbb{P}[\text{det}(A_2)=0] \leq \frac{n+d-1}{q}$
+\begin{theorem}\textbf{(Volumes) \\}
+\begin{itemize}
+\item[•] Avec une probabilité $\geq 1 - (\frac{m}{q})^{\lfloor t/\lceil\frac{m}{d}\rceil\rfloor}$, on a que $\text{vol}(\mathcal{L}_1)=q^{td-m}$.
+\item[•] Avec une probabilité $\geq 1 - (\frac{n+d-1}{q})^{\lfloor t/\lceil\frac{n+d-1}{d}\rceil\rfloor}$, on a que $\text{vol}(\mathcal{L}_2)=q^{td-(n+d-1)}$. \\
+\end{itemize}
+Si on utilise les ordres de grandeurs proposés dans le schéma de chiffrement de \cite{mplwe}, on a:  \[\mathbb{P}(\text{vol}(\mathcal{L}_{2})=q^{td-(n+d-1)}) \geq 1 - (\frac{1}{n^\frac{3}{2}\sqrt{\log{n}}})^{\log{n}}\]
+\end{theorem}
+\textbf{Preuve :} Les deux cas étant analogues, on se contente de la preuve pour $\mathcal{L}_2$. Il suffit de montrer qu'avec bonne probabilité, $A:=[\text{Toep}^{d,n}(a'_i)_{i\leq t}]$ est de rang plein. \\
+On commence par rappeller de lemme de Schwartz-Zippel : pour un polynôme multivarié de degré $n$, à coefficients dans $\mathbb{Z}/p\mathbb{Z}$, la probabilité d'annuler ce polynôme en choisissant les variables uniformément est au plus $\frac{n}{p}$. \\
+On considère donc la matrice carré constituée des $n+d-1$ premières lignes de $A$, que l'on note $A_1$. Le déterminant de cette sous-matrice est un polynôme à plusieurs variables, de degré $n+d-1$, dont les variables sont choisies uniforméments dans $\mathbb{Z}_q$. Alors, d'après le lemme , on a que : \[\mathbb{P}[\text{det}(A_1)=0] \leq \frac{n+d-1}{q}\]
+On peut alors répéter ce processus pour les sous-matrices suivantes. Cependant, afin de conserver l'indépendance, il faut faire attention à ne pas reprendre une Toeplitz déjà utilisée. Ainsi, $A_k$ sera la sous matrice carré commençant à la $ (k-1)d\lceil \frac{n+d-1}{d} \rceil $-ème ligne. Au total, on pourra donc avoir au moins $\lfloor t/\lceil\frac{n+d-1}{d}\rceil\rfloor$ sous matrices carrés dont les entrées sont mutuellements indépendantes. Alors : 
+\begin{eqnarray*}
+\mathbb{P}(\text{rg}(A)<n+d-1) &\leq& \mathbb{P}(\bigcap_{k\leq\lfloor t/\lceil\frac{n+d-1}{d}\rceil\rfloor} \det{A_k} = 0) \\
+&=&\mathbb{P}[\text{det}(A_1)=0]^{\lfloor t/\lceil\frac{n+d-1}{d}\rceil\rfloor} \\
+&=&  (\frac{n+d-1}{q})^{\lfloor t/\lceil\frac{n+d-1}{d}\rceil\rfloor}
+\end{eqnarray*}
+Ce qui donne bien l'inégalité voulue.
+On peut alors procéder aux mêmes inversions et opérations sur les colonnes que dans le cas de $\mathcal{L}_0$, pour obtenir de manière analogue la valeur du volume.
+
 \section{Schéma de chiffrement}
 
 \subsection{Preuve de correction}
@@ -354,7 +367,6 @@ Finalement on obtient la borne voulue :
 $\hfill \square$
 
 \section*{Annexe}
-
 \printbibliography[heading=bibintoc, title={Références}]
 \end{document}
 
