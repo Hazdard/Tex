@@ -101,7 +101,7 @@ Dans ce qui suit, on note $\mathbb{Z}_q$ (resp. $\mathbb{R}_q$) le quotient $\ma
 \subsection{Problème LWE et difficulté}
 
 \begin{defin}\textbf{(Distribution LWE)}
-Soient $q\geq 2$, $m\geq 1$, $\chi$ une distribution de probabilité sur $\mathbb{Z}$. À partir de $s\in \mathbb{Z}_q^m$, on définit $\mathcal{D}_{q,\chi,m}$ la distribution sur $\mathbb{Z}_q^m\times\mathbb{Z}_q$ obtenue en choisissant $a \hookleftarrow \mathcal{U}(\mathbb{Z}_q^m)$, $e\hookleftarrow \chi$, et qui renvoie $(a,b):=(a,\left<a,s\right> +e \text{ mod } q)$.
+Soient $q\geq 2$, $m\geq 1$, $\chi$ une distribution de probabilité sur $\mathbb{R}$. À partir de $s\in \mathbb{Z}_q^m$, on définit $\mathcal{D}_{q,\chi,m}$ la distribution sur $\mathbb{Z}_q^m\times\mathbb{R}_q$ obtenue en choisissant $a \hookleftarrow \mathcal{U}(\mathbb{Z}_q^m)$, $e\hookleftarrow \chi$, et qui renvoie $(a,b):=(a,\left<a,s\right> +e \text{ mod } q)$.
 \end{defin}
 
 \begin{defin}\textbf{(Problèmes LWE)}
