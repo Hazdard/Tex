@@ -45,17 +45,16 @@
 \author{Sacha Ben-Arous, sous la direction d'Alice Pellet-Mary}
 
 
-
-%changer distrib erreur -> réelle
-% On tire s unfi dans les pb LWE
+% DET DOIT ETRE NON NUL
 % volume normalisé + proba en log log + réductions dans lautre sens 
-%regarder lambda_1 par rapport a minkowski
-% Simul pour unif et comparer avec notre cas
-% Proba que colonnes indeps
+% regarder lambda_1 par rapport a minkowski
+
+% détailler réseau engendré par les colonnes
+% Changer notation coeff poly
+% domaine mu + corriger -1
+
 % Mettre une matrice "empilée" pour bien faire comprendre 
 % Rapeller tous les ordres (et odg) avant de se lancer dans le dur de la partie 3
-
-
 % EXEMPLES FACTEUR DEXP BORNE
 % PARLER DE LYUBASHEVSKI
 % METTRE DES HYPER LIENS 
@@ -79,11 +78,11 @@ Insérer abstract ici \\
 \section{Introduction}
 \; Les réseaux euclidiens sont une construction algébrique permettant entre autres de définir des problèmes mathématiques dont la résolution algorithmique est conjecturée difficile, même pour des ordinateurs quantiques. Cela les rend donc particulièrement intéressants pour construire des protocoles sûrs en cryptographie post-quantique. \\
 Deux exemples fondamentaux de problèmes sur les réseaux sont le \textit{Small Integer Solutions problem} (SIS) introduit par Ajtai en 1996, et le \textit{Learning With Errors problem} (LWE), découvert par Regev en 2005. \\
-Le problème LWE est privilégié dans la construction de schémas de chiffrement car il été prouvé \cite{wcac} que résoudre une instance aléatoire de LWE est aussi dur que résoudre la pire instance d'un problème dur (cf suite). On dit que LWE bénéficie d'une réduction \textit{pire-cas moyen-cas}. \\
-Cependant, si l'on utilise la version standard de LWE pour construire des protocoles, ces derniers auront une efficacité très réduite à cause d'opérations faisant intervenir de grandes matrices aléatoires. La variante \textit{Polynomial Learning With Errors}, proposée par Stehlé \textit{et al.} \cite{plwe}, résout ce problème en utilisant des réseaux structurés : les calculs matriciels correspondent alors à des produits de polynômes, calculables très efficacement. Cependant, ce gain d'efficacité se fait au détriment de garanties de sécurité : les polynômes sont manipulés dans $\mathbb{Z}_p[X]/f$ et la complexité de la variante est directement liée au $f$ choisi. \\
-Afin de se débarasser de cette dépendance, Roşca \textit{et al.} introduisent le \textit{Middle-Product Learning With Errors problem} (MP-LWE) \cite{mplwe} dont l'intérêt est d'être aussi dur que des classes exponentiellement grandes de problèmes PLWE($f$) (dont on espère qu'elles contiennent au moins une instance difficile), tout en conservant l'efficacité des réseaux structurés. \\
+Le problème LWE est privilégié dans la construction de schémas de chiffrement car d'une part il est facile d'en tirer des constructions cryptographiques, et d'autre part il été prouvé (cf. \cite{wcac}) que résoudre une instance aléatoire de LWE est aussi dur que résoudre la pire instance d'un problème supposé dur. On dit que LWE bénéficie d'une réduction \textit{pire-cas moyen-cas}. \\
+Cependant, si l'on utilise la version standard de LWE pour construire des protocoles, ces derniers auront une efficacité moyenne à cause d'opérations faisant intervenir de grandes matrices aléatoires. La variante \textit{Polynomial Learning With Errors} (PLWE), proposée par Stehlé \textit{et al.} \cite{plwe}, résout ce problème en utilisant des réseaux structurés : les calculs matriciels correspondent alors à des produits de polynômes, calculables plus rapidement. Cependant, ce gain d'efficacité se fait potentiellement au détriment de garanties de sécurité : les polynômes sont manipulés dans $\mathbb{Z}_p[X]/f$ et la complexité de la variante est directement liée au $f$ choisi. \\
+Afin de se débarasser de cette dépendance, Roşca \textit{et al.} introduisent le \textit{Middle-Product Learning With Errors problem} (MP-LWE) \cite{mplwe} dont l'intérêt est d'être aussi dur que des classes exponentiellement grandes de problèmes PLWE (dont on espère qu'elles contiennent au moins une instance difficile), tout en conservant l'efficacité des réseaux structurés. \\
 
-Durant mon stage, j'ai donc travaillé sur la variante MP-LWE du problème de Regev, et plus particulièrement sur les effets de la réduction de PLWE vers MP-LWE proposée par \cite{mplwe}.
+Durant mon stage, j'ai ainsi travaillé sur la variante MP-LWE du problème de Regev, et plus particulièrement sur les effets de la réduction de PLWE vers MP-LWE proposée par \cite{mplwe}.
 \\
 
 \section{Préliminaires}
@@ -96,18 +95,27 @@ Le réseau est alors de \textit{dimension} $n$, et la famille des $(b_i)_{1\leq 
 En notant $B:=[b_1,\dots,b_n]$ la matrice dont les colonnes sont formées par les $(b_i)_{1\leq i \leq n}$, on considérera de manière équivalente : \[\mathcal{L}(B) := \left\{ Bx, x \in \mathbb{Z}^n \right\} \]
 \end{defin}
 
-Dans ce qui suit, on note $\mathbb{Z}_q$ (resp. $\mathbb{R}_q$) le quotient $\mathbb{Z}/q\mathbb{Z}$ (resp. $\mathbb{R}/q\mathbb{Z}$), et $\|.\|$ désigne la norme euclidienne.
+\begin{defin}\textbf{(Notations)}
+\begin{itemize}
+\item[•] On note $\mathbb{Z}_q$ (resp. $\mathbb{R}_q$) le quotient $\mathbb{Z}/q\mathbb{Z}$ (resp. $\mathbb{R}/q\mathbb{Z}$), et $\|.\|$ désigne la norme euclidienne.
+\item[•] Si $E$ est un ensemble fini, on note $\mathcal{U}(E)$ la distribution uniforme sur cet ensemble.
+\item[•] Pour $n\in \mathbb{N}$, on note $\mathbb{K}^{<n}[X]$ l'ensemble des polynômes de degré strictement plus petit que $n$, à coefficients dans $\mathbb{K}$.
+\item[•] Pour $\sigma \in \mathbb{R}^+$, on note $\mathcal{N}(\sigma)$ la distribution gaussienne de variance $\sigma^2$.
+\item[•] Pour $\mathcal{D}$ une distribution de probabilité sur $\mathbb{K}$ et $n\in \mathbb{N}$, on note $\mathcal{D}^n[X]$ la distribution de probabilité sur $\mathbb{K}^n[X]$ où chaque coefficient est tiré indépendamment selon $\mathcal{D}$.
+\item[•] Pour $f \in \mathbb{Z}^m[X]$, on définit $EF(f) :=\displaystyle \max_{\substack{g\in \mathbb{Z}^{2m-1}[X] \\ g \neq 0}}(\frac{\|g\text{ mod }f \|_\infty}{\|g\|_\infty})$ le \textit{facteur d'expansion} de $f$.
+\end{itemize}
+\end{defin}
 
 \subsection{Problème LWE et difficulté}
 
 \begin{defin}\textbf{(Distribution LWE)}
-Soient $q\geq 2$, $m\geq 1$, $\chi$ une distribution de probabilité sur $\mathbb{R}$. À partir de $s\in \mathbb{Z}_q^m$, on définit $\mathcal{D}_{q,\chi,m}$ la distribution sur $\mathbb{Z}_q^m\times\mathbb{R}_q$ obtenue en choisissant $a \hookleftarrow \mathcal{U}(\mathbb{Z}_q^m)$, $e\hookleftarrow \chi$, et qui renvoie $(a,b):=(a,\left<a,s\right> +e \text{ mod } q)$.
+Soient $q\geq 2$, $m\geq 1$, $\chi$ une distribution de probabilité sur $\mathbb{R}$. À partir de $s\in \mathbb{Z}_q^m$, on définit $\mathcal{D}_{q,\chi,m}(s)$ la distribution sur $\mathbb{Z}_q^m\times\mathbb{R}_q$ obtenue en choisissant $a \hookleftarrow \mathcal{U}(\mathbb{Z}_q^m)$, $e\hookleftarrow \chi$, et qui renvoie $(a,b):=(a,\left<a,s\right> +e \text{ mod } q)$.
 \end{defin}
 
 \begin{defin}\textbf{(Problèmes LWE)}
-Soient $q\geq 2$, $m\geq 1$, $\chi$. Muni de la distribution $\mathcal{D}_{q,\chi,m}$ précédente, on peut alors définir deux problèmes : 
+Soient $q\geq 2$, $m\geq 1$, $\chi$. On tire $s\ \hookleftarrow \mathcal{U}( \mathbb{Z}_q^m)$, et muni de la distribution $\mathcal{D}_{q,\chi,m}(s)$ précédente, on peut alors définir deux problèmes : 
 \begin{enumerate}
-\item[•]\textbf{LWE-Décisionnel} consiste à un distinguer un nombre arbitraire d'échantillons de $\mathcal{D}_{q,\chi,m}$ et le même nombre d'échantillons de $\mathcal{U}(\mathbb{Z}_q^m)\times\mathcal{U}(\mathbb{Z}_q)$.
+\item[•]\textbf{LWE-Décisionnel} consiste à un distinguer un nombre arbitraire d'échantillons de $\mathcal{D}_{q,\chi,m}(s)$ et le même nombre d'échantillons de $\mathcal{U}(\mathbb{Z}_q^m)\times\mathcal{U}(\mathbb{Z}_q)$.
 \item[•]\textbf{LWE-Calculatoire} consiste à retrouver le secret $s$ à partir d'un nombre fixé d'échantillons indépendants.
 \end{enumerate}
 \end{defin}
@@ -115,7 +123,7 @@ Soient $q\geq 2$, $m\geq 1$, $\chi$. Muni de la distribution $\mathcal{D}_{q,\ch
 En notant $A$ la matrice dont les lignes sont formées des ($a_i)_{i\leq t}$, $e:=(e_i)_{i\leq t}$ et $b:=(b_i)_{i\leq t}$ ($t$ représente le nombre d'échantillons), on a : $b=As +e \text{ mod } q$.
 
 \begin{defin}
-Dans un réseau $\Lambda$, on note $\lambda_i := \inf\{r,\dim(\text{Vect}(\Lambda\cap\mathcal{B}(0,r))=i\}$ le i-ème minimum du réseau. En particulier, on a $\lambda_1 = \inf\{\|v\| ,  v \in \mathcal{L}(B)/\{0\}\}$ qui est le plus court vecteur non nul du réseau.
+Dans un réseau $\Lambda$, on note $\lambda_i := \inf\{r,\dim(\text{Vect}(\Lambda\cap\mathcal{B}(0,r))=i\}$ le i-ème minimum du réseau. En particulier, on a $\lambda_1 = \inf\{\|v\| ,  v \in \mathcal{L}(B)\setminus\{0\}\}$ qui est le plus court vecteur non nul du réseau.
 \end{defin}
 
 \underline{Rq} : $\lambda_i$ s'interprète comme le rayon de la plus petite boule centrée à l'origine qui contient $i$ vecteurs indépendants du réseau. \\ Le calcul effectif de ces minimums semble très dur : les meilleurs algorithmes polynomiaux connus calculant $\lambda_1$ ont un facteur d'approximation exponentiel. \\
@@ -123,7 +131,7 @@ Dans un réseau $\Lambda$, on note $\lambda_i := \inf\{r,\dim(\text{Vect}(\Lambd
 On peut alors considérer le problème algorithmique suivant, qui apparait lors de l'étude des réseaux reliés aux protocoles utilisant LWE : 
 
 \begin{defin}\textbf{(BDD)}
-Soit $B$ une base d'un réseau de dimension $n$, et $\gamma \in \mathbb{R}^+$. Une instance du problème \textit{Bounded Distance Decoding} est un vecteur $t \in \mathbb{R}^m$ de la forme $t=x+e$, où $x\in \mathcal{L}(B)$ et $\|e\| \leq \lambda_1/\gamma$. Le problème consiste à retrouver $x$ (ou $e$) à partir de $t$.
+Soit $B$ une base d'un réseau de dimension $n$, et $\gamma \geq 2$. Une instance du problème \textit{Bounded Distance Decoding} est un vecteur $t \in \mathbb{R}^m$ de la forme $t=x+e$, où $x\in \mathcal{L}(B)$ et $\|e\| \leq \lambda_1/\gamma$. Le problème consiste à retrouver $x$ (ou $e$) à partir de $t$.
 \end{defin}
 
 En revenant au problème LWE-Décisionnel, on constate que ce dernier se réduit à une instance de BDD dans le réseau engendré par les colonnes de $[A|qId_t]$.
@@ -139,33 +147,23 @@ On considère la variante polynomiale du problème LWE :
 Soient $q \geq 2$, $m>0$, $f$ polynôme de degré $m$, $\chi$ une distribution sur $\mathbb{R}_q[X]/f$. À partir de $s\in \mathbb{Z}_q[X]/f$, on défini la distribution $\text{P}^{(f)}_{q,\chi}(s)$ sur $\mathbb{Z}_q[X]/f \times \mathbb{R}_q[X]/f$ obtenue en tirant $a \hookleftarrow \mathcal{U}(\mathbb{Z}_q[X]/f)$, $e\hookleftarrow \chi$ et qui renvoie $(a,b=a\cdot s+e)$.
 \end{defin}
 
-Ensuite, on définit un nouveau produit sur les polynômes : 
+Ensuite, on définit un nouveau produit sur les polynômes, qui consiste à garder les $d$ coefficients du milieu dans un produit de degré $d+2k-1$ : 
 \begin{defin}\textbf{(Middle-Product)}
 Soient $d_a,d_b,d,k \in \mathbb{N}$ tels que $d_a+d_b-1=d+2k$. Alors le \textit{middle-product} $\odot_d : \mathbb{R}^{<d_a}[X]\times\mathbb{R}^{<d_b}[X]\to\mathbb{R}^{<d}[X]$ est la fonction :
 \[(a,b) \mapsto a \odot_d b = \lfloor \frac{(a\cdot b)\text{ mod }x^{k+d}}{x^k} \rfloor\]
 \end{defin}
-
 On construit alors une distribution plus générale utilisant le produit précédent : 
 \begin{defin}\textbf{(Distribution MP-LWE)}
-Soient $n,d >0$, $q\geq 2$ et $\chi$ une distribution sur $\mathbb{R}_q^{<d}[X]$. Pour $s\in \mathbb{Z}^{n+d-1}$, on définit la distribution $\text{MP}_{q,n,d,\chi}(s)$ sur $\mathbb{Z}_q^{<n}[X]\times\mathbb{R}_q^{<d}$ obtenu en tirant $a \hookleftarrow \mathcal{U}(\mathbb{Z}_q^{<n}[X])$, $e\hookleftarrow \chi$ et qui renvoie $(a,b=a\odot_d s+e)$.
+Soient $n,d >0$, $q\geq 2$ et $\chi$ une distribution sur $\mathbb{R}_q^{<d}[X]$. Pour $s\in \mathbb{Z}_q^{<n+d-1}[X]$, on définit la distribution $\text{MP}_{q,n,d,\chi}(s)$ sur $\mathbb{Z}_q^{<n}[X]\times\mathbb{R}_q^{<d}[X]$ obtenu en tirant $a \hookleftarrow \mathcal{U}(\mathbb{Z}_q^{<n}[X])$, $e\hookleftarrow \chi$ et qui renvoie $(a,b=a\odot_d s+e)$. 
 \end{defin}
 
-Les problèmes décisionnels $\text{PLWE}^{(f)}_{q,\chi}$ et $\text{MP-LWE}_{q,n,d,\chi}$ associés peuvent se définir ensuite de manière parfaitement analogue au cas LWE classique. \\
+Les problèmes décisionnels $\text{PLWE}^{(f)}_{q,\chi}(s)$ et $\text{MP-LWE}_{q,n,d,\chi}(s)$ associés peuvent se définir ensuite de manière parfaitement analogue au cas LWE classique. \\
 
-\begin{defin} Soit $\sigma >0$ et $m \in \mathbb{N}$
-\begin{enumerate}
-\item[•] On note $D_\sigma$ la gaussienne en dimension $n$ dont la matrice de covariance est $\sigma^2\text{Id}_n$.
-\item[•] Soit $f \in \mathbb{Z}[X]$ de degré $m$. On définit le \textit{facteur d'expansion} de $f$ 
-par\\ $EF(f) :=\displaystyle \max_{\substack{g\in \mathbb{Z}^{2m-1}[X] \\ g \neq 0}}(\frac{\|g\text{ mod }f \|_\infty}{\|g\|_\infty})$
-\end{enumerate}
-\end{defin}
-
-
-\begin{theorem}
-Soient $n,d >0$, $q\geq 2$, et $\alpha \in (0,1)$. Pour $S>0$, on note $\mathcal{F}(S,d,n)$ les polynômes de $\mathbb{Z}[X]$ unitaires, dont le coefficient constant est inversible dans $\mathbb{Z}_q$, de degré $m$ vérifiant $d\leq m\leq n$, et tels que $\text{EF}(f)\leq S$. Il existe une réduction \textit{ppt} depuis $\text{PLWE}^{(f)}_{q,D_{\alpha q}}$ pour tout $f\in\mathcal{F}(S,d,n)$ vers  $\text{MP-LWE}_{q,n,d,D_{\alpha' q}}$, où $\alpha' = \alpha d S$.
+\begin{theorem}\textbf{(Théorème 3.6 \cite{mplwe})}
+Soient $n,d >0$, $q\geq 2$, et $\alpha \in (0,1)$. Pour $S>0$, on note $\mathcal{F}(S,d,n)$ les polynômes de $\mathbb{Z}[X]$ unitaires, dont le coefficient constant est inversible dans $\mathbb{Z}_q$, de degré $m$ vérifiant $d\leq m\leq n$, et tels que $\text{EF}(f)\leq S$. Il existe une réduction \textit{ppt} depuis $\text{PLWE}^{(f)}_{q,\mathcal{N}(\alpha q)^{<d}[X]}$ pour tout $f\in\mathcal{F}(S,d,n)$ vers  $\text{MP-LWE}_{q,n,d,\mathcal{N}(\alpha' q)^{<d}[X]}$, où $\alpha' = \alpha d S$.
 \end{theorem}
 
-Il s'agit du résultat principal de \cite{mplwe}. Durant mon stage, j'ai étudié comment la réduction explicitée dans la preuve du théorème agit géométriquement sur les réseaux sous-jacents aux problèmes de manière à en augmenter la complexité.
+Il s'agit du résultat principal de \cite{mplwe}. Durant mon stage, j'ai étudié comment la réduction explicitée dans la preuve du théorème agit géométriquement sur les réseaux sous-jacents aux problèmes de manière à ne pas en diminuer 	la complexité.
 
 \section{Étude de la réduction}
 
@@ -215,7 +213,7 @@ On obtient que $b'_i$ est uniformément distribué car $b_i$ l'est, et que $\tex
 Ensuite, on constate que le nouveau secret est encore fortement lié au secret de l'ancien réseau. Pour régler ce problème, on prend $s'' \hookleftarrow \mathcal{U}(\mathbb{Z}_q^{n+d-1}[X])$ et on en sortie, on ajoute à chaque $(a'_i,b'_i)$ le couple $(0,a'_i\odot_d s'')$, de manière à re-randomiser le secret, i.e : le nouveau secret $\tilde s = s'+s''$ est maintenant uniforme dans le nouveau réseau.  \\
 
 On a de plus que, en notant $J \in \mathbb{R}^{d\times d}$ la matrice qui a des $1$ sur son anti-diagonale et des $0$ ailleurs, la nouvelle distribution de l'erreur est $J\cdot\text{M}_f^d\cdot D_{\alpha q}$. Pour obtenir à nouveau une gaussienne dont la matrice de covariance est diagonale, il suffit alors de majorer les valeurs singulières de la nouvelle distribution, et de choisir le majorant comme variance de la gaussienne diagonale. Or dans notre cas, on a clairement $\|J\|=1$ et $\|\text{M}_f\| \leq d\text{EF}(f)=dS$, d'où $\alpha'=\alpha d S$, comme annoncé dans le Théorème 2.1. \\
-\newpage
+
 \subsection{Effets géométriques}
 
 Comme on a pu le voir dans la définition du problème BDD, la difficulté d'une instance $x$ dans un réseau $\mathcal{L}$ est reliée au facteur $\gamma$, que l'on peut écrire $\gamma = \frac{\lambda_1}{\text{dist}(x,\mathcal{L})}$. Plus $\gamma$ est petit, plus l'instance est difficile, et inversement. 
@@ -282,7 +280,7 @@ Si l'un des $a_i$ est inversible modulo $f$, alors $\text{vol}(\mathcal{L}_0) = 
 On commence par remarquer que quitte à permuter les $a_i$, la forme précédente est valable dès qu'au moins l'un d'entre eux est inversible modulo $f$. Il suffit alors de dire que les colonnes de la matrice constituée sont linéairement indépendantes pour obtenir une base du réseau. Or cette matrice est triangulaire inférieure à termes diagonaux non nuls, donc ses colonnes sont libres, et de plus son déterminant vaut le produit des termes diagonaux, ce qui achève la preuve. \\
 
 On aimerait pouvoir utiliser la même preuve dans le cas des réseaux $\mathcal{L}_1$ et $\mathcal{L}_2$, cependant cela n'est pas possible car les matrices composant le bloc de gauche sont rectangulaires, donc n'admettent pas d'inverse. On peut cependant justifier que cette colonne est de rang plein, ce qui permettra d'obtenir un résultat sur le volume analogue à celui qui précède.
-\newpage
+
 \begin{theorem}\textbf{(Volumes) \\}
 \begin{itemize}
 \item[•] Avec une probabilité $\geq 1 - (\frac{m}{q})^{\lfloor t/\lceil\frac{m}{d}\rceil\rfloor}$, on a que $\text{vol}(\mathcal{L}_1)=q^{td-m}$.
