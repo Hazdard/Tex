@@ -45,10 +45,8 @@
 \author{Sacha Ben-Arous, sous la direction d'Alice Pellet-Mary}
 
 
-% DET DOIT ETRE NON NUL
-% volume normalisé 
+% étudier le rapport des volumes normalisés
 % distance
-% envoyer rapport
 % proba par rapport à unif et par rapport à la borne
 % regarder lambda_1 par rapport a minkowski, heuristique gaussienne, utiliser la norme infinie
 
@@ -101,7 +99,7 @@ En notant $B:=[b_1,\dots,b_n]$ la matrice dont les colonnes sont formées par le
 \item[•] On note $\mathbb{Z}_q$ (resp. $\mathbb{R}_q$) le quotient $\mathbb{Z}/q\mathbb{Z}$ (resp. $\mathbb{R}/q\mathbb{Z}$), et $\|.\|$ désigne la norme euclidienne.
 \item[•] Si $E$ est un ensemble fini, on note $\mathcal{U}(E)$ la distribution uniforme sur cet ensemble.
 \item[•] Pour $n\in \mathbb{N}$, on note $\mathbb{K}^{<n}[X]$ l'ensemble des polynômes de degré strictement plus petit que $n$, à coefficients dans $\mathbb{K}$.
-\item[•] Pour $\sigma \in \mathbb{R}^+$, on note $\mathcal{N}(\sigma)$ la distribution gaussienne de variance $\sigma^2$.
+\item[•] Pour $\sigma \in \mathbb{R}^+$, on note $\mathcal{N}(\sigma)$ la distribution gaussienne centrée de variance $\sigma^2$.
 \item[•] Pour $\mathcal{D}$ une distribution de probabilité sur $\mathbb{K}$ et $n\in \mathbb{N}$, on note $\mathcal{D}^n[X]$ la distribution de probabilité sur $\mathbb{K}^n[X]$ où chaque coefficient suis la loi $\mathcal{D}$.
 \item[•] Pour $f \in \mathbb{Z}^m[X]$, on définit $EF(f) :=\displaystyle \max_{\substack{g\in \mathbb{Z}^{2m-1}[X] \\ g \neq 0}}(\frac{\|g\text{ mod }f \|_\infty}{\|g\|_\infty})$ le \textit{facteur d'expansion} de $f$.
 \end{itemize}
@@ -233,11 +231,11 @@ Dans un réseau $\mathcal{L}$ de dimension $n$, $\lambda_1 \leq \sqrt{n}\cdot\te
 \end{theorem}
 
 De plus, dans des réseaux aléatoires, on a l'estimation suivante : 
-\begin{theorem}
-Dans un réseau aléatoire, $\lambda_1$ est en moyenne de l'ordre de la borne de Minkowski, i.e $\lambda_1 \simeq \text{vol}(\mathcal{L})^\frac{1}{n}$
-\end{theorem}
+\begin{rem}\textbf{(Heuristique gaussienne)}
+Dans un réseau aléatoire, l'heuristique gaussienne fournit une borne inférieur sur $\lambda_1$ :  \[\lambda_1 \geq \sqrt{\frac{n}{2\pi e}}\text{vol}(\mathcal{L})^\frac{1}{n} \]
+\end{rem}
 
-On admet pour l'instant que ce second théorème s'applique dans notre cas particulier de réseaux structurés, et on conclut donc que : $\gamma = \frac{\text{vol}(\mathcal{L})^\frac{1}{n}}{\text{dist}(x,\mathcal{L})}$. \\
+On admet pour l'instant que nos réseaux structurés suivent cette heuristique, et on étudiera la pertinence de cette hypothèse dans un second temps. Les deux bornes permettent d'avoir une estimation de $\lambda_1$, et donc du facteur $\gamma$ associé à l'instance $x$ de BDD étudiée : $\gamma \simeq \frac{\sqrt{n}\text{vol}(\mathcal{L})^\frac{1}{n}}{\text{dist}(x,\mathcal{L})}$. \\
 
 Ainsi, les deux caractéristiques des réseaux permettant d'estimer la complexité du problème BDD associé sont leur volume, et la distance au point choisi.  Dans ce qui suit, on se propose donc d'étudier ces deux quantités dans le cadre de la réduction précédemment présentée.
 
@@ -294,9 +292,10 @@ On aimerait pouvoir utiliser la même preuve dans le cas des réseaux $\mathcal{
 Si on utilise les ordres de grandeurs proposés dans le schéma de chiffrement de \cite{mplwe}, on a:  \[\mathbb{P}(\text{vol}(\mathcal{L}_{2})=q^{td-(n+d-1)}) \geq 1 - (\frac{1}{n^\frac{3}{2}\sqrt{\log{n}}})^{\log{n}}\]
 \end{theorem}
 \textbf{Preuve :} Les deux cas étant analogues, on se contente de la preuve pour $\mathcal{L}_2$. Il suffit de montrer qu'avec bonne probabilité, $A:=[\text{Toep}^{d,n}(a'_i)_{i\leq t}]$ est de rang plein. \\
-On commence par rappeller de lemme de Schwartz-Zippel : pour un polynôme multivarié de degré $n$, à coefficients dans $\mathbb{Z}/p\mathbb{Z}$, la probabilité d'annuler ce polynôme en choisissant les variables uniformément est au plus $\frac{n}{p}$. \\
-On considère donc la matrice carré constituée des $n+d-1$ premières lignes de $A$, que l'on note $A_1$. Le déterminant de cette sous-matrice est un polynôme à plusieurs variables, de degré $n+d-1$, dont les variables sont choisies uniforméments dans $\mathbb{Z}_q$. Alors, d'après le lemme , on a que : \[\mathbb{P}[\text{det}(A_1)=0] \leq \frac{n+d-1}{q}\]
-On peut alors répéter ce processus pour les sous-matrices suivantes. Cependant, afin de conserver l'indépendance, il faut faire attention à ne pas reprendre une Toeplitz déjà utilisée. Ainsi, $A_k$ sera la sous matrice carré commençant à la $ (k-1)d\lceil \frac{n+d-1}{d} \rceil $-ème ligne. Au total, on pourra donc avoir au moins $\lfloor t/\lceil\frac{n+d-1}{d}\rceil\rfloor$ sous matrices carrés dont les entrées sont mutuellements indépendantes. Alors : 
+On commence par rappeller de lemme de Schwartz-Zippel : pour un polynôme multivarié non nul de degré $n$, à coefficients dans $\mathbb{Z}/p\mathbb{Z}$, la probabilité d'annuler ce polynôme en choisissant les variables uniformément est au plus $\frac{n}{p}$. \\
+On considère donc la matrice carré constituée des $n+d-1$ premières lignes de $A$, que l'on note $A_1$. Le déterminant de cette sous-matrice est un polynôme à plusieurs variables, de degré $n+d-1$, dont les variables sont choisies uniforméments dans $\mathbb{Z}_q$. Ce polynôme est non nul, par exemple on peut choisir $a_1=1$, $a_2= x^d$, $a_3=x^{2d}$, $\dots$ et alors $A_1 = \text{Id}$ et donc $\det(A_1)=1\neq 0$.
+\\ Alors, d'après le lemme , on a que : \[\mathbb{P}[\text{det}(A_1)=0] \leq \frac{n+d-1}{q}\]
+On peut ensuite répéter ce processus pour les sous-matrices suivantes. Cependant, afin de conserver l'indépendance, il faut faire attention à ne pas reprendre une Toeplitz déjà utilisée. Ainsi, $A_k$ sera la sous matrice carré commençant à la $ (k-1)d\lceil \frac{n+d-1}{d} \rceil $-ème ligne. Au total, on pourra donc avoir au moins $\lfloor t/\lceil\frac{n+d-1}{d}\rceil\rfloor$ sous matrices carrés dont les entrées sont mutuellements indépendantes. Alors : 
 \begin{eqnarray*}
 \mathbb{P}(\text{rg}(A)<n+d-1) &\leq& \mathbb{P}(\bigcap_{k\leq\lfloor t/\lceil\frac{n+d-1}{d}\rceil\rfloor} \det{A_k} = 0) \\
 &=&\mathbb{P}[\text{det}(A_1)=0]^{\lfloor t/\lceil\frac{n+d-1}{d}\rceil\rfloor} \\
@@ -318,7 +317,7 @@ Si $\alpha \leq \frac{1}{16(k+1)t\sqrt{\lambda}}$ et  $8td(k+1)\leq qd\leq e^\la
 \textbf{Preuve :}
 On commence par donner une borne classique sur la distribution gaussienne : 
 \begin{eqnarray*}
-\mathbb{P}_{X \hookleftarrow \mathcal{N}(\sigma^2)}(|X| \geq M) &=& \frac{2}{\sigma \sqrt{2 \pi}} \int_{M}^\infty e^{-\frac{t^2}{2 \sigma^2}} \, \mathrm{d}t \\
+\mathbb{P}_{X \hookleftarrow \mathcal{N}(\sigma)}(|X| \geq M) &=& \frac{2}{\sigma \sqrt{2 \pi}} \int_{M}^\infty e^{-\frac{t^2}{2 \sigma^2}} \, \mathrm{d}t \\
 &\leq &  \frac{2}{\sigma \sqrt{2 \pi}}\int_{M}^\infty \frac{t}{M} e^{-\frac{t^2}{2 \sigma^2}} \, \mathrm{d}t \\
 & \leq & \frac{2\sigma}{M \sqrt{2 \pi}} [-e^{-\frac{t^2}{2 \sigma^2}}]_M^\infty \\
 & \leq & \frac{2\sigma}{M \sqrt{2 \pi}} e^{-\frac{M^2}{2 \sigma^2}}
@@ -339,7 +338,7 @@ Alors, on obtient que :
 \begin{eqnarray*}
 \mathbb{P}(\|\mu + 2\sum_{i \leq t}r_i \odot_d e_i  \|_\infty \geq q/2 ) &\leq& \mathbb{P}(1+2E \geq \frac{q}{2t(k+1)}) \\
 &\leq& \mathbb{P}(\bigcup_{i,j} \{ |e_i(j)| \geq \frac{q}{4t(k+1)} - \frac{1}{2} \} ) \\
-&\leq& (k+d)t \ \mathbb{P}_{X \hookleftarrow \mathcal{N}(\alpha^2 q^2)}(|X| \geq \frac{q}{4t(k+1)} - 1) \\
+&\leq& (k+d)t \ \mathbb{P}_{X \hookleftarrow \mathcal{N}(\alpha q)}(|X| \geq \frac{q}{4t(k+1)} - 1) \\
 &\leq& \frac{8t^2(k+1)(k+d)\alpha q}{q - 6t(k+1)} e^{-\frac{1}{2(\alpha q)^2}(\frac{q}{4t(k+1)}-1)^2} \\
 \end{eqnarray*}
 
