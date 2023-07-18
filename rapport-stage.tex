@@ -133,9 +133,9 @@ On peut alors considérer le problème algorithmique suivant, qui apparait lors 
 Soit $B$ une base d'un réseau de dimension $n$, et $\gamma \geq 2$. Une instance du problème \textit{Bounded Distance Decoding} est un vecteur $t \in \mathbb{R}^m$ de la forme $t=x+e$, où $x\in \mathcal{L}(B)$ et $\|e\| \leq \lambda_1/\gamma$. Le problème consiste à retrouver $x$ (ou $e$) à partir de $t$.
 \end{defin}
 
-En revenant au problème LWE-Calculatoire, on constate que ce dernier se réduit à une instance de BDD dans le réseau engendré par les colonnes de $[A|qId_t]$ où $t$ est le nombre d'échantillons. \\
+En revenant au problème LWE-Calculatoire, on constate que ce dernier se réduit à une instance de BDD dans le réseau engendré par les colonnes de $A$ et $q\text{Id}_t$ où $t$ est le nombre d'échantillons. \\
 En effet, $b=As +e \text{ mod } q$, donc on travaille dans $\mathcal{L} := \{y \in \mathbb{R}^{tm} \ | \ \exists x \in \mathbb{R}^m, y=Ax \text{ mod } q \}$, et on va montrer que $\mathcal{L}=\{y \in \mathbb{R}^{tm} \ | \ \exists x \in \mathbb{R}^{t(m+1)}, y=[A|q\text{Id}_{tm}]\cdot x  \}$  \\
-Pour $y \in \mathcal{L}$, il existe $x \in \mathbb{R}^m$ tel que $y=Ax \text{ mod } q$. Alors en notant $x' \in \mathbb{R}^{t(m+1}$ le vecteur dont les $m$ première coordonnées sont celles de $x$ et les autres sont nulles, on a que $y=[A|q\text{Id}_{tm}]\cdot x' $\\
+Pour $y \in \mathcal{L}$, il existe $x \in \mathbb{R}^m$ tel que $y=Ax \text{ mod } q$. Alors en notant $x' \in \mathbb{R}^{t(m+1)}$ le vecteur dont les $m$ première coordonnées sont celles de $x$ et les autres sont nulles, on a que $y=[A|q\text{Id}_{tm}]\cdot x' $\\
 Réciproquement, pour $y$ dans le second réseau, il existe $x \in \mathbb{R}^{t(m+1)}$ tel que $y=[A|q\text{Id}_{tm}]\cdot x$. Alors en notant $x'\in \mathbb{R}^m$ le vecteur constitué des $m$ première composantes de $x$, et $x''\in \mathbb{R}^{tm}$ le reste, on a que $y=Ax'+q\text{Id}_{tm}x''$, donc $y = Ax' \text{ mod } q$.
 \\
 
@@ -302,8 +302,25 @@ On peut ensuite répéter ce processus pour les sous-matrices suivantes. Cependa
 &=&  (\frac{n+d-1}{q})^{\lfloor t/\lceil\frac{n+d-1}{d}\rceil\rfloor}
 \end{eqnarray*}
 Ce qui donne bien l'inégalité voulue.
-On peut alors procéder aux mêmes inversions et opérations sur les colonnes que dans le cas de $\mathcal{L}_0$, pour obtenir de manière analogue la valeur du volume.
+On peut alors procéder aux mêmes inversions et opérations sur les colonnes que dans le cas de $\mathcal{L}_0$, pour obtenir de manière analogue la valeur du volume. \\
 
+On précise que cette borne est loin d'être optimale. En effet, les résultats expérimentaux laissent penser que la probabilité d'être de rang plein pour nos matrices structurées est en fait la même que pour des matrices où les coefficients sont choisis uniforméments (dans ce cas on a une formule exacte).
+
+\subsubsection{Évolution de la distance au réseau}
+
+Dans le cas de LWE, la distance au réseau de l'instance de BDD est exactement égale à la norme du vecteur d'erreur $e$. On note $e_0$ (resp. $e_1$) (resp. $e_2$) la variable aléatoire qui représente le vecteur d'erreur tiré dans $\mathcal{L}_0$ (resp. $\mathcal{L}_1$) (resp. $\mathcal{L}_2$).
+\begin{theorem}\textbf{(Erreur moyenne)}
+\begin{itemize}
+\item[-] $\mathbb{E}(\|e_0\|) \leq \sqrt{tm}(\alpha q) $
+\item[-] $\mathbb{E}(\|e_1\|) \leq \sqrt{td}(\alpha q) $
+\item[-] $\mathbb{E}(\|e_2\|) \leq \sqrt{td}(\alpha d S q)$
+\end{itemize}
+\end{theorem}
+\textbf{Preuve :} \\
+On rappelle que par concavité de la fonction racine, on a que, pour $X$ une variable aléatoire à valeurs dans $\mathbb{R}^n$, l'inégalité de Jensen donne : \[\sqrt{\mathbb{E}(\|X\|^2)} \geq \mathbb{E}(\|X\|)\]
+Les composantes de $e_0$ et $e_1$ (resp. $e_2$) suivent une loi normale de variance $\alpha q$ (resp. $\alpha q d S$), ce qui donne la valeur du deuxième moment. Alors par linéarité de l'espérance et en utilisant l'inégalité ci-dessus, on en déduit le résultat voulu.
+
+\subsection{Heuristique gaussienne}
 \section{Schéma de chiffrement}
 
 \subsection{Preuve de correction}
