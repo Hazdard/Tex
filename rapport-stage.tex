@@ -47,8 +47,10 @@
 
 % DET DOIT ETRE NON NUL
 % volume normalisé 
+% distance
+% envoyer rapport
 % proba par rapport à unif et par rapport à la borne
-% regarder lambda_1 par rapport a minkowski, heuristique gaussienne
+% regarder lambda_1 par rapport a minkowski, heuristique gaussienne, utiliser la norme infinie
 
 
 % détailler réseau engendré par les colonnes
@@ -213,9 +215,9 @@ Alors on a, toujours en utilisant le Lemme 3.1, que $b'_i = a'_i \odot_d s' + e'
 
 On obtient que $b'_i$ est uniformément distribué car $b_i$ l'est, et que $\text{M}_f$ est inversible modulo $q$. Cette dernière affirmation repose sur l'hypothèse que le coefficient constant de $f$ est inversible modulo $q$. \\
 
-Ensuite, on constate que le nouveau secret est encore fortement lié au secret de l'ancien réseau. Pour régler ce problème, on prend $s'' \hookleftarrow \mathcal{U}(\mathbb{Z}_q^{n+d-1}[X])$ et on en sortie, on ajoute à chaque $(a'_i,b'_i)$ le couple $(0,a'_i\odot_d s'')$, de manière à re-randomiser le secret, i.e : le nouveau secret $\tilde s = s'+s''$ est maintenant uniforme dans le nouveau réseau.  \\
+Ensuite, on constate que le nouveau secret est encore fortement lié au secret de l'ancien réseau. Pour régler ce problème, on prend $s'' \hookleftarrow \mathcal{U}(\mathbb{Z}_q^{n+d-1}[X])$ et en sortie, on ajoute à chaque $(a'_i,b'_i)$ le couple $(0,a'_i\odot_d s'')$, de manière à re-randomiser le secret, i.e : le nouveau secret $\tilde s = s'+s''$ est maintenant uniforme dans le nouveau réseau.  \\
 
-On a de plus que, en notant $J \in \mathbb{R}^{d\times d}$ la matrice qui a des $1$ sur son anti-diagonale et des $0$ ailleurs, la nouvelle distribution de l'erreur est $J\cdot\text{M}_f^d\cdot D_{\alpha q}$. Pour obtenir à nouveau une gaussienne dont la matrice de covariance est diagonale, il suffit alors de majorer les valeurs singulières de la nouvelle distribution, et de choisir le majorant comme variance de la gaussienne diagonale. Or dans notre cas, on a clairement $\|J\|=1$ et $\|\text{M}_f\| \leq d\text{EF}(f)=dS$, d'où $\alpha'=\alpha d S$, comme annoncé dans le Théorème 2.1. \\
+On a de plus que, en notant $J \in \mathbb{R}^{d\times d}$ la matrice qui a des $1$ sur son anti-diagonale et des $0$ ailleurs, la nouvelle distribution de l'erreur est $J\cdot\text{M}_f^d\cdot \mathcal{N}(\alpha q)^{<d}[X]$. Pour obtenir à nouveau une gaussienne, il suffit alors de majorer les valeurs singulières de la nouvelle distribution, et de choisir le majorant comme variance de la nouvelle gaussienne. Or dans notre cas, on a clairement $\|J\|=1$ et $\|\text{M}_f\| \leq d\text{EF}(f)\leq dS$, d'où $\alpha'=\alpha d S$ convient, comme annoncé dans le Théorème 2.1. 
 
 \subsection{Effets géométriques}
 
