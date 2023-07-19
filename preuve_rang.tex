@@ -11,7 +11,6 @@
 \usepackage{fancyhdr}
 \usepackage{amsmath,amsfonts,amssymb}
 \usepackage[french]{babel}
-\usepackage[maxalphanames=99, maxnames=99, backend=bibtex, style=alphabetic, sorting=ynt]{biblatex}
 \usepackage[hidelinks]{hyperref} 
 \hypersetup{
   colorlinks   = true,    % Colours links instead of ugly boxes
@@ -41,9 +40,9 @@
 
 \begin{document}
 
-Si $(A_i)_{i \leq t}$ est une famille de matrices, on désigne par $[A_{i\leq t}]$ la matrice par blocs qui correspond à l'empilement des  $(A_i)_{i \leq t}$ : 
+Si $(M_i)_{i \leq t}$ est une famille de matrices, on désigne par $[M_{i\leq t}]$ la matrice par blocs qui correspond à l'empilement des  $(M_i)_{i \leq t}$ : 
 $$ \left[\begin{array}{c}
-A_1 \\ A_2 \\ \dots \\ A_t
+M_1 \\ M_2 \\ \dots \\ M_t
 \end{array}\right] $$
  \\
 
@@ -63,7 +62,7 @@ Ainsi les Toeplitz sont des matrices environ 3 fois plus larges que longues, et 
 
 \textbf{Théorème : \\}
 Avec une probabilité $\geq 1 - (\frac{n+d}{q})^{\lfloor t/\lceil\frac{n+d}{d}\rceil\rfloor}$, on a que $A$ est de rang plein. \\
-Si on utilise les ordres de grandeurs proposés dans le schéma de chiffrement, on a:  \[\mathbb{P}(\text{rg}(A)=n+d) \geq 1 - (\frac{1}{n^\frac{3}{2}\sqrt{\log{n}}})^{\log{n}}\] \\
+Si on utilise les ordres de grandeurs proposés dans le schéma de chiffrement, on a:  \[\mathbb{P}(\text{rg}(A)=n+d) \geq 1 - (\frac{3}{2 n^{1.5}\log{n}})^{\frac{\log{n}}{3}}\] \\
 
 
 \textbf{Preuve :}
@@ -78,5 +77,4 @@ On peut ensuite répéter ce processus pour les sous-matrices suivantes. Cependa
 \end{eqnarray*}
 Ce qui donne bien l'inégalité voulue.
 
-\printbibliography[heading=bibintoc, title={Références}]
 \end{document}
