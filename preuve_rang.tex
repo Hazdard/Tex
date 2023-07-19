@@ -1,0 +1,82 @@
+\documentclass[11pt,a4paper]{article}
+\textheight245mm
+\textwidth170mm
+\hoffset-21mm
+\voffset-15mm
+\parindent0pt
+\usepackage[utf8]{inputenc}
+\usepackage{dsfont}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{fancyhdr}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage[french]{babel}
+\usepackage[maxalphanames=99, maxnames=99, backend=bibtex, style=alphabetic, sorting=ynt]{biblatex}
+\usepackage[hidelinks]{hyperref} 
+\hypersetup{
+  colorlinks   = true,    % Colours links instead of ugly boxes
+  urlcolor     = blue,    % Colour for external hyperlinks
+  linkcolor    = black,    % Colour of internal links
+  citecolor    = black      % Colour of citations
+}
+
+\pagestyle{fancy}
+
+\usepackage{array,multirow,makecell}
+\setcellgapes{4pt}
+\makegapedcells
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash }b{#1}}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash }b{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash }b{#1}}
+
+\renewcommand{\headrulewidth}{1pt}
+\fancyhead[C]{}
+\fancyhead[L]{L3 - 2022/2023}
+\fancyhead[R]{D.E.R Informatique}
+
+\renewcommand{\footrulewidth}{1pt}
+\fancyfoot[C]{\thepage} 
+\fancyfoot[L]{Sacha Ben-Arous}
+\fancyfoot[R]{E.N.S Paris-Saclay}
+
+\begin{document}
+
+Si $(A_i)_{i \leq t}$ est une famille de matrices, on désigne par $[A_{i\leq t}]$ la matrice par blocs qui correspond à l'empilement des  $(A_i)_{i \leq t}$ : 
+$$ \left[\begin{array}{c}
+A_1 \\ A_2 \\ \dots \\ A_t
+\end{array}\right] $$
+ \\
+
+On considère les $(a_i)_{i \leq t}$ variables aléatoires uniformes sur $(\mathbb{Z}/q\mathbb{Z})^n[X]$ (i.e chaque coefficient est choisi uniformément). \\
+
+On défini $A:=[\text{Toep}^{d}(a_i)_{i\leq t}]$, où  $\text{Toep}^{d}(P)$ est une matrice à $d$ lignes et $\text{deg}(P)+d$ colonnes, dont la $j$-ème ligne est constituée des coefficients de $x^{j-1}P$. Par exemple, \\
+
+$\text{Toep}^{3}(X^2 + 3X + 1) = \left[\begin{array}{ccccc}
+1&3&2&0&0 \\
+0&1&3&2&0 \\ 
+0&0&1&3&2 
+\end{array}\right]$ \\
+
+Pour donner du contexte, en pratique on a $t=O(\log{n})$, $d=n/2$ et $q \geq n^{2.5}\log{n}$ \\
+Ainsi les Toeplitz sont des matrices environ 3 fois plus larges que longues, et $A$ est une matrice très longue. Le rang maximum de cette dernière est donc $n+d$ \\
+
+
+\textbf{Théorème : \\}
+Avec une probabilité $\geq 1 - (\frac{n+d}{q})^{\lfloor t/\lceil\frac{n+d}{d}\rceil\rfloor}$, on a que $A$ est de rang plein. \\
+Si on utilise les ordres de grandeurs proposés dans le schéma de chiffrement, on a:  \[\mathbb{P}(\text{rg}(A)=n+d) \geq 1 - (\frac{1}{n^\frac{3}{2}\sqrt{\log{n}}})^{\log{n}}\] \\
+
+
+\textbf{Preuve :}
+On commence par rappeller de lemme de Schwartz-Zippel : pour un polynôme multivarié non nul de degré $n$, à coefficients dans $\mathbb{Z}/p\mathbb{Z}$, la probabilité d'annuler ce polynôme en choisissant les variables uniformément est au plus $\frac{n}{p}$. \\
+On considère donc la matrice carré constituée des $n+d$ premières lignes de $A$, que l'on note $A_1$. Le déterminant de cette sous-matrice est un polynôme à plusieurs variables, de degré $n+d$, dont les variables sont choisies uniforméments dans $\mathbb{Z}/q\mathbb{Z}$. Ce polynôme est non nul, par exemple on peut choisir $a_1=1$, $a_2= x^d$, $a_3=x^{2d}$, $\dots$ et alors $A_1 = \text{Id}$ et donc $\det(A_1)=1\neq 0$.
+\\ Alors, d'après le lemme , on a que : \[\mathbb{P}[\text{det}(A_1)=0] \leq \frac{n+d}{q}\]
+On peut ensuite répéter ce processus pour les sous-matrices suivantes. Cependant, afin de conserver l'indépendance, il faut faire attention à ne pas reprendre une Toeplitz déjà utilisée. Ainsi, $A_k$ sera la sous matrice carré commençant à la $ (k-1)d\lceil \frac{n+d}{d} \rceil $-ème ligne. Au total, on pourra donc avoir au moins $\lfloor t/\lceil\frac{n+d}{d}\rceil\rfloor$ sous matrices carrés dont les entrées sont mutuellements indépendantes. Alors : 
+\begin{eqnarray*}
+\mathbb{P}(\text{rg}(A)<n+d) &\leq& \mathbb{P}(\bigcap_{k\leq\lfloor t/\lceil\frac{n+d}{d}\rceil\rfloor} \det{A_k} = 0) \\
+&=&\mathbb{P}[\text{det}(A_1)=0]^{\lfloor t/\lceil\frac{n+d}{d}\rceil\rfloor} \\
+&=&  (\frac{n+d}{q})^{\lfloor t/\lceil\frac{n+d}{d}\rceil\rfloor}
+\end{eqnarray*}
+Ce qui donne bien l'inégalité voulue.
+
+\printbibliography[heading=bibintoc, title={Références}]
+\end{document}
