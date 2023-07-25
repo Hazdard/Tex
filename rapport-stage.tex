@@ -9,6 +9,7 @@
 \usepackage{graphicx}
 \usepackage{caption}
 \usepackage{fancyhdr}
+\usepackage{mathdots}
 \usepackage{amsmath,amsfonts,amssymb}
 \usepackage[french]{babel}
 \usepackage[maxalphanames=99, maxnames=99, backend=bibtex, style=alphabetic, sorting=ynt]{biblatex}
@@ -22,6 +23,8 @@
 }
 \usepackage{zephyr}
 \pagestyle{fancy}
+
+\def\rddots#1{\cdot^{\cdot^{\cdot^{#1}}}}
 
 \usepackage{array,multirow,makecell}
 \setcellgapes{4pt}
@@ -46,16 +49,13 @@
 
 
 % étudier le rapport des volumes normalisés
-% distance
 % regarder lambda_1 par rapport a minkowski, heuristique gaussienne, utiliser la norme infinie
 
 %définir gaussienne discrete dans schema de chiffrement
 
-% Mettre une matrice "empilée" pour bien faire comprendre 
 % Rapeller tous les ordres (et odg) avant de se lancer dans le dur de la partie 3
 % EXEMPLES FACTEUR DEXP BORNE
 % PARLER DE LYUBASHEVSKI
-% METTRE DES HYPER LIENS 
 % Citer Stehlé pour Minkowski-Hlawka dans le cas PLWE
 
 
@@ -66,21 +66,29 @@
 
 
 \begin{document}
+
+
 \maketitle 
-\begin{abstract}
-Insérer abstract ici \\
-\end{abstract}
+
+%\begin{abstract}
+%Insérer abstract ici \\
+%\end{abstract}
+
+%\includegraphics[width=6cm]{./ens-logo.png}
+%\hfill \includegraphics[scale=0.38]{./imb.png}
+
 \tableofcontents
 \newpage
 \section{Introduction}
 \; Les réseaux euclidiens sont une construction algébrique permettant entre autres de définir des problèmes mathématiques dont la résolution algorithmique est conjecturée difficile, même pour des ordinateurs quantiques. Cela les rend donc particulièrement intéressants pour construire des protocoles sûrs en cryptographie post-quantique. \\
-Deux exemples fondamentaux de problèmes sur les réseaux sont le \textit{Small Integer Solutions problem} (SIS) introduit par Ajtai en 1996, et le \textit{Learning With Errors problem} (LWE), découvert par Regev en 2005. \\
-Le problème LWE est privilégié dans la construction de schémas de chiffrement car d'une part il est facile d'en tirer des constructions cryptographiques, et d'autre part il été prouvé (cf. \cite{wcac}) que résoudre une instance aléatoire de LWE est aussi dur que résoudre la pire instance d'un problème supposé dur. On dit que LWE bénéficie d'une réduction \textit{pire-cas moyen-cas}. \\
+Deux exemples fondamentaux de problèmes sur les réseaux sont le \textit{Small Integer Solutions problem} (SIS) introduit par Ajtai en 1996 \cite{sis}, et le \textit{Learning With Errors problem} (LWE), découvert par Regev en 2009 \cite{lwe}. \\
+Le problème LWE est privilégié dans la construction de schémas de chiffrement car il est facile d'en tirer des constructions cryptographiques. D'autre part il été prouvé \cite{lwe} que résoudre une instance aléatoire de LWE est aussi dur que résoudre la pire instance d'un problème supposé dur. On dit que LWE bénéficie d'une réduction \textit{pire-cas moyen-cas}. \\
 Cependant, si l'on utilise la version standard de LWE pour construire des protocoles, ces derniers auront une efficacité moyenne à cause d'opérations faisant intervenir de grandes matrices aléatoires. La variante \textit{Polynomial Learning With Errors} (PLWE), proposée par Stehlé \textit{et al.} \cite{plwe}, résout ce problème en utilisant des réseaux structurés : les calculs matriciels correspondent alors à des produits de polynômes, calculables plus rapidement. Cependant, ce gain d'efficacité se fait potentiellement au détriment de garanties de sécurité : les polynômes sont manipulés dans $\mathbb{Z}_p[X]/f$ et la complexité de la variante est directement liée au $f$ choisi. \\
 Afin de se débarasser de cette dépendance, Roşca \textit{et al.} introduisent le \textit{Middle-Product Learning With Errors problem} (MP-LWE) \cite{mplwe} dont l'intérêt est d'être aussi dur que des classes exponentiellement grandes de problèmes PLWE (dont on espère qu'elles contiennent au moins une instance difficile), tout en conservant l'efficacité des réseaux structurés. \\
 
-Durant mon stage, j'ai ainsi travaillé sur la variante MP-LWE du problème de Regev, et plus particulièrement sur les effets de la réduction de PLWE vers MP-LWE proposée par \cite{mplwe}.
-\\
+Durant mon stage, j'ai ainsi travaillé sur la variante MP-LWE du problème de Regev, et plus particulièrement sur les effets de la réduction de PLWE vers MP-LWE proposée par \cite{mplwe}. \\
+
+La section $2$ du rapport introduit les définitions utilisées, ainsi que le thème du stage. À partir de la sous-section $3.2$, tous les théorèmes, résultats empiriques et code constituent ma contribution (sauf mention du contraire).
 
 \section{Préliminaires}
 \begin{defin} 
@@ -99,7 +107,10 @@ En notant $B:=[b_1,\dots,b_n]$ la matrice dont les colonnes sont formées par le
 \item[•] Pour $n\in \mathbb{N}$, on note $\mathbb{K}^{<n}[X]$ l'ensemble des polynômes de degré strictement plus petit que $n$, à coefficients dans $\mathbb{K}$.
 \item[•] Pour $\sigma \in \mathbb{R}^+$, on note $\mathcal{N}(\sigma)$ la distribution gaussienne centrée de variance $\sigma^2$.
 \item[•] Pour $\mathcal{D}$ une distribution de probabilité sur $\mathbb{K}$ et $n\in \mathbb{N}$, on note $\mathcal{D}^n[X]$ la distribution de probabilité sur $\mathbb{K}^n[X]$ où chaque coefficient suis la loi $\mathcal{D}$.
+\item[•] Si $f$ et $g$ sont des polynômes, on note $g \text{ mod } f$ le reste dans la division euclidienne de $g$ par $f$.
 \item[•] Pour $f \in \mathbb{Z}^m[X]$, on définit $EF(f) :=\displaystyle \max_{\substack{g\in \mathbb{Z}^{2m-1}[X] \\ g \neq 0}}(\frac{\|g\text{ mod }f \|_\infty}{\|g\|_\infty})$ le \textit{facteur d'expansion} de $f$.
+\item[•] Si $(A_i)_{i \leq t}$ est une famille de matrices, on désigne par $[A_{i\leq t}]$ la matrice par blocs qui correspond à l'empilement vertical des  $(A_i)_{i \leq t}$ .
+\item[•] Pour $A$ et $B$ des matrices, on désigne par $[A|B]$ la matrice dont les colonnes sont celles de $A$, puis celles de $B$. 
 \end{itemize}
 \end{defin}
 
@@ -112,7 +123,7 @@ Soient $q\geq 2$, $m\geq 1$, $\chi$ une distribution de probabilité sur $\mathb
 \begin{defin}\textbf{(Problèmes LWE)}
 Soient $q\geq 2$, $m\geq 1$, $\chi$. On tire $s\ \hookleftarrow \mathcal{U}( \mathbb{Z}_q^m)$, et muni de la distribution $\mathcal{D}_{q,\chi,m}(s)$ précédente, on peut alors définir deux problèmes : 
 \begin{enumerate}
-\item[•]\textbf{LWE-Décisionnel} consiste à un distinguer un nombre arbitraire d'échantillons de $\mathcal{D}_{q,\chi,m}(s)$ et le même nombre d'échantillons de $\mathcal{U}(\mathbb{Z}_q^m)\times\mathcal{U}(\mathbb{Z}_q)$.
+\item[•]\textbf{LWE-Décisionnel} consiste à un distinguer un nombre arbitraire d'échantillons de $\mathcal{D}_{q,\chi,m}(s)$ et le même nombre d'échantillons de $\mathcal{U}(\mathbb{Z}_q^m)\times\mathcal{U}(\mathbb{R}_q)$.
 \item[•]\textbf{LWE-Calculatoire} consiste à retrouver le secret $s$ à partir d'un nombre fixé d'échantillons indépendants.
 \end{enumerate}
 \end{defin}
@@ -125,16 +136,26 @@ Dans un réseau $\Lambda$, on note $\lambda_i := \inf\{r,\dim(\text{Vect}(\Lambd
 
 \underline{Rq} : $\lambda_i$ s'interprète comme le rayon de la plus petite boule centrée à l'origine qui contient $i$ vecteurs indépendants du réseau. \\ Le calcul effectif de ces minimums semble très dur : les meilleurs algorithmes polynomiaux connus calculant $\lambda_1$ ont un facteur d'approximation exponentiel. \\
 
+\begin{defin}
+ On appelle volume d'un réseau $\mathcal{L}=\mathcal{L}(B)$ la quantité $\sqrt{\det{(B^\top B)}}$. Elle ne dépend pas de la base choisie.
+\end{defin}
+
+Le théorème suivant donne alors une borne sur $\lambda_1$ :
+\begin{theorem}\textbf{(Minkowski)}
+Dans un réseau $\mathcal{L}$ de dimension $n$, $\lambda_1 \leq \sqrt{n}\cdot\text{vol}(\mathcal{L})^\frac{1}{n}$
+\end{theorem}
+
 On peut alors considérer le problème algorithmique suivant, qui apparait lors de l'étude des réseaux reliés aux protocoles utilisant LWE : 
 
 \begin{defin}\textbf{(BDD)}
 Soit $B$ une base d'un réseau de dimension $n$, et $\gamma \geq 2$. Une instance du problème \textit{Bounded Distance Decoding} est un vecteur $t \in \mathbb{R}^m$ de la forme $t=x+e$, où $x\in \mathcal{L}(B)$ et $\|e\| \leq \lambda_1/\gamma$. Le problème consiste à retrouver $x$ (ou $e$) à partir de $t$.
 \end{defin}
 
-En revenant au problème LWE-Calculatoire, on constate que ce dernier se réduit à une instance de BDD dans le réseau engendré par les colonnes de $A$ et $q\text{Id}_t$ où $t$ est le nombre d'échantillons. \\
-En effet, $b=As +e \text{ mod } q$, donc on travaille dans $\mathcal{L} := \{y \in \mathbb{R}^{tm} \ | \ \exists x \in \mathbb{R}^m, y=Ax \text{ mod } q \}$, et on va montrer que $\mathcal{L}=\{y \in \mathbb{R}^{tm} \ | \ \exists x \in \mathbb{R}^{t(m+1)}, y=[A|q\text{Id}_{tm}]\cdot x  \}$  \\
-Pour $y \in \mathcal{L}$, il existe $x \in \mathbb{R}^m$ tel que $y=Ax \text{ mod } q$. Alors en notant $x' \in \mathbb{R}^{t(m+1)}$ le vecteur dont les $m$ première coordonnées sont celles de $x$ et les autres sont nulles, on a que $y=[A|q\text{Id}_{tm}]\cdot x' $\\
-Réciproquement, pour $y$ dans le second réseau, il existe $x \in \mathbb{R}^{t(m+1)}$ tel que $y=[A|q\text{Id}_{tm}]\cdot x$. Alors en notant $x'\in \mathbb{R}^m$ le vecteur constitué des $m$ première composantes de $x$, et $x''\in \mathbb{R}^{tm}$ le reste, on a que $y=Ax'+q\text{Id}_{tm}x''$, donc $y = Ax' \text{ mod } q$.
+En revenant au problème LWE-Calculatoire, on constate que ce dernier se réduit à une instance de BDD dans le réseau engendré par les colonnes de $A$ (de dimension $t\times m$) et $q\text{Id}_t$ où $t$ est le nombre d'échantillons. \\
+En effet, $b=As +e \text{ mod } q$, donc avec $x:= b-e \text{ mod } q$ et $e$ choisi petit par rapport à $\lambda_1$, $b=x+e$ est bien une instance de BDD. \\
+On travaille alors dans $\mathcal{L} := \{y \in \mathbb{Z}^{t} \ | \ \exists x \in \mathbb{Z}^m, y=Ax \text{ mod } q \}$, et on va montrer que $\mathcal{L}=\{y \in \mathbb{Z}^{t} \ | \ \exists x \in \mathbb{Z}^{m+t}, y=[A|q\text{Id}_{t}]\cdot x  \}$  \\
+Pour $y \in \mathcal{L}$, il existe $x \in \mathbb{Z}^m$ tel que $y=Ax \text{ mod } q$. Alors en notant $k \in \mathbb{Z}^{t}$ le vecteur tel que $y=Ax + k\cdot q\text{Id}_{t}$ et $x' \in \mathbb{Z}^{m+t}$ dont les $m$ premières composantes sont celles de $x$, et les autres celles de $k$, on a $y=[A|q\text{Id}_{t}]\cdot x'$ qui est bien dans le second réseau.\\
+Réciproquement, pour $y$ dans le second réseau, il existe $x \in \mathbb{R}^{m+t}$ tel que $y=[A|q\text{Id}_{t}]\cdot x$. Alors en notant $x'\in \mathbb{Z}^m$ le vecteur constitué des $m$ première composantes de $x$, et $x''\in \mathbb{R}^{t}$ le reste, on a que $y=Ax'+q\text{Id}_{t}x''$, donc $y = Ax' \text{ mod } q$.
 \\
 
 \begin{conj}
@@ -170,7 +191,7 @@ Il s'agit du résultat principal de \cite{mplwe}. Durant mon stage, j'ai étudi�
 
 Afin de manipuler les réseaux sous-jacents à ces variantes, il est nécessaire de défnir les objets suivants : 
 
-\begin{defin} Soient $f,a\in \mathbb{R}_d[X]$ de degré $m$ et $n$, et $d \in \mathbb{N}$
+\begin{defin} Soient $f,a\in \mathbb{R}_q[X]$ de degré $m$ et $n$, et $d \in \mathbb{N}$
 \begin{enumerate}
 \item[•] On note $\text{Rot}^d_f(a) \in \mathbb{R}^{d\times m}$ la matrice dont la $i$-ème ligne est constituée des coefficients de $a\cdot x^{i-1}\text{ mod } f$. On écrira $\text{Rot}_f(a)$ pour  $\text{Rot}^m_f(a)$
 \item[•] On note $\text{Toep}^{d,n}(a) \in \mathbb{R}^{d\times(n+d-1)}$ la matrice dont la $i$-ème ligne est constituée des coefficients de $a\cdot x^{i-1}$.
@@ -188,11 +209,14 @@ Dans la suite, on notera de manière identique un polynôme et le vecteur de ses
 \item[(4)] Si $\text{deg}(a) < m$, $\text{Rot}_f(a)\cdot(1,0,\dots,0)^\top = \text{M}_f\cdot a$
 \end{enumerate}
 \end{lemma}
-Les preuves calculatoires sont fournies dans \cite{mplwe}.
+Les preuves sont fournies dans \cite{mplwe}.
 
 \subsection{Principe de la réduction}
+Cette section a pour but d'expliquer les grandes lignes de la preuve de \cite{mplwe} afin de poser le contexte de l'étude menée dans les parties suivantes. \\
+
 Soient $q \geq 2$, $\alpha \in (0,1)$, $f$ polynôme vérifiant les hypothèses du Théorème 2.1, dont on gardera les notations. \\
- À partir de $s\in \mathbb{Z}_q[X]/f$, on se donne initialement un nombre $t$ d'échantillons $(a_i,b_i)_{i\leq t}$ de $\text{P}^{(f)}_{q,D_{\alpha q}}(s)$. Le but est de construire $t$ échantillons $(a'_i,b'_i)_{i\leq t}$ de $\text{MP}_{q,n,d,D_{\alpha'q}}(s)$. Dans un premier temps, on va "prolonger" les $a_i$ dans un espace de polynômes de plus grand degré. Ensuite grâce au Lemme 3.1 on passera du produit usuel dans l'espace quotient au middle-product. Il faudra alors re-randomiser le secret, et éliminer la dernière dépendance en $f$ dans la distribution de la nouvelle erreur. \\
+ À partir de $s\in \mathbb{Z}_q[X]/f$, on se donne initialement un nombre $t$ d'échantillons $(a_i,b_i)_{i\leq t}$ de $\text{P}^{(f)}_{q,\mathcal{N}(\alpha q)^{<d}[X]}(s)$. Le but est de construire $t$ échantillons $(a'_i,b'_i)_{i\leq t}$ de $\text{MP}_{q,n,d,\mathcal{N}(\alpha' q)^{<d}[X]}(s)$. \\ 
+ Dans un premier temps, on va "prolonger" les $a_i$ dans un espace de polynômes de plus grand degré. Ensuite grâce au Lemme 3.1 on passera du produit usuel dans l'espace quotient au middle-product. Il faudra alors re-randomiser le secret, et éliminer la dernière dépendance en $f$ dans la distribution de la nouvelle erreur. \\
 
 Tout d'abord, on tire $(r_i)_{i\leq t} \hookleftarrow \mathcal{U}(\mathbb{Z}_q^{<n-m}[X])$, et on définit $a'_i := a_i + f\cdot r_i \in \mathbb{Z}_q^{<n}[X]$. On a alors que, les $a_i$ et $r_i$ étant uniformes, les $a'_i$ le sont aussi. Moralement, on rajoute la partie des $a_i$ qui a été oubliée en passant au quotient. La preuve formelle consitue le Lemme 2.1 de \cite{psis}. Elle se fait par récurrence, en utilisant de manière cruciale que $f$ est unitaire. \\
 
@@ -209,49 +233,44 @@ où on a noté $\begin{cases} b'_i = \overline{\text{M}_f^d\cdot b_i} \\ s' = \o
 
 Alors on a, toujours en utilisant le Lemme 3.1, que $b'_i = a'_i \odot_d s' + e'_i$ \\
 
-On obtient que $b'_i$ est uniformément distribué car $b_i$ l'est, et que $\text{M}_f$ est inversible modulo $q$. Cette dernière affirmation repose sur l'hypothèse que le coefficient constant de $f$ est inversible modulo $q$. \\
-
+$b_i$ étant uniformément distribué, $b'_i$ l'est aussi car $\text{M}_f$ est inversible modulo $q$. Cette dernière affirmation repose sur l'hypothèse que le coefficient constant de $f_0$ de $f$ est inversible modulo $q$ car : 
+$$ M_f =\left[\begin{array}{cccc}
+1&0&\cdots&0 \\
+0& 0 & \cdots & -f_0 \\
+\vdots & \vdots &  \iddots &* \\
+0 & -f_0 & * &* 
+\end{array}\right] $$
 Ensuite, on constate que le nouveau secret est encore fortement lié au secret de l'ancien réseau. Pour régler ce problème, on prend $s'' \hookleftarrow \mathcal{U}(\mathbb{Z}_q^{n+d-1}[X])$ et en sortie, on ajoute à chaque $(a'_i,b'_i)$ le couple $(0,a'_i\odot_d s'')$, de manière à re-randomiser le secret, i.e : le nouveau secret $\tilde s = s'+s''$ est maintenant uniforme dans le nouveau réseau.  \\
 
 On a de plus que, en notant $J \in \mathbb{R}^{d\times d}$ la matrice qui a des $1$ sur son anti-diagonale et des $0$ ailleurs, la nouvelle distribution de l'erreur est $J\cdot\text{M}_f^d\cdot \mathcal{N}(\alpha q)^{<d}[X]$. Pour obtenir à nouveau une gaussienne, il suffit alors de majorer les valeurs singulières de la nouvelle distribution, et de choisir le majorant comme variance de la nouvelle gaussienne. Or dans notre cas, on a clairement $\|J\|=1$ et $\|\text{M}_f\| \leq d\text{EF}(f)\leq dS$, d'où $\alpha'=\alpha d S$ convient, comme annoncé dans le Théorème 2.1. 
 
 \subsection{Effets géométriques}
+À partir de maintenant, et pour toute la suite du rapport, les théorèmes et résultats empiriques présentés sont issus de mon stage (sauf mention du contraire). \\
 
-Comme on a pu le voir dans la définition du problème BDD, la difficulté d'une instance $x$ dans un réseau $\mathcal{L}$ est reliée au facteur $\gamma$, que l'on peut écrire $\gamma = \frac{\lambda_1}{\text{dist}(x,\mathcal{L})}$. Plus $\gamma$ est petit, plus l'instance est difficile, et inversement. 
-
-\begin{defin}
-On appelle volume d'un réseau $\mathcal{L}=\mathcal{L}(B)$ la quantité $\sqrt{\det{B}}$. Elle ne dépend pas de la base choisie.
-\end{defin}
-
-Le théorème suivant donne alors une première borne sur $\lambda_1$ :
-\begin{theorem}\textbf{(Minkowski)}
-Dans un réseau $\mathcal{L}$ de dimension $n$, $\lambda_1 \leq \sqrt{n}\cdot\text{vol}(\mathcal{L})^\frac{1}{n}$
-\end{theorem}
+Comme on a pu le voir dans la définition du problème BDD, la difficulté d'une instance $x$ dans un réseau $\mathcal{L}$ est reliée au facteur $\gamma$, que l'on peut écrire $\gamma = \frac{\lambda_1}{\text{dist}(x,\mathcal{L})}$. Plus $\gamma$ est petit, plus l'instance est difficile, et inversement. La dimension du réseau
 
 De plus, dans des réseaux aléatoires, on a l'estimation suivante : 
 \begin{rem}\textbf{(Heuristique gaussienne)}
-Dans un réseau aléatoire, l'heuristique gaussienne fournit une borne inférieur sur $\lambda_1$ :  \[\lambda_1 \geq \sqrt{\frac{n}{2\pi e}}\text{vol}(\mathcal{L})^\frac{1}{n} \]
+Dans un réseau aléatoire, l'heuristique gaussiennedonne une estimation de $\lambda_1$ :  \[\lambda_1 \simeq \sqrt{\frac{n}{2\pi e}}\text{vol}(\mathcal{L})^\frac{1}{n} \]
 \end{rem}
 
-On admet pour l'instant que nos réseaux structurés suivent cette heuristique, et on étudiera la pertinence de cette hypothèse dans un second temps. Les deux bornes permettent d'avoir une estimation de $\lambda_1$, et donc du facteur $\gamma$ associé à l'instance $x$ de BDD étudiée : $\gamma \simeq \frac{\sqrt{n}\text{vol}(\mathcal{L})^\frac{1}{n}}{\text{dist}(x,\mathcal{L})}$. \\
+On admet pour l'instant que nos réseaux structurés suivent cette heuristique, et on étudiera la pertinence de cette hypothèse dans un second temps. Cela nous permet d'avoir une estimation de $\lambda_1$, et donc du facteur $\gamma$ associé à l'instance $x$ de BDD étudiée : $\gamma \simeq \frac{\sqrt{n}\text{vol}(\mathcal{L})^\frac{1}{n}}{\text{dist}(x,\mathcal{L})}$. \\
 
 Ainsi, les deux caractéristiques des réseaux permettant d'estimer la complexité du problème BDD associé sont leur volume, et la distance au point choisi.  Dans ce qui suit, on se propose donc d'étudier ces deux quantités dans le cadre de la réduction précédemment présentée.
 
 \subsubsection{Évolution du volume }
-Si $(A_i)_{i \leq t}$ est une famille de matrices, on désigne par $[A_{i\leq t}]$ la matrice par blocs qui correspond à l'empilement des  $(A_i)_{i \leq t}$ . \\
-Pour $A$ et $B$ des matrices, on désigne par $[A|B]$ la matrice dont les colonnes sont celles de $A$, puis celles de $B$. \\
 
 Afin d'étudier les effets de cette réduction, on remarque que $3$ réseaux distincts apparaissent, et on se propose donc d'en étudier les propriétés : 
 \begin{itemize}
 \item Le réseau initial $\mathcal{L}_0 = \{ y \in \mathbb{Z}^{tm} \ | \ \exists x\in \mathbb{Z}^m,\ y=[\text{Rot}_f(a_i)_{i\leq t}]\cdot x \text{ mod }q \}$
-\item Le réseau intermédiaire $\mathcal{L}_1 =\{ y \in \mathbb{Z}^{td} \ | \ \exists x\in \mathbb{Z}^d,\ m=[\text{Rot}_f^d(a_i)_{i\leq t}]\cdot x \text{ mod }q \}$  qui correspond au projeté en dimension $d$ du réseau initial
+\item Le réseau intermédiaire $\mathcal{L}_1 =\{ y \in \mathbb{Z}^{td} \ | \ \exists x\in \mathbb{Z}^d,\ y=[\text{Rot}_f^d(a_i)_{i\leq t}]\cdot x \text{ mod }q \}$  qui correspond au projeté en dimension $dt$ du réseau initial $\mathcal{L}_0$
 \item Le réseau final $\mathcal{L}_2 = \{ y \in \mathbb{Z}^{td} \ | \ \exists x\in \mathbb{Z}^{n+d-1},\ y=[\text{Toep}^{d,n}(a'_i)_{i\leq t}]\cdot x \text{ mod }q\}$ \\
 \end{itemize}
 
-On clairement que $\mathcal{L}_0$ est engendré par les colonnes de la matrice $[[\text{Rot}_f(a_i)_{i\leq t}] \ |\ q\text{Id}_t]$. En particulier, son sous-espace vectoriel engendré est égal à l'espace entier (ou encore son rang est égal à la dimension ambiente), on dit que c'est un réseau de \textit{rang plein}. De plus, ce réseau contient les $(0,\dots,q,\dots,0)^\top$, dans ce cas il est dit \textit{q-aire}.\\
+Comme démontré en préliminaires, on a que $\mathcal{L}_0$ est engendré par les colonnes de la matrice $[[\text{Rot}_f(a_i)_{i\leq t}] \ |\ q\text{Id}_t]$. En particulier, son sous-espace vectoriel engendré est égal à l'espace entier (ou encore son rang est égal à la dimension ambiente), on dit que c'est un réseau de \textit{rang plein}. De plus, ce réseau contient les $(0,\dots,q,\dots,0)^\top$, dans ce cas il est dit \textit{q-aire}.\\
 
 \begin{lemma}
-Si $a_1$ est inversible modulo $f$, alors $\mathcal{L}_0$ est engendré par 
+Si $a_1$ est inversible dans $\mathbb{Z}_q[X]/f$, alors $\mathcal{L}_0$ est engendré par 
 $$ \left[\begin{array}{c|ccc}
 \text{Id}_m & 0 &\cdots &0\\
 \text{Rot}_f(a_2)\cdot\text{Rot}_f(a_1)^{-1}&q&\cdots & 0\\
@@ -262,17 +281,17 @@ $$ \left[\begin{array}{c|ccc}
 \textbf{Preuve :} \\
 Pour alléger les notations, on pose $A_i := \text{Rot}_f(a_i)$ et $A:=[\text{Rot}_f(a_i)_{i\leq t}]$. Premièrement, si $a_1$ est inversible modulo $f$, alors $A_1$ est inversible. En effet, on a $\text{Rot}_f(a_1)\cdot\text{Rot}_f(a_1^{-1})=\text{Rot}_f(a_1\cdot a_1^{-1})=\text{Rot}_f(1)=\text{Id}_m$, d'où $\text{Rot}_f(a_1)^{-1}=\text{Rot}_f(a_1^{-1})$. On peut alors remarquer que : \\
 
-$(\subseteq)$ Si $y \in \mathcal{L}_0$, alors il existe $x$ tel que $y=Ax \text{ mod q}$, donc en notant $x':=\text{Rot}_f(a)\cdot x$, on a \\ $y=A\cdot\text{Rot}_f(a)^{-1}\cdot x' \text{ mod q}$, d'où 
+Si $y \in \mathcal{L}_0$, alors il existe $x$ tel que $y=Ax \text{ mod } q$, donc en notant $x':=\text{Rot}_f(a_1)\cdot x$, on a \\ $y=A\cdot\text{Rot}_f(a_1)^{-1}\cdot x' \text{ mod q}$, d'où 
 $$ \left[\begin{array}{c|cccc}
 \text{Id}_m \\
 \text{Rot}_f(a_2)\cdot\text{Rot}_f(a_1)^{-1} & & q\cdot \text{Id}\\
 \vdots &\\
 \text{Rot}_f(a_t)\cdot\text{Rot}_f(a_1)^{-1}&\\
 \end{array}\right] $$
-engendre $\mathcal{L}_0$. Alors, des combinaisons linéaires des colonnes du bloc de gauche permettent de retirer les $m$ premières colonnes du bloc de droite (ces dernières étant engendrées modulo $q$ par le bloc de gauche). Finalement, on a bien que les vecteurs voulus engendrent $\mathcal{L}_0$. \\
+engendre $\mathcal{L}_0$. Alors, des combinaisons linéaires des colonnes du bloc de gauche permettent de retirer les $m$ premières colonnes du bloc de droite (ces dernières étant engendrées par les autres colonnes de la matrice). Finalement, on a bien que les vecteurs voulus engendrent $\mathcal{L}_0$. \\
 
-$(\supseteq)$ Réciproquement, il suffit de remonter les calculs, tout étant inversible.
 
+$\hfill \square$
 \begin{theorem}
 
 Si l'un des $a_i$ est inversible modulo $f$, alors $\text{vol}(\mathcal{L}_0) = q^{m(t-1)}$
@@ -282,7 +301,10 @@ On commence par remarquer que quitte à permuter les $a_i$, la forme précédent
 
 On aimerait pouvoir utiliser la même preuve dans le cas des réseaux $\mathcal{L}_1$ et $\mathcal{L}_2$, cependant cela n'est pas possible car les matrices composant le bloc de gauche sont rectangulaires, donc n'admettent pas d'inverse. On peut cependant justifier que cette colonne est de rang plein, ce qui permettra d'obtenir un résultat sur le volume analogue à celui qui précède.
 
-\begin{theorem}\textbf{(Volumes) \\}
+$\hfill \square$
+
+\begin{theorem}
+Supposons $q$ premier, alors : 
 \begin{itemize}
 \item[•] Avec une probabilité $\geq 1 - (\frac{m}{q})^{\lfloor t/\lceil\frac{m}{d}\rceil\rfloor}$, on a que $\text{vol}(\mathcal{L}_1)=q^{td-m}$.
 \item[•] Avec une probabilité $\geq 1 - (\frac{n+d-1}{q})^{\lfloor t/\lceil\frac{n+d-1}{d}\rceil\rfloor}$, on a que $\text{vol}(\mathcal{L}_2)=q^{td-(n+d-1)}$. \\
@@ -300,7 +322,10 @@ On peut ensuite répéter ce processus pour les sous-matrices suivantes. Cependa
 &=&  (\frac{n+d-1}{q})^{\lfloor t/\lceil\frac{n+d-1}{d}\rceil\rfloor}
 \end{eqnarray*}
 Ce qui donne bien l'inégalité voulue.
-On peut alors procéder aux mêmes inversions et opérations sur les colonnes que dans le cas de $\mathcal{L}_0$, pour obtenir de manière analogue la valeur du volume. \\
+On peut alors procéder aux mêmes inversions et opérations sur les colonnes que dans le cas de $\mathcal{L}_0$, pour obtenir de manière analogue la valeur du volume.
+
+$\hfill \square$ 
+\\
 
 On précise que cette borne est loin d'être optimale. En effet, les résultats expérimentaux laissent penser que la probabilité d'être de rang plein pour nos matrices structurées est en fait la même que pour des matrices où les coefficients sont choisis uniforméments (dans ce cas on a une formule exacte).
 
@@ -383,6 +408,7 @@ Finalement on obtient la borne voulue :
 &\leq& 2^{-\Omega(\lambda)}
 \end{eqnarray*}
 $\hfill \square$
+
 
 \section*{Annexe}
 \printbibliography[heading=bibintoc, title={Références}]
