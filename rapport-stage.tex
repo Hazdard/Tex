@@ -329,7 +329,21 @@ $\hfill \square$
 
 On précise que cette borne est loin d'être optimale. En effet, les résultats expérimentaux laissent penser que la probabilité d'être de rang plein pour nos matrices structurées est en fait la même que pour des matrices où les coefficients sont choisis uniforméments (dans ce cas on a une formule exacte). \\
 
-On peut en effet dénombrer les matrices de rang plein de taille $(m,n)$ à coefficients dans $\mathbb{Z}/p\mathbb{Z}$ où $p$ est premier. On suppose sans perte de généralité que $m\geq n$, alors : la première colonne doit être non nulle, il y a donc $p^m-1$ choix, la seconde ne doit pas être dans l'espace engendré par la première, il y a donc $p^m -p$ choix, au final on a $\displaystyle \prod_{0\leq i < n}(p^m - p^i)$ matrices de rang plein. La probabilité d'en obtenir une en choisissant uniformément les coefficients vaut donc :  $ \displaystyle \frac{1}{p^{mn}} \prod_{0\leq i < n}(p^m - p^i) = \displaystyle \prod_{0\leq i < n}(1 - \frac{1}{p^{m-i}})$. 
+Dénombrons les matrices de rang plein de taille $m \times n$ (dans notre cas on aurait $n+d-1$ colonnes et $dt$ lignes) à coefficients dans $\mathbb{Z}/p\mathbb{Z}$ où $p$ est premier. On suppose sans perte de généralité que $m\geq n$, alors : la première colonne doit être non nulle, il y a donc $p^m-1$ choix, la seconde ne doit pas être dans l'espace engendré par la première, il y a donc $p^m -p$ choix, etc $\dots$ Finalement, on a $\displaystyle \prod_{0\leq i < n}(p^m - p^i)$ matrices de rang plein. La probabilité d'en obtenir une en choisissant uniformément les coefficients vaut donc :  $ \displaystyle \frac{1}{p^{mn}} \prod_{0\leq i < n}(p^m - p^i) = \displaystyle \prod_{0\leq i < n}(1 - \frac{1}{p^{m-i}})$. \\
+
+Pour les calculs expérimentaux, j'ai choisi les valeurs suivantes des paramètres : $n=22, d=11, t=3$ et $p=71$. Ces valeurs correspondent aux ordres ordres de grandeurs proposés dans \cite{mplwe}, sauf $p$ qui sera pris de l'ordre de $n^\beta\log{n}$ où on fait varier $\beta$.  En faisant $10^6$ tests, on obtient alors les résultats suivants : \\
+
+\begin{tabular}{|C{2cm}|C{3cm}|C{3cm}|C{3cm}|}
+	\hline 
+	& Probabilité empirique & Probabilité pour les matrices uniformes & Borne obtenue dans la preuve \\	  
+	\hline
+	$\beta=0.75$ $p=37$  & 0.998603 & 0.99924 & 0.135135  \\ 
+	\hline
+	$\beta=1$ $p=71$  & 0.99962 & 0.999798 & 0.549295  \\
+	\hline
+	$\beta=1.5$ $p=331$  & 0.999989 & 0.999990 & 0.903323 \\
+	\hline
+\end{tabular}
 
 \subsubsection{Évolution de la distance au réseau}
 
