@@ -245,11 +245,11 @@ Ensuite, on constate que le nouveau secret est encore fortement lié au secret d
 On a de plus que, en notant $J \in \mathbb{R}^{d\times d}$ la matrice qui a des $1$ sur son anti-diagonale et des $0$ ailleurs, la nouvelle distribution de l'erreur est $J\cdot\text{M}_f^d\cdot \mathcal{N}(\alpha q)^{<d}[X]$. Pour obtenir à nouveau une gaussienne, il suffit alors de majorer les valeurs singulières de la nouvelle distribution, et de choisir le majorant comme variance de la nouvelle gaussienne. Or dans notre cas, on a clairement $\|J\|=1$ et $\|\text{M}_f\| \leq d\text{EF}(f)\leq dS$, d'où $\alpha'=\alpha d S$ convient, comme annoncé dans le Théorème 2.1. 
 
 \subsection{Effets géométriques}
-À partir de maintenant, et pour toute la suite du rapport, les théorèmes et résultats empiriques présentés sont issus de mon stage (sauf mention du contraire). \\
+À partir de maintenant, et pour toute la suite du rapport, les théorèmes et résultats empiriques présentés sont issus de mon stage (sauf mention du contraire). Ma contribution consiste à quantifier l'évolution des paramètres régissant la difficulté des instances BDD sous-jacentes aux variantes étudiées lors de la réduction de \cite{mplwe}	précédemment détaillée. \\
 
-Comme on a pu le voir dans la définition du problème BDD, la difficulté d'une instance $x$ dans un réseau $\mathcal{L}$ est reliée au facteur $\gamma$, que l'on peut écrire $\gamma = \frac{\lambda_1}{\text{dist}(x,\mathcal{L})}$. Plus $\gamma$ est petit, plus l'instance est difficile, et inversement. La dimension du réseau
+Comme on a pu le voir dans la définition du problème BDD, la difficulté d'une instance $x$ dans un réseau $\mathcal{L}$ est d'une part proportionnelle à la dimension du réseau, et d'autre part, elle est reliée au facteur $\gamma$, que l'on peut écrire $\gamma = \frac{\lambda_1}{\text{dist}(x,\mathcal{L})}$. Plus $\gamma$ est petit, plus l'instance est difficile, et inversement. \\
 
-De plus, dans des réseaux aléatoires, on a l'estimation suivante : 
+
 \begin{rem}\textbf{(Heuristique gaussienne)}
 Dans un réseau aléatoire, l'heuristique gaussiennedonne une estimation de $\lambda_1$ :  \[\lambda_1 \simeq \sqrt{\frac{n}{2\pi e}}\text{vol}(\mathcal{L})^\frac{1}{n} \]
 \end{rem}
@@ -312,9 +312,9 @@ Supposons $q$ premier, alors :
 Si on utilise les ordres de grandeurs proposés dans le schéma de chiffrement de \cite{mplwe}, on a:  \[\mathbb{P}(\text{vol}(\mathcal{L}_{2})=q^{td-(n+d-1)}) \geq 1 - (\frac{1}{n^\frac{3}{2}\sqrt{\log{n}}})^{\log{n}}\]
 \end{theorem}
 \textbf{Preuve :} Les deux cas étant analogues, on se contente de la preuve pour $\mathcal{L}_2$. Il suffit de montrer qu'avec bonne probabilité, $A:=[\text{Toep}^{d,n}(a'_i)_{i\leq t}]$ est de rang plein. \\
-On commence par rappeller de lemme de Schwartz-Zippel : pour un polynôme multivarié non nul de degré $n$, à coefficients dans $\mathbb{Z}/p\mathbb{Z}$, la probabilité d'annuler ce polynôme en choisissant les variables uniformément est au plus $\frac{n}{p}$. \\
-On considère donc la matrice carré constituée des $n+d-1$ premières lignes de $A$, que l'on note $A_1$. Le déterminant de cette sous-matrice est un polynôme à plusieurs variables, de degré $n+d-1$, dont les variables sont choisies uniforméments dans $\mathbb{Z}_q$. Ce polynôme est non nul, par exemple on peut choisir $a_1=1$, $a_2= x^d$, $a_3=x^{2d}$, $\dots$ et alors $A_1 = \text{Id}$ et donc $\det(A_1)=1\neq 0$.
-\\ Alors, d'après le lemme , on a que : \[\mathbb{P}[\text{det}(A_1)=0] \leq \frac{n+d-1}{q}\]
+On commence par rappeller de lemme de Schwartz-Zippel : pour un polynôme multivarié non nul de degré $n$, à coefficients dans $\mathbb{Z}/p\mathbb{Z}$ où $p$ est premier, la probabilité d'annuler ce polynôme en choisissant les variables uniformément est au plus $\frac{n}{p}$. \\
+On considère donc la matrice carré constituée des $n+d-1$ premières lignes de $A$, que l'on note $A_1$. Le déterminant de cette sous-matrice est un polynôme à plusieurs variables, de degré $n+d-1$, dont les variables sont choisies uniforméments dans $\mathbb{Z}_q$. Ce polynôme est non nul, par exemple on peut choisir $a_{\lceil\frac{n+d-1}{d}\rceil}=1$, $a_1= x^d$, $a_2=x^{2d}$, $\dots$ et alors $A_1$ est une matrice de permutation, donc $\det(A_1)= 1\neq 0$.
+\\ Alors, d'après le lemme, $q$ étant premier, on a que : \[\mathbb{P}[\text{det}(A_1)=0] \leq \frac{n+d-1}{q}\]
 On peut ensuite répéter ce processus pour les sous-matrices suivantes. Cependant, afin de conserver l'indépendance, il faut faire attention à ne pas reprendre une Toeplitz déjà utilisée. Ainsi, $A_k$ sera la sous matrice carré commençant à la $ (k-1)d\lceil \frac{n+d-1}{d} \rceil $-ème ligne. Au total, on pourra donc avoir au moins $\lfloor t/\lceil\frac{n+d-1}{d}\rceil\rfloor$ sous matrices carrés dont les entrées sont mutuellements indépendantes. Alors : 
 \begin{eqnarray*}
 \mathbb{P}(\text{rg}(A)<n+d-1) &\leq& \mathbb{P}(\bigcap_{k\leq\lfloor t/\lceil\frac{n+d-1}{d}\rceil\rfloor} \det{A_k} = 0) \\
@@ -327,21 +327,22 @@ On peut alors procéder aux mêmes inversions et opérations sur les colonnes qu
 $\hfill \square$ 
 \\
 
-On précise que cette borne est loin d'être optimale. En effet, les résultats expérimentaux laissent penser que la probabilité d'être de rang plein pour nos matrices structurées est en fait la même que pour des matrices où les coefficients sont choisis uniforméments (dans ce cas on a une formule exacte).
+On précise que cette borne est loin d'être optimale. En effet, les résultats expérimentaux laissent penser que la probabilité d'être de rang plein pour nos matrices structurées est en fait la même que pour des matrices où les coefficients sont choisis uniforméments (dans ce cas on a une formule exacte). \\
+
+On peut en effet dénombrer les matrices de rang plein de taille $(m,n)$ à coefficients dans $\mathbb{Z}/p\mathbb{Z}$ où $p$ est premier. On suppose sans perte de généralité que $m\geq n$, alors : la première colonne doit être non nulle, il y a donc $p^m-1$ choix, la seconde ne doit pas être dans l'espace engendré par la première, il y a donc $p^m -p$ choix, au final on a $\displaystyle \prod_{0\leq i < n}(p^m - p^i)$ matrices de rang plein. La probabilité d'en obtenir une en choisissant uniformément les coefficients vaut donc :  $ \displaystyle \frac{1}{p^{mn}} \prod_{0\leq i < n}(p^m - p^i) = \displaystyle \prod_{0\leq i < n}(1 - \frac{1}{p^{m-i}})$. 
 
 \subsubsection{Évolution de la distance au réseau}
 
-Dans le cas de LWE, la distance au réseau de l'instance de BDD est exactement égale à la norme du vecteur d'erreur $e$. On note $e_0$ (resp. $e_1$) (resp. $e_2$) la variable aléatoire qui représente le vecteur d'erreur tiré dans $\mathcal{L}_0$ (resp. $\mathcal{L}_1$) (resp. $\mathcal{L}_2$).
+Dans le cas de LWE, la distance au réseau de l'instance de BDD est exactement égale à la norme du vecteur d'erreur $e$. On note $e_0$ (resp. $e_1$) (resp. $e_2$) la variable aléatoire qui représente le vecteur d'erreur tiré dans $\mathcal{L}_0$ (resp. $\mathcal{L}_1$) (resp. $\mathcal{L}_2$). $e_0$ est le vecteur d'erreur initial de PLWE, $e_1$ est la projection de $e_0$ en dimension $dt$, et $e_2$ est le vecteur d'erreur final dans la réduction, i.e après re-randomisation pour suivre une gaussienne de paramètre $\sigma' = \alpha' q$.
 \begin{theorem}\textbf{(Erreur moyenne)}
 \begin{itemize}
-\item[-] $\mathbb{E}(\|e_0\|) \leq \sqrt{tm}(\alpha q) $
-\item[-] $\mathbb{E}(\|e_1\|) \leq \sqrt{td}(\alpha q) $
-\item[-] $\mathbb{E}(\|e_2\|) \leq \sqrt{td}(\alpha d S q)$
+\item[-] $\mathbb{E}(\|e_0\|^2) = tm(\alpha q)^2 $
+\item[-] $\mathbb{E}(\|e_1\|^2) = td(\alpha q)^2 $
+\item[-] $\mathbb{E}(\|e_2\|^2) = td(\alpha d S q)^2$
 \end{itemize}
 \end{theorem}
 \textbf{Preuve :} \\
-On rappelle que par concavité de la fonction racine, on a que, pour $X$ une variable aléatoire à valeurs dans $\mathbb{R}^n$, l'inégalité de Jensen donne : \[\sqrt{\mathbb{E}(\|X\|^2)} \geq \mathbb{E}(\|X\|)\]
-Les composantes de $e_0$ et $e_1$ (resp. $e_2$) suivent une loi normale de variance $\alpha q$ (resp. $\alpha q d S$), ce qui donne la valeur du deuxième moment. Alors par linéarité de l'espérance et en utilisant l'inégalité ci-dessus, on en déduit le résultat voulu.
+On utilise la norme euclidienne, donc le carré de la norme d'une vecteur est égal à la somme des carrés de ses composantes. De plus le moment d'ordre deux d'une gaussienne est égal à sa variance $\sigma^2$, ce qui donne les résultats voulus par linéarité de l'espérance.
 
 \subsection{Heuristique gaussienne}
 \section{Schéma de chiffrement}
