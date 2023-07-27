@@ -1,6 +1,6 @@
 \documentclass[11pt,a4paper]{article}
 \textheight245mm
-\textwidth110mm
+\textwidth170mm
 \hoffset-21mm
 \voffset-15mm
 \parindent0pt
@@ -333,6 +333,8 @@ Dénombrons les matrices de rang plein de taille $m \times n$ (dans notre cas on
 
 Pour les calculs expérimentaux, j'ai choisi les valeurs suivantes des paramètres : $n=22, d=11, t=3$ et $p=71$. Ces valeurs correspondent aux ordres ordres de grandeurs proposés dans \cite{mplwe}, sauf $p$ qui sera pris de l'ordre de $n^\beta\log{n}$ où on fait varier $\beta$.  En faisant $10^6$ tests, on obtient alors les résultats suivants : \\
 
+{
+\centering
 \begin{tabular}{|C{2cm}|C{3cm}|C{3cm}|C{3cm}|}
 	\hline 
 	& Probabilité empirique & Probabilité pour les matrices uniformes & Borne obtenue dans la preuve \\	  
@@ -343,9 +345,10 @@ Pour les calculs expérimentaux, j'ai choisi les valeurs suivantes des paramètr
 	\hline
 	$\beta=1.5$ $p=331$  & 0.999979 & 0.999990 & 0.903323 \\
 	\hline
-\end{tabular} 
-\\
-\\
+\end{tabular}\par
+}
+~\\
+
 
 Le code utilisé pour produire ces résultats est disponible \href{https://github.com/Hazdard/mplwe-sage/tree/main}{ici}, au tag "rapport". 
 
