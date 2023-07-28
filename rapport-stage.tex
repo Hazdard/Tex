@@ -74,14 +74,13 @@
 %Insérer abstract ici \\
 %\end{abstract}
 
-%\includegraphics[width=6cm]{./ens-logo.png}
-%\hfill \includegraphics[scale=0.38]{./imb.png}
+%\includegraphics[scale=0.2]{./ens-logo.png} \hfill \includegraphics[scale=0.36]{./imb.png}
 
 \tableofcontents
 \newpage
 \section{Introduction}
 \; Les réseaux euclidiens sont une construction algébrique permettant entre autres de définir des problèmes mathématiques dont la résolution algorithmique est conjecturée difficile, même pour des ordinateurs quantiques. Cela les rend donc particulièrement intéressants pour construire des protocoles sûrs en cryptographie post-quantique. \\
-Deux exemples fondamentaux de problèmes sur les réseaux sont le \textit{Small Integer Solutions problem} (SIS) introduit par Ajtai en 1996 \cite{sis}, et le \textit{Learning With Errors problem} (LWE), découvert par Regev en 2009 \cite{lwe}. \\
+Deux exemples fondamentaux de problèmes sur les réseaux sont le \textit{Small Integer Solutions problem} (SIS) introduit par Ajtai en 1996 \cite{sis}, et le \textit{Learning With Errors problem} (LWE), découvert par Regev en 2005 \cite{lwe}. \\
 Le problème LWE est privilégié dans la construction de schémas de chiffrement car il est facile d'en tirer des constructions cryptographiques. D'autre part il été prouvé \cite{lwe} que résoudre une instance aléatoire de LWE est aussi dur que résoudre la pire instance d'un problème supposé dur. On dit que LWE bénéficie d'une réduction \textit{pire-cas moyen-cas}. \\
 Cependant, si l'on utilise la version standard de LWE pour construire des protocoles, ces derniers auront une efficacité moyenne à cause d'opérations faisant intervenir de grandes matrices aléatoires. La variante \textit{Polynomial Learning With Errors} (PLWE), proposée par Stehlé \textit{et al.} \cite{plwe}, résout ce problème en utilisant des réseaux structurés : les calculs matriciels correspondent alors à des produits de polynômes, calculables plus rapidement. Cependant, ce gain d'efficacité se fait potentiellement au détriment de garanties de sécurité : les polynômes sont manipulés dans $\mathbb{Z}_p[X]/f$ et la complexité de la variante est directement liée au $f$ choisi. \\
 Afin de se débarasser de cette dépendance, Roşca \textit{et al.} introduisent le \textit{Middle-Product Learning With Errors problem} (MP-LWE) \cite{mplwe} dont l'intérêt est d'être aussi dur que des classes exponentiellement grandes de problèmes PLWE (dont on espère qu'elles contiennent au moins une instance difficile), tout en conservant l'efficacité des réseaux structurés. \\
@@ -106,7 +105,7 @@ En notant $B:=[b_1,\dots,b_n]$ la matrice dont les colonnes sont formées par le
 \item[•] Si $E$ est un ensemble fini, on note $\mathcal{U}(E)$ la distribution uniforme sur cet ensemble.
 \item[•] Pour $n\in \mathbb{N}$, on note $\mathbb{K}^{<n}[X]$ l'ensemble des polynômes de degré strictement plus petit que $n$, à coefficients dans $\mathbb{K}$.
 \item[•] Pour $\sigma \in \mathbb{R}^+$, on note $\mathcal{N}(\sigma)$ la distribution gaussienne centrée de variance $\sigma^2$.
-\item[•] Pour $\mathcal{D}$ une distribution de probabilité sur $\mathbb{K}$ et $n\in \mathbb{N}$, on note $\mathcal{D}^n[X]$ la distribution de probabilité sur $\mathbb{K}^n[X]$ où chaque coefficient suis la loi $\mathcal{D}$.
+\item[•] Pour $\mathcal{D}$ une distribution de probabilité sur $\mathbb{K}$ et $n\in \mathbb{N}$, on note $\mathcal{D}^n[X]$ la distribution de probabilité sur $\mathbb{K}^n[X]$ où chaque coefficient suit la loi $\mathcal{D}$.
 \item[•] Si $f$ et $g$ sont des polynômes, on note $g \text{ mod } f$ le reste dans la division euclidienne de $g$ par $f$.
 \item[•] Pour $f \in \mathbb{Z}^m[X]$, on définit $EF(f) :=\displaystyle \max_{\substack{g\in \mathbb{Z}^{2m-1}[X] \\ g \neq 0}}(\frac{\|g\text{ mod }f \|_\infty}{\|g\|_\infty})$ le \textit{facteur d'expansion} de $f$.
 \item[•] Si $(A_i)_{i \leq t}$ est une famille de matrices, on désigne par $[A_{i\leq t}]$ la matrice par blocs qui correspond à l'empilement vertical des  $(A_i)_{i \leq t}$ .
@@ -182,7 +181,7 @@ Soient $n,d >0$, $q\geq 2$ et $\chi$ une distribution sur $\mathbb{R}_q^{<d}[X]$
 Les problèmes décisionnels $\text{PLWE}^{(f)}_{q,\chi}(s)$ et $\text{MP-LWE}_{q,n,d,\chi}(s)$ associés peuvent se définir ensuite de manière parfaitement analogue au cas LWE classique. \\
 
 \begin{theorem}\textbf{(Théorème 3.6 \cite{mplwe})}
-Soient $n,d >0$, $q\geq 2$, et $\alpha \in (0,1)$. Pour $S>0$, on note $\mathcal{F}(S,d,n)$ les polynômes de $\mathbb{Z}[X]$ unitaires, dont le coefficient constant est inversible dans $\mathbb{Z}_q$, de degré $m$ vérifiant $d\leq m\leq n$, et tels que $\text{EF}(f)\leq S$. Il existe une réduction \textit{ppt} depuis $\text{PLWE}^{(f)}_{q,\mathcal{N}(\alpha q)^{<d}[X]}$ pour tout $f\in\mathcal{F}(S,d,n)$ vers  $\text{MP-LWE}_{q,n,d,\mathcal{N}(\alpha' q)^{<d}[X]}$, où $\alpha' = \alpha d S$.
+Soient $n,d >0$, $q\geq 2$, et $\alpha \in (0,1)$. Pour $S>0$, on note $\mathcal{F}(S,d,n)$ les polynômes de $\mathbb{Z}[X]$ unitaires, dont le coefficient constant est inversible dans $\mathbb{Z}_q$, de degré $m$ vérifiant $d\leq m\leq n$, et tels que $\text{EF}(f)\leq S$. Il existe une réduction \textit{ppt} depuis $\text{PLWE}^{(f)}_{q,\mathcal{N}(\alpha q)^{<d}[X]}$ décisionnel pour tout $f\in\mathcal{F}(S,d,n)$ vers  $\text{MP-LWE}_{q,n,d,\mathcal{N}(\alpha' q)^{<d}[X]}$ décisionnel, où $\alpha' = \alpha d S$.
 \end{theorem}
 
 Il s'agit du résultat principal de \cite{mplwe}. Durant mon stage, j'ai étudié comment la réduction explicitée dans la preuve du théorème agit géométriquement sur les réseaux sous-jacents aux problèmes de manière à ne pas en diminuer 	la complexité.
@@ -233,16 +232,18 @@ où on a noté $\begin{cases} b'_i = \overline{\text{M}_f^d\cdot b_i} \\ s' = \o
 
 Alors on a, toujours en utilisant le Lemme 3.1, que $b'_i = a'_i \odot_d s' + e'_i$ \\
 
-$b_i$ étant uniformément distribué, $b'_i$ l'est aussi car $\text{M}_f$ est inversible modulo $q$. Cette dernière affirmation repose sur l'hypothèse que le coefficient constant de $f_0$ de $f$ est inversible modulo $q$ car : 
+On a de plus que, en notant $J \in \mathbb{R}^{d\times d}$ la matrice qui a des $1$ sur son anti-diagonale et des $0$ ailleurs, la nouvelle distribution de l'erreur est $J\cdot\text{M}_f^d\cdot \mathcal{N}(\alpha q)^{<d}[X]$. Pour obtenir à nouveau une gaussienne, il suffit alors de majorer les valeurs singulières de la nouvelle distribution, et de choisir le majorant comme variance de la nouvelle gaussienne. Or dans notre cas, on a clairement $\|J\|=1$ et $\|\text{M}_f\| \leq d\text{EF}(f)\leq dS$, d'où $\alpha'=\alpha d S$ convient, comme annoncé dans le Théorème 2.1. \\
+
+Ensuite, on constate que le nouveau secret est encore fortement lié au secret de l'ancien réseau. Pour régler ce problème, on prend $s'' \hookleftarrow \mathcal{U}(\mathbb{Z}_q^{n+d-1}[X])$ et en sortie, on ajoute à chaque $(a'_i,b'_i)$ le couple $(0,a'_i\odot_d s'')$, de manière à re-randomiser le secret, i.e : le nouveau secret $\tilde s = s'+s''$ est maintenant uniforme dans le nouveau réseau.  \\
+
+Finalement, comme on réduit d'une variante décisionnelle vers une autre, il faut vérifier que si les échantillons sont uniformes au départ, alors ils le sont encore à l'arrivée. Or, si $b_i$ est uniformément distribué, alors $b'_i$ l'est aussi car $\text{M}_f$ est inversible modulo $q$. Cette dernière affirmation repose sur l'hypothèse que le coefficient constant de $f_0$ de $f$ est inversible modulo $q$ car : 
 $$ M_f =\left[\begin{array}{cccc}
 1&0&\cdots&0 \\
 0& 0 & \cdots & -f_0 \\
 \vdots & \vdots &  \iddots &* \\
 0 & -f_0 & * &* 
 \end{array}\right] $$
-Ensuite, on constate que le nouveau secret est encore fortement lié au secret de l'ancien réseau. Pour régler ce problème, on prend $s'' \hookleftarrow \mathcal{U}(\mathbb{Z}_q^{n+d-1}[X])$ et en sortie, on ajoute à chaque $(a'_i,b'_i)$ le couple $(0,a'_i\odot_d s'')$, de manière à re-randomiser le secret, i.e : le nouveau secret $\tilde s = s'+s''$ est maintenant uniforme dans le nouveau réseau.  \\
 
-On a de plus que, en notant $J \in \mathbb{R}^{d\times d}$ la matrice qui a des $1$ sur son anti-diagonale et des $0$ ailleurs, la nouvelle distribution de l'erreur est $J\cdot\text{M}_f^d\cdot \mathcal{N}(\alpha q)^{<d}[X]$. Pour obtenir à nouveau une gaussienne, il suffit alors de majorer les valeurs singulières de la nouvelle distribution, et de choisir le majorant comme variance de la nouvelle gaussienne. Or dans notre cas, on a clairement $\|J\|=1$ et $\|\text{M}_f\| \leq d\text{EF}(f)\leq dS$, d'où $\alpha'=\alpha d S$ convient, comme annoncé dans le Théorème 2.1. 
 
 \subsection{Effets géométriques}
 À partir de maintenant, et pour toute la suite du rapport, les théorèmes et résultats empiriques présentés sont issus de mon stage (sauf mention du contraire). Ma contribution consiste à quantifier l'évolution des paramètres régissant la difficulté des instances BDD sous-jacentes aux variantes étudiées lors de la réduction de \cite{mplwe}	précédemment détaillée. \\
@@ -363,7 +364,7 @@ Dans le cas de LWE, la distance au réseau de l'instance de BDD est exactement �
 \end{itemize}
 \end{theorem}
 \textbf{Preuve :} \\
-On utilise la norme euclidienne, donc le carré de la norme d'une vecteur est égal à la somme des carrés de ses composantes. De plus le moment d'ordre deux d'une gaussienne est égal à sa variance $\sigma^2$, ce qui donne les résultats voulus par linéarité de l'espérance.
+On utilise la norme euclidienne, donc le carré de la norme d'une vecteur est égal à la somme des carrés de ses composantes. De plus le moment d'ordre deux d'une gaussienne centrée est égal à sa variance $\sigma^2$, ce qui donne les résultats voulus par linéarité de l'espérance.
 
 \subsection{Heuristique gaussienne}
 \section{Schéma de chiffrement}
