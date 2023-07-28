@@ -383,7 +383,7 @@ Soit $B \in \mathbb{N}^*$ :
 &\leq&  \sum_{x \in \mathbb{Z}_q^{n+d-1}} \sum_{\substack{y \in \mathbb{Z}^{dt} \\ 0 < \|y\|_\infty \leq B}} \mathbb{P}_A(y=A\cdot x) 
 \end{eqnarray*}
 
-Alors, pour $y \in \mathbb{Z}^{dt}$ et $1 \leq i \leq t$, en notant $y_i$ le vecteur constitué des coordonnées $(i-1)d$ à $id$ de $y$, on a : 
+Alors, pour $y \in \mathbb{Z}^{dt}$ et $1 \leq i \leq t$, en notant $y_i$ le vecteur constitué des coordonnées $(i-1)d+1$ à $id$ de $y$, on a : 
 
 \begin{eqnarray*}
 \mathbb{P}(\lambda_1^\infty(\mathcal{L}_2) \leq B) &\leq& \sum_{x \in \mathbb{Z}_q^{n+d-1}} \sum_{\substack{y \in \mathbb{Z}^{dt} \\ 0 < \|y\|_\infty \leq B}} \prod_{i=1}^t \mathbb{P}_{a_i}(y_i =\text{Toep}^{d,n}(a_i) \cdot  x)
@@ -394,7 +394,7 @@ $$ \text{Toep}^{d,n}(a) \cdot  x =  \begin{pmatrix}
 a_0 & \cdots & a_{n-1} &0 & \cdots&  0 \\
 0 & a_0 & \cdots & a_{n-1} & 0 &\vdots \\
 \vdots & 0 & \ddots & & \ddots & 0  \\
-0 & \cdots & \cdots & a_0 & \cdots & a_{n-1} 
+0 & \cdots & 0 & a_0 & \cdots & a_{n-1} 
 
 \end{pmatrix} 
 \begin{pmatrix}
@@ -418,7 +418,7 @@ a_{n-1}
 \end{pmatrix}
 $$
 
-En notant $\text{Ps}(x)$ la matrice de dimensions $d\times n$ du dernier membre, on remarque que cette matrice est constante sur ses antidiagonales, i.e : $ i+j=r+s \Rightarrow \text{Ps}(x)_{i,j}=\text{Ps}(x)_{r,s}$ . En injectant cette égalité dans le calcul, on obtient : 
+En notant $\text{Ps}(x)$ la matrice de dimensions $d\times n$ du membre de droite, on remarque que cette dernière est constante sur ses antidiagonales, i.e : $ i+j=r+s \Rightarrow \text{Ps}(x)_{i,j}=\text{Ps}(x)_{r,s}$ . Elle est dite \textit{persymétrique}. En injectant cette égalité dans le calcul, on obtient : 
 
 \begin{eqnarray*}
 \mathbb{P}(\lambda_1^\infty(\mathcal{L}_2) \leq B) &\leq& \sum_{x \in \mathbb{Z}_q^{n+d-1}} \sum_{\substack{y \in \mathbb{Z}^{dt} \\ 0 < \|y\|_\infty \leq B}} \prod_{i=1}^t \mathbb{P}_{a_i}(y_i = \text{Ps}(x) \cdot  a_i)
@@ -434,8 +434,13 @@ Ainsi, en distinguant les $x\in \mathbb{Z}_q^{n+d-1}$ suivant le rang de $\text{
 &\leq& \sum_{r=1}^d \ \sum_{\substack{x \in \mathbb{Z}_q^{n+d-1} \\ \text{rg}(\text{Ps}(x))=r}} \frac{B^{dt}}{q^{rt}}
 \end{eqnarray*}
 
-Il faut maintenant dénombrer les $x\in \mathbb{Z}_q^{n+d-1}$ tels que $\text{rg}(\text{Ps}(x))=r$.
+Il faut maintenant dénombrer les $x\in \mathbb{Z}_q^{n+d-1}$ tels que $\text{rg}(\text{Ps}(x))=r$. Pour cela, on utilise un résultat de Daykin \cite{rank} : le nombre de matrices persymétriques de dimensions $m\times n$, à coefficients dans $\mathbb{Z}/p\mathbb{Z}$ et de rang $r$ vaut : $\begin{cases} 1 \text{ si } r=0 \\ p^{2(r-1)}(p^2-1) \text{ si } 1 \leq r < \min(m,n) \\ p^{2(r-1)}(p^{|m-n|+1}-1) \text{ si } r=\min(m,n) \\ 0 \text{ dans tous les autres cas} \end{cases}$
 
+Dans notre cas, les dimensions sont $d$ et $n$, et avec les valeurs utilisées dans \cite{mplwe}, on a $d=\frac{n}{2}$. En particulier, $2(d-1)+n-d +1 \leq 3d$, donc on majore le cardinal de l'ensemble de ces matrices de rang $r$ quelconque par $q^{3r}$. Alors : 
+\begin{eqnarray*}
+\mathbb{P}(\lambda_1^\infty(\mathcal{L}_2) \leq B) &\leq& \sum_{r=1}^d \ \sum_{\substack{x \in \mathbb{Z}_q^{n+d-1} \\ \text{rg}(\text{Ps}(x))=r}} \   \sum_{\substack{y \in \mathbb{Z}^{dt} \\ 0 < \|y\|_\infty \leq B}} \frac{1}{q^{rt}} \\
+&\leq& \sum_{r=1}^d \ \sum_{\substack{x \in \mathbb{Z}_q^{n+d-1} \\ \text{rg}(\text{Ps}(x))=r}} \frac{B^{dt}}{q^{rt}}
+\end{eqnarray*}
 
 \section{Schéma de chiffrement}
 
