@@ -236,7 +236,7 @@ On a de plus que, en notant $J \in \mathbb{R}^{d\times d}$ la matrice qui a des 
 
 Ensuite, on constate que le nouveau secret est encore fortement lié au secret de l'ancien réseau. Pour régler ce problème, on prend $s'' \hookleftarrow \mathcal{U}(\mathbb{Z}_q^{n+d-1}[X])$ et en sortie, on ajoute à chaque $(a'_i,b'_i)$ le couple $(0,a'_i\odot_d s'')$, de manière à re-randomiser le secret, i.e : le nouveau secret $\tilde s = s'+s''$ est maintenant uniforme dans le nouveau réseau.  \\
 
-Finalement, comme on réduit d'une variante décisionnelle vers une autre, il faut vérifier que si les échantillons sont uniformes au départ, alors ils le sont encore à l'arrivée. Or, si $b_i$ est uniformément distribué, alors $b'_i$ l'est aussi car $\text{M}_f$ est inversible modulo $q$. Cette dernière affirmation repose sur l'hypothèse que le coefficient constant de $f_0$ de $f$ est inversible modulo $q$ car : 
+Finalement, comme on réduit d'une variante décisionnelle vers une autre, il faut vérifier que si les échantillons sont uniformes au départ, alors ils le sont encore à l'arrivée. Or, si $b_i$ est uniformément distribué, alors $b'_i$ l'est aussi car $\text{M}_f$ est inversible modulo $q$. Cette dernière affirmation repose sur l'hypothèse que le coefficient constant $f_0$ de $f$ est inversible modulo $q$ car : 
 $$ M_f =\left[\begin{array}{cccc}
 1&0&\cdots&0 \\
 0& 0 & \cdots & -f_0 \\
@@ -282,7 +282,7 @@ $$ \left[\begin{array}{c|ccc}
 \textbf{Preuve :} \\
 Pour alléger les notations, on pose $A_i := \text{Rot}_f(a_i)$ et $A:=[\text{Rot}_f(a_i)_{i\leq t}]$. Premièrement, si $a_1$ est inversible modulo $f$, alors $A_1$ est inversible. En effet, on a $\text{Rot}_f(a_1)\cdot\text{Rot}_f(a_1^{-1})=\text{Rot}_f(a_1\cdot a_1^{-1})=\text{Rot}_f(1)=\text{Id}_m$, d'où $\text{Rot}_f(a_1)^{-1}=\text{Rot}_f(a_1^{-1})$. On peut alors remarquer que : \\
 
-Si $y \in \mathcal{L}_0$, alors il existe $x$ tel que $y=Ax \text{ mod } q$, donc en notant $x':=\text{Rot}_f(a_1)\cdot x$, on a \\ $y=A\cdot\text{Rot}_f(a_1)^{-1}\cdot x' \text{ mod q}$, d'où 
+Si $y \in \mathcal{L}_0$, alors il existe $x$ tel que $y=Ax \text{ mod } q$, donc en notant $x':=\text{Rot}_f(a_1)\cdot x$, on a $y=A\cdot\text{Rot}_f(a_1)^{-1}\cdot x' \text{ mod q}$, d'où 
 $$ \left[\begin{array}{c|cccc}
 \text{Id}_m \\
 \text{Rot}_f(a_2)\cdot\text{Rot}_f(a_1)^{-1} & & q\cdot \text{Id}\\
@@ -291,18 +291,19 @@ $$ \left[\begin{array}{c|cccc}
 \end{array}\right] $$
 engendre $\mathcal{L}_0$. Alors, des combinaisons linéaires des colonnes du bloc de gauche permettent de retirer les $m$ premières colonnes du bloc de droite (ces dernières étant engendrées par les autres colonnes de la matrice). Finalement, on a bien que les vecteurs voulus engendrent $\mathcal{L}_0$. \\
 
-
 $\hfill \square$
+
 \begin{theorem}
 
-Si l'un des $a_i$ est inversible modulo $f$, alors $\text{vol}(\mathcal{L}_0) = q^{m(t-1)}$
+Si l'un des $a_i$ est inversible dans $\mathbb{Z}_q[X]/f$, alors $\text{vol}(\mathcal{L}_0) = q^{m(t-1)}$
 \end{theorem}
 \textbf{Preuve :}\\
 On commence par remarquer que quitte à permuter les $a_i$, la forme précédente est valable dès qu'au moins l'un d'entre eux est inversible modulo $f$. Il suffit alors de dire que les colonnes de la matrice constituée sont linéairement indépendantes pour obtenir une base du réseau. Or cette matrice est triangulaire inférieure à termes diagonaux non nuls, donc ses colonnes sont libres, et de plus son déterminant vaut le produit des termes diagonaux, ce qui achève la preuve. \\
 
+$\hfill \square$ \\
+
 On aimerait pouvoir utiliser la même preuve dans le cas des réseaux $\mathcal{L}_1$ et $\mathcal{L}_2$, cependant cela n'est pas possible car les matrices composant le bloc de gauche sont rectangulaires, donc n'admettent pas d'inverse. On peut cependant justifier que cette colonne est de rang plein, ce qui permettra d'obtenir un résultat sur le volume analogue à celui qui précède.
 
-$\hfill \square$
 
 \begin{theorem}
 Supposons $q$ premier, alors : 
@@ -338,7 +339,7 @@ Pour les calculs expérimentaux, j'ai choisi les valeurs suivantes des paramètr
 \centering
 \begin{tabular}{|C{2cm}|C{3cm}|C{3cm}|C{3cm}|}
 	\hline 
-	& Probabilité empirique & Probabilité pour les matrices uniformes & Borne obtenue dans la preuve \\	  
+	& Probabilité empirique & Probabilité pour les matrices uniformes & Borne inférieure obtenue dans le théorème 3.2 \\	  
 	\hline
 	$\beta=0.75$ $p=37$  & 0.998603 & 0.99924 & 0.135135  \\ 
 	\hline
@@ -351,11 +352,11 @@ Pour les calculs expérimentaux, j'ai choisi les valeurs suivantes des paramètr
 ~\\
 
 
-Le code utilisé pour produire ces résultats est disponible \href{https://github.com/Hazdard/mplwe-sage/tree/main}{ici}, au tag "rapport". 
+Le code utilisé pour produire ces résultats est disponible \href{https://github.com/Hazdard/mplwe-sage/tree/main}{ici}, au tag ``rapport''.
 
 \subsubsection{Évolution de la distance au réseau}
 
-Dans le cas de LWE, la distance au réseau de l'instance de BDD est exactement égale à la norme du vecteur d'erreur $e$. On note $e_0$ (resp. $e_1$) (resp. $e_2$) la variable aléatoire qui représente le vecteur d'erreur tiré dans $\mathcal{L}_0$ (resp. $\mathcal{L}_1$) (resp. $\mathcal{L}_2$). $e_0$ est le vecteur d'erreur initial de PLWE, $e_1$ est la projection de $e_0$ en dimension $dt$, et $e_2$ est le vecteur d'erreur final dans la réduction, i.e après re-randomisation pour suivre une gaussienne de paramètre $\sigma' = \alpha' q$.
+Dans le cas de LWE, la distance au réseau de l'instance de BDD est exactement égale à la norme du vecteur d'erreur $e$. On note $e_0$ (resp. $e_1$) (resp. $e_2$) la variable aléatoire qui représente le vecteur d'erreur tiré dans $\mathcal{L}_0$ (resp. $\mathcal{L}_1$) (resp. $\mathcal{L}_2$). Le vecteur $e_0$ est l'erreur initiale de PLWE, $e_1$ est la projection de $e_0$ en dimension $dt$, et $e_2$ est le vecteur d'erreur final dans la réduction, i.e après re-randomisation pour suivre une gaussienne de paramètre $\sigma' = \alpha' q$.
 \begin{theorem}\textbf{(Erreur moyenne)}
 \begin{itemize}
 \item[-] $\mathbb{E}(\|e_0\|^2) = tm(\alpha q)^2 $
@@ -364,9 +365,32 @@ Dans le cas de LWE, la distance au réseau de l'instance de BDD est exactement �
 \end{itemize}
 \end{theorem}
 \textbf{Preuve :} \\
-On utilise la norme euclidienne, donc le carré de la norme d'une vecteur est égal à la somme des carrés de ses composantes. De plus le moment d'ordre deux d'une gaussienne centrée est égal à sa variance $\sigma^2$, ce qui donne les résultats voulus par linéarité de l'espérance.
+On utilise la norme euclidienne, donc le carré de la norme d'un vecteur est égal à la somme des carrés de ses composantes. De plus le moment d'ordre deux d'une gaussienne centrée est égal à sa variance $\sigma^2$, ce qui donne les résultats voulus par linéarité de l'espérance.
 
 \subsection{Heuristique gaussienne}
+
+Étudions maintenant la validité de l'utilisation de l'heuristique gaussienne dans notre cas. La borne de Minkowski fournissant une borne supérieure sur $\lambda_1$, il suffit d'obtenir une borne inférieure qui soit du même ordre. On rappelle la notation $A=[\text{Toep}^{d,n}(a_i)_{i\leq t}]$, où les $(a_i)_{i\leq t}$ sont des variables aléatoires.
+
+\begin{theorem} 
+Avec probabilité $\displaystyle \geq \frac{1}{2^{dt}}$ sur $A$, on a $\lambda_1^\infty(\mathcal{L}_2) \geq \text{vol}(\mathcal{L}_2)^{\frac{1}{dt}}$
+\end{theorem}
+
+\textbf{Preuve :} \\
+Soit $B >0$ :
+\begin{eqnarray*}
+\mathbb{P}_A(\lambda_1^\infty(\mathcal{L}_2) \leq B) &=& \mathbb{P}_A( \bigcup_{y\in \mathbb{Z}_q^{dt}} \{0 < \|y\|_\infty \leq B \land y \in \mathcal{L}_2 \} ) \\
+&\leq& \sum_{\substack{y \in \mathbb{Z}_q^{dt} \\ 0 < \|y\|_\infty \leq B}} \mathbb{P}_A(y \in \mathcal{L}_2) \\
+&\leq&  \sum_{x \in \mathbb{Z}_q^{n+d-1}} \sum_{\substack{y \in \mathbb{Z}_q^{dt} \\ 0 < \|y\|_\infty \leq B}} \mathbb{P}_A(y=A\cdot x) 
+\end{eqnarray*}
+
+Alors, pour $y \in \mathbb{Z}^{dt}$ et $1 \leq i \leq t$, en notant $y_i$ le vecteur constitué des coordonnées $(i-1)d$ à $id$ de $y$, on a : 
+
+\begin{eqnarray*}
+\mathbb{P}(\lambda_1^\infty(\mathcal{L}_2) \leq B) &\leq& \sum_{x \in \mathbb{Z}_q^{n+d-1}} \sum_{\substack{y \in \mathbb{Z}_q^{dt} \\ 0 < \|y\|_\infty \leq B}} \prod_{i=1}^t \mathbb{P}_{a_i}(y_i =\text{Toep}^{d,n}(a_i) \cdot  x)
+\end{eqnarray*}
+
+Car les $(a_i)_{i\leq t}$ sont mutuellements indépendants. Alors, 
+
 \section{Schéma de chiffrement}
 
 \subsection{Preuve de correction}
