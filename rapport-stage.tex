@@ -378,18 +378,56 @@ Avec probabilité $\displaystyle \geq \frac{1}{2^{dt}}$ sur $A$, on a $\lambda_1
 \textbf{Preuve :} \\
 Soit $B >0$ :
 \begin{eqnarray*}
-\mathbb{P}_A(\lambda_1^\infty(\mathcal{L}_2) \leq B) &=& \mathbb{P}_A( \bigcup_{y\in \mathbb{Z}_q^{dt}} \{0 < \|y\|_\infty \leq B \land y \in \mathcal{L}_2 \} ) \\
-&\leq& \sum_{\substack{y \in \mathbb{Z}_q^{dt} \\ 0 < \|y\|_\infty \leq B}} \mathbb{P}_A(y \in \mathcal{L}_2) \\
-&\leq&  \sum_{x \in \mathbb{Z}_q^{n+d-1}} \sum_{\substack{y \in \mathbb{Z}_q^{dt} \\ 0 < \|y\|_\infty \leq B}} \mathbb{P}_A(y=A\cdot x) 
+\mathbb{P}_A(\lambda_1^\infty(\mathcal{L}_2) \leq B) &=& \mathbb{P}_A( \bigcup_{y\in \mathbb{Z}^{dt}} \{0 < \|y\|_\infty \leq B \land y \in \mathcal{L}_2 \} ) \\
+&\leq& \sum_{\substack{y \in \mathbb{Z}^{dt} \\ 0 < \|y\|_\infty \leq B}} \mathbb{P}_A(y \in \mathcal{L}_2) \\
+&\leq&  \sum_{x \in \mathbb{Z}_q^{n+d-1}} \sum_{\substack{y \in \mathbb{Z}^{dt} \\ 0 < \|y\|_\infty \leq B}} \mathbb{P}_A(y=A\cdot x) 
 \end{eqnarray*}
 
 Alors, pour $y \in \mathbb{Z}^{dt}$ et $1 \leq i \leq t$, en notant $y_i$ le vecteur constitué des coordonnées $(i-1)d$ à $id$ de $y$, on a : 
 
 \begin{eqnarray*}
-\mathbb{P}(\lambda_1^\infty(\mathcal{L}_2) \leq B) &\leq& \sum_{x \in \mathbb{Z}_q^{n+d-1}} \sum_{\substack{y \in \mathbb{Z}_q^{dt} \\ 0 < \|y\|_\infty \leq B}} \prod_{i=1}^t \mathbb{P}_{a_i}(y_i =\text{Toep}^{d,n}(a_i) \cdot  x)
+\mathbb{P}(\lambda_1^\infty(\mathcal{L}_2) \leq B) &\leq& \sum_{x \in \mathbb{Z}_q^{n+d-1}} \sum_{\substack{y \in \mathbb{Z}^{dt} \\ 0 < \|y\|_\infty \leq B}} \prod_{i=1}^t \mathbb{P}_{a_i}(y_i =\text{Toep}^{d,n}(a_i) \cdot  x)
 \end{eqnarray*}
 
-Car les $(a_i)_{i\leq t}$ sont mutuellements indépendants. Alors, 
+Car les $(a_i)_{i\leq t}$ sont mutuellements indépendants. Ensuite, on observe que, pour $a \in \mathbb{Z}^{<n}[X]$ et $x \in \mathbb{Z}_q^{n+d-1}$, on a : 
+$$ \text{Toep}^{d,n}(a) \cdot  x =  \begin{pmatrix}
+a_0 & \cdots & a_{n-1} &0 & \cdots&  0 \\
+0 & a_0 & \cdots & a_{n-1} & 0 &\vdots \\
+\vdots & 0 & \ddots & & \ddots & 0  \\
+0 & \cdots & \cdots & a_0 & \cdots & a_{n-1} 
+
+\end{pmatrix} 
+\begin{pmatrix}
+x_{1} \\
+x_{2} \\
+\vdots \\
+x_{n+d-1}
+\end{pmatrix} 
+=
+\begin{pmatrix}
+x_1 & x_2 & \cdots & x_n \\
+x_2 & x_3 & \cdots & x_{n+1} \\
+\vdots & \cdots & \cdots & \vdots \\
+x_d & \cdots & \cdots & x_{n+d-1} 
+\end{pmatrix}
+\begin{pmatrix}
+a_{0} \\
+a_{1} \\
+\vdots \\
+a_{n-1}
+\end{pmatrix}
+$$
+
+En notant $\text{Ps}(x)$ la matrice de dimensions $d\times n$ du dernier membre, on remarque que cette matrice est constante sur ses antidiagonales, i.e : $ i+j=r+s \Rightarrow \text{Ps}(x)_{i,j}=\text{Ps}(x)_{r,s}$ . En injectant cette égalité dans le calcul, on obtient : 
+
+\begin{eqnarray*}
+\mathbb{P}(\lambda_1^\infty(\mathcal{L}_2) \leq B) &\leq& \sum_{x \in mathbb{Z}_q^{n+d-1}} \sum_{\substack{y \in \mathbb{Z}^{dt} \\ 0 < \|y\|_\infty \leq B}} \prod_{i=1}^t \mathbb{P}_{a_i}(y_i = \text{Ps}(x) \cdot  a_i)
+\end{eqnarray*}
+
+
+
+
+
 
 \section{Schéma de chiffrement}
 
