@@ -376,7 +376,7 @@ Avec probabilité $\displaystyle \geq \frac{1}{2^{dt}}$ sur $A$, on a $\lambda_1
 \end{theorem}
 
 \textbf{Preuve :} \\
-Soit $B >0$ :
+Soit $B \in \mathbb{N}^*$ :
 \begin{eqnarray*}
 \mathbb{P}_A(\lambda_1^\infty(\mathcal{L}_2) \leq B) &=& \mathbb{P}_A( \bigcup_{y\in \mathbb{Z}^{dt}} \{0 < \|y\|_\infty \leq B \land y \in \mathcal{L}_2 \} ) \\
 &\leq& \sum_{\substack{y \in \mathbb{Z}^{dt} \\ 0 < \|y\|_\infty \leq B}} \mathbb{P}_A(y \in \mathcal{L}_2) \\
@@ -421,12 +421,20 @@ $$
 En notant $\text{Ps}(x)$ la matrice de dimensions $d\times n$ du dernier membre, on remarque que cette matrice est constante sur ses antidiagonales, i.e : $ i+j=r+s \Rightarrow \text{Ps}(x)_{i,j}=\text{Ps}(x)_{r,s}$ . En injectant cette égalité dans le calcul, on obtient : 
 
 \begin{eqnarray*}
-\mathbb{P}(\lambda_1^\infty(\mathcal{L}_2) \leq B) &\leq& \sum_{x \in mathbb{Z}_q^{n+d-1}} \sum_{\substack{y \in \mathbb{Z}^{dt} \\ 0 < \|y\|_\infty \leq B}} \prod_{i=1}^t \mathbb{P}_{a_i}(y_i = \text{Ps}(x) \cdot  a_i)
+\mathbb{P}(\lambda_1^\infty(\mathcal{L}_2) \leq B) &\leq& \sum_{x \in \mathbb{Z}_q^{n+d-1}} \sum_{\substack{y \in \mathbb{Z}^{dt} \\ 0 < \|y\|_\infty \leq B}} \prod_{i=1}^t \mathbb{P}_{a_i}(y_i = \text{Ps}(x) \cdot  a_i)
 \end{eqnarray*}
 
+Alors, $a_i$ étant uniforme, on a : 
+ \[ \mathbb{P}_{a_i}(y_i = \text{Ps}(x) \cdot  a_i) \leq \frac{q^{\dim(\ker{\text{Ps}(x)})}}{q^n} = \frac{1}{q^{\text{rg}(\text{Ps}(x))}}\]
 
+Ainsi, en distinguant les $x\in \mathbb{Z}_q^{n+d-1}$ suivant le rang de $\text{Ps}(x)$, on a :
 
+\begin{eqnarray*}
+\mathbb{P}(\lambda_1^\infty(\mathcal{L}_2) \leq B) &\leq& \sum_{r=1}^d \ \sum_{\substack{x \in \mathbb{Z}_q^{n+d-1} \\ \text{rg}(\text{Ps}(x))=r}} \   \sum_{\substack{y \in \mathbb{Z}^{dt} \\ 0 < \|y\|_\infty \leq B}} \frac{1}{q^{rt}} \\
+&\leq& \sum_{r=1}^d \ \sum_{\substack{x \in \mathbb{Z}_q^{n+d-1} \\ \text{rg}(\text{Ps}(x))=r}} \frac{B^{dt}}{q^{rt}}
+\end{eqnarray*}
 
+Il faut maintenant dénombrer les $x\in \mathbb{Z}_q^{n+d-1}$ tels que $\text{rg}(\text{Ps}(x))=r$.
 
 
 \section{Schéma de chiffrement}
