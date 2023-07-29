@@ -49,14 +49,12 @@
 
 
 % étudier le rapport des volumes normalisés
-% regarder lambda_1 par rapport a minkowski, heuristique gaussienne, utiliser la norme infinie
+% Citer Stehlé pour Minkowski-Hlawka dans le cas PLWE
 
 %définir gaussienne discrete dans schema de chiffrement
 
 % Rapeller tous les ordres (et odg) avant de se lancer dans le dur de la partie 3
 % EXEMPLES FACTEUR DEXP BORNE
-% PARLER DE LYUBASHEVSKI
-% Citer Stehlé pour Minkowski-Hlawka dans le cas PLWE
 
 
 
@@ -87,7 +85,7 @@ Afin de se débarasser de cette dépendance, Roşca \textit{et al.} introduisent
 
 Durant mon stage, j'ai ainsi travaillé sur la variante MP-LWE du problème de Regev, et plus particulièrement sur les effets de la réduction de PLWE vers MP-LWE proposée par \cite{mplwe}. \\
 
-La section $2$ du rapport introduit les définitions utilisées, ainsi que le thème du stage. À partir de la sous-section $3.2$, tous les théorèmes, résultats empiriques et code constituent ma contribution (sauf mention du contraire).
+La section $2$ du rapport introduit les définitions utilisées, ainsi que le thème du stage. À partir de la sous-section $3.2$, tous les théorèmes, résultats empiriques et code constituent ma contribution (sauf mention du contraire). De plus, en étudiant \cite{mplwe}, j'ai remarqué qu'une partie de la preuve de correction du schéma de chiffrement proposé était fausse. Ainsi, j'en donne une autre version dans la partie 4, avec des hypothèses renforcées.
 
 \section{Préliminaires}
 \begin{defin} 
@@ -104,7 +102,7 @@ En notant $B:=[b_1,\dots,b_n]$ la matrice dont les colonnes sont formées par le
 \item[•] On note $\mathbb{Z}_q$ (resp. $\mathbb{R}_q$) le quotient $\mathbb{Z}/q\mathbb{Z}$ (resp. $\mathbb{R}/q\mathbb{Z}$), et $\|.\|$ désigne la norme euclidienne.
 \item[•] Si $E$ est un ensemble fini, on note $\mathcal{U}(E)$ la distribution uniforme sur cet ensemble.
 \item[•] Pour $n\in \mathbb{N}$, on note $\mathbb{K}^{<n}[X]$ l'ensemble des polynômes de degré strictement plus petit que $n$, à coefficients dans $\mathbb{K}$.
-\item[•] Pour $\sigma \in \mathbb{R}^+$, on note $\mathcal{N}(\sigma)$ la distribution gaussienne centrée de variance $\sigma^2$.
+\item[•] Pour $\sigma \in \mathbb{R}^+$, on note $\mathcal{N}(\sigma)$ la distribution gaussienne centrée de variance $\sigma^2$, ainsi que $\lfloor \mathcal{N}(\sigma)\rceil$ cette distribution arrondie à l'entier le plus proche.
 \item[•] Pour $\mathcal{D}$ une distribution de probabilité sur $\mathbb{K}$ et $n\in \mathbb{N}$, on note $\mathcal{D}^n[X]$ la distribution de probabilité sur $\mathbb{K}^n[X]$ où chaque coefficient suit la loi $\mathcal{D}$.
 \item[•] Si $f$ et $g$ sont des polynômes, on note $g \text{ mod } f$ le reste dans la division euclidienne de $g$ par $f$.
 \item[•] Pour $f \in \mathbb{Z}^m[X]$, on définit $EF(f) :=\displaystyle \max_{\substack{g\in \mathbb{Z}^{2m-1}[X] \\ g \neq 0}}(\frac{\|g\text{ mod }f \|_\infty}{\|g\|_\infty})$ le \textit{facteur d'expansion} de $f$.
@@ -139,7 +137,7 @@ Dans un réseau $\Lambda$, on note $\lambda_i := \inf\{r,\dim(\text{Vect}(\Lambd
  On appelle volume d'un réseau $\mathcal{L}=\mathcal{L}(B)$ la quantité $\sqrt{\det{(B^\top B)}}$. Elle ne dépend pas de la base choisie.
 \end{defin}
 
-Le théorème suivant donne alors une borne sur $\lambda_1$ :
+Le théorème suivant fournit une borne sur $\lambda_1$ :
 \begin{theorem}\textbf{(Minkowski)}
 Dans un réseau $\mathcal{L}$ de dimension $n$, $\lambda_1 \leq \sqrt{n}\cdot\text{vol}(\mathcal{L})^\frac{1}{n}$
 \end{theorem}
@@ -173,6 +171,7 @@ Ensuite, on définit un nouveau produit sur les polynômes, qui consiste à gard
 Soient $d_a,d_b,d,k \in \mathbb{N}$ tels que $d_a+d_b-1=d+2k$. Alors le \textit{middle-product} $\odot_d : \mathbb{R}^{<d_a}[X]\times\mathbb{R}^{<d_b}[X]\to\mathbb{R}^{<d}[X]$ est la fonction :
 \[(a,b) \mapsto a \odot_d b = \lfloor \frac{(a\cdot b)\text{ mod }x^{k+d}}{x^k} \rfloor\]
 \end{defin}
+Concrètement, cela consiste à garder les $d$-termes du milieu dans le produit usuel. \\
 On construit alors une distribution plus générale utilisant le produit précédent : 
 \begin{defin}\textbf{(Distribution MP-LWE)}
 Soient $n,d >0$, $q\geq 2$ et $\chi$ une distribution sur $\mathbb{R}_q^{<d}[X]$. Pour $s\in \mathbb{Z}_q^{<n+d-1}[X]$, on définit la distribution $\text{MP}_{q,n,d,\chi}(s)$ sur $\mathbb{Z}_q^{<n}[X]\times\mathbb{R}_q^{<d}[X]$ obtenu en tirant $a \hookleftarrow \mathcal{U}(\mathbb{Z}_q^{<n}[X])$, $e\hookleftarrow \chi$ et qui renvoie $(a,b=a\odot_d s+e)$. 
@@ -333,7 +332,7 @@ On précise que cette borne est loin d'être optimale. En effet, les résultats 
 
 Dénombrons les matrices de rang plein de taille $m \times n$ (dans notre cas on aurait $n+d-1$ colonnes et $dt$ lignes) à coefficients dans $\mathbb{Z}/p\mathbb{Z}$ où $p$ est premier. On suppose sans perte de généralité que $m\geq n$, alors : la première colonne doit être non nulle, il y a donc $p^m-1$ choix, la seconde ne doit pas être dans l'espace engendré par la première, il y a donc $p^m -p$ choix, etc $\dots$ Finalement, on a $\displaystyle \prod_{0\leq i < n}(p^m - p^i)$ matrices de rang plein. La probabilité d'en obtenir une en choisissant uniformément les coefficients vaut donc :  $ \displaystyle \frac{1}{p^{mn}} \prod_{0\leq i < n}(p^m - p^i) = \displaystyle \prod_{0\leq i < n}(1 - \frac{1}{p^{m-i}})$. \\
 
-Pour les calculs expérimentaux, j'ai choisi les valeurs suivantes des paramètres : $n=22, d=11, t=3$ et $p=71$. Ces valeurs correspondent aux ordres ordres de grandeurs proposés dans \cite{mplwe}, sauf $p$ qui sera pris de l'ordre de $n^\beta\log{n}$ où on fait varier $\beta$.  En faisant $10^6$ tests, on obtient alors les résultats suivants : \\
+Pour les calculs expérimentaux, j'ai utilisé les o.d.g proposés dans \cite{mplwe}, i.e : $t\simeq \log(n)$, $d=\frac{n}{2}$. Avec $n=22$, on a  $d=11, t=3$. J'ai cependant diminué $p$, qui sera pris premier, de l'ordre de $n^\beta\log{n}$ où on fait varier $\beta$, afin d'avoir un nombre significatif de matrices de rang non plein (dans le schéma, $\beta=2.5$).  En faisant $10^6$ tests, on obtient alors les résultats suivants : \\
 
 {
 \centering
@@ -367,16 +366,18 @@ Dans le cas de LWE, la distance au réseau de l'instance de BDD est exactement �
 \textbf{Preuve :} \\
 On utilise la norme euclidienne, donc le carré de la norme d'un vecteur est égal à la somme des carrés de ses composantes. De plus le moment d'ordre deux d'une gaussienne centrée est égal à sa variance $\sigma^2$, ce qui donne les résultats voulus par linéarité de l'espérance.
 
+$\hfill \square$
+
 \subsection{Heuristique gaussienne}
 
-Étudions maintenant la validité de l'utilisation de l'heuristique gaussienne dans notre cas. La borne de Minkowski fournissant une borne supérieure sur $\lambda_1$, il suffit d'obtenir une borne inférieure qui soit du même ordre. On rappelle la notation $A=[\text{Toep}^{d,n}(a_i)_{i\leq t}]$, où les $(a_i)_{i\leq t}$ sont des variables aléatoires.
+On va maintenant montrer la validité de l'utilisation de l'heuristique gaussienne dans notre cas. La borne de Minkowski fournissant une borne supérieure sur $\lambda_1$, il suffit d'obtenir une borne inférieure qui soit du même ordre. On rappelle la notation $A=[\text{Toep}^{d,n}(a_i)_{i\leq t}]$, où les $(a_i)_{i\leq t}$ sont des variables aléatoires. Le théorème suivant ne fournit qu'une borne sur $\lambda_1^\infty$, i.e le plus court vecteur non nul du réseau pour la norme infinie (on utilisait jusqu'ici la norme euclidienne).
 
 \begin{theorem} 
-Avec probabilité $\displaystyle \geq \frac{1}{2^{dt}}$ sur $A$, on a $\lambda_1^\infty(\mathcal{L}_2) \geq \text{vol}(\mathcal{L}_2)^{\frac{1}{dt}}$
+Avec probabilité $\displaystyle \geq 1-\frac{1}{2^{td-1}q^{t-4}}$ sur $A$, on a $\lambda_1^\infty(\mathcal{L}_2) \geq \frac{1}{2} \text{vol}(\mathcal{L}_2)^{\frac{1}{dt}}$
 \end{theorem}
 
 \textbf{Preuve :} \\
-Soit $B \in \mathbb{N}^*$ :
+Soit $B > 0$ :
 \begin{eqnarray*}
 \mathbb{P}_A(\lambda_1^\infty(\mathcal{L}_2) \leq B) &=& \mathbb{P}_A( \bigcup_{y\in \mathbb{Z}^{dt}} \{0 < \|y\|_\infty \leq B \land y \in \mathcal{L}_2 \} ) \\
 &\leq& \sum_{\substack{y \in \mathbb{Z}^{dt} \\ 0 < \|y\|_\infty \leq B}} \mathbb{P}_A(y \in \mathcal{L}_2) \\
@@ -434,20 +435,25 @@ Ainsi, en distinguant les $x\in \mathbb{Z}_q^{n+d-1}$ suivant le rang de $\text{
 &\leq& \sum_{r=1}^d \ \sum_{\substack{x \in \mathbb{Z}_q^{n+d-1} \\ \text{rg}(\text{Ps}(x))=r}} \frac{B^{dt}}{q^{rt}}
 \end{eqnarray*}
 
-Il faut maintenant dénombrer les $x\in \mathbb{Z}_q^{n+d-1}$ tels que $\text{rg}(\text{Ps}(x))=r$. Pour cela, on utilise un résultat de Daykin \cite{rank} : le nombre de matrices persymétriques de dimensions $m\times n$, à coefficients dans $\mathbb{Z}/p\mathbb{Z}$ et de rang $r$ vaut : $\begin{cases} 1 \text{ si } r=0 \\ p^{2(r-1)}(p^2-1) \text{ si } 1 \leq r < \min(m,n) \\ p^{2(r-1)}(p^{|m-n|+1}-1) \text{ si } r=\min(m,n) \\ 0 \text{ dans tous les autres cas} \end{cases}$
+Il faut maintenant dénombrer les $x\in \mathbb{Z}_q^{n+d-1}$ tels que $\text{rg}(\text{Ps}(x))=r$. Pour cela, on utilise un résultat de Daykin \cite{rank} : le nombre de matrices persymétriques de dimensions $m\times n$, à coefficients dans $\mathbb{Z}/p\mathbb{Z}$ et de rang $r$ vaut : $\begin{cases} 1 \text{ si } r=0 \\ p^{2(r-1)}(p^2-1) \text{ si } 1 \leq r < \min(m,n) \\ p^{2(r-1)}(p^{|m-n|+1}-1) \text{ si } r=\min(m,n) \\ 0 \text{ sinon} \end{cases}$
 
-Dans notre cas, les dimensions sont $d$ et $n$, et avec les valeurs utilisées dans \cite{mplwe}, on a $d=\frac{n}{2}$. En particulier, $2(d-1)+n-d +1 \leq 3d$, donc on majore le cardinal de l'ensemble de ces matrices de rang $r$ quelconque par $q^{3r}$. Alors : 
-\begin{eqnarray*}
-\mathbb{P}(\lambda_1^\infty(\mathcal{L}_2) \leq B) &\leq& \sum_{r=1}^d \ \sum_{\substack{x \in \mathbb{Z}_q^{n+d-1} \\ \text{rg}(\text{Ps}(x))=r}} \   \sum_{\substack{y \in \mathbb{Z}^{dt} \\ 0 < \|y\|_\infty \leq B}} \frac{1}{q^{rt}} \\
-&\leq& \sum_{r=1}^d \ \sum_{\substack{x \in \mathbb{Z}_q^{n+d-1} \\ \text{rg}(\text{Ps}(x))=r}} \frac{B^{dt}}{q^{rt}}
-\end{eqnarray*}
+Dans notre cas, les dimensions sont $d$ et $n$, et avec les valeurs utilisées dans \cite{mplwe}, on a $d=\frac{n}{2}$. En particulier, $2(d-1)+n-d +1 \leq 3d$. On majore donc, pour $r$ quelconque, le cardinal de l'ensemble de ces matrices de rang $r$ par $q^{3r}$. Alors : 
+\[ \mathbb{P}(\lambda_1^\infty(\mathcal{L}_2) \leq B) \leq \sum_{r=1}^d \ q^{3r} \frac{B^{dt}}{q^{rt}} = \frac{B^{dt}}{q^{t-3}}\frac{1-q^{d(3-t)}}{1-q^{3-t}} \leq B^{dt}\frac{1}{q^{t-3}-1} \leq \frac{2B^{dt}}{q^{t-3}} 
+\]
 
+En choisissant $B=\frac{1}{2}\text{vol}(\mathcal{L}_2)^{\frac{1}{td}}$, on obtient finalement : 
+\[ \mathbb{P}[\lambda_1^\infty(\mathcal{L}_2) \leq \frac{1}{2}\text{vol}(\mathcal{L}_2)^{\frac{1}{td}}] \leq \frac{1}{2^{td-1}}\frac{q^{\frac{td-(n+d-1)}{td}}}{q^{t-3}} \leq \frac{q}{2^{td-1}q^{t-3}}  \leq \frac{1}{2^{td-1}q^{t-4}} \]
+
+$\hfill \square$ \\
+
+
+Cette preuve est inspirée de celle de Stehlé \textit{et al.} \cite{hlawka} dans le cas PLWE pour des polynômes cyclotomiques. J'ai de même codé des simulations numériques pour observer ce résultat, elle sont disponibles \href{https://github.com/Hazdard/mplwe-sage/blob/main/mplwe.ipynb}{ici}.
 \section{Schéma de chiffrement}
 
 \subsection{Preuve de correction}
-On se propose tout d'abord de détailler la preuve de correction du schéma de chiffrement proposé dans \cite{mplwe} : \\
+On se propose de modifier la preuve de correction du schéma de chiffrement proposé dans \cite{mplwe}, avec des hypothèses renforcées. \\
 
-On rappelle le cadre de la preuve : $s \hookleftarrow \mathcal{U}(\mathbb{Z}^{<n+d+k-1}[X])$, pour $i\leq t$ on a $a_i \hookleftarrow \mathcal{U}(\mathbb{Z}^{<n}[X])$ ; $e_i \hookleftarrow \lfloor D_{\alpha q}\rceil[X]^{<k+d}$ et finalement $r_i \hookleftarrow \mathcal{U}(\{0,1\}^{<k+1}[X])$. On note $e_i(j)$ le $j$-ème coefficient de $e_i$. Le but est d'avoir avec bonne probabilité que : 
+On rappelle le cadre de la preuve : $s \hookleftarrow \mathcal{U}(\mathbb{Z}^{<n+d+k-1}[X])$, pour $i\leq t$ on a $a_i \hookleftarrow \mathcal{U}(\mathbb{Z}^{<n}[X])$ ; $e_i \hookleftarrow \lfloor \mathcal{N}_{\alpha q}\rceil[X]^{<k+d}$ et finalement $r_i \hookleftarrow \mathcal{U}(\{0,1\}^{<k+1}[X])$. On note $e_i(j)$ le $j$-ème coefficient de $e_i$. Le but est d'avoir avec bonne probabilité que : 
 \[\|\mu + 2\sum_{i \leq t}r_i \odot_d e_i  \|_\infty < q/2 \] où $\mu \in \{0,1\}^{<d}[X]$ est le message à chiffrer. 
 \begin{theorem}
 Si $\alpha \leq \frac{1}{16(k+1)t\sqrt{\lambda}}$ et  $8td(k+1)\leq qd\leq e^\lambda$, alors pour tout $\mu \in \{0,1\}^{<d}[X]$, avec probabilité $\geq 1 - 2^{-\Omega(\lambda)}$ sur $\texttt{(sk,pk)}\hookleftarrow\texttt{KeyGen} $, on a $\texttt{Decrypt(sk,Encrypt(pk,mu)) = mu}$ 
