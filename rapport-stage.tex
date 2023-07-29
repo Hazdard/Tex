@@ -332,7 +332,7 @@ On précise que cette borne est loin d'être optimale. En effet, les résultats 
 
 Dénombrons les matrices de rang plein de taille $m \times n$ (dans notre cas on aurait $n+d-1$ colonnes et $dt$ lignes) à coefficients dans $\mathbb{Z}/p\mathbb{Z}$ où $p$ est premier. On suppose sans perte de généralité que $m\geq n$, alors : la première colonne doit être non nulle, il y a donc $p^m-1$ choix, la seconde ne doit pas être dans l'espace engendré par la première, il y a donc $p^m -p$ choix, etc $\dots$ Finalement, on a $\displaystyle \prod_{0\leq i < n}(p^m - p^i)$ matrices de rang plein. La probabilité d'en obtenir une en choisissant uniformément les coefficients vaut donc :  $ \displaystyle \frac{1}{p^{mn}} \prod_{0\leq i < n}(p^m - p^i) = \displaystyle \prod_{0\leq i < n}(1 - \frac{1}{p^{m-i}})$. \\
 
-Pour les calculs expérimentaux, j'ai utilisé les o.d.g proposés dans \cite{mplwe}, i.e : $t\simeq \log(n)$, $d=\frac{n}{2}$. Avec $n=22$, on a  $d=11, t=3$. J'ai cependant diminué $p$, qui sera pris premier, de l'ordre de $n^\beta\log{n}$ où on fait varier $\beta$, afin d'avoir un nombre significatif de matrices de rang non plein (dans le schéma, $\beta=2.5$).  En faisant $10^6$ tests, on obtient alors les résultats suivants : \\
+Pour les calculs expérimentaux, j'ai utilisé les o.d.g proposés dans \cite{mplwe}, i.e : $t\simeq \log(n)$, $d=\frac{n}{2}$, et $n=22$, ce qui donne  $d=11, t=3$. En pratique, $n$ serait pris beaucoup plus grand. J'ai de plus diminué $p$, qui sera pris premier, de l'ordre de $n^\beta\log{n}$ où on fait varier $\beta$, afin d'avoir un nombre significatif de matrices de rang non plein (dans le schéma, $\beta=2.5$).  En faisant $10^6$ tests, on obtient alors les résultats suivants : \\
 
 {
 \centering
