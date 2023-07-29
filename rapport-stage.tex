@@ -351,8 +351,9 @@ Pour les calculs expérimentaux, j'ai utilisé les o.d.g proposés dans \cite{mp
 ~\\
 
 
-Le code utilisé pour produire ces résultats est disponible \href{https://github.com/Hazdard/mplwe-sage/tree/main}{ici}, au tag ``rapport''.
+Le code utilisé pour produire ces résultats est disponible \href{https://github.com/Hazdard/mplwe-sage/tree/main}{ici}, au tag ``rapport''. \\
 
+Pour conclure cette partie, on observe que $\text{vol}(\mathcal{L}_0)^{1/tm}=q^{1-\frac{1}{t}} > q^{1-\frac{1}{t}-\frac{n}{t}}=\text{vol}(\mathcal{L}_2)^{1/td}$. Ainsi, la réduction diminue le volume normalisé du réseau initial d'un facteur $q^{n/t}$, ce qui a pour effet d'augmenter la complexité des instances de BDD sous-jacentes.
 \subsubsection{Évolution de la distance au réseau}
 
 Dans le cas de LWE, la distance au réseau de l'instance de BDD est exactement égale à la norme du vecteur d'erreur $e$. On note $e_0$ (resp. $e_1$) (resp. $e_2$) la variable aléatoire qui représente le vecteur d'erreur tiré dans $\mathcal{L}_0$ (resp. $\mathcal{L}_1$) (resp. $\mathcal{L}_2$). Le vecteur $e_0$ est l'erreur initiale de PLWE, $e_1$ est la projection de $e_0$ en dimension $dt$, et $e_2$ est le vecteur d'erreur final dans la réduction, i.e après re-randomisation pour suivre une gaussienne de paramètre $\sigma' = \alpha' q$.
@@ -367,6 +368,8 @@ Dans le cas de LWE, la distance au réseau de l'instance de BDD est exactement �
 On utilise la norme euclidienne, donc le carré de la norme d'un vecteur est égal à la somme des carrés de ses composantes. De plus le moment d'ordre deux d'une gaussienne centrée est égal à sa variance $\sigma^2$, ce qui donne les résultats voulus par linéarité de l'espérance.
 
 $\hfill \square$
+
+Comme dans la partie précédente, on constance que la réduction augmente la difficulté de BDD, car elle augmente la distance moyenne, et réduit donc le facteur $\gamma$.
 
 \subsection{Heuristique gaussienne}
 
@@ -453,7 +456,7 @@ Cette preuve est inspirée de celle de Stehlé \textit{et al.} \cite{hlawka} dan
 \subsection{Preuve de correction}
 On se propose de modifier la preuve de correction du schéma de chiffrement proposé dans \cite{mplwe}, avec des hypothèses renforcées. \\
 
-On rappelle le cadre de la preuve : $s \hookleftarrow \mathcal{U}(\mathbb{Z}^{<n+d+k-1}[X])$, pour $i\leq t$ on a $a_i \hookleftarrow \mathcal{U}(\mathbb{Z}^{<n}[X])$ ; $e_i \hookleftarrow \lfloor \mathcal{N}_{\alpha q}\rceil[X]^{<k+d}$ et finalement $r_i \hookleftarrow \mathcal{U}(\{0,1\}^{<k+1}[X])$. On note $e_i(j)$ le $j$-ème coefficient de $e_i$. Le but est d'avoir avec bonne probabilité que : 
+On rappelle le cadre de la preuve : $s \hookleftarrow \mathcal{U}(\mathbb{Z}^{<n+d+k-1}[X])$, pour $i\leq t$ on a $a_i \hookleftarrow \mathcal{U}(\mathbb{Z}^{<n}[X])$ ; $e_i \hookleftarrow \lfloor \mathcal{N}(\alpha q)\rceil[X]^{<k+d}$ et finalement $r_i \hookleftarrow \mathcal{U}(\{0,1\}^{<k+1}[X])$. On note $e_i(j)$ le $j$-ème coefficient de $e_i$. Le but est d'avoir avec bonne probabilité que : 
 \[\|\mu + 2\sum_{i \leq t}r_i \odot_d e_i  \|_\infty < q/2 \] où $\mu \in \{0,1\}^{<d}[X]$ est le message à chiffrer. 
 \begin{theorem}
 Si $\alpha \leq \frac{1}{16(k+1)t\sqrt{\lambda}}$ et  $8td(k+1)\leq qd\leq e^\lambda$, alors pour tout $\mu \in \{0,1\}^{<d}[X]$, avec probabilité $\geq 1 - 2^{-\Omega(\lambda)}$ sur $\texttt{(sk,pk)}\hookleftarrow\texttt{KeyGen} $, on a $\texttt{Decrypt(sk,Encrypt(pk,mu)) = mu}$ 
