@@ -44,7 +44,7 @@
 \fancyfoot[R]{E.N.S Paris-Saclay}
 
 \title{\textbf{Étude du problème MP-LWE}}
-\date{}
+\date{8 Juin - 21 Juillet 2023}
 \author{Sacha Ben-Arous, sous la direction d'Alice Pellet-Mary}
 
 
@@ -255,7 +255,7 @@ On admet pour l'instant que nos réseaux structurés suivent cette heuristique, 
 
 Ainsi, les deux caractéristiques des réseaux permettant d'estimer la complexité du problème BDD associé sont leur volume, et la distance au point choisi.  Dans ce qui suit, on se propose donc d'étudier ces deux quantités dans le cadre de la réduction précédemment présentée.
 
-\subsubsection{Évolution du volume }
+\subsubsection{Évolution du volume}
 
 Afin d'étudier les effets de cette réduction, on remarque que $3$ réseaux distincts apparaissent, et on se propose donc d'en étudier les propriétés : 
 \begin{itemize}
@@ -370,9 +370,9 @@ Comme dans la partie précédente, on constate que la réduction augmente la dif
 
 \subsection{Heuristique gaussienne}
 
-On va maintenant tenter montrer la validité de l'utilisation de l'heuristique gaussienne dans notre cas. La borne de Minkowski fournissant une borne supérieure sur $\lambda_1$, il suffit d'obtenir une borne inférieure qui soit du même ordre. Ici, on obtiendra une borne plus faible, d'un facteur $1/q$.  \\ On rappelle la notation $A=[\text{Toep}^{d,n}(a_i)_{i\leq t}]$, où les $(a_i)_{i\leq t}$ sont des variables aléatoires. \\ Le théorème suivant fournit une borne sur $\lambda_1^\infty$, i.e le plus court vecteur non nul du réseau pour la norme infinie (on utilisait jusqu'ici la norme euclidienne). Comme on sait que $\lambda_1 \geq \lambda_1^\infty$, cela fournit aussi une borne dans le cas de la norme 2, mais on perd potentiellement un facteur $\sqrt{n}$ car on s'attend généralement à avoir  $\lambda_1 \simeq \sqrt{n} \lambda_1^\infty$.
+On va maintenant tenter de montrer la validité de l'utilisation de l'heuristique gaussienne dans notre cas. La borne de Minkowski fournissant une borne supérieure sur $\lambda_1$, il suffit d'obtenir une borne inférieure qui soit du même ordre. Ici, on obtiendra une borne plus faible, d'un facteur $1/q$.  \\ On rappelle la notation $A=[\text{Toep}^{d,n}(a_i)_{i\leq t}]$, où les $(a_i)_{i\leq t}$ sont des variables aléatoires. \\ Le théorème suivant fournit une borne sur $\lambda_1^\infty$, i.e le plus court vecteur non nul du réseau pour la norme infinie (on utilisait jusqu'ici la norme euclidienne). Comme on sait que $\lambda_1 \geq \lambda_1^\infty$, cela fournit aussi une borne dans le cas de la norme 2, mais on perd potentiellement un facteur $\sqrt{n}$ car on s'attend généralement à avoir  $\lambda_1 \simeq \sqrt{n} \lambda_1^\infty$.
 
-\begin{theorem} Si $d=\frac{n}{2}$ et $t\geq 4$ alors, avec probabilité $\displaystyle \geq 1-\frac{1}{2^{td-1}q^{t-3}}$ sur $A$, on a \[\lambda_1^\infty(\mathcal{L}_2) \geq \frac{1}{2q} \text{vol}(\mathcal{L}_2)^{\frac{1}{dt}}\]
+\begin{theorem} Si $q$ est premier, $d=\frac{n}{2}$ et $t\geq 4$ alors, avec probabilité $\displaystyle \geq 1-\frac{1}{2^{td-1}q^{t-3}}$ sur $A$, on a \[\lambda_1^\infty(\mathcal{L}_2) \geq \frac{1}{2q} \text{vol}(\mathcal{L}_2)^{\frac{1}{dt}}\]
 \end{theorem}
 
 \textbf{Preuve :} \\
@@ -439,7 +439,7 @@ Ainsi, en distinguant les $x\in \mathbb{Z}_q^{n+d-1}$ suivant le rang de $\text{
 \end{eqnarray*}
 
 La somme sur $r$ commence à 1, car si le rang de Ps($x$) est nul, alors $y$ l'est aussi, or on ne considère que des vecteurs non nuls.\\
-Il faut maintenant dénombrer les $x\in \mathbb{Z}_q^{n+d-1}$ tels que $\text{rg}(\text{Ps}(x))=r$. Pour cela, on utilise un résultat de Daykin \cite{rank} : le nombre de matrices persymétriques de dimensions $m\times n$, à coefficients dans $\mathbb{Z}/p\mathbb{Z}$ et de rang $r$ vaut : $\begin{cases} 1 \text{ si } r=0 \\ p^{2(r-1)}(p^2-1) \text{ si } 1 \leq r < \min(m,n) \\ p^{2(r-1)}(p^{|m-n|+1}-1) \text{ si } r=\min(m,n) \\ 0 \text{ sinon} \end{cases}$
+Il faut maintenant dénombrer les $x\in \mathbb{Z}_q^{n+d-1}$ tels que $\text{rg}(\text{Ps}(x))=r$. Pour cela, on utilise un résultat de Daykin \cite{rank} : pour $p$ premier, le nombre de matrices persymétriques de dimensions $m\times n$, à coefficients dans $\mathbb{Z}/p\mathbb{Z}$ et de rang $r$ vaut : $\begin{cases} 1 \text{ si } r=0 \\ p^{2(r-1)}(p^2-1) \text{ si } 1 \leq r < \min(m,n) \\ p^{2(r-1)}(p^{|m-n|+1}-1) \text{ si } r=\min(m,n) \\ 0 \text{ sinon} \end{cases}$
 
 Dans notre cas, les dimensions sont $d$ et $n$, et avec les valeurs utilisées dans \cite{mplwe}, on a $d=\frac{n}{2}$. En particulier, $2(d-1)+n-d +1 \leq 3d$. On majore donc, pour $r$ quelconque, le cardinal de l'ensemble de ces matrices de rang $r$ par $q^{3r}$. Alors : 
 \[ \mathbb{P}_A(\lambda_1^\infty(\mathcal{L}_2) \leq B) \leq \sum_{r=1}^d \ q^{3r} \frac{(2B+1)^{dt}}{q^{rt}} = \frac{(2B+1)^{dt}}{q^{t-3}}\frac{1-q^{d(3-t)}}{1-q^{3-t}} \leq (2B+1)^{dt}\frac{1}{q^{t-3}-1} \leq \frac{2(2B+1)^{dt}}{q^{t-3}} 
@@ -468,7 +468,7 @@ Si $\alpha \leq \frac{1}{16(k+1)t\sqrt{\lambda}}$ et  $8td(k+1)\leq qd\leq e^\la
 \end{theorem}
 
 
-\underline{Rq} : La modification est essentiellement au niveau de $\alpha$, que l'on a diminué. Cela a pour effet de réduir la variance de l'erreur gaussienne appliquée sur le message, ce qui le rend plus simple à déchiffrer, et facilite donc la preuve.
+\underline{Rq} : La modification est essentiellement au niveau de $\alpha$, que l'on a diminué. Cela a pour effet de réduire la variance de l'erreur gaussienne appliquée sur le message, ce qui le rend plus simple à déchiffrer, et facilite donc la preuve.
 \\
 
 \textbf{Preuve :} \\
