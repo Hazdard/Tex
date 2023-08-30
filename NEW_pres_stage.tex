@@ -9,28 +9,6 @@
 \usepackage[french]{babel}
 \usefonttheme[onlymath]{serif}
 
-%partie 1 : pres des réseaux
-
-%- def (cf rapport) + mise en forme matricielle 
-%- dessins / exemples simples
-%- LWE
-%- BDD (et un peu SVP/CVP)
-%- structure
-%- PLWE et MPLWE (présentés avec Rot et Toep en forme matricielle)
-%- ils sont q-ary + rang plein
-%- Réduction Rosca 
-
-%partie 2 : moi mdr
-
-%- explication du but du stage
-%- gamma BDD + heuristique gaussienne
-%- volume (cas particulier rang plein qu'on garde dans la suite)
-%- mes résultats
-%- erreurs (trivial)
-%- preuve heuristique gaussienne
-
-
-% CITE KATARINA POUR LES IMAGES !
 
 \title{Étude du problème MP-LWE}
 \date{31 Août 2023}
@@ -46,17 +24,22 @@
 \section{Introduction aux réseaux}
 
 \subsection{Définition}
+
+
 \begin{frame}{Définition}
 \onslide<1->{Un \textbf{réseau euclidien} de $\mathbb{R}^m$ est l'ensemble des combinaisons à coefficients entiers de vecteurs linéairements indépendants $b_1, \dots, b_n$, que l'on note :
 \[\mathcal{L}(b_1,\dots,b_n) := \left\{ \sum_{i=1}^n x_ib_i, x_i \in \mathbb{Z} \right\} \]}
 
 \onslide<2->{Le réseau est alors de \textit{dimension} $n$, et la famille des $(b_i)_{1\leq i \leq n}$ est appelée \textbf{base} de ce réseau.}\\
-\onslide<3->{~ \\ En notant $B:=[b_1,\dots,b_n]$ la matrice dont les colonnes sont formées par les $(b_i)_{1\leq i \leq n}$, on considérera de manière équivalente : \[\mathcal{L}(B) := \left\{ Bx, x \in \mathbb{Z}^n \right\} \]}
+\onslide<3->{~ \\ En notant $B:=[b_1,\dots,b_n]$, on considérera de manière équivalente : \[\mathcal{L}(B) := \left\{ Bx, x \in \mathbb{Z}^n \right\} \]}
 \end{frame}
+
+
 
 \begin{frame}{Exemples}
 Insérer des illustrations svp (si possible dimension 2 et 3 et q-ary et plusieurs bases pour un même réseau)
 \end{frame}
+
 
 \subsection{Learning With Errors}
 \begin{frame}{Learning With Errors}
@@ -77,18 +60,24 @@ a_t & 0 & \cdots &q\\
 \in \mathbb{Z}^{t\times (n+t)}$
 \end{frame}
 
+
 \begin{frame}{Difficulté de LWE}
-\onslide<1->{La difficulté de la résolution algorithmique de ce problème est relié au facteur $\gamma = \frac{\lambda_1}{\|e\|}$, où $\lambda_1$ est la norme du plus court vecteur non nul du réseau engendré par $A'$. \\ ~ \\}
-
-\onslide<2->{Plus $\gamma$ est petit, plus le problème est dur, et inversement. \\ ~ \\}
-
-\onslide<3->{Pour $\gamma$ polynomial en $n$, ce problème est conjecturé exponentiellement dur à résoudre, même sur un ordinateur quantique.}
+\begin{itemize}
+\item<1->[•]La difficulté est relié au facteur $\gamma = \frac{\lambda_1}{\|e\|}$ \\ ~ \\
+\item<2->[•] Plus $\gamma$ est petit, plus le problème est dur \\ ~ \\
+\item<3->[•] Si $\gamma = poly(n)$, ce problème est conjecturé exponentiellement dur à résoudre, même sur un ordinateur quantique
+\begin{center}
+\includegraphics[scale=0.30]{gamma_hard.png}
+\end{center}
+\end{itemize}
 \end{frame}
 
+\subsection{Variantes structurées}
 \begin{frame}{Variantes structurées}
-\onslide<1->{Si on utilise LWE tel quel pour construire un protocole, ce dernier aura une efficacité très moyenne, étant donné que les calculs mis en jeu sont des produits de grandes matrices aléatoires. \\ ~ \\}
-\onslide<2->{Stehlé \textit{et al.} [SSTX09], résout ce problème en utilisant des réseaux structurés : les calculs matriciels correspondent alors à des produits de polynômes, calculables plus rapidement. C'est la variante P-LWE \\ ~ \\}
+\onslide<1->{\textbf{Problème }: LWE tel quel est peu efficace à cause des grandes matrices aléatoires. \\ ~ \\}
+\onslide<2->{\textbf{Solution } : Rajouter de la structure : polynômes (Stehlé \textit{et al.} [SSTX09])}
 \end{frame}
+
 
 \begin{frame}{Illustration}
 Concrètement, cela consiste à représenter matriciellement le produit de polynômes, et donc à mettre des blocs structurés dans $A$
@@ -97,13 +86,27 @@ Concrètement, cela consiste à représenter matriciellement le produit de polyn
 \end{center}
 \end{frame}
 
+
 \begin{frame}{Variantes structurées}
-\onslide<1->{Cependant, cette variante souffre encore d'un défaut : un nouveau paramètre $f \in \mathbb{Z}^m_p[X]$ est utilisé, et la complexité de P-LWE($f$) est directement liée au $f$ choisi. \\ ~ \\}
-\onslide<2->{Roşca \textit{et al.} introduisent ainsi une nouvelle variante structurée, Middle-Product Learning With Errors, et prouve que des classes exponentiellement grandes de problèmes P-LWE s'y réduisent, afin de se débarasser de la dépendance en $f$.}
+\onslide<1->{Défaut : nouveau paramètre $f \in \mathbb{Z}^m_p[X]$ qui régit la complexité. \\ ~ \\}
+\onslide<1->{\underline{Ex }: $x^n+1$ et $x^n -1$ \\ ~ \\}
+\onslide<2->{Roşca \textit{et al.} [RSSS17] introduisent une nouvelle variante structurée, et y réduisent des classes exponentiellement grandes de problèmes P-LWE.}
 \end{frame}
 
+
+\section{Étude de la réduction}
+
+
+\begin{frame}{Objectif}
+\begin{itemize}
+\item<1->[•] Comprendre le fonctionnement de la réduction, et son impact sur les paramètres de difficulté.  \\ ~ \\
+\item<2->[•] Établir des propriétés sur le nouveau réseau d'arrivée 
+\end{itemize}
+\end{frame}
+
+
 \begin{frame}{Représentation matricielle de la réduction}
-\onslide<1->{Pour $f \in \mathbb{Z}^m_p[X]$ et $a \in \mathbb{Z}^n_p[X]$, on note $\text{Rot}_f(a) \in \mathbb{R}^{m\times m}$ la matrice dont la $i$-ème ligne est constituée des coefficients de $a\cdot x^{i-1}\text{ mod } f$. \\ ~ \\}
+\onslide<1->{On défini $\text{Rot}_f(a)$ pour qu'elle vérifie $\text{Rot}_f(a) \cdot b = (a\times b \mod f)$ \\ ~ \\}
 \onslide<2->{\underline{Ex}: Si $f=x^4+1$ et $\displaystyle a=\sum_{0\leq i < 4} a_ix^i$, alors :
 $$
 \text{Rot}_f(a) = \begin{pmatrix}
@@ -114,6 +117,50 @@ a_0 & a_1 & a_2 & a_3 \\
 \end{pmatrix} 
 $$
 }
+
+\end{frame}
+
+\begin{frame}{Représentation matricielle de la réduction}
+\onslide<1->{De même pour $\text{Toep}_d(a)$, choisie pour avoir $\text{Toep}_d(a) \cdot b = (a\odot b)$ \\ ~ \\}
+\onslide<2->{\underline{Ex}: Si  $d=3$ et $\displaystyle a=\sum_{0\leq i < 4} a_ix^i$, alors :
+$$
+\text{Toep}(a) = \begin{pmatrix}
+a_0 & a_1 & a_2 & a_3 &0&0&0\\
+0&a_0 & a_1 & a_2 & a_3&0&0 \\
+0&0&a_0 & a_1 & a_2 & a_3&0 \\
+0&0&0&a_0 & a_1 & a_2 & a_3 \\
+\end{pmatrix} 
+$$
+}
+
+\end{frame}
+
+
+\begin{frame}{Représentation matricielle de la réduction}
+La réduction va donc de 
+$
+\mathcal{L}_1= 
+\left[ \begin{array}{c}
+\text{Rot}_f(a_1) \\
+\vdots  \\
+\text{Rot}_f(a_t) \\
+\end{array} \right]
+$
+vers 
+$
+\mathcal{L}_2= 
+\left[ \begin{array}{c}
+\text{Toep}_d(a_1) \\
+\vdots  \\
+\text{Toep}_d(a_t) \\
+\end{array} \right]
+$
+
+\end{frame}
+
+
+\section*{Annexe}
+\begin{frame}{Références}
 
 \end{frame}
 \end{document}
