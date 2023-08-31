@@ -54,13 +54,14 @@
 \end{frame}
 
 \begin{frame}{Lien avec les réseaux}
-Cela revient à chercher le point le plus proche de $A\cdot s + e$ dans le réseau engendré par \\ ~ \\ $A' := 
+Cela revient à chercher le point le plus proche de $A\cdot s + e$ dans le réseau engendré par \onslide<1>{A} \\ ~ \\ \onslide<2>{$A' := 
  \left[\begin{array}{c|ccc}
 &q&\cdots & 0\\
 A & \vdots &\ddots & \vdots\\
  & 0 & \cdots &q\\
 \end{array}\right]
 \in \mathbb{Z}^{t\times (n+t)}$
+car on travaillait modulo $q$}
 \end{frame}
 
 
@@ -128,7 +129,7 @@ $$
 
 \begin{frame}{Représentation matricielle de la réduction}
 \onslide<1->{De même pour $\text{Toep}_d(a)$, choisie pour avoir $\text{Toep}_d(a) \cdot b = (a\odot_d b)$ \\ ~ \\}
-\onslide<2->{\underline{Ex}: Si  $d=3$ et $\displaystyle a=\sum_{0\leq i < 4} a_ix^i$, alors :
+\onslide<2->{\underline{Ex}: Si  $d=4$ et $\displaystyle a=\sum_{0\leq i < 4} a_ix^i$, alors :
 $$
 \text{Toep}(a) = \begin{pmatrix}
 a_0 & a_1 & a_2 & a_3 &0&0&0\\
