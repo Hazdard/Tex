@@ -37,25 +37,28 @@
 
 
 \begin{frame}{Exemples}
-Insérer des illustrations svp (si possible dimension 2 et 3 et q-ary et plusieurs bases pour un même réseau)
+\begin{center}
+\includegraphics[scale=0.38]{lattice.png}
+\captionof{figure}{Exemple de réseau [Kat23]}
+\end{center}
 \end{frame}
 
 
 \subsection{Learning With Errors}
 \begin{frame}{Learning With Errors}
 \textbf{Learning With Errors Problem :} \\ ~ \\
-\onslide<1->{On fixe des entiers $n$ et $t$, un nombre premier $p$ et une distribution de bruit $\chi$. On tire un secret $s\hookleftarrow \mathcal{U}(\mathbb{Z}_p^n)$.  \\ ~ \\}
+\onslide<1->{On fixe des entiers $n$ et $t$, un nombre premier $q$ et une distribution de bruit $\mathcal{N}(\sigma)$. On tire un secret $s\hookleftarrow \mathcal{U}(\mathbb{Z}_q^n)$.  \\ ~ \\}
 
-\onslide<2->{Le problème est le suivant : à partir de $t$ échantillons \[(a_i,b_i):=(a_i,\left<a_i,s\right> +e_i \text{ mod } p)\] où $a_i\hookleftarrow \mathcal{U}(\mathbb{Z}_p^n)$ et $e_i\hookleftarrow \chi$, on souhaite retrouver le secret $s$. \\ ~ \\}
+\onslide<2->{Le problème est le suivant : à partir de $t$ échantillons \[(a_i,b_i):=(a_i,\left<a_i,s\right> +e_i \text{ mod } q)\] où $a_i\hookleftarrow \mathcal{U}(\mathbb{Z}_p^n)$ et $e_i\hookleftarrow \mathcal{N}(\sigma)$, on souhaite retrouver le secret $s$. \\ ~ \\}
 \onslide<3->{\underline{Rq} : Sans bruit, le problème est facile à résoudre.}
 \end{frame}
 
 \begin{frame}{Lien avec les réseaux}
 Cela revient à chercher le point le plus proche de $A\cdot s + e$ dans le réseau engendré par \\ ~ \\ $A' := 
  \left[\begin{array}{c|ccc}
-a_1 &q&\cdots & 0\\
-\vdots & \vdots &\ddots & \vdots\\
-a_t & 0 & \cdots &q\\
+&q&\cdots & 0\\
+A & \vdots &\ddots & \vdots\\
+ & 0 & \cdots &q\\
 \end{array}\right]
 \in \mathbb{Z}^{t\times (n+t)}$
 \end{frame}
@@ -68,6 +71,7 @@ a_t & 0 & \cdots &q\\
 \item<3->[•] Si $\gamma = poly(n)$, ce problème est conjecturé exponentiellement dur à résoudre, même sur un ordinateur quantique
 \begin{center}
 \includegraphics[scale=0.30]{gamma_hard.png}
+\captionof{figure}{Lien difficulté/gamma [Kat23]}
 \end{center}
 \end{itemize}
 \end{frame}
@@ -83,12 +87,13 @@ a_t & 0 & \cdots &q\\
 Concrètement, cela consiste à représenter matriciellement le produit de polynômes, et donc à mettre des blocs structurés dans $A$
 \begin{center}
 \includegraphics[scale=0.30]{plwe_struct.png}
+\captionof{figure}{Représentation de la structure d'un réseau [Kat23]}
 \end{center}
 \end{frame}
 
 
 \begin{frame}{Variantes structurées}
-\onslide<1->{Défaut : nouveau paramètre $f \in \mathbb{Z}^m_p[X]$ qui régit la complexité. \\ ~ \\}
+\onslide<1->{Défaut : nouveau paramètre $f \in \mathbb{Z}^m_q[X]$ qui régit la complexité. \\ ~ \\}
 \onslide<1->{\underline{Ex }: $x^n+1$ et $x^n -1$ \\ ~ \\}
 \onslide<2->{Roşca \textit{et al.} [RSSS17] introduisent une nouvelle variante structurée, et y réduisent des classes exponentiellement grandes de problèmes P-LWE.}
 \end{frame}
@@ -104,7 +109,7 @@ Concrètement, cela consiste à représenter matriciellement le produit de polyn
 \end{itemize}
 \end{frame}
 
-
+\subsection{Heuristique gaussienne}
 \begin{frame}{Représentation matricielle de la réduction}
 \onslide<1->{On défini $\text{Rot}_f(a)$ pour qu'elle vérifie $\text{Rot}_f(a) \cdot b = (a\times b \mod f)$ \\ ~ \\}
 \onslide<2->{\underline{Ex}: Si $f=x^4+1$ et $\displaystyle a=\sum_{0\leq i < 4} a_ix^i$, alors :
@@ -120,8 +125,9 @@ $$
 
 \end{frame}
 
+
 \begin{frame}{Représentation matricielle de la réduction}
-\onslide<1->{De même pour $\text{Toep}_d(a)$, choisie pour avoir $\text{Toep}_d(a) \cdot b = (a\odot b)$ \\ ~ \\}
+\onslide<1->{De même pour $\text{Toep}_d(a)$, choisie pour avoir $\text{Toep}_d(a) \cdot b = (a\odot_d b)$ \\ ~ \\}
 \onslide<2->{\underline{Ex}: Si  $d=3$ et $\displaystyle a=\sum_{0\leq i < 4} a_ix^i$, alors :
 $$
 \text{Toep}(a) = \begin{pmatrix}
@@ -139,7 +145,7 @@ $$
 \begin{frame}{Représentation matricielle de la réduction}
 La réduction va donc de 
 $
-\mathcal{L}_1= 
+A_1= 
 \left[ \begin{array}{c}
 \text{Rot}_f(a_1) \\
 \vdots  \\
@@ -148,7 +154,7 @@ $
 $
 vers 
 $
-\mathcal{L}_2= 
+A_2= 
 \left[ \begin{array}{c}
 \text{Toep}_d(a_1) \\
 \vdots  \\
@@ -158,10 +164,84 @@ $
 
 \end{frame}
 
+\begin{frame}{Heuristique gausienne}
+\onslide<1->{Volume d'un réseau $\mathcal{L}(B)$  $ := \sqrt{\det{(B^\top B)}}$. \\ ~ \\
+\underline{Rq }: ne dépend pas de $B$\\ ~ \\ }
+\onslide<2->{\textbf{Heuristique gaussienne : }\[ |\{\text{points du réseau de norme} \leq R \}| \simeq \frac{V_n(R)}{\text{vol}(L)} = \frac{R^n V_n(1)}{\text{vol}(L)}\]
+En particulier $\lambda_1 \simeq \sqrt{n} \cdot \text{vol}(L)^\frac{1}{n}$}
+\end{frame}
 
-\section*{Annexe}
+\subsection{Volume et erreur}
+\begin{frame}{Volumes}
+\onslide<1->{\textbf{Théorème : } Avec probabilité $\geq 1 - \frac{1}{q^{mt}}$ on a $\text{vol}(\mathcal{L}_1) = q^{m(t-1)}$ \\ ~ \\}
+\onslide<2->{\textbf{Théorème : }Avec une probabilité $\geq 1 - (\frac{n+d-1}{q})^{\lfloor t/\lceil\frac{n+d-1}{d}\rceil\rfloor}$, on a que $\text{vol}(\mathcal{L}_2)=q^{td-(n+d-1)}$ \\ ~ \\}
+\onslide<3->{À retenir : $\frac{\text{vol}(\mathcal{L}_1)^\frac{1}{tm}}{\text{vol}(\mathcal{L}_2)^\frac{1}{td}} = q^\frac{n}{td}$, et $td \simeq n$ donc le volume change peu}
+\end{frame}
+
+
+\begin{frame}{Idée de preuve}
+\begin{itemize}
+\item<1->[•] Il suffit d'avoir que $A_1$ et $A_2$ sont de rang plein\\ ~ \\
+\item<2->[•] Pour $A_1$ : utiliser $\text{Rot}_f(a)^{-1}=\text{Rot}_f(a^{-1})$\\ ~ \\
+\item<3->[•] Pour $A_2$ : plus dur car bloc pas carrés, il faut les rassembler. Ma preuve n'utilise pas la structure Toeplitz, et la borne est non optimale.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Résultats expérimentaux}
+$n=22$, $d=11, t=3$, et $q=n^\beta\log{n}$ où on fait varier $\beta$. En pratique $n$ est beaucoup plus grand, et dans le schéma $\beta=2.5$. En faisant $10^6$ tests, on obtient les résultats suivants : \\
+
+\begin{center}
+\includegraphics[scale=0.40]{tab_exp.png}
+\end{center}
+\end{frame}
+
+\begin{frame}{Erreurs}
+\begin{itemize}
+\item[•] $\mathbb{E}(\|e_1\|^2) = tm(\alpha q)^2 $\\ ~ \\
+\item[•] $\mathbb{E}(\|e_2\|^2) = td(\alpha d S q)^2$ \\ ~ \\
+\end{itemize}
+
+car $\sigma_2 = (\alpha d S)\sigma_1$. Voir rapport pour détails.
+\end{frame}
+
+\begin{frame}{Heuristique gaussienne}
+\onslide<1->{\textbf{Théorème (Minkowski) :} $\lambda_1 \leq \sqrt{n}\cdot\text{vol}(\mathcal{L})^\frac{1}{n}$  \\ ~ \\ }
+\onslide<2->{\textbf{Théorème : } Si $d=\frac{n}{2}$ et $t\geq 4$ alors, avec probabilité $\displaystyle \geq 1-\frac{1}{2^{td-1}q^{t-3}}$, on a : \[\lambda_1^\infty(\mathcal{L}_2) \geq \frac{1}{2q} \text{vol}(\mathcal{L}_2)^{\frac{1}{dt}}\]}
+
+\onslide<3->{\underline{Rq }: Le résultat est en norme infinie, et est trop faible par rapport à ce qui attendu.}
+
+\end{frame}
+
+
+\subsection{Schéma de chiffrement}
+\begin{frame}{Schéma de chiffrement}
+\onslide<1->{\textbf{Théorème [RSS17] : }
+Si $\alpha \leq \frac{1}{16\sqrt{tk\lambda}}$ et  $16t(k+1)\leq q$, alors pour tout $\mu \in \{0,1\}^{<d}[X]$, avec probabilité $\geq 1 - 2^{-\Omega(\lambda)}$ sur $\texttt{(sk,pk)}\hookleftarrow\texttt{KeyGen} $, on a $\texttt{Decrypt(sk,Encrypt(pk,mu)) = mu}$ \\ ~ \\
+
+Preuve incorrecte, j'en donne une nouvelle version, avec des hypothèses renforcées.\\ ~ \\}
+
+\onslide<2->{\textbf{Théorème :}
+Si $\alpha \leq \frac{1}{16(k+1)t\sqrt{\lambda}}$ et  $8td(k+1)\leq qd\leq e^\lambda$, alors pour tout $\mu \in \{0,1\}^{<d}[X]$, avec probabilité $\geq 1 - 2^{-\Omega(\lambda)}$ sur $\texttt{(sk,pk)}\hookleftarrow\texttt{KeyGen} $, on a $\texttt{Decrypt(sk,Encrypt(pk,mu)) = mu}$\\ ~ \\}
+
+
+\onslide<3->{\underline{Rq} : La modification est essentiellement au niveau de $\alpha$, que l'on a diminué. Cela a pour effet de réduire la variance de l'erreur gaussienne appliquée sur le message, ce qui le rend plus simple à déchiffrer, et facilite donc la preuve.}
+\end{frame}
+
+
+\begin{frame}{Conclusion}
+\begin{itemize}
+\item[•] MP-LWE gagne sur le plan algébrique tout en conservant la difficulté algorithmique\\ ~ \\
+\item[•] Résultat sur l'heuristique gaussienne à améliorer\\ ~ \\
+\item[•] Étudier l'influence de la structure sur le rang des réseaux
+\end{itemize}
+\end{frame}
+
+
 \begin{frame}{Références}
-
+[Kat23] \ Katharina Boudgoust, ``Hardness Assumptions in Lattice-Based Cryptography" \\ ~ \\
+RSSS17] \ Miruna Roşca , Amin Sakzad, Damien Stehlé et Ron Steinfeld ``Middle-Product Learning With Errors"\\ ~ \\
+SSTX09] \ Damien Stehlé, Ron Steinfeld, Keisuke Tanaka et Keita Xagawa “Efficient public key encryption based on ideal lattices"
 \end{frame}
 \end{document}
 
