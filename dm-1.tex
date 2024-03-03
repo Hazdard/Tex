@@ -1,0 +1,63 @@
+\documentclass[11pt,a4paper]{article}
+\textheight245mm
+\textwidth170mm
+\hoffset-21mm
+\voffset-15mm
+\parindent0pt
+\usepackage[utf8]{inputenc}
+\usepackage{dsfont}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{fancyhdr}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage[french]{babel}
+\usepackage[hidelinks]{hyperref} 
+\hypersetup{
+  colorlinks   = true,    % Colours links instead of ugly boxes
+  urlcolor     = blue,    % Colour for external hyperlinks
+  linkcolor    = black,    % Colour of internal links
+  citecolor    = black      % Colour of citations
+}
+\usepackage{zephyr}
+\pagestyle{fancy}
+
+\usepackage{array,multirow,makecell}
+\setcellgapes{4pt}
+\makegapedcells
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash }b{#1}}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash }b{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash }b{#1}}
+
+\renewcommand{\headrulewidth}{1pt}
+\fancyhead[C]{DM 1}
+\fancyhead[L]{L3 - 2023/2024}
+\fancyhead[R]{Intégration-Probabilités}
+
+\renewcommand{\footrulewidth}{1pt}
+\fancyfoot[C]{\thepage} 
+\fancyfoot[L]{Sacha Ben-Arous}
+\fancyfoot[R]{E.N.S Paris-Saclay}
+
+\begin{document}
+\textbf{Exercice 10} : \\
+
+1) Par définition de $f$, on a : $\forall K \geq 0, \ \displaystyle \lim_{n\to \infty}  \sum_{k = 0}^K f_n(k)=\sum^K_{k = 0} f(k)$. \\
+
+ Supposons que la somme $\displaystyle \sum_{k \geq 0} f(k)$ soit finie. Alors, on peut appliquer le théorème de double limite dans sa version discrète, car toutes les sommes considérées sont finies, ce qui donne : 
+ \[\lim_{K \to \infty} \lim_{n\to \infty}  \sum_{k = 0}^K f_n(k) = \lim_{n\to \infty}  \lim_{K \to \infty} \sum_{k = 0}^K f_n(k)\]
+ 
+ i.e : \[\displaystyle \sum_{k \geq 0} f(k) =  \lim_{n\to \infty} \sum_{k \geq 0} f_n(k) \]
+ 
+ Dans le cas où $\displaystyle \sum_{k \geq 0} f(k)$ est infinie, on a pour tout $K$ positif : \[ \displaystyle \lim_{n\to \infty} \sum_{k \geq 0} f_n(k) \geq \lim_{n\to \infty} \sum_{k = 0}^K f_n(k) = \sum_{k = 0}^K f(k) \] L'existence de la limite (dans $\overline{\mathbb{R}} $) est due à la croissance des $(f_n)_{n\in \mathbb{N}}$, et l'inégalité provient de la positivité de cette suite. Or cette inégalité est vraie pour tout $K$, dont le majorant ne dépend pas, et par hypothèse le minorant tend vers $+\infty$ avec $K$. Ainsi, en passant à la limite, on a bien :
+\[ \lim_{n\to \infty} \sum_{k \geq 0} f_n(k) = + \infty\]
+
+2) On note $\displaystyle \tilde{f}_n(k) := \inf_{m\geq n} f_m(k)$. Alors d'une part $\displaystyle \varliminf_{n\to \infty}{f_n(k)} = \lim_{n \to \infty} \tilde{f}_n(k)$, et d'autre part la suite des $(\tilde{f}_n)_{n\in \mathbb{N}}$ est clairement croissante (et positive), on peut donc lui appliquer le résultat de la question précédente, ce qui donne : 
+\begin{equation}
+\sum_{k\geq 0} \varliminf_{n\to \infty}{f_n(k)} = \lim_{n \to \infty} \sum_{k \geq 0} \tilde{f}_n(k) 
+\end{equation}
+Or, pour $K\geq 0$, on a : \[\sum_{k = 0}^K \tilde{f}_n(k) \leq \inf_{m\geq n}\sum_{k = 0}^K f_m(k) \leq \inf_{m\geq n}\sum_{k \geq 0} f_m(k) \leq\varliminf_{n\to \infty} \sum_{k\geq 0} {f_n(k)}  \]
+Les infimum et sommes infinis existent dans  $\overline{\mathbb{R}} $ grâce à la positivité des $(f_n)_{n\in \mathbb{N}}$. La première inégalité est une propriété classique des infimum (cf. exercice 8), la seconde est due à la positivité des $(f_n)_{n\in \mathbb{N}}$, et la troisième est donnée par la croissance d'une suite d'infimum. Finalement, le majorant étant indépendant du $K$ choisi, on peut directement injecter l'ingalité dans (1) en passant à la limite et ainsi obtenir le résultat voulu : 
+\[\sum_{k\geq 0} \varliminf_{n\to \infty}{f_n(k)} \leq \varliminf_{n\to \infty} \sum_{k\geq 0} {f_n(k)}  \]
+\qed
+
+\end{document}
