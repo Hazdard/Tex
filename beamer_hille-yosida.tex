@@ -1,0 +1,81 @@
+\documentclass[10pt]{beamer}
+\usetheme{metropolis}           % Use metropolis theme
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{dsfont}
+\usepackage{graphicx}
+\usepackage{caption}
+\usefonttheme[onlymath]{serif}
+
+
+\title{Théorème de Hille-Yosida et applications}
+\date{\today}
+\author{Sacha Ben-Arous, Quentin Verrier, Clément Robiez}
+\institute{ENS Paris-Saclay}
+\begin{document}
+  \maketitle
+\begin{frame}
+\tableofcontents
+\end{frame}  
+\section{Théorème de Hille-Yosida}
+\begin{frame}{Définitions}
+On travaille dans un espace de Hilbert $H$. On considère un opérateur linéaire non borné (i.e non continu) $A : D(A)\rightarrow H$.
+\begin{itemize}
+\item[•]  $A$ est monotone si $\forall v \in D(A), \ \left<Av,v\right> \geq 0$ \\ ~ \\
+\item[•] $A$ est maximal si $\forall f\in H, \ \exists u\in D(A), \ u + Au=f$ 
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Propriétés fondamentales}
+Si $A$ est un opérateur maximal monotone, alors :
+\begin{itemize}
+\item[•]  $D(A)$ est dense dans $H$ 
+\item[•] Le graphe de $A$ est fermé 
+\item[•] $\forall \lambda > 0, \ (I+\lambda A)$ est une bijection, et $\|(I+\lambda A)^{-1}\|_{\mathcal{L}(H)} \leq 1 $
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Outils de la preuve}
+Soit $A$ est un opérateur maximal monotone, on note pour $\lambda > 0$ :
+\begin{itemize}
+\item<1->[•] $J_{\lambda} := (I+\lambda A)^{-1}$ la résolvante de $A$
+\item<1->[•] $A_{\lambda} := \frac{1}{\lambda}(I-J_{\lambda})$ l'approximation de Yosida de $A$ 
+\end{itemize}
+
+\underline{Rq} : $A_{\lambda}$ est continue et définie sur $H$. \\ ~ \\
+\onslide<2->{
+On a les propriétés suivantes : 
+\begin{itemize}
+\item[•] $A_\lambda v = A(J_\lambda v) $ et $ A_\lambda v = J_\lambda (A v) $
+\item[•] $\lim\limits_{\lambda\to 0} J_\lambda v = v$ et $\lim\limits_{\lambda\to 0} A_\lambda v = Av$
+\item[•] $\|A_\lambda v \| \leq \frac{1}{\lambda}\| v \|$ et $\|A_\lambda v \| \leq \| A v \|$
+\end{itemize}
+}
+\end{frame}
+
+\begin{frame}{Théorème de Hille-Yosida}
+\textbf{Théorème (Hille-Yosida) : \\}
+Soit $A$ un opérateur maximal monotone.\\
+ Alors, $\forall u_0 \in D(A), \ \exists ! u \in \mathcal{C}^1([0,+\infty[,H) \cap\mathcal{C}([0,+\infty[,D(A)) $ tel que : \\ ~ \\
+$(*) \begin{cases}\displaystyle \frac{du}{dt} +Au = 0 \text{\ \ \ \ sur } [0,+\infty[ \\ u(0)=u_0 \end{cases}$ \\ ~ \\ ~ \\
+De plus  $\forall t \geq 0$, $\|u(t)\|\leq 0 \ $ et $\ \displaystyle \|\frac{du}{dt}\| \leq  \|Au_0\|$
+\end{frame}
+
+\begin{frame}{Preuve (1) : Unicité}
+Soient $u_1,u_2$ solutions de $(*)$, on a : 
+\begin{eqnarray*}  \frac{1}{2}\frac{d}{dt}|u_1-u_2|^2  &=& \left< \frac{d}{dt}(u_1-u_2),(u_1-u_2)\right> \\
+&=&-\left< A(u_1-u_2),(u_1-u_2)\right> \ \leq \ 0
+\end{eqnarray*}
+\\ ~ \\
+Or $u_1(0)=u_2(0)=u_0$, donc $\forall t \geq 0, u_1(t)=u_2(t)$
+\end{frame}
+
+\begin{frame}{Preuve (2) : Approximations}
+
+\end{frame}
+
+\section{Équation de la chaleur}
+
+\section{Régularité elliptique}
+
+\end{document}
