@@ -112,6 +112,49 @@ Comme $A$ est fermé, $\forall t \geq 0, u(t) \in D(A)$, et $u$ satisfait le pro
 \end{frame}
 \section{Équation de la chaleur}
 
+\begin{frame}{Présentation du problème}
+$(*)\begin{cases}  \Delta u = \frac{d}{dt}u \\ u(0)=u_0(x) \ \ \text{où } \ u_0 \in \mathcal{L}^2(\Omega) \end{cases}$ \\ ~ \\ ~ \\ 
+
+On veut appliquer Hille-Yosida avec $A=-\Delta$, sur l'espace de Hilbert $\mathcal{L}^2(\Omega)$ (ou bien $\mathcal{H}^2(\Omega)$). \\ ~ \\ 
+
+Avec $\Omega$ qui est un ouvert régulier de $\mathbb{R}^n$.
+\end{frame}
+
+
+
+\begin{frame}{Cas $\Omega=\mathbb{R}^n$}
+La transformée de Fourier est plus forte que Hille-Yosida dans le cas particulier où $\Omega=\mathbb{R}^n$, car on obtient une forme explicite de la solution. On raisonne par analyse synthèse : \\ ~ \\ ~ \\  
+$\displaystyle \widehat{\frac{du}{dt}}-\widehat{\Delta u}=0$, or on a $\widehat{\frac{du}{dt}}=\frac{d\hat{u}}{dt}$ et $\widehat{\Delta u}=-|\xi|^2\hat{u}$ \\ ~ \\ ~ \\ 
+
+On obtient alors $\widehat{u}=\widehat{u_0} \ e^{-|\xi|^2t}$, et donc $u=\text{TF}^{-1}(\widehat{u_0} \ e^{-|\xi|^2t})$
+\end{frame}
+
+
+
+\begin{frame}{Noyau de la chaleur}
+Par les calculs, on obtient $u=\frac{1}{(2\pi)^d}  \displaystyle \int_{\mathbb{R}^d} u_0(y)\sqrt{\frac{\pi}{t}}^d e^{-\frac{|x-y|^2}{4t}} \, \mathrm{d}y $\\ ~ \\ 
+On reconnait un produit de convolution entre $u_0$ et $\mathcal{H}_t$ le noyau de la chaleur. \\ ~ \\ 
+
+$\mathcal{H}_t := \frac{1}{\sqrt{(4\pi t)^d}} e^{-\frac{|x|^2}{4t}}$ \\ ~ \\ 
+
+Réciproquement, cette solution vérifie $(*)$.
+\end{frame}
+
+
+\begin{frame}{Cas général}
+On veut résoudre dans $\mathcal{H}^2(\Omega)$. La monotonie du laplacien est immédiate, la partie difficile étant la maximalité : \\ ~ \\ 
+$-\Delta u +u = f \ \text{où} \ f \in  \textcolor{red}{\mathcal{L}^2(\Omega)} $   \\ ~ \\ 
+Il est facile de prouver l'existence de solution dans $\mathcal{H}^1(\Omega)$ grâce au théorème de Lax-Milgram :\\ ~ \\ 
+$\exists !\  u\in\mathcal{H}^1(\Omega), \ \forall v \in \mathcal{H}^1(\Omega), \displaystyle \int_{\Omega} \nabla u \cdot \nabla v \,  + \int_{\Omega} u v =  \int_{\Omega} f v  \, $
+\end{frame}
+
+
+
 \section{Régularité elliptique}
+
+\begin{frame}{Principe}
+\textbf{Théorème (version Dirichlet) :} Soit $\Omega$ un ouvert de classe $\mathcal{C}^2$, de frontière $\Gamma$ bornée. Si $f \in \mathcal{L}^2(\Omega)$ et $u\in \mathcal{H}^1_0(\Omega)$ tq : \\ ~ \\  $\forall v \in \mathcal{H}^1_0(\Omega), \ \displaystyle \int_{\Omega} \nabla u \cdot \nabla v \,  + \int_{\Omega} u v =  \int_{\Omega} f v  \, $\\ ~ \\ 
+Alors $u\in \mathcal{H}^2(\Omega)$.
+\end{frame}
 
 \end{document}
