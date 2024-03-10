@@ -1,0 +1,160 @@
+\documentclass[10pt]{beamer}
+\usetheme{metropolis}           % Use metropolis theme
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{dsfont}
+\usepackage{graphicx}
+\usepackage{caption}
+\usefonttheme[onlymath]{serif}
+
+
+\title{Théorème de Hille-Yosida et applications}
+\date{\today}
+\author{Sacha Ben-Arous, Quentin Verrier, Clément Robiez}
+\institute{ENS Paris-Saclay}
+\begin{document}
+  \maketitle
+\begin{frame}
+\tableofcontents
+\end{frame}  
+
+
+\section{Théorème de Hille-Yosida}
+\begin{frame}{Définitions}
+On travaille dans un espace de Hilbert $H$. On considère un opérateur linéaire non borné (i.e non continu) $A : D(A)\rightarrow H$.
+\begin{itemize}
+\item[•]  $A$ est monotone si $\forall v \in D(A), \ \left<Av,v\right> \geq 0$ \\ ~ \\
+\item[•] $A$ est maximal si $\forall f\in H, \ \exists u\in D(A), \ u + Au=f$ 
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Propriétés fondamentales}
+Si $A$ est un opérateur maximal monotone, alors :
+\begin{itemize}
+\item[•]  $D(A)$ est dense dans $H$ 
+\item[•] Le graphe de $A$ est fermé 
+\item[•] $\forall \lambda > 0, \ (I+\lambda A)$ est une bijection, et $\|(I+\lambda A)^{-1}\|_{\mathcal{L}(H)} \leq 1 $
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Outils de la preuve}
+Soit $A$ est un opérateur maximal monotone, on note pour $\lambda > 0$ :
+\begin{itemize}
+\item<1->[•] $J_{\lambda} := (I+\lambda A)^{-1}$ la résolvante de $A$
+\item<1->[•] $A_{\lambda} := \frac{1}{\lambda}(I-J_{\lambda})$ l'approximation de Yosida de $A$ 
+\end{itemize}
+\underline{Rq} : $A_{\lambda}$ est continue et définie sur $H$. \\ ~ \\
+\onslide<2->{
+On a les propriétés suivantes : 
+\begin{itemize}
+\item[•] $A_\lambda v = A(J_\lambda v) $ et $ A_\lambda v = J_\lambda (A v) $
+\item[•] $\lim\limits_{\lambda\to 0} J_\lambda v = v$ et $\lim\limits_{\lambda\to 0} A_\lambda v = Av$
+\item[•] $\|A_\lambda v \| \leq \frac{1}{\lambda}\| v \|$ et $\|A_\lambda v \| \leq \| A v \|$
+\end{itemize}
+}
+\end{frame}
+
+
+\begin{frame}{Théorème de Hille-Yosida}
+\textbf{Théorème (Hille-Yosida) : \\}
+Soit $A$ un opérateur maximal monotone.\\
+ Alors, $\forall u_0 \in D(A), \ \exists ! u \in \mathcal{C}^1([0,+\infty[,H) \cap\mathcal{C}([0,+\infty[,D(A)) $ tel que : \\ ~ \\
+$(*) \begin{cases}\displaystyle \frac{du}{dt} +Au = 0 \text{\ \ \ \ sur } [0,+\infty[ \\ u(0)=u_0 \end{cases}$ \\ ~ \\ ~ \\
+De plus  $\forall t \geq 0$, $\|u(t)\|\leq 0 \ $ et $\ \displaystyle \|\frac{du}{dt}\| \leq  \|Au_0\|$
+\end{frame}
+
+
+\begin{frame}{Preuve (1) : Unicité}
+Soient $u_1,u_2$ solutions de $(*)$, on a : 
+\begin{eqnarray*}  \frac{1}{2}\frac{d}{dt}|u_1-u_2|^2  &=& \left< \frac{d}{dt}(u_1-u_2),(u_1-u_2)\right> \\
+&=&-\left< A(u_1-u_2),(u_1-u_2)\right> \ \leq \ 0
+\end{eqnarray*}
+\\ ~ \\
+Or $u_1(0)=u_2(0)=u_0$, donc $ \forall t \geq 0, \ u_1(t)=u_2(t)$
+\end{frame}
+
+
+\begin{frame}{Preuve (2) : Approximations}
+Soit $\lambda \geq 0$ : \\ ~ \\
+$(**) \begin{cases}\displaystyle \frac{d}{dt}u_\lambda +A_\lambda u_\lambda = 0 \\ u_\lambda(0)=u_0 \end{cases}$ \\ ~ \\ 
+Il existe $u_\lambda$ solution $\mathcal{C}^\infty$ de $(**)$ par C-L. \\ ~ \\ 
+On a $\left< A_\lambda u_\lambda,u_\lambda\right> \geq 0$ et $\frac{1}{2}\frac{d}{dt}|u_\lambda|^2 \leq 0$ donc $|u_\lambda|\leq u_0$. \\ ~ \\
+Par le même raisonnement, on obtient la décroissance de toutes les dérivées.
+\end{frame}
+
+\begin{frame}{Preuve (3) et (4) : Convergence}
+Soit $\lambda, \mu \geq 0$, on a de même  $\frac{1}{2}\frac{d}{dt}|u_\lambda-u_\mu|^2 \leq 2(\lambda + \mu) |Au_0|^2$, et en intégrant on obtient : \\~ \\
+$|u_\lambda -u_\mu| \leq 2 \sqrt{(\lambda + \mu)t}\ |Au_0|$\\~ \\ 
+
+Donc sur tout segment $[0,T]$ on a une suite de Cauchy, sur lequel la convergence va être uniforme vers $u \in \mathcal{C}([0,+\infty[,H)$. \\~\\ 
+
+Si de plus $u_0 \in D(A^2)$, on peut refaire le même raisonnement avec les dérivées pour obtenir $u \in \mathcal{C}^1([0,+\infty[,H)$. \\~\\ 
+\end{frame}
+
+
+\begin{frame}{Preuve (5) : Densité}
+On remarque que $\lim\limits_{\lambda\to 0} J_\lambda u_\lambda= u$, et de plus $\frac{d}{dt}u_\lambda + A(J_\lambda u_\lambda)=0$. \\~ \\
+Alors, $A$ étant fermé, on en déduit que $\forall t \geq 0, u(t) \in D(A)$, et $u \in \mathcal{C}([0,+\infty[,D(A))$, donc que $u$ est solution de $(*)$.\\~ \\
+\onslide<2->{\textbf{Lemme :} \\
+Soit $u_0 \in D(A)$, en notant $u_0' := J_\lambda u_0 \in D(A)$, on a $u_0' + \lambda A u_0' = u_0$. \\~\\
+Alors $u_0' \in D(A^2)$, et $\lim\limits_{\lambda\to 0} J_\lambda u_0 = u_0$ et $\lim\limits_{\lambda\to 0} J_\lambda Au_0 = Au_0$ , ce qui donne la densité de $D(A^2)$ dans $D(A)$.}
+\end{frame}
+
+\begin{frame}{Preuve (6) : Densité}
+
+Soit $(u_{0,n})_{n\in \mathbb{N}} \in D(A^2)^\mathbb{N}$ qui tend vers $u_0$ pour la norme du graphe. On considère les solutions $(u_{n})_{n\in \mathbb{N}}$ associées par l'étape $(5)$. Par décroissance, on a \\~\\
+$\begin{cases} |u_{n}(t) - u_{m}(t)| \leq |u_{0,n}-u_{0,m}| \to 0 \\ \displaystyle |\frac{du_{n}}{dt}(t) - \frac{du_{m}}{dt}(t)|\leq |Au_{0,n}-Au_{0,m}| \to 0 \end{cases}$ \\ ~ \\ 
+
+Alors convergence uniforme sur $\mathbb{R}^+$, leur limite vérifie $u\in \mathcal{C}^1([0,+\infty[,H)$ \\~\\
+Comme $A$ est fermé, $\forall t \geq 0, u(t) \in D(A)$, et $u$ satisfait le problème initial, ce qui achève la preuve. \\~\\ \qed
+\end{frame}
+\section{Équation de la chaleur}
+
+\begin{frame}{Présentation du problème}
+$(*)\begin{cases}  \Delta u = \frac{d}{dt}u \\ u(0)=u_0(x) \ \ \text{où } \ u_0 \in \mathcal{L}^2(\Omega) \end{cases}$ \\ ~ \\ ~ \\ 
+
+On veut appliquer Hille-Yosida avec $A=-\Delta$, sur l'espace de Hilbert $\mathcal{L}^2(\Omega)$ (ou bien $\mathcal{H}^2(\Omega)$). \\ ~ \\ 
+
+Avec $\Omega$ qui est un ouvert régulier de $\mathbb{R}^n$.
+\end{frame}
+
+
+
+\begin{frame}{Cas $\Omega=\mathbb{R}^n$}
+La transformée de Fourier est plus forte que Hille-Yosida dans le cas particulier où $\Omega=\mathbb{R}^n$, car on obtient une forme explicite de la solution. On raisonne par analyse synthèse : \\ ~ \\ ~ \\  
+$\displaystyle \widehat{\frac{du}{dt}}-\widehat{\Delta u}=0$, or on a $\widehat{\frac{du}{dt}}=\frac{d\hat{u}}{dt}$ et $\widehat{\Delta u}=-|\xi|^2\hat{u}$ \\ ~ \\ ~ \\ 
+
+On obtient alors $\widehat{u}=\widehat{u_0} \ e^{-|\xi|^2t}$, et donc $u=\text{TF}^{-1}(\widehat{u_0} \ e^{-|\xi|^2t})$
+\end{frame}
+
+
+
+\begin{frame}{Noyau de la chaleur}
+Par les calculs, on obtient $u=\frac{1}{(2\pi)^d}  \displaystyle \int_{\mathbb{R}^d} u_0(y)\sqrt{\frac{\pi}{t}}^d e^{-\frac{|x-y|^2}{4t}} \, \mathrm{d}y $\\ ~ \\ 
+On reconnait un produit de convolution entre $u_0$ et $\mathcal{H}_t$ le noyau de la chaleur. \\ ~ \\ 
+
+$\mathcal{H}_t := \frac{1}{\sqrt{(4\pi t)^d}} e^{-\frac{|x|^2}{4t}}$ \\ ~ \\ 
+
+Réciproquement, cette solution vérifie $(*)$.
+\end{frame}
+
+
+\begin{frame}{Cas général}
+On veut résoudre dans $\mathcal{H}^2(\Omega)$. La monotonie du laplacien est immédiate, la partie difficile étant la maximalité : \\ ~ \\ 
+$-\Delta u +u = f \ \text{où} \ f \in  \textcolor{red}{\mathcal{L}^2(\Omega)} $   \\ ~ \\ 
+Il est facile de prouver l'existence de solution dans $\mathcal{H}^1(\Omega)$ grâce au théorème de Lax-Milgram :\\ ~ \\ 
+$\exists !\  u\in\mathcal{H}^1(\Omega), \ \forall v \in \mathcal{H}^1(\Omega), \displaystyle \int_{\Omega} \nabla u \cdot \nabla v \,  + \int_{\Omega} u v =  \int_{\Omega} f v  \, $
+\end{frame}
+
+
+
+\section{Régularité elliptique}
+
+\begin{frame}{Principe}
+\textbf{Théorème (version Dirichlet) :} Soit $\Omega$ un ouvert de classe $\mathcal{C}^2$, de frontière $\Gamma$ bornée. Si $f \in \mathcal{L}^2(\Omega)$ et $u\in \mathcal{H}^1_0(\Omega)$ tq : \\ ~ \\  $\forall v \in \mathcal{H}^1_0(\Omega), \ \displaystyle \int_{\Omega} \nabla u \cdot \nabla v \,  + \int_{\Omega} u v =  \int_{\Omega} f v  \, $\\ ~ \\ 
+Alors $u\in \mathcal{H}^2(\Omega)$.
+\end{frame}
+
+\end{document}
