@@ -62,7 +62,7 @@ On a les propriétés suivantes :
 Soit $A$ un opérateur maximal monotone.\\
  Alors, $\forall u_0 \in D(A), \ \exists ! u \in \mathcal{C}^1([0,+\infty[,H) \cap\mathcal{C}([0,+\infty[,D(A)) $ tel que : \\ ~ \\
 $(*) \begin{cases}\displaystyle \frac{du}{dt} +Au = 0 \text{\ \ \ \ sur } [0,+\infty[ \\ u(0)=u_0 \end{cases}$ \\ ~ \\ ~ \\
-De plus  $\forall t \geq 0$, $\|u(t)\|\leq 0 \ $ et $\ \displaystyle \|\frac{du}{dt}\| \leq  \|Au_0\|$
+De plus  $\forall t \geq 0$, $\|u(t)\|\leq \|u_0\| \ $ et $\ \displaystyle \|\frac{du}{dt}\| \leq  \|Au_0\|$
 \end{frame}
 
 
@@ -95,7 +95,7 @@ Si de plus $u_0 \in D(A^2)$, on peut refaire le même raisonnement avec les dér
 
 
 \begin{frame}{Preuve (5) : Densité}
-On remarque que $\lim\limits_{\lambda\to 0} J_\lambda u_\lambda= u$, et de plus $\frac{d}{dt}u_\lambda + A(J_\lambda u_\lambda)=0$. \\~ \\
+On remarque que $\lim\limits_{\lambda\to 0} J_\lambda u_\lambda= u$, et de plus $\displaystyle \frac{du_\lambda}{dt} + A(J_\lambda u_\lambda)=0$. \\~ \\
 Alors, $A$ étant fermé, on en déduit que $\forall t \geq 0, u(t) \in D(A)$, et $u \in \mathcal{C}([0,+\infty[,D(A))$, donc que $u$ est solution de $(*)$.\\~ \\
 \onslide<2->{\textbf{Lemme :} \\
 Soit $u_0 \in D(A)$, en notant $u_0' := J_\lambda u_0 \in D(A)$, on a $u_0' + \lambda A u_0' = u_0$. \\~\\
@@ -113,11 +113,9 @@ Comme $A$ est fermé, $\forall t \geq 0, u(t) \in D(A)$, et $u$ satisfait le pro
 \section{Équation de la chaleur}
 
 \begin{frame}{Présentation du problème}
-$(*)\begin{cases}  \Delta u = \frac{d}{dt}u \\ u(0)=u_0(x) \ \ \text{où } \ u_0 \in \mathcal{L}^2(\Omega) \end{cases}$ \\ ~ \\ ~ \\ 
+$(*)\begin{cases} \displaystyle \Delta u = \frac{du}{dt} \\ u(0)=u_0(x) \ \ \text{où } \ u_0 \in \mathcal{L}^2(\Omega) \end{cases}$ \\ ~ \\ ~ \\ 
 
-On veut appliquer Hille-Yosida avec $A=-\Delta$, sur l'espace de Hilbert $\mathcal{L}^2(\Omega)$ (ou bien $\mathcal{H}^2(\Omega)$). \\ ~ \\ 
-
-Avec $\Omega$ qui est un ouvert régulier de $\mathbb{R}^n$.
+On veut appliquer Hille-Yosida avec $A=-\Delta$, sur l'espace de Hilbert $\mathcal{L}^2(\Omega)$, avec $D(A)= \mathcal{H}^2(\Omega)$, sur $\Omega$ qui est un ouvert régulier de $\mathbb{R}^n$.
 \end{frame}
 
 
@@ -143,7 +141,7 @@ Réciproquement, cette solution vérifie $(*)$.
 
 \begin{frame}{Cas général}
 On veut résoudre dans $\mathcal{H}^2(\Omega)$. La monotonie du laplacien est immédiate, la partie difficile étant la maximalité : \\ ~ \\ 
-$-\Delta u +u = f \ \text{où} \ f \in  \textcolor{red}{\mathcal{L}^2(\Omega)} $   \\ ~ \\ 
+$-\Delta u +u = f \ \text{où} \ f \in \mathcal{L}^2(\Omega) $   \\ ~ \\ 
 Il est facile de prouver l'existence de solution dans $\mathcal{H}^1(\Omega)$ grâce au théorème de Lax-Milgram :\\ ~ \\ 
 $\exists !\  u\in\mathcal{H}^1(\Omega), \ \forall v \in \mathcal{H}^1(\Omega), \displaystyle \int_{\Omega} \nabla u \cdot \nabla v \,  + \int_{\Omega} u v =  \int_{\Omega} f v  \, $
 \end{frame}
