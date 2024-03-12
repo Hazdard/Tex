@@ -165,7 +165,15 @@ On se servira de $\displaystyle D_hu(x):=\frac{u(x+h)-u(x)}{|h|}$ quand cet obje
 
 
 \begin{frame}{Lemme}
-$\forall v \in \mathcal{H}^1(\Omega), \ h \ \| \ \Gamma$, on a $\ \|D_hv\|_{\mathcal{L}^2(\Omega)} \leq \|\nabla v\|_{\mathcal{L}^2(\Omega)}  $
+\textbf{Lemme :}
+$\forall v \in \mathcal{H}^1(\Omega), \ h \ \| \ \Gamma$, on a $\ \|D_hv\|_{\mathcal{L}^2(\Omega)} \leq \|\nabla v\|_{\mathcal{L}^2(\Omega)}  $ \\~\\
+
+\textbf{Preuve :} On se rammène à $\mathcal{C}^1\cap \mathcal{H}^1(\Omega)$ par densité de cet ensemble. \\~\\
+On a $D_hv(x) = \displaystyle \frac{1}{|h|}\int_0^1 \nabla v(x+th).h \,\mathrm{d}t $, et donc : \\~\\
+
+$\|D_hv\|^2_{\mathcal{L}^2(\Omega)} \leq \displaystyle \int_{\Omega} \int_0^1 | \nabla v(x+th).h|^2 \leq \| \nabla v\|^2_{\mathcal{L}^2(\Omega)}$ \\~\\
+
+en utilisant un changement de variable et Fubini-Tonelli.
 
 \end{frame}
 
@@ -206,10 +214,7 @@ Finalement, on a montré qu'il existe des $f_{j,k} \in \mathcal{L}^2(\Omega)$ te
 $\forall \varphi  \in \mathcal{C}^\infty_c(\Omega), \ \ \displaystyle \int u \frac{\partial^2 \varphi}{\partial x_j  \partial x_k} \, = \displaystyle \int f_{j,k} \varphi \,$ \\~\\
 
 Donc $u\in \mathcal{H}^2(\Omega)$.
-
 \end{frame}
-
-
 
 
 
