@@ -150,9 +150,71 @@ $\exists !\  u\in\mathcal{H}^1(\Omega), \ \forall v \in \mathcal{H}^1(\Omega), \
 
 \section{Régularité elliptique}
 
-\begin{frame}{Principe}
-\textbf{Théorème (version Dirichlet) :} Soit $\Omega$ un ouvert de classe $\mathcal{C}^2$, de frontière $\Gamma$ bornée. Si $f \in \mathcal{L}^2(\Omega)$ et $u\in \mathcal{H}^1_0(\Omega)$ tq : \\ ~ \\  $\forall v \in \mathcal{H}^1_0(\Omega), \ \displaystyle \int_{\Omega} \nabla u \cdot \nabla v \,  + \int_{\Omega} u v =  \int_{\Omega} f v  \, $\\ ~ \\ 
+\begin{frame}{Théorème (Dirichlet)}
+\textbf{Théorème (version Dirichlet) :} Soit $\Omega$ un ouvert de classe $\mathcal{C}^2$, de frontière $\Gamma$ bornée. Si $f \in \mathcal{L}^2(\Omega)$ et $u\in \mathcal{H}^1_0(\Omega)$ tq : \\ ~ \\  $\forall v \in \mathcal{H}^1_0(\Omega), \ \displaystyle \int_{\Omega} \nabla u \cdot \nabla v \,  + \int_{\Omega} u v =  \int_{\Omega} f v  \, \ \ \ (*) $\\ ~ \\ 
 Alors $u\in \mathcal{H}^2(\Omega)$.
 \end{frame}
+
+
+\begin{frame}{Idée de la preuve}
+On étudie la cas $\Omega=\mathbb{R}^n$ et  $\Omega=\mathbb{R}^n_+(=\mathbb{R}^{n-1}\times ]0;+\infty[)$, qui contiennent l'essentiel de la preuve dans le cas général. \\ ~ \\ 
+
+On se servira de $\displaystyle D_hu(x):=\frac{u(x+h)-u(x)}{|h|}$ quand cet objet a un sens.
+
+\end{frame}
+
+
+\begin{frame}{Lemme}
+$\forall v \in \mathcal{H}^1(\Omega), \ h \ \| \ \Gamma$, on a $\ \|D_hv\|_{\mathcal{L}^2(\Omega)} \leq \|\nabla v\|_{\mathcal{L}^2(\Omega)}  $
+
+\end{frame}
+
+
+
+\begin{frame}{Cas $\Omega=\mathbb{R}^n$}
+On applique $(*)$ avec $v=D_{-h}D_hu$, ce qui donne  : \\~\\
+
+$ \displaystyle \int_{\Omega} |\nabla D_h u|^2 \,  + \int_{\Omega} |D_hu|^2 =  \int_{\Omega} f D_{-h}D_hu  \,$ \\~\\
+
+Par Cauchy-Schwarz et avec le lemme précédent on obtient : \\~\\ 
+
+$\|D_hu\|_{\mathcal{H}^1} \leq \|f\|_2$, donc en particulier  $\forall i=1,\dots,n \ $ : $\displaystyle \|D_h \frac{\partial u}{\partial x_i} \|_2 \leq \|f\|_2$  \\~\\
+
+$\textcolor{red}{\text{Par le lemme precedent, on conclut que } \frac{\partial u}{\partial x_i} \in \mathcal{H}^1}.$
+\end{frame}
+
+
+\begin{frame}{Cas $\Omega=\mathbb{R}^n_+$ (1)}
+Par le même raisonnement, on a que pour $h \ \| \ \Gamma$, on a $\|D_hu\|_{\mathcal{H}^1} \leq \|f\|_2  $ \\~\\
+On se donne alors $\varphi \in \mathcal{C}^\infty_c(\Omega)$, et on a : \\~\\
+
+$\displaystyle \left | \int D_h (\frac{\partial u}{\partial x_j} )\varphi \, \right | =  \left |-\int uD_{-h} (\frac{\partial \varphi}{\partial x_j})\, \right | \leq \|f\|_2 \|\varphi\|_2 $ \\~\\
+
+En passant à la limite sur $h$, on obtient $\forall 1\leq j \leq n$ et $1 \leq k \leq n-1$ : \\~\\
+
+$\left |\displaystyle \int u \frac{\partial^2 \varphi}{\partial x_j \partial x_k} \, \right | \leq \|f\|_2 \|\varphi\|_2 $
+\end{frame}
+
+
+\begin{frame}{Cas $\Omega=\mathbb{R}^n_+$ (2)}
+En utilisant $(*)$, on obtient : \\~\\
+
+$\left |\displaystyle \int u \frac{\partial^2 \varphi}{\partial x_N^2} \, \right | \leq \displaystyle \sum_{i=1}^{n-1} \left |\displaystyle \int u \frac{\partial^2 \varphi}{\partial x_i^2} \, \right | + \left |\displaystyle \int (f-u) \varphi \, \right | \leq C \|f\|_2 \|\varphi\|_2$ \\~\\
+
+Finalement, on a montré qu'il existe des $f_{j,k} \in \mathcal{L}^2(\Omega)$ tels que : \\~\\
+
+$\forall \varphi  \in \mathcal{C}^\infty_c(\Omega), \ \ \displaystyle \int u \frac{\partial^2 \varphi}{\partial x_j  \partial x_k} \, = \displaystyle \int f_{j,k} \varphi \,$ \\~\\
+
+Donc $u\in \mathcal{H}^2(\Omega)$.
+
+\end{frame}
+
+
+
+
+
+
+
+
 
 \end{document}
