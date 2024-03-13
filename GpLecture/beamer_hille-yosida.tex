@@ -152,7 +152,9 @@ $\exists !\  u\in\mathcal{H}^1(\Omega), \ \forall v \in \mathcal{H}^1(\Omega), \
 
 \begin{frame}{Théorème (Dirichlet)}
 \textbf{Théorème (version Dirichlet) :} Soit $\Omega$ un ouvert de classe $\mathcal{C}^2$, de frontière $\Gamma$ bornée. Si $f \in \mathcal{L}^2(\Omega)$ et $u\in \mathcal{H}^1_0(\Omega)$ tq : \\ ~ \\  $\forall v \in \mathcal{H}^1_0(\Omega), \ \displaystyle \int_{\Omega} \nabla u \cdot \nabla v \,  + \int_{\Omega} u v =  \int_{\Omega} f v  \, \ \ \ (*) $\\ ~ \\ 
-Alors $u\in \mathcal{H}^2(\Omega)$.
+Alors $u\in \mathcal{H}^2(\Omega)$. \\~\\
+
+\underline{Rq }: Ce théorème est encore valide si on ne suppose que $u,v\in\mathcal{H}^1(\Omega)$ et qu'on impose la valeur des dérivées partielles sur la frontière. Il s'agit des conditions de Neumann.
 \end{frame}
 
 
@@ -217,9 +219,42 @@ Donc $u\in \mathcal{H}^2(\Omega)$.
 \end{frame}
 
 
+\begin{frame}{Exemple (1)}
+
+On peut par exemple résoudre le problème suivant :
+
+$\mathcal{Q}=\Omega \times (0;+\infty)$ \\
+$\Sigma = \Gamma \times (0;+\infty)$ \\~\\
+
+
+\includegraphics[scale=0.2]{exemple1.png}
+\captionof{figure}{Equation de la chaleur sur un ouvert $\Omega$}
+
+\end{frame}
 
 
 
+\begin{frame}{Exemple (2)}
+
+On considère de même le cas où $\frac{\partial u}{\partial n}=0$ sur $\Sigma$ avec le vecteur orthogonal à la frontière $\Sigma$. \\~\\
+
+
+\includegraphics[scale=0.25]{iceberg.png}
+\captionof{figure}{Système en contact avec un thermostat} ~ \\~\\
+
+Autre exemple historique : tore métallique dans du sable, pas d'échange avec l'extérieur.
+\end{frame}
+
+
+
+\begin{frame}{Fin}
+
+\begin{center}
+Merci pour votre attention ! \\~\\
+Q\&A
+\end{center}
+
+\end{frame}
 
 
 \end{document}
