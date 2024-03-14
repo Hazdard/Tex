@@ -154,7 +154,7 @@ $\exists !\  u\in\mathcal{H}^1(\Omega), \ \forall v \in \mathcal{H}^1(\Omega), \
 \textbf{Théorème (version Dirichlet) :} Soit $\Omega$ un ouvert de classe $\mathcal{C}^2$, de frontière $\Gamma$ bornée. Si $f \in \mathcal{L}^2(\Omega)$ et $u\in \mathcal{H}^1_0(\Omega)$ tq : \\ ~ \\  $\forall v \in \mathcal{H}^1_0(\Omega), \ \displaystyle \int_{\Omega} \nabla u \cdot \nabla v \,  + \int_{\Omega} u v =  \int_{\Omega} f v  \, \ \ \ (*) $\\ ~ \\ 
 Alors $u\in \mathcal{H}^2(\Omega)$. \\~\\
 
-\underline{Rq }: Ce théorème est encore valide si on ne suppose que $u,v\in\mathcal{H}^1(\Omega)$ et qu'on impose la valeur des dérivées partielles sur la frontière. Il s'agit des conditions de Neumann.
+\underline{Rq }: Ce théorème est encore valide si on ne suppose que $u,v\in\mathcal{H}^1(\Omega)$ et qu'on impose la valeur du gradient sur la frontière. Il s'agit des conditions de Neumann.
 \end{frame}
 
 
@@ -171,42 +171,44 @@ On se servira de $\displaystyle D_hu(x):=\frac{u(x+h)-u(x)}{|h|}$ quand cet obje
 $\forall v \in \mathcal{H}^1(\Omega), \ h \ \| \ \Gamma$, on a $\ \|D_hv\|_{\mathcal{L}^2(\Omega)} \leq \|\nabla v\|_{\mathcal{L}^2(\Omega)}  $ \\~\\
 
 \textbf{Preuve :} On se rammène à $\mathcal{C}^1\cap \mathcal{H}^1(\Omega)$ par densité de cet ensemble. \\~\\
-On a $D_hv(x) = \displaystyle \frac{1}{|h|}\int_0^1 \nabla v(x+th).h \,\mathrm{d}t $, et donc : \\~\\
+On a $D_hv(x) = \displaystyle \frac{1}{|h|}\int_0^1 \nabla v(x+th).h \,\mathrm{d}t $, et comme de plus : \\~\\
 
-$\|D_hv\|^2_{\mathcal{L}^2(\Omega)} \leq \displaystyle \int_{\Omega} \int_0^1 | \nabla v(x+th).h|^2 \leq \| \nabla v\|^2_{\mathcal{L}^2(\Omega)}$ \\~\\
+$\displaystyle \left | \int_0^1 \nabla v(x+th).h \,\mathrm{d}t \right |^2 \leq |h|^2 \int_0^1 |\nabla v(x+th)|^2 \,\mathrm{d}t $ par C-S, on obtient : \\~\\
 
-en utilisant un changement de variable et Fubini-Tonelli.
+$\|D_hv\|^2_{\mathcal{L}^2(\Omega)} \leq \displaystyle \int_{\Omega} \int_0^1 | \nabla v(x+th)|^2 \,\mathrm{d}t \,\mathrm{d}x \leq \| \nabla v\|^2_{\mathcal{L}^2(\Omega)}$ \\~\\
+
+en utilisant un changement de variable et Fubini-Tonelli. On conclut dans le cas général par continuité de la norme.
 
 \end{frame}
 
 
-
-\begin{frame}{Cas $\Omega=\mathbb{R}^n$}
+\begin{frame}{Cas $\Omega=\mathbb{R}^n$ ou $\mathbb{R}^n_+$ (1)}
 On applique $(*)$ avec $v=D_{-h}D_hu$, ce qui donne  : \\~\\
 
 $ \displaystyle \int_{\Omega} |\nabla D_h u|^2 \,  + \int_{\Omega} |D_hu|^2 =  \int_{\Omega} f D_{-h}D_hu  \,$ \\~\\
 
-Par Cauchy-Schwarz et avec le lemme précédent on obtient : \\~\\ 
+Par Cauchy-Schwarz on obtient : \\~\\ 
 
-$\|D_hu\|_{\mathcal{H}^1} \leq \|f\|_2$, donc en particulier  $\forall i=1,\dots,n \ $ : $\displaystyle \|D_h \frac{\partial u}{\partial x_i} \|_2 \leq \|f\|_2$  \\~\\
+$\|D_hu\|^2_{\mathcal{H}^1} \leq \|f\|_2 \|D_{-h}(D_hu)\|_2 $, ce qui donne avec le lemme précédent : \\~\\
 
-$\textcolor{red}{\text{Par le lemme precedent, on conclut que } \frac{\partial u}{\partial x_i} \in \mathcal{H}^1}.$
+$\|D_hu\|_{\mathcal{H}^1} \leq \|f\|_2 $
 \end{frame}
 
 
-\begin{frame}{Cas $\Omega=\mathbb{R}^n_+$ (1)}
-Par le même raisonnement, on a que pour $h \ \| \ \Gamma$, on a $\|D_hu\|_{\mathcal{H}^1} \leq \|f\|_2  $ \\~\\
+\begin{frame}{Cas $\Omega=\mathbb{R}^n$ ou $\mathbb{R}^n_+$ (2)}
 On se donne alors $\varphi \in \mathcal{C}^\infty_c(\Omega)$, et on a : \\~\\
 
-$\displaystyle \left | \int D_h (\frac{\partial u}{\partial x_j} )\varphi \, \right | =  \left |-\int uD_{-h} (\frac{\partial \varphi}{\partial x_j})\, \right | \leq \|f\|_2 \|\varphi\|_2 $ \\~\\
+$\displaystyle \left |\int uD_{-h} (\frac{\partial \varphi}{\partial x_j})\, \right | = \displaystyle \left | - \int D_h (\frac{\partial u}{\partial x_j} )\varphi \, \right | \leq \|f\|_2 \|\varphi\|_2 $ \\~\\
 
 En passant à la limite sur $h$, on obtient $\forall 1\leq j \leq n$ et $1 \leq k \leq n-1$ : \\~\\
 
-$\left |\displaystyle \int u \frac{\partial^2 \varphi}{\partial x_j \partial x_k} \, \right | \leq \|f\|_2 \|\varphi\|_2 $
+$\left |\displaystyle \int u \frac{\partial^2 \varphi}{\partial x_j \partial x_k} \, \right | \leq \|f\|_2 \|\varphi\|_2 $ \\~\\
+
+Sur $\mathbb{R}^n$, $k=n$ ne pose pas de soucis, par contre il faut travailler différemment sur $\mathbb{R}^n_+$.
 \end{frame}
 
 
-\begin{frame}{Cas $\Omega=\mathbb{R}^n_+$ (2)}
+\begin{frame}{Cas $\Omega=\mathbb{R}^n_+$ (3)}
 En utilisant $(*)$, on obtient : \\~\\
 
 $\left |\displaystyle \int u \frac{\partial^2 \varphi}{\partial x_N^2} \, \right | \leq \displaystyle \sum_{i=1}^{n-1} \left |\displaystyle \int u \frac{\partial^2 \varphi}{\partial x_i^2} \, \right | + \left |\displaystyle \int (f-u) \varphi \, \right | \leq C \|f\|_2 \|\varphi\|_2$ \\~\\
@@ -236,15 +238,23 @@ $\Sigma = \Gamma \times (0;+\infty)$ \\~\\
 
 \begin{frame}{Exemple (2)}
 
-On considère de même le cas où $\frac{\partial u}{\partial n}=0$ sur $\Sigma$ avec le vecteur orthogonal à la frontière $\Sigma$. \\~\\
+On considère de même le cas où la valeur de $u$ est fixée le long de la frontière $\Sigma$. \\~\\
 
 
 \includegraphics[scale=0.25]{iceberg.png}
 \captionof{figure}{Système en contact avec un thermostat} ~ \\~\\
 
-Autre exemple historique : tore métallique dans du sable, pas d'échange avec l'extérieur.
+Autre exemple historique : tore métallique dans du sable, pas d'échange avec l'extérieur. Effet régularisant de l'équation de la chaleur.
 \end{frame}
 
+
+\begin{frame}{Cas auto-adjoint}
+\textbf{Théorème (variante Hille-Yosida) : \\}
+Soit $A$ un opérateur auto-adjoint maximal monotone.\\
+ Alors, $\textcolor{red}{\forall  u_0 \in H}, \ \exists ! u \in \mathcal{C}^1(]0,+\infty[,H) \cap\mathcal{C}(]0,+\infty[,D(A)) $ tel que : \\ ~ \\
+$(*) \begin{cases}\displaystyle \frac{du}{dt} +Au = 0 \text{\ \ \ \ sur } ]0,+\infty[ \\ u(0)=u_0 \end{cases}$ \\ ~ \\ ~ \\
+De plus  $\forall t > 0$, $\|u(t)\|\leq \|u_0\| \ $ et $\ \displaystyle \|\frac{du}{dt}\| \leq  \|Au_0\|$
+\end{frame}
 
 
 \begin{frame}{Fin}
