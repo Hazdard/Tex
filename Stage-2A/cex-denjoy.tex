@@ -60,7 +60,7 @@ Pour tout $\alpha \in \mathbb{R} \setminus \mathbb{Q}$, il existe un $\mathcal{C
 \ \ \ \ \ Pour faire cela, on s'inspire de la preuve du théorème dans le cas $\mathcal{C}^2$ : on sait déjà par Poincaré qu'un tel $f$ est semi-conjugué à $R_\alpha$ par une fonction continue croissante $h$ du tore. La preuve procède par l'absurde, en montrant que si $h$ n'est pas inversible, alors elle est constante sur un intervalle $I$ non trivial du tore. Les itérés $f^n(I)$ sont alors disjoints (on dit que $I$ est un intervalle errant pour la dynamique de $f$), et on conclut en montrant que la somme de leurs tailles diverge. \\ 
 L'idée ici est donc construire une fonction $f$ qui admet un intervalle errant mais dont la suite des tailles des itérés est sommable. \\
 
-On va de plus utiliser l'invariant de conjuguaison suivant : 
+On se servira de l'invariant de conjuguaison suivant : 
 
 \begin{defin} : Un homéomorphisme du tore $f$ est dit \textit{minimal} si tout ensemble fermé invariant par  $f$ est vide ou égal au tore tout entier. 
 \end{defin}
@@ -74,7 +74,16 @@ On va de plus utiliser l'invariant de conjuguaison suivant :
 
 \textbf{Preuve :} \\ 
 (1) est immédiat en utilisant la bijectivité de la conjuguaison. \\
-(2) s'obtient en remarquand que si $\alpha \in \mathbb{R} \setminus \mathbb{Q}$, alors $\alpha\mathbb{Z} + \mathbb{Z}$ est dense dans $\mathbb{R}$, et donc $\alpha\mathbb{Z}/\mathbb{Z}$ est dense dans le tore $\mathbb{R}/\mathbb{Z}$. \\
+(2) s'obtient en remarquand que si $\alpha \in \mathbb{R} \setminus \mathbb{Q}$, alors $\alpha\mathbb{Z} + \mathbb{Z}$ est dense dans $\mathbb{R}$, et donc $\alpha\mathbb{Z}/\mathbb{Z}$ est dense dans le tore $\mathbb{R}/\mathbb{Z}$. \\ \qed
+
+La proposition suivante sera utile dans la suite :
+
+\begin{proposition}
+Soient $D_1,D_2$ deux ensembles denses dans $[0,1]$, et $f : D_1 \to D_2$ une surjection (strictement) croissante, alors $f$ admet un unique prolongement continu, (strictement) croissant, de $[0,1]$ dans lui-même.
+\end{proposition}
+
+\textbf{Preuve :} L'unicité du prolongement est immédiate par densité de $D_1$, car deux fonctions continues sur un sous-ensemble dense sont partout égales. Si $x\in [0,1]\setminus D_1$, il existe $(x_n)_{n\in \mathbb{N}}$ dans $D_1$ qui tend vers $x$, quel'on peut supposer monotone. La suite $(f(x_n))_{n\in\mathbb{N}}$ est alors monotone bornée, donc converge vers une limite qui définit la valeur de $f(x)$. Cette définition ne dépend pas du choix de la suite, car si l'on se donne une autre suite $(\tilde{x}_n)_{n\in\mathbb{N}}$ ayant les mêmes propriétés, on remarque que la suite de terme général $f(x_n)-f(\tilde{x}_n)$ est de Cauchy. Cette construction préserve clairement la monotonie (stricte) de $f$, et est de plus continue, car l'image monotone non continue d'un intervalle évite un intervalle, or l'image de $f$ est dense. \\ \qed
+\\
 
 \textbf{Preuve du Théorème 1.1 :} \\
 
@@ -120,8 +129,17 @@ Maintenant, si l'on arrive à montrer que $\bigcup_{n\in \mathbb{Z}} I_n$ est in
 \end{lemma}
 
 
-\textbf{Preuve :} \textit{à faire ...}
+\textbf{Preuve :} \textit{à faire ...} \\
 
+On en déduit en particulier que, $f$ étant strictement croissante et continue, on a de plus $f(\overset{\circ}I_n)=\overset{\circ}I_{n+1}$.
+
+\begin{lemma} $K := \displaystyle [0,1] \setminus \bigcup_{n\in \mathbb{Z}} \overset{\circ} I_n$ est un fermé non trivial et stable par $f$.
+\end{lemma}
+
+
+\textbf{Preuve :} La stabilité découle de la remarque précédente. Cet ensemble est clairement distinct de $[0,1]$ et il est de plus non vide car sinon, par compacité de $[0,1]$, on pourrait en extraire un recouvrement fini, mais alors la mesure de ce recouvrement serait strictement plus petite que $1$ au vu de la définition des $(I_n)_{n\in\mathbb{Z}}$, ce qui est absurde. \\ \qed  ~\\
+
+\underline{Rq }: $K$ est en fait un ensemble de Cantor, au sens où il est fermé d'intérieur vide et sans point isolé.
 \newpage
 \printbibliography[heading=bibintoc, title={Références}]
 
