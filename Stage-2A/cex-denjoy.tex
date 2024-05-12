@@ -47,17 +47,19 @@
 \begin{document}
 \maketitle
 
-\ \ \ \ \ Ce document est consacré à l'étude de certains contre-exemples du théorème de Denjoy. Dans une première partie nous construirons un contre-exemple $\mathcal{C}^1$ élémentaire proposé par Denjoy lui-même, et qui est développé par H. Rosenberg dans \cite{rosenberg}. Nous présenterons ensuite un résultat sur l'existence et la densité de contre-exemples de régularité $\mathcal{C}^{2-\epsilon}$ proposé par Michael Herman dans sa thèse \cite{herman}, en particulier au chapitre X.
-
-\section{Cas continûment dérivable}
+\ \ \ \ \ Ce document est consacré à l'étude de certains contre-exemples du théorème de Denjoy. Dans une première partie nous construirons des contre-exemples de régularité optimale, dus à Denjoy, et qui sont développé par H. Rosenberg dans \cite{rosenberg}, et surtout par Michael Herman dans sa thèse \cite{herman}, en particulier au chapitre X. Nous présenterons ensuite un résultat sur la densité de ces contre-exemples, en suivant les travaux de Herman.
+\section{Introduction et outils}
 
 On se propose de montrer le théorème suivant :
 
 \begin{theorem}\textbf{(Denjoy) : }
-Pour tout $\alpha \in \mathbb{R} \setminus \mathbb{Q}$, il existe un $\mathcal{C}^1$-difféomorphisme $f$ du tore tel que $\rho(f)=\alpha$ et $f$ n'est pas conjugué à la rotation $R_\alpha$.
+Pour tout $\alpha \in \mathbb{R} \setminus \mathbb{Q}$, $\forall \epsilon > 0$, il existe un $\mathcal{C}^{2-\epsilon}$-difféomorphisme $f$ du tore tel que $\rho(f)=\alpha$ et $f$ n'est pas conjugué à la rotation $R_\alpha$.
 \end{theorem}
 
-\ \ \ \ \ Pour faire cela, on s'inspire de la preuve du théorème dans le cas $\mathcal{C}^2$ : on sait déjà par Poincaré qu'un tel $f$ est semi-conjugué à $R_\alpha$ par une fonction continue croissante $h$ du tore. La preuve procède par l'absurde, en montrant que si $h$ n'est pas inversible, alors elle est constante sur un intervalle $I$ non trivial du tore. Les itérés $f^n(I)$ sont alors disjoints (on dit que $I$ est un intervalle errant pour la dynamique de $f$), et on conclut en montrant que la somme de leurs tailles diverge. \\ 
+~\\
+\underline{Rq }: Ici, la  régularité non-entière est définie au sens de Hölder, i.e $f$ est $\mathcal{C}^1$, de dérivée $1-\epsilon$-hölderienne.\\
+
+\ \ \ \ \ Pour construire un contre-exemple, on s'inspire de la preuve du théorème dans le cas $\mathcal{C}^2$ : on sait déjà par Poincaré qu'un tel $f$ est semi-conjugué à $R_\alpha$ par une fonction continue croissante $h$ du tore. La preuve procède par l'absurde, en montrant que si $h$ n'est pas inversible, alors elle est constante sur un intervalle $I$ non trivial du tore. Les itérés $f^n(I)$ sont alors disjoints (on dit que $I$ est un intervalle errant pour la dynamique de $f$), et on conclut en montrant que la somme de leurs tailles diverge. \\ 
 L'idée ici est donc construire une fonction $f$ qui admet un intervalle errant mais dont la suite des tailles des itérés est sommable. \\
 
 On se servira de l'invariant de conjuguaison suivant : 
@@ -70,38 +72,38 @@ On se servira de l'invariant de conjuguaison suivant :
 \item Si $f$ est conjugué à $g$ minimal, alors $f$ est minimal.
 \item Si $\alpha \in \mathbb{R} \setminus \mathbb{Q}$, alors $R_\alpha$ est minimal
 \end{enumerate}
+\label{prop:mini}
 \end{proposition}
 
 \textbf{Preuve :} \\ 
-(1) est immédiat en utilisant la bijectivité et la continuité de la conjuguaison. \\
+(1) est immédiat en utilisant la bicontinuité de la conjuguaison. \\
 (2) s'obtient en remarquand que si $\alpha \in \mathbb{R} \setminus \mathbb{Q}$, alors $\alpha\mathbb{Z} + \mathbb{Z}$ est dense dans $\mathbb{R}$, et donc $\alpha\mathbb{Z}/\mathbb{Z}$ est dense dans le tore $\mathbb{R}/\mathbb{Z}$. \\ \qed
 
 La proposition suivante sera utile dans la suite :
 
 \begin{proposition}
 Soient $D_1,D_2$ deux ensembles denses dans $[0,1]$, et $f : D_1 \to D_2$ une surjection (strictement) croissante, alors $f$ admet un unique prolongement continu, (strictement) croissant, de $[0,1]$ dans lui-même.
+\label{prop:dense}
 \end{proposition}
 
 \textbf{Preuve :} L'unicité du prolongement est immédiate par densité de $D_1$, car deux fonctions continues sur un sous-ensemble dense sont partout égales. Si $x\in [0,1]\setminus D_1$, il existe $(x_n)_{n\in \mathbb{N}}$ dans $D_1$ qui tend vers $x$, que l'on peut supposer monotone. La suite $(f(x_n))_{n\in\mathbb{N}}$ est alors monotone bornée, donc converge vers une limite qui définit la valeur de $f(x)$.
 % Cette définition ne dépend pas du choix de la suite, car si l'on se donne une autre suite $(\tilde{x}_n)_{n\in\mathbb{N}}$ ayant les mêmes propriétés, on remarque que la suite de terme général $f(x_n)-f(\tilde{x}_n)$ est de Cauchy. % 
 Cette construction préserve clairement la monotonie (stricte) de $f$, et est de plus continue, car l'image monotone non continue d'un intervalle évite un intervalle, or l'image de $f$ est dense. \\ \qed
-\\
 
-\textbf{Preuve du Théorème 1.1 :} \\
+\subsection{Contre-exemple continu} 
 
 On note $(l_n)_{n\in \mathbb{Z}}$ la suite des longueurs des intervalles,  qui vérifie les propriétés suivantes : 
 \begin{enumerate}
 
-\item[•] $\displaystyle \sum_{n\in \mathbb{Z}} l_n = 1$ 
+\item[(a)] $\displaystyle \sum_{n\in \mathbb{Z}} l_n = 1$ 
 
-\item[•]$\displaystyle \lim\limits_{n \to \pm \infty } \frac{l_{n+1}}{l_n} = 1 $
-
-\item[•] $\displaystyle \sup_{n\in \mathbb{Z}} \left | \frac{l_{n+1}}{l_n} -1 \right | < \frac{1}{4}$
+\item[(b)]$\displaystyle \lim\limits_{n \to \pm \infty } \frac{l_{n+1}}{l_n} = 1 $
 
 \end{enumerate} On peut par exemple prendre $l_n = \displaystyle \frac{c}{n^2 + k}$ où $k$ est grand et $c$ est une constante bien choisie. \\
 On note alors $ \alpha_n := \alpha n \mod 1$ et on pose $I_n := [b_n , c_n]$ où $\begin{cases} b_n := \displaystyle \sum_{\{m, \ \alpha_m < \alpha_n\}} l_m \\ c_n := \displaystyle \sum_{\{m, \ \alpha_m \leq \alpha_n\}} l_m  = b_n + l_n \end{cases}$ \\
 
 \begin{lemma} $\displaystyle K := [0,1] \setminus \bigcup_{n\in \mathbb{Z}} \overset{\circ}I_n$ est un fermé non trivial.
+\label{lem:cantor}
 \end{lemma}
 
 
@@ -118,13 +120,20 @@ On considère ensuite la fonction $h$ définie par morceaux sur les $(I_n)_{n\in
 
 
 \textbf{Preuve :} Soient $n_1,n_2 \in \mathbb{Z}$ tels que $\alpha_{n_1} < \alpha_{n_2}$, alors : $b_{n_2} - c_{n_1} = \displaystyle \sum_{k, \alpha_{n_1} < \alpha_k < \alpha_{n_2}} l_k \  > 0$, ce qui prouve le premier point. \\
-Ensuite, on en déduit immédiatement que $h$ est croissante, et alors par la Proposition 1.2, admet un prolongement continue croissant de [0,1] dans lui-même.
+On en déduit immédiatement que $h$ est croissante, et alors par la \hyperref[prop:dense]{Proposition 1.2}, admet un prolongement continue croissant de [0,1] dans lui-même. Par définition, on a l'inclusion $I_n \subset h^{-1}(\{\alpha_n\})$. Si par l'absurde il existe $x$ tel que $h(x)=\alpha_n$ et $x \notin I_n$, alors $d(x,I_n) >0$. On suppose sans perte de généralité que $x<b_n$, alors par densité de $\displaystyle \bigcup_{n\in \mathbb{Z}} I_n$ il existe $y\in I_{n'}$ tel que $x\leq y < b_n$, et la croissance de $h$ donne $\alpha_n = h(x) \leq h(y) \leq \alpha_n$, i.e $\alpha_{n'} = \alpha_n$, ce qui est absurde, et donne donc l'égalité voulue. \\ \qed \\
 
+On prolonge maintenant $h$ sur $\mathbb{R}$ par la relation, pour $x\in [0,1]$ et $p\in \mathbb{Z}$, $h(x+p)=h(x)+p$, et on note $I_{n,p}:=h^{-1}(\alpha_n+p)=I_n + p$. Alors $\displaystyle U:= \bigcup_{n,p \in \mathbb{Z}} \overset{\circ}I_{n,p}$ est un ouvert dense de $\mathbb{R}$, et $\mathbb{R}\setminus U$ est encore un ensemble de Cantor. \\
 
+$\forall n \in \mathbb{Z}$, on choisit un homéomorphisme croissant $g_n$ de $I_n$ sur $I_{n+1}$, par exemple la transformation affine : $g_n(x) := \displaystyle \frac{l_n+1}{l_n}x + b_{n+1}-b_n\frac{l_{n+1}}{l_n}$, qui vérifie bien $g_n(b_n)=b_{n+1}$ et $g_n(c_n)=c_{n+1}$. Cela définit alors une application $g$ de $\displaystyle \bigcup_{n\in \mathbb{Z}} I_n$ dans lui-même, strictement croissante. Par la \hyperref[prop:dense]{Proposition 1.2}, $g$ admet un prolongement continu de $[0,1]$ dans lui-même, que l'on prolonge en homéomorphisme sur $\mathbb{R}$ entier de la même manière que $h$. On a alors par construction $h \circ g = R_\alpha \circ h$ sur $\displaystyle \bigcup_{n,p \in \mathbb{Z}} \overset{\circ}I_{n,p}$, mais cet ensemble est dense dans $\mathbb{R}$ et les fonctions en jeu sont continues, donc l'égalité a lieu sur tout $\mathbb{R}$. Par 1-périodicité de ces fonctions, elles descendent en applications du tore, et on a la propriété suivante : \\
 
+\begin{theorem}
+L'homéomorphisme du cercle $g$ construit précédemment vérifie $\rho(g)=\alpha$, mais $g$ n'est pas conjugué à $R_\alpha$.
+\end{theorem}
 
+\textbf{Preuve :} $\rho(g)=\alpha$ est immédiat car la semi-conjuguaison préserve le nombre de rotation (cf. \cite{dgv}).
+Ensuite, $K = [0,1] \setminus \bigcup_{n \in \mathbb{Z}} \overset{\circ}I_{n}$ est invariant par $g$ par construction de ce dernier, mais cet ensemble est fermé non trivial d'après le  \hyperref[lem:cantor]{Lemme 1.1}, donc $g$ n'est pas minimal, et alors la \hyperref[prop:mini]{Proposition 1.1} permet de conclure que $g$ n'est pas conjugué à $R_\alpha$. \\ \qed
 
-
+\subsection{Contre-exemple dérivable}
 
 
 
