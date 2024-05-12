@@ -135,6 +135,12 @@ L'homéomorphisme du cercle $g$ construit précédemment vérifie $\rho(g)=\alph
 \textbf{Preuve :} $\rho(g)=\alpha$ est immédiat car la semi-conjuguaison préserve le nombre de rotation (cf. \cite{dgv}).
 Ensuite, $K = [0,1] \setminus \bigcup_{n \in \mathbb{Z}} \overset{\circ}I_{n}$ est invariant par $g$ par construction de ce dernier, mais cet ensemble est fermé non trivial d'après le  \hyperref[lem:cantor]{Lemme 1.1}, donc $g$ n'est pas minimal, et alors la \hyperref[prop:mini]{Proposition 1.1} permet de conclure que $g$ n'est pas conjugué à $R_\alpha$. \\ \qed
 
+
+\begin{centering}
+\includegraphics[scale=0.452]{diagram.png}
+\captionof{figure}{\cite{herman} Schéma de la construction où $f=R_\alpha$}
+\end{centering}
+
 \subsection{Contre-exemple dérivable}
 
 On considère toujours un homéomorphisme croissant $g_n$ de $I_n$ sur $I_{n+1}$, prolongé en $g_{n,p} = g_n +p$ sur $I_{n,p}$. On va de plus imposer que $g_n$ soit un difféomorphisme de classe $\mathcal{C}^1$, vérifiant : \\
@@ -143,12 +149,17 @@ $(*) \begin{cases}\ g_n'(x)=1 \ \text{ si } x \in \partial I_n \\ \displaystyle 
 
 On considèrera enfin les fonctions $g_n'$ prolongées continuement sur tout l'intervalle [0,1], en les prenant constantes égales à 1 sur le complémentaire de $I_n$
 
-\begin{lemma}\textbf{\cite{milnor}}
-La fonction $\displaystyle g_n : b_n +x \mapsto b_{n+1} + \int_0^x e^{c_nt(l_n-t)} \mathrm{d}t$, où $c_n$ est l'unique réel tel que $\displaystyle \int_0^{l_n} e^{c_nt(l_n-t)} \mathrm{d}t = l_{n+1}$, vérifie la condition $(*)$.
+\begin{lemma}$\displaystyle g_n : x \mapsto b_{n+1} + \int_{b_n}^x 1 + \frac{6}{l_n^2}(\frac{l_{n+1}}{l_n} -1)(t-b_n)(c_n-t)\mathrm{d}t$ vérifie la condition $(*)$.
 \end{lemma}
 
-\textbf{Preuve :} \textit{en cours ...} \\
+\textbf{Preuve :} $g_n$ est un $\mathcal{C}^1$ difféomorphisme car sa dérivée est strictement positive. De plus, on a :
+\begin{eqnarray*}
+\int_{b_n}^{c_n} 1 + \frac{6}{l_n^2}(\frac{l_{n+1}}{l_n} -1)(t-b_n)(c_n-t)\mathrm{d}t &=& l_n +  \frac{6}{l_n^2}(\frac{l_{n+1}}{l_n} -1)\int_{b_n}^{c_n} (t-b_n)(c_n-t)\mathrm{d}t \\
+&=& l_n +  \frac{6}{l_n^2}(\frac{l_{n+1}}{l_n} -1) \left [\frac{u^2}{2}l_n - \frac{u^3}{3}\right ]^{l_n}_0 \\
+&=& l_n +  \frac{6}{l_n^2}(\frac{l_{n+1}}{l_n} -1) \frac{l_n^3}{6} = l_{n+1}
+\end{eqnarray*}
 
+Donc $g_n$ envoie bien $I_n$ sur $I_{n+1}$. La première condition de $(*)$ est immédiate, la seconde découle du fait que pour $x\in I_n$ : $ \displaystyle |g_n'(x) -1| \leq 6(\frac{l_{n+1}}{l_n} -1) \to 0 $ quand $n\to \pm \infty$ par hypothèse. \\ \qed
 \begin{lemma}
 La fonction $\eta$ qui coïncide avec $g_n'$ sur $I_n$ et qui vaut $1$ ailleurs est continue et vérifie $\displaystyle \eta =  1 + \sum_{n \in \mathbb{Z}} (g_n'-1)$
 \end{lemma}
@@ -181,6 +192,11 @@ On en déduit que $g$ est un homéomorphisme $\mathcal{C}^1$ de $\mathbb{R}$ à 
 
 \subsection{Régularité hölderienne}
 
+Soit $w:[0, +\infty] \mapsto [0, +\infty]$ un module de continuité, en considérant la fonction $g$ construite dans la partie précédente, on a le lemme :
+
+\begin{lemma}
+$g'$ est continue pour le module $w$ $\Leftrightarrow \displaystyle \sup_{n\in \mathbb{Z}} \left |\frac{l_{n+1}}{l_n}-1 \right |\frac{1}{w(l_n)} <+ \infty$
+\end{lemma}
 
 \newpage
 \printbibliography[heading=bibintoc, title={Références}]
