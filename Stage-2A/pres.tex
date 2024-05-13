@@ -22,11 +22,63 @@
 
 \section{Difféomorphismes du cercle}
 \begin{frame}{Dynamique en dimension 1}
-    On considère le cercle $\mathbb{S}^1 := \left\{z, |z|=1 \right\}$, ainsi que le plongement $\Pi : \mathbb{R} \mapsto \mathbb{S}^1, t \mapsto e^{2i\pi t}$
+    On considère le cercle $\mathbb{S}^1 := \left\{z, |z|=1 \right\}$, ainsi que le plongement $\Pi : \mathbb{R} \mapsto \mathbb{S}^1, t \mapsto e^{2i\pi t}$. \\
+    
+Pour $f:\mathbb{S}^1 \mapsto \mathbb{S}^1$, on dit que $F: \mathbb{R} \mapsto \mathbb{R}$ est un relèvement si $\Pi \circ F = f \circ \Pi$, i.e $f(e^{2i\pi t}) = e^{2i\pi F(t)}$
+
+\textbf{Lemme :} Si $f$ est un $\mathcal{C}^k$-difféomorphisme du cercle, alors il existe un relèvement de $f$ qui est un $\mathcal{C}^k$-difféomorphisme (de $\mathbb{R}$). \\~\\
+
+Dans la suite, on considèrera a minima des homéomorphismes, ainsi que leur relèvements réguliers associés.
+\end{frame}
+
+\begin{frame}{Nombre de rotation}
+    Si $f$ est un homéomorphisme, $F$ un relèvement, et $x\in \mathbb{R}$, la suite $\displaystyle (\frac{F^n(x)}{n})_{n\in \mathbb{N}}$ converge vers une limite indépendante de $x$, notée $\rho(F)$. On définit alors $\rho(f):= \rho(F) \mod 1$. \\~\\
+    
+$\rho$ n'est \textbf{pas} un morphisme, mais vérifie $\rho(h\circ f \circ h^{-1}) = \rho(f)$, c'est un invariant de conjuguaison. \\~\\
+
+On se demande alors si il existe un représentant simple de la classe de $f$, à savoir $R_{\rho(f)}$.
 \end{frame}
 
 
-\subsection*{Théorème d'Arnorld}
+
+\begin{frame}{Théorème de Poincaré}
+Le résultat est clairement faux quand $\rho(f) \in \mathbb{Q}$. Dans le cas irrationnel, on a le résultat suivant : \\~\\
+
+\textbf{Théorème (Poincaré) :} Si $f$ est un homéomorphisme de nombre de rotation $\alpha$ irrationnel, alors $f$ est semi-conjugué à $R_\alpha$, i.e il existe $h$ continue telle que $h \circ f = R_\alpha \circ h$. \\~\\
+
+Que dire de l'inversibilité de $h$ ?
+\end{frame}
+
+
+\begin{frame}{Théorème de Denjoy}
+\textbf{Théorème (Denjoy) :} Si $f$ est un $\mathcal{C}^2$-difféomorphisme de nombre de rotation $\alpha$ irrationnel, alors $f$ est conjugué à $R_\alpha$ par un homéomorphisme. \\~\\
+
+\underline{Idée de la preuve }: Il ne peut pas exister d'intervalle errant pour $h$. \\~\\
+
+\underline{Question }: Le résultat est-il optimal ?
+
+\end{frame}
+
+
+\begin{frame}{Contre-exemples}
+\textbf{Théorème (Herman) :} Pour tout $\alpha$ irrationnel, $\forall \epsilon > 0$, il existe un $\mathcal{C}^{2-\epsilon}$-difféomorphisme $f$ tel que $\rho(f)=\alpha$ et $f$ n'est pas conjugué à la rotation $R_\alpha$. Ces contre-exemples sont de plus denses dans l'ensemble des difféomorphismes de nombre de rotation $\alpha$. \\~\\
+
+\underline{Idée }: Un homéomorphisme $f$ est dit \textit{minimal} si tout ensemble fermé invariant par  $f$ est vide ou égal au cercle tout entier. Cette propriété est un invariant de conjuguaison.
+\end{frame}
+
+
+
+\begin{frame}{Construction explicite}
+
+\begin{centering}
+\includegraphics[scale=0.35]{diagram.png}
+\captionof{figure}{Schéma de la construction où $f=R_\alpha$}
+\end{centering}
+
+On construit un difféo non minimal mais suffisamment régulier en choisissant judicieusement la famille d'intervalles errants.
+\end{frame}
+
+\section{Théorème d'Arnold}
 \begin{frame}
 \frametitle{Cadre}
 Prenons un relevé $F$ analytique de rotation $\alpha$ (et donc semi-conjugué à $R_\alpha$). Que l'on écrit :
@@ -46,7 +98,7 @@ On choisit de chercher \( U \) 1-périodique. On a que
 \end{frame}
 
 \begin{frame}
-\frametitle{Perte de régularité et Petit diviseur}
+\frametitle{Perte de régularité et petits diviseurs}
 Dans quelle mesure \( \widehat{U} \) est-elle liée à une série de Fourier convergente ?
 
 En effet, \( \exp(2 i \pi n \alpha)-1 \) peut arbitrairement s'approcher de 0.
@@ -73,7 +125,7 @@ Le théorème d'Arnold affirme donc que si \( F \) a un relevé \( F(x) = x + \a
     \item \( F_{n+1}=H_n^{-1} \circ F_n \circ H_n=\left(H_1 \circ \cdots \circ H_n\right)^{-1} \circ F \circ\left(H_1 \circ \cdots \circ H_n\right) \).
 \end{itemize}
 \end{frame}
-\section{Théorème de Nash Moser}
+\section{Théorème de Nash-Moser}
 \begin{frame}
 \frametitle{Cadre}
 On considère ici deux suites d'espaces de Banach ${E}\sigma, \lVert \cdot \rVert\sigma$ et ${F}\sigma, \lVert \cdot \rVert\sigma$.
@@ -112,7 +164,7 @@ Convergente dans $E_a$ si $u \in E_b$ et $a < b$.
 \end{frame}
 
 \begin{frame}
-\frametitle{Shéma de la preuve:}
+\frametitle{Schéma de la preuve:}
 On construit les suites suivantes en prenant g $\in F_\beta$
 $$
 g=\sum \Delta_j g_j ; \quad\left\|g_j\right\|b \leqq C_b \theta_j^{b-\beta-1}\|g\|\beta^{\prime} .
@@ -121,6 +173,17 @@ $$
 u_{j+1}=u_j+\Delta_j \dot{u}j, \quad \dot{u}_j=\psi\left(v_j\right) g_j, \quad v_j=S{\theta_j} u_j
 $$
 et on montre que $\Phi(u) -\Phi(0) = T(g) + g$ avec T application continue . 
+\end{frame}
+
+
+
+\begin{frame}{Fin}
+
+\begin{center}
+Merci pour votre attention ! \\~\\
+Q\&A
+\end{center}
+
 \end{frame}
 
 \end{document}
