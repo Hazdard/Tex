@@ -187,15 +187,17 @@ $g$ est un difféomorphisme de classe $\mathcal{C}^1$ qui vérifie $\rho(g)=\alp
 Alors, si $A$ est un borélien de mesure de Lebesgue nulle, on a $\lambda(g(A)) \leq \lambda(g(A\cap (\mathbb{R} \setminus U))) + \lambda(g(A\cap U))$. 
 Or le premier terme est nul car $\mathbb{R} \setminus U$ est stable par $g$ et de mesure nulle, et le second terme est nul par théorème de changement de variable, $g$ étant un $\mathcal{C}^1$-difféomorphisme sur $ U $, et $A$ de mesure nulle. \\
 
-On en déduit que la mesure de Stieltjes associée à $g$ est de Radon, et est absolument continue par rapport à la mesure de Lebesgue. Alors la théorie des points de Lebesgue donne qu'il existe $\mu \in \mathcal{L}^1(\mathbb{R})$ telle que $g(x) = g(0) + \displaystyle \int_0^x \mu(t) \mathrm{d}t$. Mais alors $\mu$ est égale à $g_n'$ sur les $(I_{n,p})_{p\in \mathbb{Z}}$, i.e presque partout égale à $\eta$ car $U$ est de mesure pleine, et on a finalement : $g(x) = g(0) + \displaystyle \int_0^x \eta(t) \mathrm{d}t$. \\
+On en déduit que la mesure de Stieltjes associée à $g$ est de Radon, et est absolument continue par rapport à la mesure de Lebesgue. Ainsi $g$ admet une dérivée de Radon-Nikodym $\mu \in \mathcal{L}^1(\mathbb{R})$, telle que $g(x) = g(0) + \displaystyle \int_0^x \mu(t) \mathrm{d}t$. Mais alors $\mu$ est presque partout égale à $g_n'$ sur les $(I_{n,p})_{p\in \mathbb{Z}}$ d'après la théorie des points de Lebesgue, i.e presque partout égale à $\eta$ car $U$ est de mesure pleine, et on a finalement : $g(x) = g(0) + \displaystyle \int_0^x \eta(t) \mathrm{d}t$. \\
 On en déduit que $g$ est un homéomorphisme $\mathcal{C}^1$ de $\mathbb{R}$ à dérivée non nulle, et donc un $\mathcal{C}^1$-difféomorphisme. \\ \qed
 
 \subsection{Régularité hölderienne}
 
-Soit $w:[0, +\infty] \mapsto [0, +\infty]$ un module de continuité, en considérant la fonction $g$ construite dans la partie précédente, on a le lemme :
+Soit $w:[0, 1] \mapsto [0, 1]$ un module de continuité, on considère l'ensemble des fonctions continue pour ce module, $\displaystyle\mathcal{C}^w(\mathbb{T}) := \left\{ \varphi \in \mathcal{C}^0(\mathbb{T}) \ \left| \ \sup_{ 0<|x-y|\leq 1}  \frac{|\varphi(x)-\varphi(y)|}{w(|x-y|)} < +\infty \right. \right\} $ \\
+
+En considérant la fonction $g$ construite dans la partie précédente, on a le lemme :
 
 \begin{lemma}
-$g'$ est continue pour le module $w$ $\Leftrightarrow \displaystyle \sup_{n\in \mathbb{Z}} \left |\frac{l_{n+1}}{l_n}-1 \right |\frac{1}{w(l_n)} <+ \infty$
+$g' \in \mathcal{C}^w(\mathbb{T}) \Leftrightarrow \displaystyle \sup_{n\in \mathbb{Z}} \left |\frac{l_{n+1}}{l_n}-1 \right |\frac{1}{w(l_n)} <+ \infty$
 \end{lemma}
 
 \newpage
