@@ -78,7 +78,7 @@ On se servira de l'invariant de conjuguaison suivant :
 
 \textbf{Preuve :} \\ 
 (1) est immédiat en utilisant la bicontinuité de la conjuguaison. \\
-(2) s'obtient en remarquand que si $\alpha \in \mathbb{R} \setminus \mathbb{Q}$, alors $\alpha\mathbb{Z} + \mathbb{Z}$ est dense dans $\mathbb{R}$, et donc $\alpha\mathbb{Z}/\mathbb{Z}$ est dense dans le tore $\mathbb{R}/\mathbb{Z}$. \\ \qed
+(2) s'obtient en remarquant que si $\alpha \in \mathbb{R} \setminus \mathbb{Q}$, alors $\alpha\mathbb{Z} + \mathbb{Z}$ est dense dans $\mathbb{R}$, et donc $\alpha\mathbb{Z}/\mathbb{Z}$ est dense dans le tore $\mathbb{R}/\mathbb{Z}$. \\ \qed
 
 La proposition suivante sera utile dans la suite :
 
@@ -208,13 +208,11 @@ L'inégalité des accroissements finis donne donc : \\
 
 $\displaystyle \sup_{0<x-y\leq 1} \left | \frac{g_n'(x) - g_n'(y)}{w(x-y)}\right | \leq \left | \frac{l_{n+1}}{l_n}-1\right | \frac{3}{w(l_n)} < +\infty$, et on en déduit que $g' \in \mathcal{C}^w(\mathbb{T})$ car $g'-1$ est limite uniforme de $\displaystyle  \sum_{k = -n}^n (g_k'-1)$, et les fonctions dans la somme ayant des supports disjoints 2 à 2, on a :\\
 
-$\displaystyle  \left | \sum_{k = -n}^n (g_k'-1) \right |_{\mathcal{C}^w} \leq 2\sup_{n \in \mathbb{Z}} |g_n' -1|_{\mathcal{C}^w} \leq \frac{6}{l_n}(\frac{l_{n+1}}{l_n}-1) < + \infty $
-
-~ \\
+$\displaystyle  \left | \sum_{k = -n}^n (g_k'-1) \right |_{\mathcal{C}^w} \leq 2\sup_{n \in \mathbb{Z}} |g_n' -1|_{\mathcal{C}^w} \leq \frac{6}{l_n}(\frac{l_{n+1}}{l_n}-1) < + \infty $ \\ \qed
 
 \underline{Rq }: Ce résultat est en fait une équivalence. \\
 
-La suite $ \displaystyle l_n := \frac{c}{(|n|+k)(log(|n| + k)^{1+\epsilon}}$ vérifie le critère du lemme 1.5 pour le module $w(x)=O(x^{1-\epsilon'})$, pour tout $\epsilon' > \epsilon$
+La suite $ \displaystyle l_n := \frac{c}{(|n|+k)(log(|n| + k)^{1+\epsilon}}$ vérifie le critère du lemme 1.5 pour le module $w(x)=O(x^{1-\epsilon'})$, pour tout $\epsilon' > \epsilon$, ce qui permet de conclure la preuve du Théorème 1.1
 
 
 \newpage
