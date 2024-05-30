@@ -1,0 +1,120 @@
+\documentclass[11pt,a4paper]{article}
+\textheight245mm
+\textwidth170mm
+\hoffset-21mm
+\voffset-15mm
+\parindent0pt
+\usepackage[utf8]{inputenc}
+\usepackage{dsfont}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{fancyhdr}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage[french]{babel}
+\usepackage[hidelinks]{hyperref} 
+\hypersetup{
+  colorlinks   = true,    % Colours links instead of ugly boxes
+  urlcolor     = blue,    % Colour for external hyperlinks
+  linkcolor    = black,   % Colour of internal links
+  citecolor    = black    % Colour of citations
+}
+\usepackage{../../zephyr}
+\pagestyle{fancy}
+
+\usepackage{array,multirow,makecell}
+\setcellgapes{4pt}
+\makegapedcells
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash }b{#1}}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash }b{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash }b{#1}}
+
+\renewcommand{\headrulewidth}{1pt}
+\fancyhead[C]{Oraux blancs}
+\fancyhead[L]{}
+\fancyhead[R]{}
+
+\renewcommand{\footrulewidth}{1pt}
+\fancyfoot[C]{\thepage} 
+\fancyfoot[L]{Sacha Ben-Arous}
+\fancyfoot[R]{E.N.S Paris-Saclay}
+
+\begin{document}
+\textbf{Exercice 1 :}  \\
+Pour $x>1$, on note $ \zeta (x) := \displaystyle \sum_{n=1}^{+\infty} \frac{1}{n^x}$ \\
+
+\begin{enumerate}
+\item Calculer la limite de $\zeta (x)$ quand $x \to +\infty$ .
+\item Déterminer l'ensemble des réels $x$ tels que $ F(x) := \displaystyle \sum_{n=2}^{+\infty} \frac{\zeta(n)}{n}x^n$ soit bien définie.
+\item Montrer que $F$ est continue sur $[-1;1[$, et de classe $\mathcal{C}^1$ sur $\left ] -1;1 \right [$.
+\item Donner une expression plus simple de $F(x)$. \\
+\end{enumerate} 
+
+
+\textbf{Exercice 2 :} \\
+On note $f(z) := \displaystyle \sum_{n=0}^{+\infty} a_n z^n$ une série entière de rayon de convergence $R >0$.
+\begin{enumerate}
+\item Montrer que pour $0<r<R$, on a : $\displaystyle \sum_{n=0}^{+\infty}|a_n|^2r^{2n}=\frac{1}{2\pi}\int_0^{2\pi} |f(re^{i\theta})|^2\mathrm{d}\theta $
+\item Que dire sur $f$ si $|f|$ admet un maximum local en 0 ?
+\item On suppose maintenant que $R=+\infty$ et qu'il existe $P \in \mathbb{R}_d[X]$ tel que $|f(z)|\leq P(|z|)$ pour tout $z \in \mathbb{C}$. Montrer que $f\in \mathbb{C}_d[X]$. \\
+\end{enumerate}
+
+\textbf{Exercice 3 :} \\
+ On souhaite modéliser le nombre d'arrivées de clients dans une boutique, durant un laps de temps $T$. \\
+Pour $n\in \mathbb{N}$, et $s,t \in \mathbb{R}$ avec $0\leq s\leq t$, on note $A(n,s,t)$ l'évènement :
+\[\text{`` Il arrive } n \text{ clients dans l'intervalle de temps} [s;t[ \text{ ''}\]
+
+On admet qu'il existe un espace probabilisé permettant d'étudier ces événements, en supposant : \\
+\begin{itemize}
+\item[(H1)] Pour tout $m,n \in \mathbb{N}$, et tous réels $0\leq r \leq s \leq t$, les événements $A(m,r,s)$ et $A(n,s,t)$ sont indépendants.
+\item[(H2)] La probabilité de l'événement $A(n,s,t)$ ne dépend que de $n$ et du réel $t-s$. On note : \[p_n(t) := \mathbb{P}(A(n,0,t))\]
+\item[(H3)] La fonction $p_0$ est continue et $p_0(0)=1$
+\item[(H4)] Pour tout $t\in \mathbb{R}_+$, on a \[\sum_{n=0}^{+\infty}p_n(t)=1\]
+\item[(H5)] On a le développement asymptotique quand $t \to 0^+$ : \[1-p_0(t)-p_1(t) = o(p_1(t))\]
+\end{itemize}
+
+Cette dernière hypothèse signifie que, durant un laps de temps minime, la probabilité d'arrivée d'au moins deux clients est négligeable devant la probabilité d'arrivée d'un seul client.
+
+\begin{enumerate}
+\item Justifier que la fonction $p_0$ est décroissante, et que : \[\forall s,t \in \mathbb{R}_+, \ p_0(s+t)=p_0(s)p_0(t)\]
+\item Montrer que $p_0$ est à valeurs strictement positives et qu'il existe un réel $\lambda \geq 0$ vérifiant \[\forall t \in \mathbb{R}_+, \ p_0(t) = e^{-\lambda t}\]
+\textit{Indication : On pourra considérer la fonction $f(t) = \ln{(p_0(t))}$ }.
+\item Justifier que, quand  $t \to 0^+$ : \[p_1(t) = \lambda t + o(t) \ \ \  \text{ et } \ \ \ \forall n \geq 2, \ p_n(t) = o(t)\]
+\item Pour $n\in \mathbb{N}^*$, montrer : \[\forall s,t \geq 0, \  p_n(s+t)= \sum_{k=0}^np_k(s)p_{n-k}(t)\] En déduire que $p_n$ est dérivable et que \[\forall t \geq 0, \ p_n'(t)=\lambda(p_{n-1}(t) - p_n(t))\]
+\item En considérant $q_n(t) := e^{\lambda t} p_n(t)$, obtenir l'expression de $p_n(t)$.
+\item On note $X$ la variable aléatoire déterminant le nombre de clients arrivant durant le laps de temps $T >0$. Déterminer la loi de $X$. Quelle est l'interprétation du paramètre $\lambda$ ? \\
+\end{enumerate}
+
+\textbf{Exercice 4 :}
+\begin{enumerate}
+\item Montrer que $GL_n(\mathbb{K})$ est dense dans $M_n(\mathbb{K})$.
+\item Montrer que l'ensemble des matrices diagonalisables dans $\mathbb{C}$ est dense dans $M_n(\mathbb{C})$.
+\item 
+\begin{itemize}
+\item[a)] Montrer que l’ensemble des matrices diagonalisables dans $\mathbb{R}$ n’est pas dense dans $M_n(\mathbb{R})$.
+\item[b)] Montrer que $P\in \mathbb{R}[X]$ unitaire de degré$n\in \mathbb{N}$ sur $\mathbb{R}$ est scindé si et seulement si \\ $ \forall z \in \mathbb{C},|Im(z)|^n \leq |P(z)|$.
+\item[c)] En déduire que l'ensemble des matrices trigonalisables dans $\mathbb{R}$ est fermé dans $M_n(\mathbb{R})$.
+\item[d)]  Montrer que l’adhérence des matrices diagonalisables dans $\mathbb{R}$ est l’ensemble des matrices
+trigonalisables dans $\mathbb{R}$.
+\end{itemize}
+\end{enumerate}
+\textit{Bonus : Calculer l'adhérence des matrices de rang $r$ dans $M_n(\mathbb{K})$} \\
+
+\textbf{Exercice 5 :}
+\begin{enumerate}
+\item Soit $A\in GL_n(\mathbb{R})$, montrer qu'il existe $O\in \mathcal{O}_n(\mathbb{R})$ et $S \in \mathcal{S}_n(\mathbb{R})$ tels que $A=OS$. Étendre ce résultat aux matrices non-inversibles.
+\item Montrer que l'ensemble des matrices de $M_n(\mathbb{R})$ à déterminant $> 0$ est connexe par arcs.
+\item Soit $M\in M_n(\mathbb{R})$, justifier l'existence de $\displaystyle \sup_{O\in \mathcal{O}_n(\mathbb{R})} \left | Tr(OM) \right |$ et calculer sa valeur. \\
+\end{enumerate}
+
+\textbf{Exercice 6 :} \\
+On note : \[f : M\in M_n(\mathbb{R}) \mapsto (\text{Tr}(M),\text{Tr}(M^2),\dots,\text{Tr}(M^n))\]
+On munit $ M_n(\mathbb{R})$ de sa structure euclidienne canonique.
+\begin{enumerate}
+\item Montrer que $f$ est différentiable en tout $M$ et expliciter $df(M)$.
+\item Comparer le rang de $df(M)$ au degré du polynôme minimal de $M$.
+\item Montrer que l'ensemble $\left \{ M \in M_n(\mathbb{R}), \ \chi_M = \mu_M \right \} $ est un ouvert de $M_n(\mathbb{R})$. \\
+\end{enumerate}
+
+\textbf{Exercice 7 :} \\
+Montrer que tout sous-groupe fini des inversibles d'un corps commutatif est cyclique.
+\end{document}

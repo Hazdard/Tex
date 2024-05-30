@@ -1,0 +1,114 @@
+\documentclass[11pt,a4paper]{article}
+\textheight245mm
+\textwidth170mm
+\hoffset-21mm
+\voffset-15mm
+\parindent0pt
+\usepackage[utf8]{inputenc}
+\usepackage{dsfont}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{fancyhdr}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage[french]{babel}
+\usepackage[hidelinks]{hyperref} 
+\hypersetup{
+  colorlinks   = true,    % Colours links instead of ugly boxes
+  urlcolor     = blue,    % Colour for external hyperlinks
+  linkcolor    = black,   % Colour of internal links
+  citecolor    = black    % Colour of citations
+}
+\usepackage{../../zephyr}
+\pagestyle{fancy}
+
+\usepackage{array,multirow,makecell}
+\setcellgapes{4pt}
+\makegapedcells
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash }b{#1}}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash }b{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash }b{#1}}
+
+\renewcommand{\headrulewidth}{1pt}
+\fancyhead[C]{Oraux blancs}
+\fancyhead[L]{}
+\fancyhead[R]{}
+
+\renewcommand{\footrulewidth}{1pt}
+\fancyfoot[C]{\thepage} 
+\fancyfoot[L]{Sacha Ben-Arous}
+\fancyfoot[R]{E.N.S Paris-Saclay}
+
+\begin{document}
+
+\textbf{Exercice 1 :}  \\
+Pour $x>1$, on note $ \zeta (x) := \displaystyle \sum_{n=1}^{+\infty} \frac{1}{n^x}$ \\
+
+\begin{enumerate}
+\item Calculer la limite de $\zeta (x)$ quand $x \to +\infty$ .
+\item Déterminer l'ensemble des réels $x$ tels que $ F(x) := \displaystyle \sum_{n=2}^{+\infty} \frac{\zeta(n)}{n}x^n$ soit bien définie.
+\item Montrer que $F$ est continue sur $[-1;1[$, et de classe $\mathcal{C}^1$ sur $\left ] -1;1 \right [$.
+\item Donner une expression plus simple de $F(x)$. \\
+\end{enumerate} 
+
+\textit{Correction :} \\
+\begin{enumerate}
+
+\item Posons $u_n(x) = \displaystyle \frac{1}{n^x}$ définie sur $]1;+\infty[$. La série de fonctions $\displaystyle \sum u_n$ converge simplement sur $]1;+\infty[$, ce qui assure la bonne définition de $\zeta(x)$. Plus précisément, pour $a > 1$, on a
+\[
+\sup_{x \in [a;+\infty[} \left|u_n(x)\right| = u_n(a) \quad \text{avec} \quad \sum u_n(a) \quad \text{convergente}
+\]
+et il y a donc convergence normale (et donc uniforme) de la série de fonctions $u_n$ sur $[a;+\infty[$. Puisque
+\[
+u_n(x) \xrightarrow[x \to +\infty]{} \begin{cases}
+1 & \text{si } n = 1,\\
+0 & \text{si } n \ge 2,
+\end{cases}
+\]
+on peut appliquer le théorème de la double limite et affirmer que $\zeta$ tend en $+\infty$ vers la somme convergente des limites :
+\[
+\zeta(x) \xrightarrow[x \to +\infty]{} 1.
+\]
+\item Posons $v_n(x) = \displaystyle \frac{\zeta(n) x^n}{n}$. Pour $x \neq 0$, on a
+\[
+\left|\frac{v_{n+1}(x)}{v_n(x)}\right| \xrightarrow[n \to +\infty]{} \left|x\right|.
+\]
+Par le critère de d'Alembert, la série converge pour $|x| < 1$ et diverge pour $|x| > 1$. Pour $x = 1$, il y a divergence car
+\[
+\frac{\zeta(n)}{n} \sim \frac{1}{n}.
+\]
+Pour $x = -1$, il y a convergence en vertu du critère spécial des séries alternées. En effet, la suite $\displaystyle \left((-1)^n \frac{\zeta(n)}{n}\right)_{n\in \mathbb{N}}$ est alternée et décroît en valeur absolue vers 0, car $\zeta(n+1) \leq \zeta(n)$. \\
+
+\item En tant que somme d'une série entière de rayon de convergence 1, la fonction $F$ est de classe $\mathcal{C}^1$ (et même $\mathcal{C}^\infty$) sur $]-1;1[$. Les fonctions $v_n$ sont continues sur $[-1;0]$ et l'on vérifie que la série $\sum v_n(x)$ satisfait le critère spécial des séries alternées pour tout $x \in [-1;0]$. On peut alors majorer le reste de cette série par son premier terme :
+\[
+\left|\sum_{k=n+1}^{+\infty} v_k(x)\right| \leq \left|v_{n+1}(x)\right| \leq \frac{\zeta(n)}{n}.
+\]
+Ce dernier majorant étant uniforme de limite nulle, on peut affirmer qu'il y a convergence uniforme de la série de fonctions $\sum v_n$ sur $[-1;0]$ et sa somme $F$ est donc continue.
+
+\item Par dérivation de la somme d'une série entière, on obtient pour $x \in ]-1;1[$,
+\[
+F'(x) = \sum_{n=1}^{+\infty} \zeta(n+1) x^n = \sum_{n=1}^{+\infty} \sum_{p=1}^{+\infty} \frac{x^n}{p^{n+1}}.
+\]
+On peut permuter les deux sommes par le théorème de Fubini car il y a convergence des séries
+\[
+\sum_{p \ge 1} \left|\frac{x^n}{p^{n+1}}\right| \quad \text{et} \quad \sum_{n \ge 1} \sum_{p=1}^{+\infty} \left|\frac{x^n}{p^{n+1}}\right|.
+\]
+On en déduit après sommation géométrique :
+\[
+F'(x) = \sum_{p=1}^{+\infty} \sum_{n=1}^{+\infty} \frac{x^n}{p^{n+1}} = \sum_{p=1}^{+\infty} \frac{x}{p(p-x)} = \sum_{p=1}^{+\infty} \left(\frac{1}{p-x} - \frac{1}{p}\right).
+\]
+La série de fonctions associée converge normalement sur tout segment de $]-1;1[$ et on peut donc intégrer terme à terme :
+\[
+F(x) = F(0) + \int_0^x F'(t) \, \mathrm{d}t = \int_0^x \sum_{p=1}^{+\infty} \left(\frac{1}{p-t} - \frac{1}{p}\right) \, \mathrm{d}t = \sum_{p=1}^{+\infty} \left(\ln\left(\frac{p}{p-x}\right) - \frac{x}{p}\right).
+\]
+
+\end{enumerate}
+
+\textbf{Exercice 2 :} On note $f(z) := \displaystyle \sum_{n=0}^{+\infty} a_n z^n$ une série entière de rayon de convergence $R >0$.
+
+\begin{enumerate}
+\item Montrer que pour $0<r<R$, on a : $\displaystyle \sum_{n=0}^{+\infty}|a_n|^2r^{2n}=\frac{1}{2\pi}\int_0^{2\pi} |f(re^{i\theta})|^2\mathrm{d}\theta $
+\item Que dire sur $f$ si $|f|$ admet un maximum local en 0 ?
+\item On suppose maintenant que $R=+\infty$ et qu'il existe $P \in \mathbb{R}_d[X]$ tel que $|f(z)|\leq P(|z|)$ pour tout $z \in \mathbb{C}$. Montrer que $f\in \mathbb{C}_d[X]$.
+\end{enumerate}
+
+\end{document}
