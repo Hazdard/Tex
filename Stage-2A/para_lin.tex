@@ -10,7 +10,43 @@
 \begin{document}
 \maketitle
 
-Ce document a pour objectif d'exposer les principaux théorèmes de paralinéarisation en explicitant tous les outils utilisés, avec pour point de départ la décomposition de Littlewood-Paley. On s'appuiera sur \cite{metivier} et comme \cite{dgv} références, en particulier les chapitres 4 et 5 du livre de Métivier.
+Ce document a pour objectif d'exposer les principaux théorèmes de paralinéarisation en explicitant tous les outils utilisés, avec pour point de départ la décomposition de Littlewood-Paley. On s'appuiera sur \cite{metivier} et \cite{dgv} comme références, en particulier les chapitres 4 et 5 du livre de Métivier.
+\section{Décomposition de Littlewood-Paley}
+
+
+\begin{thm}[Inégalité de Bernstein]
+Soit $r_1,r_2 >0$. Il existe $C$ tel que pour tout $k \geq 1$, $\lambda >0$, $u\in L^p(\R^d)$ $(1\leq p \leq +\infty)$, on a :
+\begin{equation}\label{bernstein}
+\text{supp } \hat{u} \subset B(0,r_1\lambda) \Rightarrow \sup_{|\alpha|=k} \|\partial^\alpha u\|_{L^p} \leq C^k \lambda^k \|u\|_{L^p}
+\end{equation}
+\begin{equation}
+\text{supp } \hat{u} \subset C(0,r_1\lambda,r_2\lambda) \Rightarrow  C^{-k} \lambda^k \|u\|_{L^p} \leq \sup_{|\alpha|=k} \|\partial^\alpha u\|_{L^p} \leq C^k \lambda^k \|u\|_{L^p}
+\end{equation}
+\end{thm}
+
+
+\begin{lemma}\label{young}
+Il existe $C>0$ tel que pour tout $1\leq p \leq +\infty$, $u \in L^p(\R^d)$, 
+\begin{align*}
+\sup_{p\geq -1}\|S_pu\|_{L^p} &\leq C \|u\|_{L^p} & \sup_{p\geq -1}\|\Delta_pu\|_{L^p} &\leq C \|u\|_{L^p}
+\end{align*}
+\end{lemma}
+
+
+\begin{lemma}[Quasi-orthogonalité]
+Pour tout $u\in L^2(\R^d)$, 
+\begin{equation}\label{qortho}
+\sum_{p \geq -1} \|\Delta_p u \|^2_{L^2} \leq \| u \|^2_{L^2} \leq 2 \sum_{p \geq -1} \|\Delta_p u \|^2_{L^2} 
+\end{equation}
+\end{lemma}
+
+
+\begin{thm}[Caractérisation des espaces de Sobolev]
+Si $s\in \R$, $u\in L^2(\R^d)$, on a alors $u\in H^s(\R^d) \Leftrightarrow \sum_{p\geq -1}2^{2ps}\|\Delta_p u \|_{L^2}^2 < +\infty$. De plus, il existe $C>0$ tel que :
+\begin{equation}\label{carac_sobol}
+\frac{1}{C}\sum_{p\geq -1}2^{2ps}\|\Delta_p u \|_{L^2}^2 \leq \|u\|_{H^s} \leq C \sum_{p\geq -1}2^{2ps}\|\Delta_p u \|_{L^2}^2 
+\end{equation}
+\end{thm}
 
 \section{Théorèmes de paralinéarisation}
 
@@ -30,15 +66,28 @@ Soit $F$ une fonction $C^{\infty}$ de $\R$ telle que $F(0)=0$. Si $u\in H^s(\R^d
 \end{lemma}
 
 \begin{proof}
-Si $s=0$, le résultat se déduit de l'existence d'une fonction $G$ continue telle que $F(u)=uG(u)$. Or $u\in L^2$, et $G(u) \in L^{\infty}$ car $u$ est bornée, ce qui donne bien $F\in L^2$.
-\par Quand $s>0$, on remarque qu'il existe $C_\alpha$  indépendant de $u$ et $k$ telle que  : 
+Si $s=0$, le résultat se déduit de l'existence d'une fonction $G$ continue telle que $F(u)=uG(u)$. Alors, comme $u\in L^2$ et $G(u) \in L^{\infty}$ car $u$ est bornée, on obtient bien $F\in L^2$. \\
+Quand $s>0$, on remarque qu'il existe $C_\alpha$  indépendant de $u$ et $k$ telle que  : 
 \begin{equation}
 \|\partial^\alpha \Delta_k u \|_{L^2} \leq C_\alpha 2^{(|\alpha|-s)k} \varepsilon_k
 \end{equation}
-avec $\sum \varepsilon_k^2 =  \|u\|_{H^s}^2$. En effet, l'inégalité de Bernstein \ref{•} puis la caractérisation des espaces de Sobolev donnent le résultat voulu. On a de plus,
+avec $\sum \varepsilon_k^2 =  \|u\|_{H^s}^2$. En effet, l'inégalité de Bernstein (\ref{bernstein}) puis la caractérisation des espaces de Sobolev (\ref{carac_sobol}) donnent le résultat voulu. On a de plus,
 \begin{equation}
 \|\partial^\alpha \Delta_k u \|_{L^{\infty}} \leq C_\alpha 2^{|\alpha|k} \|u\|_{L^{\infty}}
 \end{equation}
+toujours par l'inégalité de Bernstein. Le lemme de quasi-orthogonalité (\ref{qortho}) donnant que $(\Delta_k u)_{k\in \N}$ est terme général d'une série absolument convergente, la complétude de $L^2$ fournit alors la convergence simple de cette série, i.e. $S_n \to u$ dans $L^2$. De plus, d'après le \fcref{young},  $\|S_pu\|_{L^\infty} \leq C \|u\|_{L^\infty}$. On en déduit que $F(S_nu) \to F(u)$ dans $L^2$ car :
+\[ \| F(S_nu) - F(u)\|_{L^2} \leq C \sup_{t\in[0,1]} \|F'(tS_nu- (1-t)u \|_{L^\infty}\|S_nu-u\|_{L^2} \to 0 \]
+
+Un argument télescopique donne alors : 
+\begin{equation*}
+F(u) = F(S_0 u) + \sum_{k=0}^{+\infty} F(S_{p+1} u) - F(S_p u) = F(S_0 u) + \sum_{k=0}^{+\infty} m_p \Delta_p u
+\end{equation*}
+
+où \[m_p := \int_0^1 F'(S_pu + t\Delta_pu)\mathrm{d}t\]
+
+
+
+
 \end{proof}
 
 
