@@ -63,7 +63,7 @@
 
 \renewcommand{\thesection}{\Roman{section}} 
 
-\renewenvironment{proof}{{\scshape Preuve.}}{\qed}
+\renewenvironment{proof}[1][\proofname]{{\scshape #1.}}{\qed}
 
 \theoremstyle{bourbaki_plain}
 
