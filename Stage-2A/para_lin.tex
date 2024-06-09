@@ -72,10 +72,10 @@ Quand $s>0$, on remarque qu'il existe $C_\alpha$  indépendant de $u$ et $k$ tel
 \|\partial^\alpha \Delta_k u \|_{L^2} \leq C_\alpha 2^{(|\alpha|-s)k} \varepsilon_k
 \end{equation}
 avec $\sum \varepsilon_k^2 =  \|u\|_{H^s}^2$. En effet, l'inégalité de Bernstein (\ref{bernstein}) puis la caractérisation des espaces de Sobolev (\ref{carac_sobol}) donnent le résultat voulu. On a de plus,
-\begin{equation}
+\begin{equation}\label{ineq_unif}
 \|\partial^\alpha \Delta_k u \|_{L^{\infty}} \leq C_\alpha 2^{|\alpha|k} \|u\|_{L^{\infty}}
 \end{equation}
-toujours par l'inégalité de Bernstein. Le lemme de quasi-orthogonalité (\ref{qortho}) donnant que $(\Delta_k u)_{k\in \N}$ est terme général d'une série absolument convergente, la complétude de $L^2$ fournit alors la convergence simple de cette série, i.e. $S_n \to u$ dans $L^2$. De plus, d'après le \fcref{young},  $\|S_pu\|_{L^\infty} \leq C \|u\|_{L^\infty}$. On en déduit que $F(S_nu) \to F(u)$ dans $L^2$ car :
+toujours par l'inégalité de Bernstein. Le lemme de quasi-orthogonalité (\ref{qortho}) donnant que $(\Delta_k u)_{k\in \N}$ est terme général d'une série absolument convergente, la complétude de $L^2$ fournit alors la convergence simple de cette série, i.e. $S_nu \to u$ dans $L^2$. De plus, d'après le \fcref{young},  $\|S_pu\|_{L^\infty} \leq C \|u\|_{L^\infty}$. On en déduit que $F(S_nu) \to F(u)$ dans $L^2$ car :
 \[ \| F(S_nu) - F(u)\|_{L^2} \leq C \sup_{t\in[0,1]} \|F'(tS_nu- (1-t)u \|_{L^\infty}\|S_nu-u\|_{L^2} \to 0 \]
 
 Un argument télescopique donne alors : 
@@ -84,7 +84,12 @@ F(u) = F(S_0 u) + \sum_{k=0}^{+\infty} F(S_{p+1} u) - F(S_p u) = F(S_0 u) + \sum
 \end{equation*}
 
 où \[m_p := \int_0^1 F'(S_pu + t\Delta_pu)\mathrm{d}t\]
+Alors, on obtient dans un premier temps que : 
 
+\begin{equation*}
+\| \partial^\alpha F'(S_pu + t\Delta_pu)\|_{L^{\infty}} \leq C_\alpha 2^{|\alpha|k} \|u\|_{L^{\infty}}
+\end{equation*}
+Pour cela on utilise la règle de la chaine (plus précisement la formule de Faà di Bruno), on majore uniformément les termes en $F'$ avec le \fcref{young} et on utilise (\ref{ineq_unif}) pour les termes en $u$.
 
 
 
