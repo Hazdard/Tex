@@ -30,10 +30,14 @@ Soit $F$ une fonction $C^{\infty}$ de $\R$ telle que $F(0)=0$. Si $u\in H^s(\R^d
 \end{lemma}
 
 \begin{proof}
-Si $s=0$, le résultat se déduit de l'existence d'une fonction $G$ continue telle que $F(u)=uG(u)$. Or $u\in L^2$, et $G(u) \in L^{\infty}$ car $u$ est bornée, ce qui donne le résultat.
+Si $s=0$, le résultat se déduit de l'existence d'une fonction $G$ continue telle que $F(u)=uG(u)$. Or $u\in L^2$, et $G(u) \in L^{\infty}$ car $u$ est bornée, ce qui donne bien $F\in L^2$.
 \par Quand $s>0$, on remarque qu'il existe $C_\alpha$  indépendant de $u$ et $k$ telle que  : 
 \begin{equation}
 \|\partial^\alpha \Delta_k u \|_{L^2} \leq C_\alpha 2^{(|\alpha|-s)k} \varepsilon_k
+\end{equation}
+avec $\sum \varepsilon_k^2 =  \|u\|_{H^s}^2$. En effet, l'inégalité de Bernstein \ref{•} puis la caractérisation des espaces de Sobolev donnent le résultat voulu. On a de plus,
+\begin{equation}
+\|\partial^\alpha \Delta_k u \|_{L^{\infty}} \leq C_\alpha 2^{|\alpha|k} \|u\|_{L^{\infty}}
 \end{equation}
 \end{proof}
 
