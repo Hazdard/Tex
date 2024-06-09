@@ -1,0 +1,72 @@
+\usepackage[french]{babel}
+\usepackage[utf8]{inputenc}
+
+
+\textheight245mm
+\textwidth170mm
+\hoffset-21mm
+\voffset-15mm
+\parindent0pt
+
+
+\usepackage{dsfont}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage[hidelinks]{hyperref} 
+\hypersetup{
+  colorlinks   = true,    % Colours links instead of ugly boxes
+  urlcolor     = blue,    % Colour for external hyperlinks
+  linkcolor    = black,   % Colour of internal links
+  citecolor    = black    % Colour of citations
+}
+\usepackage{cleveref}
+% Définir le nom des théorèmes pour cleveref
+\crefname{theorem}{théorème}{théorèmes} % minuscule (default)
+\Crefname{theorem}{Théorème}{Théorèmes} % majuscule
+% Configuration pour rendre le texte entier cliquable
+\newcommand{\fullCref}[1]{\hyperref[#1]{\Cref*{#1}}}
+
+
+\usepackage{array,multirow,makecell}
+\setcellgapes{4pt}
+\makegapedcells
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash }b{#1}}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash }b{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash }b{#1}}
+
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{1pt}
+\fancyhead[C]{}
+\fancyhead[L]{L3 - 2023/2024}
+\fancyhead[R]{D.E.R Mathématiques}
+\renewcommand{\footrulewidth}{1pt}
+\fancyfoot[C]{\thepage} 
+\fancyfoot[L]{Sacha Ben-Arous}
+\fancyfoot[R]{E.N.S Paris-Saclay}
+
+
+%%==================================================================================================================================================%%
+
+\newtheorem{theorem}{Théorème}[section]
+\newtheorem{corollary}{Corollaire}[theorem]
+\newtheorem{lemma}[section]{Lemme}
+
+
+\newtheorem{manualtheoreminner}{Théorème}
+\newenvironment{manualtheorem}[1]{%
+  \renewcommand\themanualtheoreminner{#1}%
+  \manualtheoreminner
+}{\endmanualtheoreminner}
+
+  
+  
+%https://tex.stackexchange.com/questions/391443/new-theorem-environment-with-manual-theorem-number
+
+%% Exemples :
+
+%\begin{manualtheorem}{A}[title]\label{baz}
+% This is a theorem.
+%\end{manualtheorem}
