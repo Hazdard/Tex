@@ -21,10 +21,7 @@
 \voffset-15mm
 \parindent0pt
 
-\usepackage{dsfont}
-\usepackage{graphicx}
-\usepackage{caption}
-\usepackage{amsmath,amsfonts,amssymb, amsthm}
+\usepackage{graphicx, amsmath,amsfonts,amssymb, amsthm, fancyhdr, caption, dsfont}
 %Retire le dernier points dans la notations des theoremes
 \usepackage{xpatch}
 \makeatletter
@@ -32,7 +29,6 @@
 \makeatother
 \usepackage[hidelinks]{hyperref} 
 
-\usepackage{fancyhdr}
 \pagestyle{fancy}
 \renewcommand{\headrulewidth}{1pt}
 \fancyhead[C]{}
@@ -92,3 +88,11 @@
 \crefname{cor}{Corollaire}{Corollaires}
 \crefname{lemma}{Lemme}{Lemmes}
 \crefname{mtheoreminner}{Théorème}{Théorèmes} 
+
+%%================================================================Shortcuts===========================================================================%%
+
+\def\C{\mathbb C}
+\def\R{\mathbb R}
+\def\Q{\mathbb Q}
+\def\Z{\mathbb Z}
+\def\N{\mathbb N}
