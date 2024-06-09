@@ -10,6 +10,8 @@
   
 %https://tex.stackexchange.com/questions/391443/new-theorem-environment-with-manual-theorem-number
 
+%https://tex.stackexchange.com/questions/234676/new-theorem-style
+
 %%=============================================================Appel des packages=====================================================================%%
 
 \usepackage[french]{babel}
@@ -21,13 +23,9 @@
 \voffset-15mm
 \parindent0pt
 
-\usepackage{graphicx, amsmath,amsfonts,amssymb, amsthm, fancyhdr, caption, dsfont}
-%Retire le dernier points dans la notations des theoremes
-\usepackage{xpatch}
-\makeatletter
-\xpatchcmd{\@thm}{\thm@headpunct{.}}{\thm@headpunct{}}{}{}
-\makeatother
+\usepackage{graphicx,amsmath,amsfonts,amssymb,amsthm,fancyhdr,caption,dsfont}
 \usepackage[hidelinks]{hyperref} 
+\usepackage{cleveref}
 
 \pagestyle{fancy}
 \renewcommand{\headrulewidth}{1pt}
@@ -39,20 +37,52 @@
 \fancyfoot[L]{Sacha Ben-Arous}
 \fancyfoot[R]{E.N.S Paris-Saclay}
 
+%%==============================================================Custom Styles=========================================================================%%
+
+\newtheoremstyle{bourbaki_it}%            % Name
+  {\topsep}%                                     % Space above
+  {\topsep}%                                     % Space below
+  {\itshape}%                             % Body font
+  {24pt}%                                 % Indent amount
+  {\scshape}%                             % Theorem head font
+  {.~---}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\newtheoremstyle{bourbaki_plain}%         % Name
+  {\topsep}%                                     % Space above
+  {\topsep}%                                     % Space below
+  {}%                                     % Body font
+  {24pt}%                                 % Indent amount
+  {\scshape}%                             % Theorem head font
+  {.~---}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {}%                                     % Theorem head spec (can be left empty, meaning `normal')
+  
 %%==============================================================Custom Theorems=======================================================================%%
 
 \renewcommand{\thesection}{\Roman{section}} 
 
-\theoremstyle{definition}
+\renewenvironment{proof}{{\scshape Preuve.}}{\qed}
+
+\theoremstyle{bourbaki_plain}
+
 \newtheorem{defin}{Définition}[section]
+\renewcommand{\thedefin}{\thesection -\arabic{defin}}
+\newtheorem*{rmq}{Remarque}
 
-\theoremstyle{remark}
-\newtheorem*{rmq}{Remarque:}
 
-\theoremstyle{plain}
-\newtheorem{theorem}{Théorème}[section]
-\newtheorem{cor}{Corollaire}[theorem]
-\newtheorem{lemma}[section]{Lemme}
+\theoremstyle{bourbaki_it}
+
+\newtheorem{thm}{Théorème}[section]
+\renewcommand{\thethm}{\thesection -\arabic{thm}} %Met un - a la place du .
+
+\newtheorem{cor}{Corollaire}[thm]
+\renewcommand{\thecor}{\thesection -\arabic{cor}}
+
+\newtheorem{lemma}{Lemme}[section]
+\renewcommand{\thelemma}{\thesection -\arabic{lemma}}
+
 \newtheorem{mtheoreminner}{Théorème}
 \newenvironment{mth}[1]{%
   \renewcommand\themtheoreminner{#1}%
@@ -76,15 +106,13 @@
 
 \addto\captionsfrench{\renewcommand\proofname{Preuve}}
 
-\usepackage{cleveref}
-
 % Configuration pour rendre le texte entier cliquable
 \newcommand{\fcref}[1]{\hyperref[#1]{\cref*{#1}}}
 
 %Majuscules pour cleveref
 \crefname{defin}{Définition}{Définitions}
 \crefname{rmq}{Remarque}{Remarques} 
-\crefname{theorem}{Théorème}{Théorèmes}
+\crefname{thm}{Théorème}{Théorèmes}
 \crefname{cor}{Corollaire}{Corollaires}
 \crefname{lemma}{Lemme}{Lemmes}
 \crefname{mtheoreminner}{Théorème}{Théorèmes} 
