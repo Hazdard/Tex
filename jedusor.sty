@@ -21,7 +21,7 @@
 \textwidth170mm
 \hoffset-21mm
 \voffset-15mm
-\parindent0pt
+\parindent17pt
 
 \usepackage{graphicx,amsmath,amsfonts,amssymb,amsthm,fancyhdr,caption,dsfont}
 \usepackage[hidelinks]{hyperref} 
@@ -63,12 +63,16 @@
 
 \renewcommand{\thesection}{\Roman{section}} 
 
-\renewenvironment{proof}[1][\proofname]{{\scshape #1.}}{\qed}
+\renewenvironment{proof}[1][\proofname]{{\scshape #1. }}{\qed}
+
+\numberwithin{equation}{section}  %Numero des equations en fonction de la section
+\renewcommand{\theequation}{\arabic{section}.\arabic{equation}}
 
 \theoremstyle{bourbaki_plain}
 
 \newtheorem{defin}{Définition}[section]
 \renewcommand{\thedefin}{\thesection -\arabic{defin}}
+
 \newtheorem*{rmq}{Remarque}
 
 

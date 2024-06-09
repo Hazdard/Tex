@@ -1,43 +1,44 @@
 \documentclass[11pt,a4paper]{article}
 
 \usepackage{../jedusor}
-
+\usepackage[maxalphanames=99, maxnames=99, backend=bibtex, style=alphabetic, sorting=ynt]{biblatex}
+\addbibresource{stage2A.bib}
 \title{\textbf{Décomposition de Littlewood-Paley et opérateurs paradifférentiels}}
 \date{}
 \author{Sacha Ben-Arous, Mathis Bordet}
 
 \begin{document}
 \maketitle
-ayaya
 
-\section{Test}
+Ce document a pour objectif d'exposer les principaux théorèmes de paralinéarisation en explicitant tous les outils utilisés, avec pour point de départ la décomposition de Littlewood-Paley. On s'appuiera sur \cite{metivier} et comme \cite{dgv} références, en particulier les chapitres 4 et 5 du livre de Métivier.
 
-\begin{thm}\label{bob}
-This is a theorem.
+\section{Théorèmes de paralinéarisation}
+
+\begin{thm}\label{paralin}
+Soit $F$ une fonction $C^{\infty}$ de $\R$ telle que $F(0)=0$. Si $u\in H^s(\R^d)$, avec $\rho := s - \frac{d}{2}>0 $, alors 
+\begin{equation}
+F(u) - T_{F'(u)}u \in H^{s+\rho}(\R^d).
+\end{equation}
 \end{thm}
+Pour prouver ce théorème, on commence par montrer le lemme suivant : 
 
-\begin{lemma}[Plongement lisse]\label{bab}
-This is a theorem.This is a theorem.This is a theorem.This is a theorem.This is a theorem.This is a theorem.This is a theorem.This is a theorem.This is a theorem.This is a theorem.This is a theorem.This is a theorem.This is a theorem.This is a theorem.This is a theorem.
+\begin{lemma}
+Soit $F$ une fonction $C^{\infty}$ de $\R$ telle que $F(0)=0$. Si $u\in H^s(\R^d)\cap L^{\infty}(\R^d) $, avec $s>0 $, alors $F(u) \in H^s(\R^d)$ et 
+\begin{equation}
+\|F(u)\| \leq C_s \|u\|_{L^{\infty}} \|u\|_{H^s}
+\end{equation}
 \end{lemma}
 
-\begin{mth}{A}[Plongement isométrique]\label{foo}
-This is a manual theorem.
-\end{mth}
-
-\begin{rmq}
-This statement is true, I guess.
-\end{rmq}
-
-Here is \cref{bob,,bab} and \fcref{foo}.
-
-\begin{defin}[Fibration]\label{ayaya}
-A fibration is a mapping between two topological spaces that has the homotopy lifting property for every space \(X\).
-\end{defin}
-
-\begin{proof}[Preuve du \fcref{foo}]
-To prove it by contradiction try and assume that \cref{ayaya} the statement is false,
-proceed from there and at some point you will arrive to a contradiction.
+\begin{proof}
+Si $s=0$, le résultat se déduit de l'existence d'une fonction $G$ continue telle que $F(u)=uG(u)$. Or $u\in L^2$, et $G(u) \in L^{\infty}$ car $u$ est bornée, ce qui donne le résultat.
+\par Quand $s>0$, on remarque qu'il existe $C_\alpha$  indépendant de $u$ et $k$ telle que  : 
+\begin{equation}
+\|\partial^\alpha \Delta_k u \|_{L^2} \leq C_\alpha 2^{(|\alpha|-s)k} \varepsilon_k
+\end{equation}
 \end{proof}
 
+
+\newpage
+\printbibliography[heading=bibintoc, title={Références}]
 \end{document}
 	
