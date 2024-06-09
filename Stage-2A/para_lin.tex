@@ -2,21 +2,42 @@
 
 \usepackage{../jedusor}
 
-\title{\textbf{Décomposition de Littlewood-Paley et opérateurs paralinéaires }}
+\title{\textbf{Décomposition de Littlewood-Paley et opérateurs paralinéaires}}
 \date{}
 
 \begin{document}
 \maketitle
 ayaya
+\section{Test}
 \begin{theorem}\label{bob}
 This is a theorem.
 \end{theorem}
+\subsection{tata}
 
-\begin{manualtheorem}{Test}[Bob]\label{foo}
+\begin{theorem}\label{bab}
+This is a theorem.
+\end{theorem}
+
+\begin{mth}{Test}[Plongement isométrique]\label{foo}
 This is a manual theorem.
-\end{manualtheorem}
+\end{mth}
 
-Here is \fullCref{bob} and \fullCref{foo}.
+\begin{rmq}
+This statement is true, I guess.
+\end{rmq}
 
+\begin{theorem}
+This is another theorem.
+\end{theorem}
+Here is \cref{bob,,bab} and \fcref{foo}.
+
+\begin{defin}[Fibration]\label{ayaya}
+A fibration is a mapping between two topological spaces that has the homotopy lifting property for every space \(X\).
+\end{defin}
+
+\begin{proof}
+To prove it by contradiction try and assume that \cref{ayaya} the statement is false,
+proceed from there and at some point you will arrive to a contradiction.
+\end{proof}
 \end{document}
 	

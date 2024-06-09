@@ -1,6 +1,19 @@
+%%=================================================================Roadmap============================================================================%%
+% Raccourcis utiles
+% Indentation première ligne des th, rmq, cor, def, lem, etc ...
+
+% Liens utiles :
+
+%https://cedricvillani.org/sites/dev/files/old_images/2012/10/ecriture.pdf
+
+%https://www.overleaf.com/learn/latex/Theorems_and_proofs
+  
+%https://tex.stackexchange.com/questions/391443/new-theorem-environment-with-manual-theorem-number
+
+%%=============================================================Appel des packages=====================================================================%%
+
 \usepackage[french]{babel}
 \usepackage[utf8]{inputenc}
-
 
 \textheight245mm
 \textwidth170mm
@@ -8,33 +21,16 @@
 \voffset-15mm
 \parindent0pt
 
-
 \usepackage{dsfont}
 \usepackage{graphicx}
 \usepackage{caption}
-\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{amsmath,amsfonts,amssymb, amsthm}
+%Retire le dernier points dans la notations des theoremes
+\usepackage{xpatch}
+\makeatletter
+\xpatchcmd{\@thm}{\thm@headpunct{.}}{\thm@headpunct{}}{}{}
+\makeatother
 \usepackage[hidelinks]{hyperref} 
-\hypersetup{
-  colorlinks   = true,    % Colours links instead of ugly boxes
-  urlcolor     = blue,    % Colour for external hyperlinks
-  linkcolor    = black,   % Colour of internal links
-  citecolor    = black    % Colour of citations
-}
-\usepackage{cleveref}
-% Définir le nom des théorèmes pour cleveref
-\crefname{theorem}{théorème}{théorèmes} % minuscule (default)
-\Crefname{theorem}{Théorème}{Théorèmes} % majuscule
-% Configuration pour rendre le texte entier cliquable
-\newcommand{\fullCref}[1]{\hyperref[#1]{\Cref*{#1}}}
-
-
-\usepackage{array,multirow,makecell}
-\setcellgapes{4pt}
-\makegapedcells
-\newcolumntype{R}[1]{>{\raggedleft\arraybackslash }b{#1}}
-\newcolumntype{L}[1]{>{\raggedright\arraybackslash }b{#1}}
-\newcolumntype{C}[1]{>{\centering\arraybackslash }b{#1}}
-
 
 \usepackage{fancyhdr}
 \pagestyle{fancy}
@@ -47,26 +43,52 @@
 \fancyfoot[L]{Sacha Ben-Arous}
 \fancyfoot[R]{E.N.S Paris-Saclay}
 
+%%==============================================================Custom Theorems=======================================================================%%
 
-%%==================================================================================================================================================%%
+\renewcommand{\thesection}{\Roman{section}} 
 
+\theoremstyle{definition}
+\newtheorem{defin}{Définition}[section]
+
+\theoremstyle{remark}
+\newtheorem*{rmq}{Remarque:}
+
+\theoremstyle{plain}
 \newtheorem{theorem}{Théorème}[section]
-\newtheorem{corollary}{Corollaire}[theorem]
+\newtheorem{cor}{Corollaire}[theorem]
 \newtheorem{lemma}[section]{Lemme}
+\newtheorem{mtheoreminner}{Théorème}
+\newenvironment{mth}[1]{%
+  \renewcommand\themtheoreminner{#1}%
+  \mtheoreminner
+}{\endmtheoreminner}
 
+%% Exemple :
 
-\newtheorem{manualtheoreminner}{Théorème}
-\newenvironment{manualtheorem}[1]{%
-  \renewcommand\themanualtheoreminner{#1}%
-  \manualtheoreminner
-}{\endmanualtheoreminner}
-
-  
-  
-%https://tex.stackexchange.com/questions/391443/new-theorem-environment-with-manual-theorem-number
-
-%% Exemples :
-
-%\begin{manualtheorem}{A}[title]\label{baz}
+%\begin{manualtheorem}{A}[title]\label{foo}
 % This is a theorem.
 %\end{manualtheorem}
+
+%%==============================================================Custom Names==========================================================================%%
+
+\hypersetup{
+  colorlinks   = true,    % Colours links instead of ugly boxes
+  urlcolor     = blue,    % Colour for external hyperlinks
+  linkcolor    = black,   % Colour of internal links
+  citecolor    = black    % Colour of citations
+}
+
+\addto\captionsfrench{\renewcommand\proofname{Preuve}}
+
+\usepackage{cleveref}
+
+% Configuration pour rendre le texte entier cliquable
+\newcommand{\fcref}[1]{\hyperref[#1]{\cref*{#1}}}
+
+%Majuscules pour cleveref
+\crefname{defin}{Définition}{Définitions}
+\crefname{rmq}{Remarque}{Remarques} 
+\crefname{theorem}{Théorème}{Théorèmes}
+\crefname{cor}{Corollaire}{Corollaires}
+\crefname{lemma}{Lemme}{Lemmes}
+\crefname{mtheoreminner}{Théorème}{Théorèmes} 
