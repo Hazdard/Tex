@@ -48,6 +48,16 @@ Si $s\in \R$, $u\in L^2(\R^d)$, on a alors $u\in H^s(\R^d) \Leftrightarrow \sum_
 \end{equation}
 \end{thm}
 
+
+\begin{thm}[]\label{meyer}
+Soit $s>0$, $n\in \N$, $n>s$. Il existe $C$ tel que pour toute famille $(u_p)_{p\in \N}$ dans $H^n(\R^d)$, si
+\begin{equation*}
+\| \partial ^\alpha u_k \|_{L^2} \leq 2^{k(|\alpha|-s)}\varepsilon_k
+\end{equation*}
+où $(\varepsilon_k)_{k\in \N} \in l^2(\N)$, alors $u=\sum_k u_k \in H^s(\R^d) $, et $ \|u\|_{H^s}^2 \leq C \sum_k \varepsilon_k^2 $
+\end{thm}
+
+
 \section{Théorèmes de paralinéarisation}
 
 \begin{thm}\label{paralin}
@@ -68,7 +78,7 @@ Soit $F$ une fonction $C^{\infty}$ de $\R$ telle que $F(0)=0$. Si $u\in H^s(\R^d
 \begin{proof}
 Si $s=0$, le résultat se déduit de l'existence d'une fonction $G$ continue telle que $F(u)=uG(u)$. Alors, comme $u\in L^2$ et $G(u) \in L^{\infty}$ car $u$ est bornée, on obtient bien $F\in L^2$. \\
 Quand $s>0$, on remarque qu'il existe $C_\alpha$  indépendant de $u$ et $k$ telle que  : 
-\begin{equation}
+\begin{equation}\label{ineq_l2}
 \|\partial^\alpha \Delta_k u \|_{L^2} \leq C_\alpha 2^{(|\alpha|-s)k} \varepsilon_k
 \end{equation}
 avec $\sum \varepsilon_k^2 =  \|u\|_{H^s}^2$. En effet, l'inégalité de Bernstein (\ref{bernstein}) puis la caractérisation des espaces de Sobolev (\ref{carac_sobol}) donnent le résultat voulu. On a de plus,
@@ -80,19 +90,25 @@ toujours par l'inégalité de Bernstein. Le lemme de quasi-orthogonalité (\ref{
 
 Un argument télescopique donne alors : 
 \begin{equation*}
-F(u) = F(S_0 u) + \sum_{k=0}^{+\infty} F(S_{p+1} u) - F(S_p u) = F(S_0 u) + \sum_{k=0}^{+\infty} m_p \Delta_p u
+F(u) = F(S_0 u) + \sum_{k=0}^{+\infty} F(S_{k+1} u) - F(S_k u) = F(S_0 u) + \sum_{k=0}^{+\infty} m_k \Delta_k u
 \end{equation*}
 
-où \[m_p := \int_0^1 F'(S_pu + t\Delta_pu)\mathrm{d}t\]
+où \[m_k := \int_0^1 F'(S_ku + t\Delta_ku)\mathrm{d}t\]
 Alors, on obtient dans un premier temps que : 
 
 \begin{equation*}
-\| \partial^\alpha F'(S_pu + t\Delta_pu)\|_{L^{\infty}} \leq C_\alpha 2^{|\alpha|k} \|u\|_{L^{\infty}}
+\| \partial^\alpha F'(S_ku + t\Delta_ku)\|_{L^{\infty}} \leq C_{\alpha,F} 2^{|\alpha|k} \|u\|_{L^{\infty}}
 \end{equation*}
 Pour cela on utilise la règle de la chaine (plus précisement la formule de Faà di Bruno), on majore uniformément les termes en $F'$ avec le \fcref{young} et on utilise (\ref{ineq_unif}) pour les termes en $u$.
-
-
-
+En intégrant, on obtient alors :
+\begin{equation*}
+\|\partial^\alpha m_k \|_{L^\infty} \leq C_{\alpha,F} 2^{|\alpha|k} \|u\|_{L^{\infty}}
+\end{equation*}
+Donc par la formule de Leibniz et l'inégalité (\ref{ineq_l2}), on obtient :
+\begin{equation*}
+\|\partial^\alpha(m_k \Delta_k u) \|_{L^2} \leq C_{\alpha,F} 2^{(|\alpha|-s)k} \|u\|_{L^{\infty}} \varepsilon_k
+\end{equation*}
+On peut donc conclure par le \fcref{meyer}.
 \end{proof}
 
 
