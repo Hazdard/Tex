@@ -40,8 +40,8 @@
 %%==============================================================Custom Styles=========================================================================%%
 
 \newtheoremstyle{bourbaki_it}%            % Name
-  {\topsep}%                              % Space above
-  {\topsep}%                              % Space below
+  {10pt}%                              % Space above
+  {10pt}%                              % Space below
   {\itshape}%                             % Body font
   {17pt}%                                 % Indent amount
   {\scshape}%                             % Theorem head font
@@ -50,8 +50,8 @@
   {}%                                     % Theorem head spec (can be left empty, meaning `normal')
 
 \newtheoremstyle{bourbaki_plain}%         % Name
-  {\topsep}%                              % Space above
-  {\topsep}%                              % Space below
+  {10pt}%                              % Space above
+  {10pt}%                              % Space below
   {}%                                     % Body font
   {17pt}%                                 % Indent amount
   {\scshape}%                             % Theorem head font
@@ -63,7 +63,7 @@
 
 \renewcommand{\thesection}{\Roman{section}} 
 
-\renewenvironment{proof}[1][\proofname]{{\scshape #1. }}{~\\ \qed}
+\renewenvironment{proof}[1][\proofname]{{\scshape #1. }}{\qed}
 
 \numberwithin{equation}{section}  %Numero des equations en fonction de la section
 \renewcommand{\theequation}{\arabic{section}.\arabic{equation}}

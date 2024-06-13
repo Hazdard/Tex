@@ -1,0 +1,108 @@
+\documentclass[11pt,a4paper]{article}
+\textheight245mm
+\textwidth170mm
+\hoffset-21mm
+\voffset-15mm
+\parindent0pt
+\usepackage[utf8]{inputenc}
+\usepackage{dsfont}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{fancyhdr}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage[french]{babel}
+\usepackage[hidelinks]{hyperref} 
+\hypersetup{
+  colorlinks   = true,    % Colours links instead of ugly boxes
+  urlcolor     = blue,    % Colour for external hyperlinks
+  linkcolor    = black,   % Colour of internal links
+  citecolor    = black    % Colour of citations
+}
+\usepackage{../../zephyr}
+\pagestyle{fancy}
+
+\usepackage{array,multirow,makecell}
+\setcellgapes{4pt}
+\makegapedcells
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash }b{#1}}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash }b{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash }b{#1}}
+
+\renewcommand{\headrulewidth}{1pt}
+\fancyhead[C]{Oraux blancs}
+\fancyhead[L]{}
+\fancyhead[R]{}
+
+\renewcommand{\footrulewidth}{1pt}
+\fancyfoot[C]{\thepage} 
+\fancyfoot[L]{Sacha Ben-Arous}
+\fancyfoot[R]{E.N.S Paris-Saclay}
+
+\begin{document}
+
+
+
+\textbf{Exercice 1 :} \\
+On note : \[f : M\in M_n(\mathbb{R}) \mapsto (\text{Tr}(M),\text{Tr}(M^2),\dots,\text{Tr}(M^n))\]
+On munit $ M_n(\mathbb{R})$ de sa structure euclidienne canonique.
+\begin{enumerate}
+\item Montrer que $f$ est différentiable en tout $M$ et expliciter $df(M)$.
+\item Comparer le rang de $df(M)$ au degré du polynôme minimal de $M$.
+\item Montrer que l'ensemble $\left \{ M \in M_n(\mathbb{R}), \ \chi_M = \mu_M \right \} $ est un ouvert de $M_n(\mathbb{R})$. \\
+\end{enumerate}
+
+
+\textbf{Exercice 2 (avec préparation) :} 
+\begin{enumerate}
+\item Donner un développement asymptotique à deux termes de 
+\[u_n = \sum_{k=2}^n \frac{\ln{k}}{k}\]
+\item À l'aide de la constante d'Euler, calculer 
+\[\sum_{n=1}^{+\infty} (-1)^n\frac{\ln{n}}{n}\]
+\end{enumerate}
+
+\textbf{Exercice 3 :}
+\begin{enumerate}
+\item Soit $A\in GL_n(\mathbb{R})$, montrer qu'il existe $O\in \mathcal{O}_n(\mathbb{R})$ et $S \in \mathcal{S}_n(\mathbb{R})$ tels que $A=OS$. Étendre ce résultat aux matrices non-inversibles.
+\item Soit $M\in M_n(\mathbb{R})$, justifier l'existence de $\displaystyle \sup_{O\in \mathcal{O}_n(\mathbb{R})} \left | Tr(OM) \right |$ et calculer sa valeur. \\
+\item Montrer que l'ensemble des matrices de $M_n(\mathbb{R})$ à déterminant $> 0$ est connexe par arcs.
+\end{enumerate}
+~\\
+
+\textbf{Exercice 4 (avec préparation) :}
+\begin{enumerate}
+\item Montrer que $GL_n(\mathbb{K})$ est dense dans $M_n(\mathbb{K})$.
+\item Justifier que l'ensemble des matrices diagonalisables dans $\mathbb{C}$ est dense dans $M_n(\mathbb{C})$.
+\item 
+\begin{itemize}
+\item[a)] Montrer que l’ensemble des matrices diagonalisables dans $\mathbb{R}$ n’est pas dense dans $M_n(\mathbb{R})$. On se contentera du cas $n=2$.
+\item[b)] Montrer que $P\in \mathbb{R}[X]$ unitaire de degré $n\in \mathbb{N}$ sur $\mathbb{R}$ est scindé si et seulement si \\ $ \forall z \in \mathbb{C},|Im(z)|^n \leq |P(z)|$.
+\item[c)] En déduire que l'ensemble des matrices trigonalisables dans $\mathbb{R}$ est fermé dans $M_n(\mathbb{R})$.
+\item[d)]  Montrer que l’adhérence des matrices diagonalisables dans $\mathbb{R}$ est l’ensemble des matrices
+trigonalisables dans $\mathbb{R}$.
+\end{itemize}
+\end{enumerate}
+\textit{Bonus : Calculer l'adhérence des matrices de rang $r$ dans $M_n(\mathbb{K})$} \\
+~\\
+
+\textbf{Exercice 5 :}
+\begin{enumerate}
+\item Montrer qu'un sous-groupe additif de $\mathbb{R}$ est soit monogène soit dense.
+\item Montrer que $ \lbrace \sin{n}, n \in \mathbb{Z} \rbrace $ est dense dans $[-1,1]$.
+\item Montrer que $ \lbrace \sin{n}, n \in \mathbb{N} \rbrace $ est dense dans $[-1,1]$.
+\end{enumerate}
+\newpage
+
+\textbf{Exercice 6 :}
+Soit $(E,d)$ un espace métrique. On dit qu'une suite $(u_n)_{n \in \mathbb{N}}$ est de Cauchy si ; \[\forall \varepsilon >0, \ \exists n_0, \ \forall p,q \geq n_0,\ d(u_p,u_q)\leq \varepsilon\]
+On dit que $E$ est complet si toute suite de Cauchy est convergente.
+\begin{enumerate}
+\item Justifier que toute suite convergente est de Cauchy.
+\item Montrer qu'une suite de Cauchy est convergente si et seulement si elle admet une suite extraite convergente.
+\item Montrer que $(\mathbb{R},|.|)$ est complet. Que dire de $(\mathbb{Q},|.|)$ ?
+\item Montrer qu'un espace métrique est complet si et seulement si la convergence absolue des séries entraine la convergence simple.
+\end{enumerate}
+~\\
+
+\textbf{Exercice bonus :} \\
+Montrer que tout sous-groupe fini des inversibles d'un corps commutatif est cyclique. \
+\end{document}

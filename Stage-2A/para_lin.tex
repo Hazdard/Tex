@@ -15,14 +15,23 @@ Ce document a pour objectif d'exposer les principaux théorèmes de paralinéari
 
 
 \begin{thm}[Inégalité de Bernstein]
-Soit $r_1,r_2 >0$. Il existe $C$ tel que pour tout $k \geq 1$, $\lambda >0$, $u\in L^p(\R^d)$ $(1\leq p \leq +\infty)$, on a :
+Soit $B$ une boule, $1\leq p  \leq  q \leq +\infty$, $k\in \N$, et $\lambda >0$. Si $u\in L^p$ tel que $\text{supp}(\hat{u})\subset \lambda B$, alors
 \begin{equation}\label{bernstein}
-\text{supp } \hat{u} \subset B(0,r_1\lambda) \Rightarrow \sup_{|\alpha|=k} \|\partial^\alpha u\|_{L^p} \leq C^k \lambda^k \|u\|_{L^p}
-\end{equation}
-\begin{equation}
-\text{supp } \hat{u} \subset C(0,r_1\lambda,r_2\lambda) \Rightarrow  C^{-k} \lambda^k \|u\|_{L^p} \leq \sup_{|\alpha|=k} \|\partial^\alpha u\|_{L^p} \leq C^k \lambda^k \|u\|_{L^p}
+\max_{|\alpha|=k}{\| \partial^\alpha u\|_{L^q}} \ \lesssim_k \lambda^{k+d \left ( \frac{1}{p}- \frac{1}{q} \right )}\|u\|_{L^p}
 \end{equation}
 \end{thm}
+
+\begin{proof}
+Soit $\varphi \in C^\infty_c(\R^d)$ qui vaut 1 sur un voisinage de $B$, on a $\hat{u}(\xi)=\varphi(\lambda^{-1}\xi)\hat{u}(\xi)$, donc $u=\lambda^d g * u$, avec $g := \mathcal{F}^{-1}(\varphi)(\lambda \cdot)$, et donc $\partial^\alpha u =\lambda^d \partial^\alpha g * u$. L'inégalité de Young donne de plus que : $\|f * g \|_{L^q} \leq \|f\|_{L^p} \|g\|_{L^r}$, où $1\leq p,r\leq q \leq +\infty$, et $\frac{1}{p}+\frac{1}{r}= 1 + \frac{1}{q}$. Or :
+\begin{eqnarray*}
+\| \partial^\alpha g \|^r_{L^r} &=& \int_{\mathbb{R^d}} \left | \partial^\alpha \left(\mathcal{F}^{-1} \varphi(\lambda x)\right) \right |^r \mathrm{d}x =   \lambda^{|\alpha|r} \int_{\mathbb{R^d}} \left | \partial^\alpha \left(\mathcal{F}^{-1}(\varphi)\right)(\lambda x) \right |^r \mathrm{d}x  \\
+&\leq& \lambda^{|\alpha|r-d} \| \partial^\alpha \mathcal{F}^{-1}\varphi \|^r_{L^r}
+\end{eqnarray*}
+Ce qui donne bien :
+\begin{eqnarray*}
+\| \partial^\alpha u \|_{L^q} \leq \lambda^{|\alpha| + d(1-\frac{1}{r})} \| \partial^\alpha \mathcal{F}^{-1}\varphi \|_{L^r} \|u\|_{L^p} = C_k\lambda^{|\alpha| + d(\frac{1}{p}-\frac{1}{q})} \|u\|_{L^p}
+\end{eqnarray*}
+\end{proof}
 
 
 \begin{lemma}\label{young}
@@ -33,7 +42,7 @@ Il existe $C>0$ tel que pour tout $1\leq p \leq +\infty$, $u \in L^p(\R^d)$,
 \end{lemma}
 
 
-\begin{lemma}[Quasi-orthogonalité]
+\begin{lemma}[Presque-orthogonalité]
 Pour tout $u\in L^2(\R^d)$, 
 \begin{equation}\label{qortho}
 \sum_{p \geq -1} \|\Delta_p u \|^2_{L^2} \leq \| u \|^2_{L^2} \leq 2 \sum_{p \geq -1} \|\Delta_p u \|^2_{L^2} 
@@ -44,8 +53,12 @@ Pour tout $u\in L^2(\R^d)$,
 \begin{thm}[Caractérisation des espaces de Sobolev]
 Si $s\in \R$, $u\in L^2(\R^d)$, on a alors $u\in H^s(\R^d) \Leftrightarrow \sum_{p\geq -1}2^{2ps}\|\Delta_p u \|_{L^2}^2 < +\infty$. De plus, il existe $C>0$ tel que :
 \begin{equation}\label{carac_sobol}
-\frac{1}{C}\sum_{p\geq -1}2^{2ps}\|\Delta_p u \|_{L^2}^2 \leq \|u\|_{H^s} \leq C \sum_{p\geq -1}2^{2ps}\|\Delta_p u \|_{L^2}^2 
+\frac{1}{C}\sum_{p\geq -1}2^{2ps}\|\Delta_p u \|_{L^2}^2 \leq \|u\|_{H^s}^2 \leq C \sum_{p\geq -1}2^{2ps}\|\Delta_p u \|_{L^2}^2 
 \end{equation}
+\end{thm}
+
+\begin{thm}[Injection de Sobolev]\label{inject}
+Pour tout $s\in \R$, $H^s(\R^d)$ s'injecte continuement dans $C^{s-\frac{d}{2}}(\R^d)$.
 \end{thm}
 
 
@@ -54,7 +67,7 @@ Soit $s>0$, $n\in \N$, $n>s$. Il existe $C$ tel que pour toute famille $(u_p)_{p
 \begin{equation*}
 \| \partial ^\alpha u_k \|_{L^2} \leq 2^{k(|\alpha|-s)}\varepsilon_k
 \end{equation*}
-où $(\varepsilon_k)_{k\in \N} \in l^2(\N)$, alors $u=\sum_k u_k \in H^s(\R^d) $, et $ \|u\|_{H^s}^2 \leq C \sum_k \varepsilon_k^2 $
+où $(\varepsilon_k)_{k\in \N} \in l^2(\N)$, alors $u=\sum_k u_k \in H^s(\R^d) $, et $ \|u\|_{H^s}^2 \leq C \sum_k \varepsilon_k^2 $.
 \end{thm}
 
 
@@ -85,13 +98,13 @@ avec $\sum \varepsilon_k^2 =  \|u\|_{H^s}^2$. En effet, l'inégalité de Bernste
 \begin{equation}\label{ineq_unif}
 \|\partial^\alpha \Delta_k u \|_{L^{\infty}} \leq C_\alpha 2^{|\alpha|k} \|u\|_{L^{\infty}}
 \end{equation}
-toujours par l'inégalité de Bernstein. Le lemme de quasi-orthogonalité (\ref{qortho}) donnant que $(\Delta_k u)_{k\in \N}$ est terme général d'une série absolument convergente, la complétude de $L^2$ fournit alors la convergence simple de cette série, i.e. $S_nu \to u$ dans $L^2$. De plus, d'après le \fcref{young},  $\|S_pu\|_{L^\infty} \leq C \|u\|_{L^\infty}$. On en déduit que $F(S_nu) \to F(u)$ dans $L^2$ car :
+toujours par l'inégalité de Bernstein. Le lemme de presque-orthogonalité (\ref{qortho}) donnant que $(\Delta_k u)_{k\in \N}$ est terme général d'une série absolument convergente, la complétude de $L^2$ fournit alors la convergence simple de cette série, i.e. $S_nu \to u$ dans $L^2$. De plus, d'après le \fcref{young},  $\|S_pu\|_{L^\infty} \leq C \|u\|_{L^\infty}$. On en déduit que $F(S_nu) \to F(u)$ dans $L^2$ car :
 \[ \| F(S_nu) - F(u)\|_{L^2} \leq C \sup_{t\in[0,1]} \|F'(tS_nu- (1-t)u \|_{L^\infty}\|S_nu-u\|_{L^2} \to 0 \]
 
 Un argument télescopique donne alors : 
-\begin{equation*}
+\begin{equation}\label{telesc}
 F(u) = F(S_0 u) + \sum_{k=0}^{+\infty} F(S_{k+1} u) - F(S_k u) = F(S_0 u) + \sum_{k=0}^{+\infty} m_k \Delta_k u
-\end{equation*}
+\end{equation}
 
 où \[m_k := \int_0^1 F'(S_ku + t\Delta_ku)\mathrm{d}t\]
 Alors, on obtient dans un premier temps que : 
@@ -113,6 +126,13 @@ On peut donc conclure par le \fcref{meyer}.
 
 \begin{proof}[Preuve du \fcref{paralin}]
 
+On commence par remarquer que quitte à soustraire un terme linéaire $au$ à $F(u)$, on peut supposer que $F'(0)=0$. Cela ne change rien à la preuve car :
+\[F(u)+au - T_{F'(u) + a}u = F(u) + au - T_{F'(u)}u  -T_{a}u =  F(u) + au - T_{F'(u)}u  -au =  F(u) - T_{F'(u)}u \]
+Ensuite, comme $\rho >0$, le \fcref{inject} donne $u\in L^\infty(\R^d)$. Par définition, on a \[T_{F'(u)}u = S_{-3}g\ u_0 + \sum_{k=0}^\infty S_{k-2} g \Delta_k u \]
+où $g= F'(u)$. En utilisant (\ref{telesc}), comme $F(S_0u)$ et $S_{-3}g \ u_0$ sont dans $H^\infty$, il suffit de prouver que :
+\[\sum_{k=0}^\infty(m_k-S_{k-2}g)\Delta_k u \ \in H^{s+\rho}\]
+Cela découle du \fcref{meyer}, que l'on peut appliquer d'une part grâce à (\ref{ineq_l2}), et d'autre part car on a l'inégalité :
+\[\| \partial^\alpha (m_k - S_{k-2}g)\|_{L^\infty} \leq C_\alpha 2^{(|\alpha|-\rho)k}\]
 \end{proof}
 
 \newpage
