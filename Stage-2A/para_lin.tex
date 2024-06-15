@@ -73,6 +73,7 @@ où $(\varepsilon_k)_{k\in \N} \in l^2(\N)$, alors $u=\sum_k u_k \in H^s(\R^d) $
 
 \section{Théorèmes de paralinéarisation}
 
+
 \begin{thm}\label{paralin}
 Soit $F$ une fonction $C^{\infty}$ de $\R$ telle que $F(0)=0$. Si $u\in H^s(\R^d)$, avec $\rho := s - \frac{d}{2}>0 $, alors 
 \begin{equation}
@@ -81,12 +82,14 @@ F(u) - T_{F'(u)}u \in H^{s+\rho}(\R^d).
 \end{thm}
 Pour prouver ce théorème, on commence par montrer le lemme suivant : 
 
+
 \begin{lemma}\label{lem_paralin}
 Soit $F$ une fonction $C^{\infty}$ de $\R$ telle que $F(0)=0$. Si $u\in H^s(\R^d)\cap L^{\infty}(\R^d) $, avec $s\geq 0 $, alors $F(u) \in H^s(\R^d)$ et 
 \begin{equation}
 \|F(u)\|_{H^s} \leq C_s \|u\|_{L^{\infty}} \|u\|_{H^s}
 \end{equation}
 \end{lemma}
+
 
 \begin{proof}
 Si $s=0$, le résultat se déduit de l'existence d'une fonction $G$ continue telle que $F(u)=uG(u)$. Alors, comme $u\in L^2$ et $G(u) \in L^{\infty}$ car $u$ est bornée, on obtient bien $F\in L^2$. \\
@@ -100,15 +103,12 @@ avec $\sum \varepsilon_k^2 =  \|u\|_{H^s}^2$. En effet, l'inégalité de Bernste
 \end{equation}
 toujours par l'inégalité de Bernstein. Le lemme de presque-orthogonalité (\ref{qortho}) donnant que $(\Delta_k u)_{k\in \N}$ est terme général d'une série absolument convergente, la complétude de $L^2$ fournit alors la convergence simple de cette série, i.e. $S_nu \to u$ dans $L^2$. De plus, d'après le \fcref{young},  $\|S_pu\|_{L^\infty} \leq C \|u\|_{L^\infty}$. On en déduit que $F(S_nu) \to F(u)$ dans $L^2$ car :
 \[ \| F(S_nu) - F(u)\|_{L^2} \leq C \sup_{t\in[0,1]} \|F'(tS_nu- (1-t)u \|_{L^\infty}\|S_nu-u\|_{L^2} \to 0 \]
-
 Un argument télescopique donne alors : 
 \begin{equation}\label{telesc}
 F(u) = F(S_0 u) + \sum_{k=0}^{+\infty} F(S_{k+1} u) - F(S_k u) = F(S_0 u) + \sum_{k=0}^{+\infty} m_k \Delta_k u
 \end{equation}
-
 où \[m_k := \int_0^1 F'(S_ku + t\Delta_ku)\mathrm{d}t\]
 Alors, on obtient dans un premier temps que : 
-
 \begin{equation*}
 \| \partial^\alpha F'(S_ku + t\Delta_ku)\|_{L^{\infty}} \leq C_{\alpha,F} 2^{|\alpha|k} \|u\|_{L^{\infty}}
 \end{equation*}
@@ -123,6 +123,7 @@ Donc par la formule de Leibniz et l'inégalité (\ref{ineq_l2}), on obtient :
 \end{equation*}
 On peut donc conclure par la \fcref{meyer}.
 \end{proof}
+
 
 \begin{proof}[Preuve du \fcref{paralin}]On commence par remarquer que quitte à soustraire un terme linéaire $au$ à $F(u)$, on peut supposer que $F'(0)=0$. Cela ne change rien à la preuve car :
 \[F(u)+au - T_{F'(u) + a}u = F(u) + au - T_{F'(u)}u  -T_{a}u =  F(u) + au - T_{F'(u)}u  -au =  F(u) - T_{F'(u)}u \]
@@ -173,7 +174,7 @@ De plus :
 \begin{equation*}
 \|S_k (F'(u) - F'(S_ku) )\|_{L^2} \lesssim \|F'(u) - F'(S_ku) )\|_{L^2} \lesssim \|u-u_k\|_{L^2} \lesssim 2^{-ks}
 \end{equation*}
-grâce au \fcref{young}, puis aux accroissements finis, et finalement avec une majoration d'un reste géométrique dans la caractérisation des espaces de Sobolev \eqref{carac_sobol}. Ainsi le second membre vérifie l'inégalité \eqref{eq2}. \\
+grâce au \fcref{young}, puis aux accroissements finis, et finalement avec une majoration du reste géométrique dans la caractérisation des espaces de Sobolev \eqref{carac_sobol}. Ainsi le second membre vérifie l'inégalité \eqref{eq2}. \\
 Ensuite, on remarque que $S_ku \in H^\infty$ car sa transformée de Fourier est à support compact. Alors, d'une part $S_ku \in L^\infty	$ par le \fcref{young}, et sa norme est bornée indépendamment de $k$. D'autre part, en écrivant la norme usuelle de Sobolev et en utilisant l'inégalité de Bernstein, on a que $\forall N \in \N$ :
 \begin{align*}
  \|S_ku\|_{H^{s+N}} &= \|S_ku\|_{H^s} + \sum_{j=1}^N\sum_{|\alpha|=s+j} \|\partial^\alpha S_k u \|_{L^2} \\
@@ -198,38 +199,8 @@ En appliquant \eqref{aled} avec $a=F'(S_ku)$ et $\sigma = s + N$ où $N$ est suf
 \|\partial^\alpha (F'(S_ku)-S_k F'(S_ku))\|_{L^\infty} &\leq C 2^{k(\frac{d}{2}-s-N+|\alpha|)} \|F'(S_ku)\|_{H^{s+N}} \\
 & \leq  C_{\alpha,N} 2^{k(\frac{d}{2}-s+|\alpha|)} \|u\|_{H^s}
 \end{align*}
-où l'on a utilisé \eqref{utillem}, ce qui donne finalement la majoration attendue pour le premier membre, et permet de conclure la preuve du \fcref{paralin}
+où l'on a utilisé \eqref{utillem}, ce qui donne finalement la majoration attendue pour le premier membre, conclut la preuve de l'inégalité \eqref{eq2} et achève donc la preuve du \fcref{paralin}.
 \end{proof}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
