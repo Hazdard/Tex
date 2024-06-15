@@ -14,15 +14,15 @@ Ce document a pour objectif d'exposer les principaux théorèmes de paralinéari
 \section{Décomposition de Littlewood-Paley}
 
 
-\begin{thm}[Inégalité de Bernstein]
+\begin{lemma}[Inégalité de Bernstein]
 Soit $B$ une boule, $1\leq p  \leq  q \leq +\infty$, $k\in \N$, et $\lambda >0$. Si $u\in L^p$ tel que $\text{supp}(\hat{u})\subset \lambda B$, alors
 \begin{equation}\label{bernstein}
-\max_{|\alpha|=k}{\| \partial^\alpha u\|_{L^q}} \ \lesssim_k \lambda^{k+d \left ( \frac{1}{p}- \frac{1}{q} \right )}\|u\|_{L^p}
+\max_{|\alpha|=k}{\| \partial^\alpha u\|_{L^q}} \ \lesssim_k \lambda^{|\alpha| +d \left ( \frac{1}{p}- \frac{1}{q} \right )}\|u\|_{L^p}
 \end{equation}
-\end{thm}
+\end{lemma}
 
 \begin{proof}
-Soit $\varphi \in C^\infty_c(\R^d)$ qui vaut 1 sur un voisinage de $B$, on a $\hat{u}(\xi)=\varphi(\lambda^{-1}\xi)\hat{u}(\xi)$, donc $u=\lambda^d g * u$, avec $g := \mathcal{F}^{-1}(\varphi)(\lambda \cdot)$, et donc $\partial^\alpha u =\lambda^d \partial^\alpha g * u$. L'inégalité de Young donne de plus que : $\|f * g \|_{L^q} \leq \|f\|_{L^p} \|g\|_{L^r}$, où $1\leq p,r\leq q \leq +\infty$, et $\frac{1}{p}+\frac{1}{r}= 1 + \frac{1}{q}$. Or :
+Soit $\varphi \in C^\infty_c(\R^d)$ qui vaut 1 sur un voisinage de $B$, on a $\hat{u}(\xi)=\varphi(\lambda^{-1}\xi)\hat{u}(\xi)$, donc $u=\lambda^d u * g$, avec $g := \mathcal{F}^{-1}(\varphi)(\lambda \cdot)$, et donc $\partial^\alpha u =\lambda^d u * \partial^\alpha g$. L'inégalité de Young donne de plus que : $\|f * g \|_{L^q} \leq \|f\|_{L^p} \|g\|_{L^r}$, où $1\leq p,r\leq q \leq +\infty$, et $\frac{1}{p}+\frac{1}{r}= 1 + \frac{1}{q}$. Or :
 \begin{eqnarray*}
 \| \partial^\alpha g \|^r_{L^r} &=& \int_{\mathbb{R^d}} \left | \partial^\alpha \left(\mathcal{F}^{-1} \varphi(\lambda x)\right) \right |^r \mathrm{d}x =   \lambda^{|\alpha|r} \int_{\mathbb{R^d}} \left | \partial^\alpha \left(\mathcal{F}^{-1}(\varphi)\right)(\lambda x) \right |^r \mathrm{d}x  \\
 &\leq& \lambda^{|\alpha|r-d} \| \partial^\alpha \mathcal{F}^{-1}\varphi \|^r_{L^r}
@@ -37,7 +37,7 @@ Ce qui donne bien :
 \begin{lemma}\label{young}
 Il existe $C>0$ tel que pour tout $1\leq p \leq +\infty$, $u \in L^p(\R^d)$, 
 \begin{align*}
-\sup_{p\geq -1}\|S_pu\|_{L^p} &\leq C \|u\|_{L^p} & \sup_{p\geq -1}\|\Delta_pu\|_{L^p} &\leq C \|u\|_{L^p}
+\sup_{k\geq -1}\|S_ku\|_{L^p} &\leq C \|u\|_{L^p} & \sup_{k\geq -1}\|\Delta_ku\|_{L^p} &\leq C \|u\|_{L^p}
 \end{align*}
 \end{lemma}
 
@@ -45,30 +45,30 @@ Il existe $C>0$ tel que pour tout $1\leq p \leq +\infty$, $u \in L^p(\R^d)$,
 \begin{lemma}[Presque-orthogonalité]
 Pour tout $u\in L^2(\R^d)$, 
 \begin{equation}\label{qortho}
-\sum_{p \geq -1} \|\Delta_p u \|^2_{L^2} \leq \| u \|^2_{L^2} \leq 2 \sum_{p \geq -1} \|\Delta_p u \|^2_{L^2} 
+\sum_{k \geq -1} \|\Delta_k u \|^2_{L^2} \leq \| u \|^2_{L^2} \leq 2 \sum_{k \geq -1} \|\Delta_k u \|^2_{L^2} 
 \end{equation}
 \end{lemma}
 
 
-\begin{thm}[Caractérisation des espaces de Sobolev]
+\begin{prop}[Caractérisation des espaces de Sobolev]
 Si $s\in \R$, $u\in L^2(\R^d)$, on a alors $u\in H^s(\R^d) \Leftrightarrow \sum_{p\geq -1}2^{2ps}\|\Delta_p u \|_{L^2}^2 < +\infty$. De plus, il existe $C>0$ tel que :
 \begin{equation}\label{carac_sobol}
-\frac{1}{C}\sum_{p\geq -1}2^{2ps}\|\Delta_p u \|_{L^2}^2 \leq \|u\|_{H^s}^2 \leq C \sum_{p\geq -1}2^{2ps}\|\Delta_p u \|_{L^2}^2 
+\frac{1}{C}\sum_{k\geq -1}2^{2ks}\|\Delta_k u \|_{L^2}^2 \leq \|u\|_{H^s}^2 \leq C \sum_{k\geq -1}2^{2ks}\|\Delta_k u \|_{L^2}^2 
 \end{equation}
-\end{thm}
+\end{prop}
 
-\begin{thm}[Injection de Sobolev]\label{inject}
-Pour tout $s\in \R$, $H^s(\R^d)$ s'injecte continuement dans $C^{s-\frac{d}{2}}(\R^d)$.
-\end{thm}
+\begin{prop}[Injection de Sobolev]\label{inject}
+Pour tout $s\in \R$, $H^s(\R^d)$ s'injecte continuement dans $C^{s-\frac{d}{2}}(\R^d)$
+\end{prop}
 
 
-\begin{thm}[]\label{meyer}
-Soit $s>0$, $n\in \N$, $n>s$. Il existe $C$ tel que pour toute famille $(u_p)_{p\in \N}$ dans $H^n(\R^d)$, si
+\begin{prop}[]\label{meyer}
+Soit $s>0$, $n\in \N$, $n>s$. Il existe $C$ tel que pour toute famille $(u_k)_{k\in \N}$ dans $H^n(\R^d)$, si $ \forall \alpha \in \N^d, \ |\alpha| \leq n $ :
 \begin{equation*}
-\| \partial ^\alpha u_k \|_{L^2} \leq 2^{k(|\alpha|-s)}\varepsilon_k
+\|\partial ^\alpha u_k \|_{L^2} \leq 2^{k(|\alpha|-s)}\varepsilon_k
 \end{equation*}
 où $(\varepsilon_k)_{k\in \N} \in l^2(\N)$, alors $u=\sum_k u_k \in H^s(\R^d) $, et $ \|u\|_{H^s}^2 \leq C \sum_k \varepsilon_k^2 $.
-\end{thm}
+\end{prop}
 
 
 \section{Théorèmes de paralinéarisation}
@@ -81,10 +81,10 @@ F(u) - T_{F'(u)}u \in H^{s+\rho}(\R^d).
 \end{thm}
 Pour prouver ce théorème, on commence par montrer le lemme suivant : 
 
-\begin{lemma}
-Soit $F$ une fonction $C^{\infty}$ de $\R$ telle que $F(0)=0$. Si $u\in H^s(\R^d)\cap L^{\infty}(\R^d) $, avec $s>0 $, alors $F(u) \in H^s(\R^d)$ et 
+\begin{lemma}\label{lem_paralin}
+Soit $F$ une fonction $C^{\infty}$ de $\R$ telle que $F(0)=0$. Si $u\in H^s(\R^d)\cap L^{\infty}(\R^d) $, avec $s\geq 0 $, alors $F(u) \in H^s(\R^d)$ et 
 \begin{equation}
-\|F(u)\| \leq C_s \|u\|_{L^{\infty}} \|u\|_{H^s}
+\|F(u)\|_{H^s} \leq C_s \|u\|_{L^{\infty}} \|u\|_{H^s}
 \end{equation}
 \end{lemma}
 
@@ -114,26 +114,140 @@ Alors, on obtient dans un premier temps que :
 \end{equation*}
 Pour cela on utilise la règle de la chaine (plus précisement la formule de Faà di Bruno), on majore uniformément les termes en $F'$ avec le \fcref{young} et on utilise (\ref{ineq_unif}) pour les termes en $u$.
 En intégrant, on obtient alors :
-\begin{equation*}
+\begin{equation}\label{majint}
 \|\partial^\alpha m_k \|_{L^\infty} \leq C_{\alpha,F} 2^{|\alpha|k} \|u\|_{L^{\infty}}
-\end{equation*}
+\end{equation}
 Donc par la formule de Leibniz et l'inégalité (\ref{ineq_l2}), on obtient :
 \begin{equation*}
 \|\partial^\alpha(m_k \Delta_k u) \|_{L^2} \leq C_{\alpha,F} 2^{(|\alpha|-s)k} \|u\|_{L^{\infty}} \varepsilon_k
 \end{equation*}
-On peut donc conclure par le \fcref{meyer}.
+On peut donc conclure par la \fcref{meyer}.
 \end{proof}
 
-\begin{proof}[Preuve du \fcref{paralin}]
-
-On commence par remarquer que quitte à soustraire un terme linéaire $au$ à $F(u)$, on peut supposer que $F'(0)=0$. Cela ne change rien à la preuve car :
+\begin{proof}[Preuve du \fcref{paralin}]On commence par remarquer que quitte à soustraire un terme linéaire $au$ à $F(u)$, on peut supposer que $F'(0)=0$. Cela ne change rien à la preuve car :
 \[F(u)+au - T_{F'(u) + a}u = F(u) + au - T_{F'(u)}u  -T_{a}u =  F(u) + au - T_{F'(u)}u  -au =  F(u) - T_{F'(u)}u \]
-Ensuite, comme $\rho >0$, le \fcref{inject} donne $u\in L^\infty(\R^d)$. Par définition, on a \[T_{F'(u)}u = S_{-3}g\ u_0 + \sum_{k=0}^\infty S_{k-2} g \Delta_k u \]
-où $g= F'(u)$. En utilisant (\ref{telesc}), comme $F(S_0u)$ et $S_{-3}g \ u_0$ sont dans $H^\infty$, il suffit de prouver que :
+Ensuite, comme $\rho >0$, la \fcref{inject} donne $u\in L^\infty(\R^d)$. Par définition, on a \[T_{F'(u)}u = S_{-3}F'(u)\cdot u_0 + \sum_{k=0}^\infty S_{k-2} F'(u)\cdot \Delta_k u \]
+En utilisant (\ref{telesc}), comme $F(S_0u)$ et $S_{-3}F'(u) \cdot u_0$ sont dans $H^\infty$, il suffit de prouver que :
 \[\sum_{k=0}^\infty(m_k-S_{k-2}g)\Delta_k u \ \in H^{s+\rho}\]
-Cela découle du \fcref{meyer}, que l'on peut appliquer d'une part grâce à (\ref{ineq_l2}), et d'autre part car on a l'inégalité :
-\[\| \partial^\alpha (m_k - S_{k-2}g)\|_{L^\infty} \leq C_\alpha 2^{(|\alpha|-\rho)k}\]
+Cela découle de la \fcref{meyer}, que l'on peut appliquer d'une part grâce à (\ref{ineq_l2}), et d'autre part car on a l'inégalité :
+\begin{equation*}
+\| \partial^\alpha (m_k - S_{k-2}F'(u))\|_{L^\infty} \leq C_\alpha 2^{(|\alpha|-\rho)k}
+\end{equation*} 
+Pour obtenir cette dernière, on va montrer séparément :
+\begin{align}
+\| \partial^\alpha (m_k - F'(S_{k-2}u))\|_{L^\infty} &\leq C_\alpha 2^{(|\alpha|-\rho)k} \label{eq1} \\
+\| \partial^\alpha (F'(S_{k}u) - S_kF'(u))\|_{L^\infty} &\leq C_\alpha 2^{(|\alpha|-\rho)k} \label{eq2}
+\end{align}
+On commence par écrire la formule de Taylor avec reste intégral, qui donne 
+\[F'(S_ku+t\Delta_ku)-F'(S_{k-2}u)=\mu_kw_k\]
+avec 
+\begin{equation*}
+w_k=(\Delta_{k-2}u + \Delta_{k-1}u + t\Delta_ku) \quad \text{ et } \mu_k = \int_0^1F''(S_{k-2}u + \tau w_k)\mathrm{d}\tau.
+\end{equation*}
+De manière analogue à \eqref{majint}, on a 
+\begin{equation*}
+\|\partial^\alpha \mu_k \|_{L^\infty} \leq C_{\alpha,F} 2^{|\alpha|k} \|u\|_{L^\infty}
+\end{equation*}
+Tandis que $w_k$ vérifie
+\begin{equation*}
+\| \partial^\alpha w_k\|_{L^\infty} \leq C_{\alpha} 2^{\frac{d}{2}k} \| \partial^\alpha w_k\|_{L^2} \leq C_{\alpha} 2^{\frac{d}{2}k} 2^{(|\alpha|-s)k} \varepsilon_k  \leq \tilde{C}_{\alpha} 2^{(|\alpha|-\rho)k}
+\end{equation*}
+où l'on a utilisé l'inégalité de Bernstein \eqref{bernstein}, puis \eqref{ineq_l2}. On en déduit donc que 
+\begin{equation*}
+\|\partial^\alpha (\mu_kw_k)\|_{L^\infty} \leq C_\alpha 2^{(|\alpha|-\rho)k} 
+\end{equation*}
+Or 
+\begin{equation*}
+m_k - F'(S_{k-2}u) = \int_0^1 \mu_k w_k\mathrm{d}t
+\end{equation*}
+Ce qui donne \eqref{eq1}.
+Pour montrer la seconde inégalité, on commence par décomposer en deux membre le terme à majorer :
+\begin{equation*}
+\left[ F'(S_{k}u) - S_k F'(S_{k}u) \right] + \left[ S_k F'(S_{k}u) - S_kF'(u) \right]
+\end{equation*}
+L'inégalité de Bernstein \eqref{bernstein} donne alors 
+\begin{equation*}
+\|\partial^\alpha S_k (F'(u) - F'(S_ku) )\|_{L^\infty} \lesssim_\alpha 2^{(|\alpha| + \frac{d}{2})k } \|S_k (F'(u) - F'(S_ku) )\|_{L^2}.
+\end{equation*}
+De plus :
+\begin{equation*}
+\|S_k (F'(u) - F'(S_ku) )\|_{L^2} \lesssim \|F'(u) - F'(S_ku) )\|_{L^2} \lesssim \|u-u_k\|_{L^2} \lesssim 2^{-ks}
+\end{equation*}
+grâce au \fcref{young}, puis aux accroissements finis, et finalement avec une majoration d'un reste géométrique dans la caractérisation des espaces de Sobolev \eqref{carac_sobol}. Ainsi le second membre vérifie l'inégalité \eqref{eq2}. \\
+Ensuite, on remarque que $S_ku \in H^\infty$ car sa transformée de Fourier est à support compact. Alors, d'une part $S_ku \in L^\infty	$ par le \fcref{young}, et sa norme est bornée indépendamment de $k$. D'autre part, en écrivant la norme usuelle de Sobolev et en utilisant l'inégalité de Bernstein, on a que $\forall N \in \N$ :
+\begin{align*}
+ \|S_ku\|_{H^{s+N}} &= \|S_ku\|_{H^s} + \sum_{j=1}^N\sum_{|\alpha|=s+j} \|\partial^\alpha S_k u \|_{L^2} \\
+& \leq \|S_ku\|_{H^s} + \sum_{j=1}^N C_{\alpha,j} 2^{kj} \|\partial^s S_ku\|_{L^2} \\
+& \leq C_{\alpha,N} 2^{kN}\|S_ku\|_{H^s} \leq C_{\alpha,N} 2^{kN}\|u\|_{H^s} .
+\end{align*}
+où l'on a observé que $\|S_ku\|_{H^s} \leq \|u\|_{H^s}$ à partir de l'écriture utilisant les multiplicateurs de Fourier, et avec la norme de Sobolev adaptée. Alors, le \fcref{lem_paralin} donne que $F'(S_ku)\in H^{s+N}$, et 
+\begin{equation}\label{utillem}
+\|F'(u)\|_{H^{s+N}} \leq C_{\alpha,N}2^{kN}\|u\|_{H^s}
+\end{equation}
+En reprenant l'inégalité (\textbf{??}) dans la preuve de l'injection de Sobolev et en utilisant l'inégalité de Bernstein, on remarque que pour $\sigma > |\alpha| + \frac{d}{2}$ et $a\in H^\sigma(\R^d)$,
+\begin{equation*}
+\|\partial^\alpha \Delta_j a\|_{L^\infty} \leq C 2^{j(\frac{d}{2}-\sigma+|\alpha|)} \|a\|_{H^\sigma}
+\end{equation*}
+Et alors, comme $a-S_ka=\sum_{j\geq k} \Delta_j a$, par majoration d'un reste géométrique, on a :
+\begin{equation}\label{aled}
+\|\partial^\alpha (a-S_k a)\|_{L^\infty} \leq C 2^{k(\frac{d}{2}-\sigma+|\alpha|)} \|a\|_{H^\sigma}
+\end{equation}
+
+En appliquant \eqref{aled} avec $a=F'(S_ku)$ et $\sigma = s + N$ où $N$ est suffisamment grand pour que $s+N > \frac{d}{2} + |\alpha|$, on a 
+\begin{align*}
+\|\partial^\alpha (F'(S_ku)-S_k F'(S_ku))\|_{L^\infty} &\leq C 2^{k(\frac{d}{2}-s-N+|\alpha|)} \|F'(S_ku)\|_{H^{s+N}} \\
+& \leq  C_{\alpha,N} 2^{k(\frac{d}{2}-s+|\alpha|)} \|u\|_{H^s}
+\end{align*}
+où l'on a utilisé \eqref{utillem}, ce qui donne finalement la majoration attendue pour le premier membre, et permet de conclure la preuve du \fcref{paralin}
 \end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \newpage
 \printbibliography[heading=bibintoc, title={Références}]

@@ -34,7 +34,7 @@
 \fancyhead[R]{D.E.R Mathématiques}
 \renewcommand{\footrulewidth}{1pt}
 \fancyfoot[C]{\thepage} 
-\fancyfoot[L]{Sacha Ben-Arous}
+\fancyfoot[L]{S. Ben-Arous, M. Bordet}
 \fancyfoot[R]{E.N.S Paris-Saclay}
 
 %%==============================================================Custom Styles=========================================================================%%
@@ -63,7 +63,7 @@
 
 \renewcommand{\thesection}{\Roman{section}} 
 
-\renewenvironment{proof}[1][\proofname]{{\scshape #1. }}{\qed}
+\renewenvironment{proof}[1][\proofname]{{\scshape #1. }}{~\\ \qed}
 
 \numberwithin{equation}{section}  %Numero des equations en fonction de la section
 \renewcommand{\theequation}{\arabic{section}.\arabic{equation}}
@@ -80,11 +80,15 @@
 \newtheorem{thm}{Théorème}[section]
 \renewcommand{\thethm}{\thesection -\arabic{thm}} %Met un - a la place du .
 
-\newtheorem{cor}{Corollaire}[thm]
+\newtheorem{cor}[thm]{Corollaire}
 \renewcommand{\thecor}{\thesection -\arabic{cor}}
 
-\newtheorem{lemma}{Lemme}[section]
+\newtheorem{lemma}[thm]{Lemme}
 \renewcommand{\thelemma}{\thesection -\arabic{lemma}}
+
+\newtheorem{prop}[thm]{Proposition}
+\renewcommand{\theprop}{\thesection -\arabic{prop}}
+
 
 \newtheorem{mtheoreminner}{Théorème}
 \newenvironment{mthm}[1]{%
@@ -118,6 +122,7 @@
 \crefname{thm}{Théorème}{Théorèmes}
 \crefname{cor}{Corollaire}{Corollaires}
 \crefname{lemma}{Lemme}{Lemmes}
+\crefname{prop}{Proposition}{Propositions}
 \crefname{mtheoreminner}{Théorème}{Théorèmes} 
 
 %%================================================================Shortcuts===========================================================================%%
