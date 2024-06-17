@@ -10,6 +10,14 @@
 \begin{document}
 \maketitle
 
+
+
+% Faire proprement les preuves de fin de partie 1.
+% Rajouter les explications sur les lemmes de caractérisations
+% Remarques sur la décomposition dyadique du bouquin Alinhac-Gérard.
+
+
+
 Ce document a pour objectif d'exposer les principaux théorèmes de paralinéarisation en explicitant tous les outils utilisés, avec pour point de départ la décomposition de Littlewood-Paley. On s'appuiera sur \cite{metivier} et \cite{dgv} comme références, en particulier les chapitres 4 et 5 du livre de Métivier.
 \section{Décomposition de Littlewood-Paley}
 
@@ -42,7 +50,7 @@ Il existe $C>0$ tel que pour tout $1\leq p \leq +\infty$, $u \in L^p(\R^d)$,
 \end{lemma}
 
 
-\begin{lemma}[Presque-orthogonalité]
+\begin{lemma}[Presque-orthogonalité]\label{lqortho}
 Pour tout $u\in L^2(\R^d)$, 
 \begin{equation}\label{qortho}
 \sum_{k \geq -1} \|\Delta_k u \|^2_{L^2} \leq \| u \|^2_{L^2} \leq 2 \sum_{k \geq -1} \|\Delta_k u \|^2_{L^2} 
@@ -57,8 +65,26 @@ Si $s\in \R$, $u\in L^2(\R^d)$, on a alors $u\in H^s(\R^d) \Leftrightarrow \sum_
 \end{equation}
 \end{prop}
 
+\begin{proof}
+En notant $\left\langle \xi \right\rangle = \sqrt{1 + |\xi|^2}$, on a $\|u\|_{H^s} = \|\left\langle D \right\rangle^su\|_{L^2}$, et le \fcref{lqortho} donne 
+\[\sum_{k \geq -1} \|\Delta_k \left\langle D \right\rangle^su \|^2_{L^2} \leq \| u \|^2_{H^s} \leq 2 \sum_{k \geq -1} \|\Delta_k \left\langle D \right\rangle^su \|^2_{L^2} \]
+La formule de Plancherel et la définition de $\Delta_p$, on obtient l'existence de $C>0$ tel que $\forall k \geq -1$
+\[\frac{1}{C}2^{ps}\|\Delta_ku\|_{L^2} \leq  \|\Delta_k\left\langle D \right\rangle^su\|_{L^2} \leq C2^{ps}\|\Delta_ku\|_{L^2} \]
+et donc il existe $\tilde{C}$ tel que :
+\[
+\frac{1}{\tilde{C}}\sum_{k\geq -1}2^{2ks}\|\Delta_k u \|_{L^2}^2 \leq \|u\|_{H^s}^2 \leq \tilde{C} \sum_{k\geq -1}2^{2ks}\|\Delta_k u \|_{L^2}^2 \]
+ce qui donne l'équivalence des normes voulue.
+\end{proof}
+
 \begin{prop}[Injection de Sobolev]\label{inject}
 Pour tout $s\in \R$, $H^s(\R^d)$ s'injecte continuement dans $C^{s-\frac{d}{2}}(\R^d)$
+\end{prop}
+
+\begin{prop}\label{spec_ball}
+Soit $(u_k)_{k\geq -1}$ tel que $\exists R >0, \forall k\geq -1, \text{supp }\hat{u}_k \subset B(0,R2^k)$.
+\begin{itemize}
+\item[•]Si $\sup $
+\end{itemize}
 \end{prop}
 
 
@@ -70,8 +96,7 @@ Soit $s>0$, $n\in \N$, $n>s$. Il existe $C$ tel que pour toute famille $(u_k)_{k
 où $(\varepsilon_k)_{k\in \N} \in l^2(\N)$, alors $u=\sum_k u_k \in H^s(\R^d) $, et $ \|u\|_{H^s}^2 \leq C \sum_k \varepsilon_k^2 $.
 \end{prop}
 
-
-\section{Théorèmes de paralinéarisation}
+\section{Éstimations douces et paralinéarisation}
 
 
 \begin{thm}\label{paralin}
@@ -162,7 +187,7 @@ Or
 m_k - F'(S_{k-2}u) = \int_0^1 \mu_k w_k\mathrm{d}t
 \end{equation*}
 Ce qui donne \eqref{eq1}.
-Pour montrer la seconde inégalité, on commence par décomposer en deux membre le terme à majorer :
+Pour montrer la seconde inégalité, on commence par décomposer en deux membres le terme à majorer :
 \begin{equation*}
 \left[ F'(S_{k}u) - S_k F'(S_{k}u) \right] + \left[ S_k F'(S_{k}u) - S_kF'(u) \right]
 \end{equation*}
