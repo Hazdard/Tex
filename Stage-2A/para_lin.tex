@@ -15,12 +15,84 @@
 % Faire proprement les preuves de fin de partie 1.
 % Rajouter les explications sur les lemmes de caractérisations
 % Remarques sur la décomposition dyadique du bouquin Alinhac-Gérard.
-
-
+% DEFINIR LES OBJETS DONT ON PARLE : SOBOLEV FOURIER HOLDER PARAPRODUIT
 
 Ce document a pour objectif d'exposer les principaux théorèmes de paralinéarisation en explicitant tous les outils utilisés, avec pour point de départ la décomposition de Littlewood-Paley. On s'appuiera sur \cite{metivier} et \cite{dgv} comme références, en particulier les chapitres 4 et 5 du livre de Métivier.
 \section{Décomposition de Littlewood-Paley}
 
+Nous allons dans cette section présenter la décomposition de Littlewood-Paley. C'est une décomposition de fonction dans laquelle chaque terme a un support de fréquence (au sens de la transformée de Fourier) localisé. Nous allons également présenter des propriétés sur cette décomposition. Il nous est cependant indispensable de s'intéresser à l'existence et, plus précisément, à la construction d'un type de fonctions que sont les fonctions $\mathbb{C}^\infty(\mathbb{R}^d)$ avec un support au voisinage de 0 mais également constantes au voisinage de 0.
+
+Considérons le cas $d=1$ et notons :
+\[
+g: \mathbb{R}^+ \to \mathbb{R}
+\]
+\[
+g(x) = 
+\begin{cases} 
+1 & \text{si } 0 \leq x \leq \frac{1}{2} \\
+\exp\left(-\frac{1}{\frac{1}{4} - |x - \frac{1}{2}|^2}\right) & \text{si } \frac{1}{2} \leq x \leq 1 \\
+0 & \text{sinon}
+\end{cases}
+\]
+On a que $g$ appartient à $\mathbb{C}^\infty(\mathbb{R})$ puisque, en effet, on peut montrer par récurrence que :
+\begin{equation}\label{plateau}
+\forall n \in \mathbb{N}^*, \ \forall x \in \left[\frac{1}{2}, 1\right], \ g^{(n)}(x) = x Q_n(|x|) \exp\left(-\frac{1}{\frac{1}{4} - |x - \frac{1}{2}|^2}\right)
+\end{equation}
+avec $Q_n$ une fraction rationnelle dont le pole ce situe en 1 , ce qui montre la continuité des $(g^{(n)})_{n \in \mathbb{N}}$.
+
+On étend alors cette construction à $\mathbb{R}^d$ en notant $\Psi(x)=g(|x|)$. $\Psi$ est une fonction $\mathbb{C}^\infty(\mathbb{R}^d)$ avec $\text{supp}(\Psi) \subset B(0,1)$ et égale à 1 sur $B(0,\frac{1}{2})$.
+
+On obtient donc, en posant $\chi(x)=\psi(x)-\psi\left(\frac{x}{2}\right)$ :
+\[ \forall \xi \in \mathbb{R}^d, \ 1= \psi(\xi) + \sum_{p=0}^\infty \chi(2^{-p} \xi) \]
+avec $\text{supp}(\chi(2^{-p} \cdot)) \subset C(0,2^{p-1},2^{p+1})$
+
+\begin{lemma}\label{decomp}
+Soit $\phi \in \mathcal{S}$ alors :
+\[
+\hat{\phi} = \psi \hat{\phi} + \sum_{p=0}^\infty \chi(2^{-p} \cdot) \hat{\phi}
+\]
+\end{lemma}
+\begin{proof}
+Soit g $\in \mathcal{S}$ : \\
+Montrons que pout tout $\alpha \ \text{et} \ \beta \in \mathbb{N}\times \mathbb{N}^d $
+$$\left\lVert x^\alpha \partial^\beta(g-\psi(2^{-p}x)g) \right\rVert_\infty \to_{p\to \infty} 0$$
+On considère alors:
+\begin{align*}
+    \left\lVert x^\alpha \partial^\beta(g-\psi(2^{-p}x)g)\right\rVert_\infty &= \left\lVert x^\alpha \partial^\beta(g-\psi(2^{-p}x)g)\right\rVert_{[2^{p-1};2^{p+1}]} \\
+    &\leq \left\lVert x^\alpha \partial^\beta g\right\rVert_{[2^{p};2^{p+1}]} + \left\lVert x^\alpha \partial^\beta g(1-\psi(2^{-p}x)\right\rVert_{[2^{p-1};2^{p}]}
+\end{align*}
+
+De plus puisque g $\in \mathcal{S}$ alors $\lim_{|x| \to \infty} x^\gamma g(x)=0$. On a alors $\left\lVert x^\alpha \partial^\beta g\right\rVert_{[2^{p};2^{p+1}]}$ tend bien vers 0 lorsque $p$ tend vers $+\infty$. En utilisant la formule de derivation de Leibniz sachant que $\partial^k \psi = O(x^{k})$ (en utilisant \eqref{plateau}) on a que $\left\lVert x^\alpha \partial^\beta g\right\rVert_{[2^{p};2^{p+1}]}$ tend bien vers 0 lorsque $p$ tend vers $+\infty$. On utilise ensuite la continuité de la transformé de Fourier et de la transformé de Fourier inverse sur $\mathcal{S}$.
+\end{proof}
+
+\begin{defin}
+On définit les opérateurs de la décomposition de Littlewood-Paley de la manière suivante :
+\[
+\forall q \in \mathbb{R_+}, \ \forall u \in L^q, \quad \Delta_{-1} u = \mathcal{F}^{-1}(\psi) \ast u, \quad \Delta_{p} u = 2^{pd} \mathcal{F}^{-1}(\chi(2^p \cdot)) \ast u \text{ pour } p \geq 0
+\]
+\end{defin}
+
+\begin{prop}
+Soit $u \in \mathcal{S}'$, en posant :
+\[
+S_p u = \sum_{k=1}^{p-1} \Delta_k u
+\]
+On a que :
+\[
+\lim_{p \to \infty} S_p u = u
+\]
+\end{prop}
+
+\begin{proof}
+Prenons $u \in \mathcal{S}'$ et $v \in \mathcal{S}$.
+\[ \langle \mathcal{F}(S_n u), v \rangle = \langle \psi(2^{-p}\xi) \mathcal{F}(u), v \rangle = \langle \mathcal{F}(u), \psi(2^{-p}\xi) v \rangle \]
+
+Or, $\lim_{p \to +\infty} \psi(2^{-p}\xi)v = v$ dans $\mathcal{S}(\mathbb{R}^d)$ par le \fcref{decomp}. On obtient donc :
+
+\[ \mathcal{F}(S_n u) \to \mathcal{F}(u) \quad \text{dans} \ \mathcal{S} \]
+Par continuité de $\mathcal{F}^{-1}$, on a en effet $S_p u = \sum_{k=1}^{p-1} \Delta_k u$.
+\end{proof}
+     
 
 \begin{lemma}[Inégalité de Bernstein]
 Soit $B$ une boule, $1\leq p  \leq  q \leq +\infty$, $k\in \N$, et $\lambda >0$. Si $u\in L^p$ tel que $\text{supp}(\hat{u})\subset \lambda B$, alors
@@ -49,6 +121,11 @@ Il existe $C>0$ tel que pour tout $1\leq p \leq +\infty$, $u \in L^p(\R^d)$,
 \end{align*}
 \end{lemma}
 
+\begin{proof}
+On écrit $S_k u = 2^{pd} \mathcal{F}^{-1}(\psi(2^p\cdot))\ast u$. Par inégalité de Young on obtient :
+$$\left\lVert S_k u \right\rVert_{L^p} \leq \left\lVert u \right\rVert_{L^p} \left\lVert 2^{pd} \mathcal{F}^{-1}(\psi(2^p\cdot)  \right\rVert_{L^1}$$ 
+On procède de même pour $\|\Delta_k u\|_{L^p}$.
+\end{proof}
 
 \begin{lemma}[Presque-orthogonalité]\label{lqortho}
 Pour tout $u\in L^2(\R^d)$, 
@@ -57,6 +134,12 @@ Pour tout $u\in L^2(\R^d)$,
 \end{equation}
 \end{lemma}
 
+\begin{proof}
+On part de $1= \psi(\xi) + \sum_{p=0}^\infty \chi(2^{-p} \xi)$.
+Seule deux de ces fonctions ont une intersection de support non vide. On utilise alors : $a^2 +b^2 \leq (a+b)^2 \leq 2(a^2 +b^2)$ et on obtient:
+$$ \frac{1}{2} \leq \psi(\xi)^2 + \sum_{p=0}^\infty \chi(2^{-p} \xi)^2 \leq 1$$
+La seconde inégalité s'en déduit en multipliant l'équation ci-dessus par $\hat{u}$ et en utilisant l'identité de Plancherel.
+\end{proof}
 
 \begin{prop}[Caractérisation des espaces de Sobolev]
 Si $s\in \R$, $u\in L^2(\R^d)$, on a alors $u\in H^s(\R^d) \Leftrightarrow \sum_{p\geq -1}2^{2ps}\|\Delta_p u \|_{L^2}^2 < +\infty$. De plus, il existe $C>0$ tel que :
@@ -96,7 +179,41 @@ Soit $s>0$, $n\in \N$, $n>s$. Il existe $C$ tel que pour toute famille $(u_k)_{k
 où $(\varepsilon_k)_{k\in \N} \in l^2(\N)$, alors $u=\sum_k u_k \in H^s(\R^d) $, et $ \|u\|_{H^s}^2 \leq C \sum_k \varepsilon_k^2 $.
 \end{prop}
 
-\section{Éstimations douces et paralinéarisation}
+\section{Estimations douces et paralinéarisation}
+
+\begin{prop}[Estimations douces pour les paraproduits et leur restes] ~\\
+\begin{itemize}
+\item[•] $\forall s\in \R, u \in L^\infty, v\in H^s,$
+\begin{equation*}
+\|T_uv\|_{H^s} \leq C_s \|u\|_{L^\infty} \|v\|_{H^s}
+\end{equation*}
+\item[•] $\forall \alpha \in \R, u \in L^\infty, v\in C^\alpha,$
+\begin{equation*}
+\|T_uv\|_{C^\alpha} \leq C_\alpha \|u\|_{L^\infty} \|v\|_{C^\alpha}
+\end{equation*}
+\item[•] $\forall r,s\in \R,$ tels que $r+s>0, u \in C^r, v\in H^s,$
+\begin{equation*}
+\|R(u,v)\|_{H^{r+s}} \leq C_{r,s} \|u\|_{C^r} \|v\|_{H^s}
+\end{equation*}
+\item[•] $\forall \alpha,\beta\in \R,$ tels que $\alpha + \beta>0, u \in C^\alpha, v\in C^\beta,$
+\begin{equation*}
+\|R(u,v)\|_{C^{\alpha + \beta}} \leq C_{\alpha,\beta} \|u\|_{C^\alpha} \|v\|_{C^\beta}
+\end{equation*}
+\end{itemize}
+\end{prop}
+
+\begin{prop}[Estimations douces pour le produit] ~\\
+\begin{itemize}
+\item[•] $\forall s>0,\ u,v \in L^\infty \cap H^s(\R^d)$,
+\begin{equation*}
+\|uv\|_{H^s} \leq C (\|u\|_{L^\infty}\|v\|_{H^s} + \|v\|_{L^\infty}\|u\|_{H^s})
+\end{equation*}
+\item[•] $\forall \alpha \in \R^+ \setminus \N,\ u,v \in C^\alpha(\R^d)$,
+\begin{equation*}
+\|uv\|_{C^\alpha} \leq C (\|u\|_{L^\infty}\|v\|_{C^\alpha} + \|v\|_{L^\infty}\|u\|_{C^\alpha})
+\end{equation*}
+\end{itemize}
+\end{prop}
 
 
 \begin{thm}\label{paralin}
