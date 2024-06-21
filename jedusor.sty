@@ -15,7 +15,12 @@
 %%=============================================================Appel des packages=====================================================================%%
 
 \usepackage[french]{babel}
+\usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
+\usepackage{graphicx,amsmath,amsfonts,amssymb,amsthm,fancyhdr,caption,dsfont}
+\usepackage[hidelinks]{hyperref} 
+\usepackage{cleveref}
+
 
 \textheight245mm
 \textwidth170mm
@@ -23,9 +28,6 @@
 \voffset-15mm
 \parindent17pt
 
-\usepackage{graphicx,amsmath,amsfonts,amssymb,amsthm,fancyhdr,caption,dsfont}
-\usepackage[hidelinks]{hyperref} 
-\usepackage{cleveref}
 
 \pagestyle{fancy}
 \renewcommand{\headrulewidth}{1pt}
@@ -40,8 +42,8 @@
 %%==============================================================Custom Styles=========================================================================%%
 
 \newtheoremstyle{bourbaki_it}%            % Name
-  {10pt}%                              % Space above
-  {10pt}%                              % Space below
+  {10pt}%                                 % Space above
+  {10pt}%                                 % Space below
   {\itshape}%                             % Body font
   {17pt}%                                 % Indent amount
   {\scshape}%                             % Theorem head font
@@ -50,8 +52,8 @@
   {}%                                     % Theorem head spec (can be left empty, meaning `normal')
 
 \newtheoremstyle{bourbaki_plain}%         % Name
-  {10pt}%                              % Space above
-  {10pt}%                              % Space below
+  {10pt}%                                 % Space above
+  {10pt}%                                 % Space below
   {}%                                     % Body font
   {17pt}%                                 % Indent amount
   {\scshape}%                             % Theorem head font
@@ -98,9 +100,9 @@
 
 %% Exemple :
 
-%\begin{manualtheorem}{A}[title]\label{foo}
+%\begin{mthm}{A}[title]\label{foo}
 % This is a theorem.
-%\end{manualtheorem}
+%\end{mthm}
 
 %%==============================================================Custom Names==========================================================================%%
 
@@ -115,6 +117,9 @@
 
 % Configuration pour rendre le texte entier cliquable
 \newcommand{\fcref}[1]{\hyperref[#1]{\cref*{#1}}}
+
+% Pour écrire des chiffres romains
+\newcommand*{\rom}[1]{\expandafter\@slowromancap\romannumeral #1@}
 
 %Majuscules pour cleveref
 \crefname{defin}{Définition}{Définitions}
