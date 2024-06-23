@@ -1,0 +1,136 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage{../jedusor}
+\usepackage[maxalphanames=99, maxnames=99, backend=bibtex, style=alphabetic, sorting=ynt]{biblatex}
+\addbibresource{stage2A.bib}
+\title{\textbf{Application au Théorème d'Arnold}}
+\date{}
+\author{Sacha Ben-Arous, Mathis Bordet}
+
+\begin{document}
+\maketitle
+On s'intéresse dans cette section au cas suivant : $g$ difféomorphisme du cercle régulier (au moins $C^2$), préservant les angles et ayant un angle de rotation $\alpha$ irrationnel. On a automatiquement par le Théorème de Danjoys (ref) qu'il est conjugué à la rotation d'angle $\alpha$. Le théorème d'Arnold s'intéresse à la régularité de la conjugaison lorsque $g$ est "très proche" de la rotation $r_\alpha$.
+\section{Description du problème}
+On choisit de réécrire $g$ comme une perturbation de la rotation soit: $g= f + r_\alpha$ avec $f$ "assez petit" (nous définirons ce que cela veut dire dans la suite). On cherche alors naturellement la conjugaison que l'on note $\eta$ sous la forme d'une perturbation de l'identité soit $\eta=id+u$. \\
+L'équation à résoudre est alors :
+
+\begin{equation}\label{1.1}
+\eta(x + \alpha)= \eta(x) + \alpha + f \cdot \eta(x) \\
+\end{equation}
+Pour plus de généralité on introduit ici un paramètre réel $\lambda$ et en utilisant les notations de $\eta$ avec $u$, l'équation $\ref{1.1}$ devient:
+\begin{equation}\label{1.2}
+\Delta_\alpha u= f \cdot (id +u) - \lambda \; \text{avec  } \Delta_\alpha u(x)= u(x+\alpha) - u(x)
+\end{equation}
+d'inconnue $u$.
+\par
+Pour illustrer le problème de régularité que va poser ce type d'équation, intéressons-nous d'abord à l'équation $\ref{1.2}$ linéarisée:
+\begin{equation}\label{1.3}
+\mu + \Delta_\alpha v = h 
+\end{equation}
+avec $\mu= \text{Avg } h$. \\
+En utilisant les séries de Fourier, on obtient la solution suivante:
+\begin{equation*}
+\hat{v}(k)=\frac{\hat{h}(k)}{exp(ik \alpha) - 1}
+\end{equation*}
+
+Cependant, le facteur $exp(ik \alpha) - 1$ peut gêner la convergence de la série de Fourier puisque celui-ci peut arbitrairement s'approcher de zéro en fonction des $k$ du fait que $\alpha$ soit irrationnel. \\
+On doit alors ici préciser la nature de notre irrationnel $\alpha$. On supposera en effet dans toute la suite de notre développement que $\alpha$ vérifie la condition diophantienne suivante: \\
+ $ \exists \gamma>0,\sigma>1 \ \text{telle que} \ \forall p,q \in \Z^2 $:
+\begin{equation}
+|\frac{q \alpha}{\pi}-p|\geq \frac{1}{\gamma q^\sigma}
+\end{equation} 
+
+Ce qui induit en notant la solution $v$ de $\ref{1.2}$ que si $f \in H^{s+\sigma}$ alors $\Delta_\alpha^{-1}h \in H^{s}$. Plus précisément, que l'opération $\Delta_{\alpha}^{-1}$ induit une perte de régularité de l'ordre de $\sigma$ et que :
+\begin{equation}\label{dio}
+\|\Delta_\alpha^{-1}h\|_{H^s} \leq C_\gamma \|f\|_{H^{s+\sigma}}
+\end{equation}
+\par
+Ce problème de perte de régularité nous empêche d'utiliser les théorèmes de point fixe ou les méthodes itératives traditionnelles pour résoudre cette équation. Face à cela, deux approches s'offrent à nous ; la première est l'utilisation d'un schéma de Nash-Moser dont le fonctionnement est détaillé dans la section (??). La deuxième et celle qu'on va développer dans la suite est d'utiliser de la paralinéarisation pour régulariser cette équation $\ref{1.2}$.
+\section{Résolution par la para-linéarisation}
+On choisit les notations suivantes :
+\begin{equation*}
+\mathbf{F}(f,U)=\Delta_\alpha u - f \cdot (id +u) + \lambda
+\end{equation*}
+On s'intéresse alors à:
+\begin{equation*}\label{equ reso}
+\mathbf{F}(f,U)=0
+\end{equation*}
+avec $U=(u,\lambda)$. On suppose que $f \in H^{s+\sigma+ \epsilon} \cap C^{N_s}$ avec $s>\sigma +1.5+ \epsilon$. On cherche a priori $u$ dans $H^s$ (et par injection de Sobolev dans $C^r_*$ où $r=s-0.5>1$).\\
+En utilisant la propriété ("de paralinéarisation"):
+\begin{equation}\label{2.1}
+\mathbf{F}(f,U)=\Delta_\alpha u -f-T_{f'(id +u)}u +R_{pl}(f(x+\cdot),u) + \lambda
+\end{equation}
+Or on a l'égalité suivante :
+\begin{equation*}
+f'(id+u)=\frac{\Delta_\alpha u}{1+u'} -\frac{\mathbf{F}(f,U)'}{1+u'}
+\end{equation*}
+En réinjectant dans $\ref{2.1}$ on obtient:
+\begin{equation}\label{2.2}
+\mathbf{F}(f,U)=\Delta_\alpha u -f-T_{\frac{\Delta_\alpha u}{1+u'}}u -T_{\frac{\mathbf{F}(f,U)'}{1+u'}}u +R_{pl}(f(x+\cdot),u) + \lambda
+\end{equation}
+De plus en utilisant l'identité suivante:
+
+\begin{align*}
+\Delta_\alpha u - T_{\frac{\Delta_\alpha u}{1+u'}}u &=u\cdot\tau_\alpha + T_{\frac{1+u'}{1+u'}}u - T_{\frac{\Delta_\alpha u}{1+u'}}u \\
+&= u\cdot\tau_\alpha  - T_{\frac{1+u'\cdot \tau_\alpha}{1+u'}}u \\
+&= u\cdot\tau_\alpha - T_{1+u'\cdot \tau_\alpha} T_{\frac{1}{1+u'}}u +R_1(1+u'\cdot \tau_\alpha,\frac{1}{1+u'}) \\ \text{en utilisant "paralinéarisation produit"} \\
+&=T_{1+u' \cdot \tau_\alpha}(T_{\frac{1}{1+u'\cdot \tau_\alpha}}u \cdot \tau_\alpha - T_{\frac{1}{1+u'}}u) +R_1(1+u'\cdot \tau_\alpha,\frac{1}{1+u'}) \\ &+R'_1 ( 1+u' \cdot \tau_\alpha ,\frac{1}{1+u' \cdot \tau_\alpha})  \\ \text{en utilisant "paralinéarisation produit"} \\
+&=T_{1+u' \cdot \tau_\alpha} \Delta_\alpha T_{\frac{1}{1+u'}}u +\tilde{R} 
+\end{align*}
+En réinjectant cela, on obtient finalement :
+\begin{equation}\label{2.3}
+\mathbf{F}(f,U)= T_{1+u' \cdot \tau_\alpha} \Delta_\alpha T_{\frac{1}{1+u'}}u +\tilde{R} -f -T_{\frac{\mathbf{F}(f,U)'}{1+u'}}u +R_{pl}(f(x+\cdot),u) + \lambda
+\end{equation}
+
+\begin{lemma}\label{inversibilite} 
+Il existe $\delta>0$ tel que si $\|u'\|_{L^\infty} \leq \delta $ alors les opérateurs $T_{\frac{1}{1+u'}}$ et $T_{1+u'\cdot \tau_\alpha}$ sont inversibles de $H^s$ dans lui-même (ou de $ H^{s+\sigma+\epsilon}$).
+\end{lemma}
+\begin{proof}
+Par le théorème ("de paralinéarisation et des produits") on a que en posant $a=\frac{1}{1+u'}$ :
+\begin{equation*}
+T_a\cdot T_{a^{-1}} -T_1=R(a,a^{-1})
+\end{equation*}
+avec $\|R(a,a^{-1})\|_{\mathbb{L}(H^s,H^{s+r})} \leq_{s,r} \|a\|_{C^r_*} \|a^{-1}\|_{C^r_*}$. On a que $R$ est continu et donc avec $ R(1,1)=0$. On a que $\lim_{u' \to 0} R(a,a^{-1})=0$. \\
+Donc on peut choisir  $\|u'\|_{L^\infty} \leq \delta $  pour que $\|R(a,a^{-1})\|_{\mathbb{L}(H^s,H^{s+r})}<1 $ et utiliser une série de Neumann pour avoir l'inversibilité de $T_a$. \\
+La preuve est identique pour $T_{1+u'\cdot \tau_\alpha }$ et pour $ H^{s+\sigma +\epsilon}$ . 
+\end{proof}
+\begin{rmq}
+Par injection de Sobolev et par le fait que $u \in C^r_*$ où $r=s-0.5>1$ on peut choisir  $u \in H^s$ tel que $\|u\|_{H^s}$ soit assez petit pour que la condition $\|u'\|_{L^\infty} \leq \delta $ soit satisfaite. On cherchera dans la suite un $u$ avec une telle norme.
+\end{rmq}
+On cherche à résoudre pour le moment une version modifiée de l'équation $\ref{equ reso}$ :
+\begin{equation}\label{equ reso'}
+\mathbf{F}(f,U)-T_{\frac{\mathbf{F}(f,U)'}{1+u'}}u=0
+\end{equation}
+Équation qu'on peut réécrire avec $Lemme \ \ref{inversibilite}$ et l'expression $\ref{2.3}$ :
+\begin{equation}\label{equ reso''}
+u=T_{1+u' \cdot \tau_\alpha}^{-1} \Delta_\alpha^{-1} T_{\frac{1}{1+u'}}^{-1}(\tilde{R} -f +R_{pl}(f(x+\cdot),u) + \lambda)
+\end{equation}
+La valeur de $\lambda$ est alors déterminée dans cette équation puisqu'elle est réglée pour pouvoir appliquer $\Delta_\alpha^{-1}$ (voir condition $\ref{1.3}$).
+Considérons le membre de gauche comme une fonction de $u$ et montrons qu'elle envoie $H^s$ dans lui-même.
+En effet d'une part avec $\tilde{R}=R_1(1+u'\cdot \tau_\alpha,\frac{1}{1+u'})u +R'_1 ( 1+u' \cdot \tau_\alpha ,\frac{1}{1+u' \cdot \tau_\alpha})u$ avec les notations du "théorème de paralinéarisation produit". On a que $\tilde{R}(u) : H^s \to H^{s+r-1} \subset H^{s+\sigma +\epsilon}$. \\
+De plus par "le théorème de paralinéarisation 1" $R_{pl}(f(x+\cdot),u):  H^s \to H^{s+r} \subset H^{s+\sigma +\epsilon}$.
+\\ 
+\\
+Malgré la perte de régularité imposée par  $\Delta_\alpha^{-1}$, le membre de gauche de $\ref{equ reso''}$ envoie donc $H^s$ dans lui-même (de manière continue).
+\par
+D'autre part, on a le contrôle suivant sur les normes:\\
+Par le "théorème de paralinéarisation":
+\begin{equation*}
+\|R_{pl}(f(x+\cdot),u)\|_{H^s} \leq C_s \|f\|_{C^r_*} (1+\|u\|_{H^s})
+\end{equation*} 
+De plus l'une des conséquences de la preuve du $Lemme \ \ref{inversibilite}$ est que $\tilde{R}(u)$ converge quadratiquement vers 0 lorsque $u$ tend vers 0 dans $H^s$. En prenant donc  $\|u\|_{H^s} \leq \rho $ on a que la norme $H^s$ du membre de gauche $\ref{equ reso''}$ est majorée par:
+\begin{equation}
+C(s,\sigma) ( \|f\|_{H^{s+\sigma+\epsilon}} +\|f\|_{C^r_*} (1+\rho) + \rho^2)
+\end{equation} 
+Puisqu'on peut prendre $\|f\|_{H^{s+\sigma+\epsilon}}$ et $\|f\|_{C^r_*}$ aussi petits qu'on veut, il existe un $\rho$ tel que le membre de gauche $\ref{equ reso''}$ envoie $B_\rho$ dans elle-même. En utilisant le point fixe de Schauder on a que l'équation $\ref{equ reso''}$ a une solution $u$ dans $H^s$ dans $B_{\rho'}$ pour tout $\rho' \leq \rho$. \\
+\par
+Enfin pour résoudre l'équation $\ref{equ reso'}$ on remarque par "la proposition 2.1":
+\begin{equation}
+\|T_{\frac{\mathbf{F}(f,U)'}{1+u'}}u\|_{H^s} \leq \|\mathbf{F}(f,U)\|_{C^1}\|u\|_{H^s}
+\end{equation}
+En utilisant une nouvelle fois l'argument de la série de Neumann on a bien que $u$ est également solution de :
+\begin{equation}
+\mathbf{F}(f,U)=0
+\end{equation}
+\end{document}
+
