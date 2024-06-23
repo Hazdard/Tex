@@ -72,6 +72,9 @@ Soit $u \in \mathcal{S}'$, en posant :
 On a que :
 \[ \lim_{n \to \infty} S_n u = u \]
 \end{prop}
+\begin{rmq}
+Dans la suite, pour simplifier les calculs, il nous arrivera d'écrire $S_{-k}$ pour $k\geq 0$, et dans ce cas on prend comme définition $S_{-k} := S_{0} = \Delta_{-1}$.
+\end{rmq}
 
 \begin{proof}
 Prenons $u \in \mathcal{S}'$ et $v \in \mathcal{S}$.
@@ -189,7 +192,7 @@ Ce qui consitue l'inégalité voulue. On en déduit immédiatement que $\sup_{k 
 \begin{prop}\label{spec_ball}
 Soit $(u_k)_{k\geq -1}$ tel que $\exists R >0, \forall k\geq -1, \text{supp }\hat{u}_k \subset B(0,R2^k)$. \\
 \begin{itemize}
-\item[•]Soit $\alpha >0$, si $\sup 2^{k\alpha}\|u\|_{L^\infty} < +\infty$, alors $u=\sum u_k \in C^\alpha_*(\R^d)$, et 
+\item[•]Soit $\alpha >0$, si $\sup 2^{k\alpha}\|u_k\|_{L^\infty} < +\infty$, alors $u=\sum u_k \in C^\alpha_*(\R^d)$, et 
 \begin{equation*}
 \|u\|_{C^\alpha_*} \leq C\sup_k 2^{k\alpha}\|u_k\|_{L^\infty}
 \end{equation*}
@@ -201,13 +204,13 @@ Soit $(u_k)_{k\geq -1}$ tel que $\exists R >0, \forall k\geq -1, \text{supp }\ha
 \end{prop}
 
 \begin{proof}
-Par hypothèse sur le support des $(u_k)_{k\geq -1}$, pour tout $q \geq -1$,  en notant $N := \lfloor q-1-\log_2(R) \rfloor$, on a: 
+Par hypothèse sur le support des $(u_k)_{k\geq -1}$, pour tout $q \geq -1$,  en notant $N := \lfloor\log_2(R) \rfloor + 1$, on a: 
 \begin{equation*}
 \Delta_q u = \sum_{k\geq q-N} \Delta_qu_k
 \end{equation*}
 On en déduit :
 \begin{equation*}
-2^{q\alpha}\|\Delta_qu\|_{L^\infty}\leq  2^{q\alpha}\sum_{k\geq q-N}\|\Delta_qu_k\|_{L^\_infty} \leq 2^{q\alpha}\sum_{k\geq q-N}\|u_k\|_{L^\infty} \leq \sum_{k\geq q-N} 2^{k\alpha}\|u_k\|_{L^\infty} 2^{(q-k)\alpha} \leq \sum_{k\in \Z} a_k b_{q-k}
+2^{q\alpha}\|\Delta_qu\|_{L^\infty}\leq  2^{q\alpha}\sum_{k\geq q-N}\|\Delta_qu_k\|_{L^\infty} \leq 2^{q\alpha}\sum_{k\geq q-N}\|u_k\|_{L^\infty} \leq \sum_{k\geq q-N} 2^{k\alpha}\|u_k\|_{L^\infty} 2^{(q-k)\alpha} \leq \sum_{k\in \Z} a_k b_{q-k}
 \end{equation*}
 où :
 \begin{itemize}
@@ -243,47 +246,94 @@ Par hypothèse, et en utilisant le \fcref{young}, on a d'une part :
 \begin{equation*}
 \|\Delta_ju_k\|_{L^2} \leq C \|u_k\|_{L^2} \leq C2^{-ks}\varepsilon_k
 \end{equation*}
-D'autre part, en utilisant l'inégalité de Bernstein \eqref{bernstein}, 
+D'autre part, en utilisant l'inégalité de Bernstein \eqref{bernstein}, on obtient pour tout $j\geq 0$ :
+\begin{equation*}
+\|\Delta_ju_k\|_{L^2} \leq C 2^{-nj} \sum_{|\alpha|=n} \|\partial^\alpha\Delta_ju_k\|_{L^2} \leq C 2^{-nj} \|u_k\|_{H^n} \leq C 2^{-(j-k)n}2^{-ks}\varepsilon_k
+\end{equation*}
+Alors :
+\begin{equation*}
+2^{js}\|\Delta_ju\|_{L^2} \leq C \sum_{k\geq j} 2^{(j-k)s}\varepsilon_k + C \sum_{k < j} 2^{(j-k)(s-n)}\varepsilon_k = C (a \star \varepsilon)_j
+\end{equation*}
+où le dernier membre est une convolution discrète entre $\varepsilon = (\varepsilon_k)_{k\in \Z}$ et  $a = (a)_{k\in \Z}$ avec
+\[a_k=2^{ks} \text{ si } k \leq 0, \quad a_k=2^{k(s-n)} \text{ sinon.}\]
+Comme $a\in \ell^1(\Z)$, l'inégalité de Young discrète donne que $(2^{js}\|\Delta_ju\|_{L^2})_{j\in \N}$ est de carré sommable, ce qui donne le résultat voulu d'après la caractérisation de la \fcref{prop_carac_sobolev}. \\
 \end{proof}
 
-\section{Estimations douces et paralinéarisation}
 
+\begin{cor}[Multiplicateurs de Meyer]\label{true_meyer}
+Soient $r,s>0$, $n\in\N$ tel que $n>s$. Si $(m_k)_{k \geq -1}$ est une suite de $L^\infty(\R^d)$ telle que pour tout multi-indice $\alpha$ avec $|\alpha|\leq n$, on ait :
+\begin{equation*}
+\|\partial^\alpha m_k\|_{L^\infty} \leq M_\alpha 2^{k(|\alpha|-r)},
+\end{equation*}
+alors l'opérateur 
+\begin{equation*}
+f \mapsto \sum_{k\geq -1} m_k\Delta_kf
+\end{equation*}
+est continu de $H^s(\R^d)$ dans $H^{s+r}(\R^d)$, et sa norme est bornée par $C_s\displaystyle \sum_{|\beta|\leq n} M_\beta$.
+\end{cor}
+
+\begin{proof}
+Pour tout $|\alpha|\leq n$, on a 
+\begin{align*}
+\|\partial^\alpha (m_k\Delta_kf)\|_{L^2} &\leq C_\alpha \sum_{\beta \leq \alpha} \|\partial^\beta m_k\|_{L^\infty} \|\partial^{\alpha-\beta}\Delta_kf\|_{L^2} \\
+&\leq C_\alpha 2^{k(|\alpha|-r-s)}\left(\sum_{\beta\leq \alpha} M_\beta \right)2^{ks}\|\Delta_kf\|_{L^2}.
+\end{align*}
+Alors, la \fcref{meyer} permet d'aboutir au résultat voulu.
+\end{proof}
+\section{Estimations douces et paralinéarisation}
+On va maintenant se servir de la décomposition de Littlewood-Paley pour étudier des produit dans les espaces fonctionnels précédemment utilisés. On remarque que l'on peut écrire, pour $u,v \in \mathcal{S}'(\R^d)$ : 
+\begin{align*}
+uv &=\sum_{k,j}\Delta_ku\Delta_jv = \sum_{k=-1}^{+\infty}\sum_{j=-1}^{p}\Delta_ku\Delta_jv + \sum_{k=-1}^{+\infty}\sum_{j=k+1}^{+\infty}\Delta_ku\Delta_jv \\
+&=\sum_{k=-1}^{+\infty}\Delta_kuS_{k+1}v +  \sum_{j=0}^{+\infty}\sum_{k=-1}^{j-1}\Delta_ku\Delta_jv = \sum_{k=-1}^{+\infty}\Delta_kuS_{k+1}v +  \sum_{j=-1}^{+\infty}\Delta_jvS_{j}u \\
+&= \sum_{k=-1}^{+\infty}\Delta_kuS_{k-2}v  \ +  \sum_{k=-1}^{+\infty}\Delta_kvS_{k-2}u \ + \sum_{|k-j|\leq 2} \Delta_ku\Delta_ju \\
+&= T_vu + T_uv + R(u,v)
+\end{align*}
+Ici, $T_vu$ (resp. $T_uv$) décrit la partie des interactions pour lesquelles la fréquence de $v$ (resp. $u$) est nettement plus faible que celle de $u$ (resp. $v$), tandis que $R(u,v)$ représente la partie où les fréquences sont du même ordre. Le terme $T_vu$ est appelé \textit{paraproduit} de $u$ par $v$.
 \begin{prop}[Estimations douces pour les paraproduits et leur restes] ~\\
 \begin{itemize}
-\item[•] $\forall s\in \R, u \in L^\infty, v\in H^s,$
-\begin{equation*}
+\item[•] $\forall s\in \R^+, u \in L^\infty, v\in H^s,$
+\begin{equation}\label{estim1}
 \|T_uv\|_{H^s} \leq C_s \|u\|_{L^\infty} \|v\|_{H^s}
-\end{equation*}
-\item[•] $\forall \alpha \in \R, u \in L^\infty, v\in C^\alpha_*,$
-\begin{equation*}
+\end{equation}
+\item[•] $\forall \alpha \in \R^+, u \in L^\infty, v\in C^\alpha_*,$
+\begin{equation}\label{estim2}
 \|T_uv\|_{C^\alpha_*} \leq C_\alpha \|u\|_{L^\infty} \|v\|_{C^\alpha}
-\end{equation*}
-\item[•] $\forall r,s\in \R,$ tels que $r+s>0, u \in C^r_*, v\in H^s,$
-\begin{equation*}
+\end{equation}
+\item[•] $\forall r,s\in \R^+$ tels que $r+s>0, u \in C^r_*, v\in H^s,$
+\begin{equation}\label{estim3}
 \|R(u,v)\|_{H^{r+s}} \leq C_{r,s} \|u\|_{C^r_*} \|v\|_{H^s}
-\end{equation*}
-\item[•] $\forall \alpha,\beta\in \R,$ tels que $\alpha + \beta>0, u \in C^\alpha_*, v\in C^\beta_*,$
-\begin{equation*}
+\end{equation}
+\item[•] $\forall \alpha,\beta\in \R^+$ tels que $\alpha + \beta>0, u \in C^\alpha_*, v\in C^\beta_*,$
+\begin{equation}\label{estim4}
 \|R(u,v)\|_{C^{\alpha + \beta}_*} \leq C_{\alpha,\beta} \|u\|_{C^\alpha_*} \|v\|_{C^\beta_*}
-\end{equation*}
+\end{equation}
 \end{itemize}
 \end{prop}
 
-\begin{prop}[Estimations douces pour le produit] ~\\
-\begin{itemize}
-\item[•] $\forall s>0,\ u,v \in L^\infty \cap H^s(\R^d)$,
-\begin{equation*}
-\|uv\|_{H^s} \leq C (\|u\|_{L^\infty}\|v\|_{H^s} + \|v\|_{L^\infty}\|u\|_{H^s})
-\end{equation*}
-\item[•] $\forall \alpha \in \R^+ \setminus \N,\ u,v \in C^\alpha_*(\R^d)$,
-\begin{equation*}
-\|uv\|_{C^\alpha_*} \leq C (\|u\|_{L^\infty}\|v\|_{C^\alpha_*} + \|v\|_{L^\infty}\|u\|_{C^\alpha_*})
-\end{equation*}
-\end{itemize}
-\end{prop}
+\begin{proof}
+On remarque que $T_uv$ a une décomposition qui vérifie les hypothèses de la \fcref{spec_ball}. En effet, $T_uv=\sum_{p=-1}^{+\infty}S_{p-2}u\Delta_pv$, et le spectre de $S_{p-2}u\Delta_pv$ est inclus dans $B(0,2^{p-2})+B(0,2^{p+1}) \subset B(0,4\times2^p)$. Alors, le \fcref{young} et la \fcref{prop_carac_sobolev} donnent :
+\begin{align*}
+\sum_k 2^{2ks} \|\Delta_kvS_{k-2}u \|^2_{L^2} &\leq \sum_k 2^{2ks} \|\Delta_kv \|^2_{L^2} \|S_{k-2}u\|_{L^\infty} \leq C \|u\|_{L^\infty}^2 \sum_k 2^{2ks} \|\Delta_kv \|^2_{L^2} \\
+&\leq  C' \|u\|_{L^\infty}^2 \|v\|_{H^s}^2
+\end{align*}
+On conclut alors que $\|T_uv\|_{H^s} \leq C_s \|u\|_{L^\infty} \|v\|_{H^s}$ à l'aide de la \fcref{spec_ball}. Les inégalités suivantes se montrent de manière parfaitement analogue.
+\end{proof}
+%
+%\begin{prop}[Estimations douces pour le produit] ~\\
+%\begin{itemize}
+%\item[•] $\forall s>0,\ u,v \in L^\infty \cap H^s(\R^d)$,
+%\begin{equation*}
+%\|uv\|_{H^s} \leq C (\|u\|_{L^\infty}\|v\|_{H^s} + \|v\|_{L^\infty}\|u\|_{H^s})
+%\end{equation*}
+%\item[•] $\forall \alpha \in \R^+ \setminus \N,\ u,v \in C^\alpha_*(\R^d)$,
+%\begin{equation*}
+%\|uv\|_{C^\alpha_*} \leq C (\|u\|_{L^\infty}\|v\|_{C^\alpha_*} + \|v\|_{L^\infty}\|u\|_{C^\alpha_*})
+%\end{equation*}
+%\end{itemize}
+%\end{prop}
 
 
-\begin{thm}\label{paralin}
+\begin{thm}[Paralinéarisation]\label{paralin}
 Soit $F$ une fonction $C^{\infty}$ de $\R$ telle que $F(0)=0$. Si $u\in H^s(\R^d)$, avec $\rho := s - \frac{d}{2}>0 $, alors 
 \begin{equation}
 F(u) - T_{F'(u)}u \in H^{s+\rho}(\R^d).
@@ -411,9 +461,41 @@ En appliquant \eqref{aled} avec $a=F'(S_ku)$ et $\sigma = s + N$ où $N$ est suf
 où l'on a utilisé \eqref{utillem}, ce qui donne finalement la majoration attendue pour $(\rom{1})$, conclut la preuve de l'inégalité \eqref{eq2} et achève donc la preuve du \fcref{paralin}.
 \end{proof}
 
+\begin{thm}[Paralinéarisation des produits]\label{paralin_prod}
+Soit $s,r>0$, et $a,b\in C^r_*(\R^d)$. Alors 
+\begin{equation*}
+R_{CM}(a,b) := T_a \circ T_b - T_{ab}
+\end{equation*}
+est un opérateur continu de $H^s(\R^d)$ dans $H^{s+r}(\R^d)$, et on a :
+\begin{equation*}
+\|R_{CM}(a,b)\|_{\mathcal{L}(H^s,H^{s+r})} \leq C_{s,r} \|a\|_{C^r_*}\|b\|_{C^r_*}
+\end{equation*}
+\end{thm}
 
-
-
+\begin{proof}
+Soit $u\in H^s(\R^d)$, on note $v:=T_bu$ et $v_k:=S_{k-2}b\cdot\Delta_ku$. On observe que :
+\begin{equation}\label{horreur}
+R_1v:=T_av-\sum_k S_{k-4}a\cdot\Delta_kv = \sum_k (\Delta_{k-3}a + \Delta_{k-4}a)\Delta_kv
+\end{equation}
+Or comme $(\Delta_{k-3}a + \Delta_{k-4}a)$ a un spectre inclus dans $B(0,2^k)$, l'inégalité de Bernstein \eqref{bernstein} et la définition des espaces de Zygmund donnent que pour tout $\alpha \in \N^d$ , $|\alpha| \leq r$:
+\begin{equation*}
+\|\partial^\alpha(\Delta_{k-3}a + \Delta_{k-4}a)\|_{L^\infty} \leq C_\alpha 2^{k|\alpha|}\|\Delta_ka\|_{L^\infty} \leq C_\alpha 2^{k(|\alpha|-r)} \|a\|_{C^r_*}
+\end{equation*}
+Alors, le \fcref{true_meyer} et l'inégalité \eqref{estim1} donnent que 
+\begin{equation*}
+\|R_1v\|_{H^{s+r}} \leq C_{s,r} \|a\|_{C^r_*} \|v\|_{H^s} \leq C_{s,r} \|a\|_{C^r_*} \|b\|_{C^r_*} \|u\|_{H^s}
+\end{equation*}
+De plus, en injectant \eqref{horreur}, on remarque que :
+\begin{align*}
+T_aT_bu - \sum_j \sum_{k \leq j-3} \Delta_ka\cdot v_j &= R_1T_bu + \sum_j S_{j-2}a\cdot\Delta_jv - \sum_j \sum_{k \leq j-3} \Delta_ka\cdot v_j \\
+&=R_1T_bu + \sum_j \sum_{k \leq j-3} \Delta_ka\cdot (\Delta_jv - v_j) \\
+&=R_1T_bu + \sum_k \Delta_ka \sum_{k+3 \leq j \leq k+5} (\Delta_jv - v_j) 
+\end{align*}
+pas compris pourquoi on coupe. En développant la défintion de $v_j$, et en ré-utilisant le \fcref{true_meyer}, on a :
+\begin{equation}
+\left\| T_aT_bu - \sum_j \sum_{k_1 \leq j-3} \sum_{k_2\leq j-3} \Delta_{k_1}a\cdot \Delta_{k_2}b \cdot \Delta_j u \right\|_{H^{s+r}} \leq C_{s,r} \|a\|_{C^r_*} \|b\|_{C^r_*} \|u\|_{H^s}
+\end{equation}
+\end{proof}
 
 
 
