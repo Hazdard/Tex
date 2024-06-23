@@ -76,9 +76,7 @@ On a que :
 \begin{proof}
 Prenons $u \in \mathcal{S}'$ et $v \in \mathcal{S}$.
 \[ \langle \mathcal{F}(S_n u), v \rangle = \langle \psi(2^{-n}\xi) \mathcal{F}(u), v \rangle = \langle \mathcal{F}(u), \psi(2^{-n}\xi) v \rangle \]
-
 Or, $\lim_{n \to +\infty} \psi(2^{-n}\xi)v = v$ dans $\mathcal{S}(\mathbb{R}^d)$ par le \fcref{decomp}. On obtient donc :
-
 \[ \mathcal{F}(S_n u) \to \mathcal{F}(u) \quad \text{dans} \ \mathcal{S} \]
 Par continuité de $\mathcal{F}^{-1}$, on a finalement $S_n u \to u$ quand $n \to +\infty$.
 \end{proof}
@@ -94,11 +92,11 @@ et on admet que c'est un espace de Hilbert muni de la norme $\|u\|_{H^s} := \dis
 
 
 \begin{defin}[Espaces de Zygmund]
-Pour tout $s\in \R^+$, on définit 
+Pour tout $\alpha > 0$, on définit 
 \begin{equation*}
-C^\alpha_*(\R^d) := \left\{ u\in L^2(\R^d), \sup_{k \geq -1} 2^{k\alpha}\|u\|_{L^\infty} < \infty \right\}
+C^\alpha_*(\R^d) := \left\{ u\in L^2(\R^d), \sup_{k \geq -1} 2^{k\alpha}\|\Delta_ku\|_{L^\infty} < +\infty \right\}
 \end{equation*}
-et on admet que c'est un espace de Hilbert muni de la norme $\|u\|_{C^\alpha_*} :=  \sup_{k \geq -1} 2^{k\alpha}\|u\|_{L^\infty} $
+et on admet que c'est un espace de Hilbert muni de la norme $\|u\|_{C^\alpha_*} :=  \sup_{k \geq -1} 2^{k\alpha}\|\Delta_ku\|_{L^\infty} $
 \end{defin}
 
 \begin{lemma}[Inégalité de Bernstein]
@@ -149,7 +147,7 @@ $$ \frac{1}{2} \leq \psi(\xi)^2 + \sum_{p=0}^\infty \chi(2^{-p} \xi)^2 \leq 1$$
 La seconde inégalité de \eqref{qortho} s'en déduit en multipliant l'inégalité ci-dessus par $\hat{u}$ et en utilisant l'identité de Plancherel.
 \end{proof}
 
-\begin{prop}[Caractérisation des espaces de Sobolev]
+\begin{prop}[Caractérisation des espaces de Sobolev]\label{prop_carac_sobolev}
 Si $s\in \R^+$, $u\in L^2(\R^d)$, on a alors $u\in H^s(\R^d) \Leftrightarrow \sum_{k\geq -1}2^{2ps}\|\Delta_k u \|_{L^2}^2 < +\infty$. De plus, il existe $C>0$ tel que :
 \begin{equation}\label{carac_sobol}
 \frac{1}{C}\sum_{k\geq -1}2^{2ks}\|\Delta_k u \|_{L^2}^2 \leq \|u\|_{H^s}^2 \leq C \sum_{k\geq -1}2^{2ks}\|\Delta_k u \|_{L^2}^2 
@@ -168,7 +166,7 @@ ce qui donne l'équivalence des normes voulue.
 \end{proof}
 
 \begin{lemma}[Injection de Sobolev]\label{inject}
-Soit $s>\frac{d}{2}$, si $u\in H^s(\R^d)$ alors $u\in L^\infty(\R^d)$, et pour tout $k\in \N$ :
+Soit $s>\frac{d}{2}$, si $u\in H^s(\R^d)$ alors $u\in C^{s-\frac{d}{2}}_*(\R^d)$, en particulier $u\in L^\infty(\R^d)$, et pour tout $k\in \N$ :
 \begin{equation*}
 \|\Delta_ku\|_{L^\infty} \lesssim 2^{k(\frac{d}{2}-s)} \|u\|_{H^s}
 \end{equation*}
@@ -184,16 +182,48 @@ Alors, l'inégalité de Cauchy-Schwarz donne :
 \begin{align*}
 \|\Delta_ku\|_{L^\infty} \leq \|\Delta_ku\|_{L^2} \left|B(0,C 2^k) \right| ^\frac{1}{2} &\lesssim 2^{k(\frac{d}{2}-s)} 2^{ks}\|\Delta_ku\|_{L^2} \leq 2^{k(\frac{d}{2}-s)} (\sum_{k\geq -1} 2^{ks}\|\Delta_ku\|^2_{L^2})^{\frac{1}{2}} \leq 2^{k(\frac{d}{2}-s)} \|u\|_{H^s}
 \end{align*}
-Ce qui consitue l'inégalité voulue. De plus, on en déduit que la série de terme général $(\Delta_ku)_{k\in \N}$ est absolument convergente dans $L^\infty$, donc par complétude elle converge simplement vers un $\tilde{u}$. On a déjà vu qu'elle converge dans $\mathcal{S}'$ vers $u$, donc $u=\tilde{u} \in L^\infty(\R^d)$.
+Ce qui consitue l'inégalité voulue. On en déduit immédiatement que $\sup_{k \geq -1} 2^{k({s-\frac{d}{2}})}\|u\|_{L^\infty} \leq \|u\|_{H^s}$, et donc $u\in C^{{s-\frac{d}{2}}}_*$. De plus, on en déduit que la série de terme général $(\Delta_ku)_{k\in \N}$ est absolument convergente dans $L^\infty$, donc par complétude elle converge simplement vers un $\tilde{u}$. On a déjà vu que cette série converge dans $\mathcal{S}'$ vers $u$, donc $u=\tilde{u} \in L^\infty(\R^d)$.
 \end{proof}
 
 
 \begin{prop}\label{spec_ball}
-Soit $(u_k)_{k\geq -1}$ tel que $\exists R >0, \forall k\geq -1, \text{supp }\hat{u}_k \subset B(0,R2^k)$.
+Soit $(u_k)_{k\geq -1}$ tel que $\exists R >0, \forall k\geq -1, \text{supp }\hat{u}_k \subset B(0,R2^k)$. \\
 \begin{itemize}
-\item[•]Si $\sup $
+\item[•]Soit $\alpha >0$, si $\sup 2^{k\alpha}\|u\|_{L^\infty} < +\infty$, alors $u=\sum u_k \in C^\alpha_*(\R^d)$, et 
+\begin{equation*}
+\|u\|_{C^\alpha_*} \leq C\sup_k 2^{k\alpha}\|u_k\|_{L^\infty}
+\end{equation*}
+\item[•]Soit $s >0$, si $\sum 2^{2ks}\|u_k\|^2_{L^2} < +\infty$, alors $u=\sum u_k \in H^s(\R^d)$, et 
+\begin{equation*}
+\|u\|_{H^s}^2 \leq C\sum_k 2^{2ks}\|u_k\|^2_{L^2} 
+\end{equation*}
 \end{itemize}
 \end{prop}
+
+\begin{proof}
+Par hypothèse sur le support des $(u_k)_{k\geq -1}$, pour tout $q \geq -1$,  en notant $N := \lfloor q-1-\log_2(R) \rfloor$, on a: 
+\begin{equation*}
+\Delta_q u = \sum_{k\geq q-N} \Delta_qu_k
+\end{equation*}
+On en déduit :
+\begin{equation*}
+2^{q\alpha}\|\Delta_qu\|_{L^\infty}\leq  2^{q\alpha}\sum_{k\geq q-N}\|\Delta_qu_k\|_{L^\_infty} \leq 2^{q\alpha}\sum_{k\geq q-N}\|u_k\|_{L^\infty} \leq \sum_{k\geq q-N} 2^{k\alpha}\|u_k\|_{L^\infty} 2^{(q-k)\alpha} \leq \sum_{k\in \Z} a_k b_{q-k}
+\end{equation*}
+où :
+\begin{itemize}
+\item[•] $a_k =  2^{k\alpha}\|u_k\|_{L^\infty}$ si $k\geq -1$, $a_k = 0$ sinon.
+\item[•] $b_r =  2^{r\alpha}$ si $r\leq N$, $b_r = 0$ sinon.
+\end{itemize}
+Comme $\alpha>0$, $(b_r)_{r\in \Z}$ est sommable, et l'inégalité de Young discrète donne :
+\begin{equation*}
+\|2^{k\alpha}\|\Delta_ku\|_{L^\infty}\|_{\ell^\infty} \leq \|a_q\|_{\ell^\infty} \|b_r\|_{\ell^1}
+\end{equation*}
+i.e :
+\begin{equation*}
+\|u\|_{C^\alpha_*} = \sup_k 2^{k\alpha}\|\Delta_ku\|_{L^\infty} \leq C\sup_k 2^{k\alpha}\|u_k\|_{L^\infty} 
+\end{equation*}
+On conclut alors par définition des espaces de Zygmund. La preuve dans le second cas est parfaitement analogue, en remplaçant $\alpha$ par $s$, et l'espace $L^\infty$ par $L^2$.
+\end{proof}
 
 
 \begin{prop}[]\label{meyer}
@@ -201,8 +231,20 @@ Soit $s>0$, $n\in \N$, $n>s$. Il existe $C$ tel que pour toute famille $(u_k)_{k
 \begin{equation*}
 \|\partial ^\alpha u_k \|_{L^2} \leq 2^{k(|\alpha|-s)}\varepsilon_k
 \end{equation*}
-où $(\varepsilon_k)_{k\in \N} \in \ell^2(\N)$, alors $u=\sum_k u_k \in H^s(\R^d) $, et $ \|u\|_{H^s}^2 \leq C \sum_k \varepsilon_k^2 $.
+où $(\varepsilon_k)_{k\in \N} \in \ell^2(\N)$, alors la somme $u:=\sum_k u_k \in H^s(\R^d) $, et $ \|u\|_{H^s}^2 \leq C \sum_k \varepsilon_k^2 $.
 \end{prop}
+
+\begin{proof}
+On remarque que la série de terme général $u_k$ est absolument convergente dans $L^2$, donc par complétude elle converge simplement, et $u$ est bien définit. Ensuite : 
+\begin{equation*}
+2^{js}\|\Delta_ju\|_{L^2} \leq \sum_{k\geq j} 2^{js}\|\Delta_ju_k\|_{L^2} + \sum_{k < j} 2^{js}\|\Delta_ju_k\|_{L^2}
+\end{equation*}
+Par hypothèse, et en utilisant le \fcref{young}, on a d'une part :
+\begin{equation*}
+\|\Delta_ju_k\|_{L^2} \leq C \|u_k\|_{L^2} \leq C2^{-ks}\varepsilon_k
+\end{equation*}
+D'autre part, en utilisant l'inégalité de Bernstein \eqref{bernstein}, 
+\end{proof}
 
 \section{Estimations douces et paralinéarisation}
 
