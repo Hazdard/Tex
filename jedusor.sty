@@ -118,6 +118,10 @@
 % Configuration pour rendre le texte entier cliquable
 \newcommand{\fcref}[1]{\hyperref[#1]{\cref*{#1}}}
 
+% Écrire des limites proprement
+\newcommand{\Lim}[1]{\raisebox{0.5ex}{\scalebox{0.8}{$\displaystyle \lim_{#1}\;$}}}
+% Sinon \lim\limits_{x \to y}
+
 % Pour écrire des chiffres romains
 \newcommand*{\rom}[1]{\expandafter\@slowromancap\romannumeral #1@}
 
