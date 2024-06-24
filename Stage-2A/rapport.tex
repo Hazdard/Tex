@@ -9,26 +9,18 @@
 \date{}
 \author{Sacha Ben-Arous, Mathis Bordet, \\ sous la direction de Thomas Alazard.}
 
-
-
-
 % Citer les sources
 % Rajouter les explications sur les lemmes de caractérisations
 % Remarques sur la décomposition dyadique du bouquin Alinhac-Gérard.
 % DEFINIR LES OBJETS DONT ON PARLE : SOBOLEV FOURIER HOLDER PARAPRODUIT
 % UTILISER GHYS DANS LINTRO
-
-
+% \mathscr{F} pour joli Fourier
 
 
 \begin{document}
 \maketitle
 \tableofcontents
 \newpage
-
-
-
-
 
 \section{Introduction}
 En cours ...
@@ -40,7 +32,7 @@ On note $\mathbb{S}^1$ le cercle de dimension 1 : $\left\{ z \in \mathbb{C} \mid
 On note également $\Pi$ l'application $ t \to \exp (2i\pi t) $ (la projection de $\mathbb{R}$ sur $\mathbb{S}^1$).
 \subsection{Problèmes de conjuguaison}
 \begin{defin}
-Soit $f \ \text{:} \ \mathbb{S}^1 \to \mathbb{S}^1$. On appelle relèvement de $f$, une application $F \ \text{:} \ \mathbb{R} \to \mathbb{R}$ vérifiant :
+Soit $f :\mathbb{S}^1 \to \mathbb{S}^1$. On appelle relèvement de $f$, une application $F :  \mathbb{R} \to \mathbb{R}$ vérifiant :
 \begin{equation*}
 f \circ \Pi = \Pi \circ F
 \end{equation*}
@@ -53,7 +45,7 @@ Toute application continue du cercle possède un relèvement continu. De plus, d
 \end{thm}
 Dans la suite, tous les relèvement d'applications continues du cercle seront pris continus.
 \begin{defin}
-Pour une application continue du cercle $f$, on définit son degré $deg(f)= F(1)-F(0)$ avec $F$ un relèvement de $f$.
+Pour une application continue du cercle $f$, on définit son degré $deg(f) := F(1)-F(0)$ avec $F$ un relèvement de $f$.
 \end{defin}
 \begin{rmq}
 On peut démontrer que ce nombre est un entier relatif et qu'il ne diffère pas selon les relèvements (continus).
@@ -68,13 +60,13 @@ Prenons $f$ un homéomorphisme préservant l'orientation alors, $deg(f)=1$ et de
 \end{prop}
 
 \begin{prop}
-Soit $f$ un homéomorphisme préservant l'orientation et $F$ un relèvement de $f$. Alors le nombre $\rho (F)=\lim\limits_{n \to +\infty} \frac{F^n(x)}{n}$ existe, ne dépend pas de $x$, et ne diffère que d'un entier relatif entre chaque relèvement.
+Soit $f$ un homéomorphisme préservant l'orientation et $F$ un relèvement de $f$. Alors le nombre $\rho (F)=\displaystyle \lim\limits_{n \to +\infty} \frac{F^n(x)}{n}$ existe, ne dépend pas de $x$, et ne diffère que d'un entier relatif entre chaque relèvement.
 \end{prop}
 
 \begin{defin}
 On définit alors le nombre de rotation de $f$ par $\rho(f) := \rho (F) \mod[1]$
 \end{defin}
-Cette nombre est fondamentale car elle caractérise le nombre de rotations moyen d'un homéomorphisme. On peut alors se demander si, de manière analogue à la relation de similitude en l'algèbre linéaire, il existe un représentant simple pour un homéomorphisme du cercle donné, i.e : un homéomorphisme du cercle $f$ est-il conjugué à la rotation d'angle $R_{\rho(f)}$ ? La réponse est clairement non si le nombre de rotation est rationnel : il suffit de remarquer qu'un homéomorphisme ayant un point fixe est de nombre de rotation nul, or la rotation d'angle $0$ est l'identité, et cette dernière est seule dans sa classe d'équivalence. Dans le cas irrationnel, le théorème suivant dû à Poincaré apporte une première réponse :
+Cette quantité est fondamentale car elle caractérise le nombre de rotations moyen d'un homéomorphisme. On peut alors se demander si, de manière analogue à la relation de similitude en l'algèbre linéaire, il existe un représentant simple pour un homéomorphisme du cercle donné, i.e : un homéomorphisme du cercle $f$ est-il conjugué à la rotation d'angle $R_{\rho(f)}$ ? La réponse est clairement non si le nombre de rotation est rationnel : il suffit de remarquer qu'un homéomorphisme ayant un point fixe est de nombre de rotation nul, or la rotation d'angle $0$ est l'identité, et cette dernière est seule dans sa classe d'équivalence. Dans le cas irrationnel, le théorème suivant dû à Poincaré apporte une première réponse :
 \begin{thm}[Poincaré]\label{poincare}
 Soit $f$ un homéomorphisme préservant l'orientation, si son nombre de rotation est un irrationnel alors $f$ est semi-conjugué à la rotation d'angle $\rho_0(f)$, i.e : il existe une fonction du cercle $h$ continue, surjective, ayant un relèvement croissant, telle que $h\circ f = R_{\rho(f)} \circ h$.
 \end{thm}
@@ -275,7 +267,7 @@ $\displaystyle  \left | \sum_{k = -n}^n (g_k'-1) \right |_{\mathcal{C}^w} \leq 2
 La suite $ \displaystyle l_n := \frac{c}{(|n|+k)(log(|n| + k)^{1+\epsilon}}$ vérifie le critère du \fcref{reg_holder} pour le module $w(x)=O(x^{1-\epsilon'})$, pour tout $\epsilon' > \epsilon$, ce qui permet de conclure la preuve du \fcref{cex_denjoy}
 
 \section{Calcul paradifférentiel}
-Cette partie a pour objectif d'exposer les principaux théorèmes de paralinéarisation, avec pour point de départ la décomposition de Littlewood-Paley. On s'appuiera sur \cite{metivier}, \cite{dgv}, et \cite{alinhac_gerard} comme références, en particulier les chapitres 4 et 5 du livre de Métivier.
+Cette partie a pour objectif d'exposer les principaux théorèmes de paralinéarisation, avec pour point de départ la décomposition de Littlewood-Paley, et comme but de démontrer un théorème dû à Arnold, que l'on énonce dans un second temps. On s'appuiera sur \cite{metivier}, \cite{dgv}, et \cite{alinhac_gerard} comme références, en particulier les chapitres 4 et 5 du livre de Métivier.
 
 \subsection{Décomposition de Littlewood-Paley}
 Nous allons dans cette section présenter la décomposition de Littlewood-Paley. C'est une décomposition de fonction dans laquelle chaque terme a un spectre borné. Nous allons également présenter des propriétés sur cette décomposition. 
@@ -309,11 +301,11 @@ et la série converge dans l'espace de Schwartz.
 Soit $u \in \mathcal{S}$, montrons que pout tout $\alpha$ et $\beta \in \mathbb{N}\times \mathbb{N}^d $, $\left\lVert x^\alpha \partial^\beta(u-\psi(2^{-k}x)u) \right\rVert_\infty \to_{k\to \infty} 0$
 On considère pour cela :
 \begin{align*}
-    \left\lVert x^\alpha \partial^\beta(g-\psi(2^{-k}x)g)\right\rVert_\infty &= \left\lVert x^\alpha \partial^\beta(g-\psi(2^{-k}x)g)\right\rVert_{\infty,[2^{k-1};2^{k+1}]} \\
-    &\leq \left\lVert x^\alpha \partial^\beta g\right\rVert_{\infty,[2^{k};2^{k+1}]} + \left\lVert x^\alpha \partial^\beta g(1-\psi(2^{-k}x)\right\rVert_{\infty,[2^{k-1};2^{k}]}
+    \left\lVert x^\alpha \partial^\beta(u-\psi(2^{-k}x)u)\right\rVert_\infty &= \left\lVert x^\alpha \partial^\beta(u-\psi(2^{-k}x)u)\right\rVert_{\infty,[2^{k-1};2^{k+1}]} \\
+    &\leq \left\lVert x^\alpha \partial^\beta u\right\rVert_{\infty,[2^{k};2^{k+1}]} + \left\lVert x^\alpha \partial^\beta u(1-\psi(2^{-k}x)\right\rVert_{\infty,[2^{k-1};2^{k}]}
 \end{align*}
 
-Comme $g \in \mathcal{S}$, on a $\left\lVert x^\alpha \partial^\beta g\right\rVert_{\infty,[2^{k};2^{k+1}]}$ qui tend bien vers 0 lorsque $p$ tend vers $+\infty$. En utilisant la formule de derivation de Leibniz sachant que $\partial^j \psi = O(x^{j})$ (en utilisant \eqref{plateau}) on a que $\left\lVert x^\alpha \partial^\beta g\right\rVert_{[2^{k};2^{k+1}]}$ tend bien vers 0 lorsque $p$ tend vers $+\infty$. On utilise ensuite la continuité de la transformé de Fourier et de la transformé de Fourier inverse sur $\mathcal{S}$.
+Comme $u \in \mathcal{S}$, on a $\left\lVert x^\alpha \partial^\beta u\right\rVert_{\infty,[2^{k};2^{k+1}]}$ qui tend bien vers $0$ lorsque $p$ tend vers $+\infty$. En utilisant la formule de derivation de Leibniz sachant que $\partial^j \psi = O(x^{j})$ (en utilisant \eqref{plateau}) on a que $\left\lVert x^\alpha \partial^\beta u(1-\psi(2^{-k}x)\right\rVert_{\infty,[2^{k-1};2^{k}]}$ tend bien vers $0$ lorsque $p$ tend vers $+\infty$. Pour conclure on utilise finalement que la transformée de Fourier est une bijection de $\mathcal{S}$ dans lui-même.
 \end{proof}
 
 \begin{defin}
@@ -337,7 +329,7 @@ Dans la suite, pour simplifier les calculs, il nous arrivera d'écrire $S_{-k}$ 
 Prenons $u \in \mathcal{S}'$ et $v \in \mathcal{S}$.
 \[ \langle \mathcal{F}(S_n u), v \rangle = \langle \psi(2^{-n}\xi) \mathcal{F}(u), v \rangle = \langle \mathcal{F}(u), \psi(2^{-n}\xi) v \rangle \]
 Or, $\lim_{n \to +\infty} \psi(2^{-n}\xi)v = v$ dans $\mathcal{S}(\mathbb{R}^d)$ par le \fcref{decomp}. On obtient donc :
-\[ \mathcal{F}(S_n u) \to \mathcal{F}(u) \quad \text{dans} \ \mathcal{S} \]
+\[ \mathcal{F}(S_n u) \to \mathcal{F}(u) \quad \text{dans} \ \mathcal{S}' \]
 Par continuité de $\mathcal{F}^{-1}$, on a finalement $S_n u \to u$ quand $n \to +\infty$.
 \end{proof}
      
@@ -388,8 +380,13 @@ Il existe $C>0$ tel que pour tout $1\leq p \leq +\infty$, $u \in L^p(\R^d)$,
 \end{lemma}
 
 \begin{proof}
-On écrit $S_n u = 2^{nd} \mathcal{F}^{-1}(\psi(2^n\cdot))\ast u$. Par inégalité de Young on obtient :
-$$\left\lVert S_n u \right\rVert_{L^p} \leq \left\lVert u \right\rVert_{L^p} \left\lVert 2^{nd} \mathcal{F}^{-1}(\psi(2^n\cdot)  \right\rVert_{L^1}$$ 
+On écrit $S_n u = 2^{nd} (\mathcal{F}^{-1}\psi)(2^n\cdot)\star u$. Par inégalité de Young on obtient :
+$$\left\lVert S_n u \right\rVert_{L^p} \leq \left\lVert u \right\rVert_{L^p} \left\lVert 2^{nd} (\mathcal{F}^{-1}\psi)(2^n\cdot) \right\rVert_{L^1}$$ 
+Or, par changement de variable, on obtient : 
+\begin{align*}
+ \left\lVert 2^{nd} (\mathcal{F}^{-1}\psi)(2^n\cdot) \right\rVert_{L^1} &= 2^{nd} \int_{\R^d} \left| (\mathcal{F}^{-1}\psi)(2^nx)  \right| \mathrm{d}x \\
+ &= \int_{\R^d} \left| \mathcal{F}^{-1}\psi(x) \right| \mathrm{d}x = \|\mathcal{F}^{-1}\psi\|
+\end{align*}
 On procède de même pour $\|\Delta_k u\|_{L^p}$.
 \end{proof}
 
@@ -785,23 +782,30 @@ On doit alors ici préciser la nature de notre irrationnel $\alpha$. On supposer
 |\frac{q \alpha}{\pi}-p|\geq \frac{1}{\gamma q^\sigma}
 \end{equation} 
 
-Ce qui induit en notant la solution $v$ de $\ref{arnold2}$ que si $f \in H^{s+\sigma}$ alors $\Delta_\alpha^{-1}h \in H^{s}$. Plus précisément, que l'opération $\Delta_{\alpha}^{-1}$ induit une perte de régularité de l'ordre de $\sigma$ et que :
+Ce qui induit en notant la solution $v$ de $\eqref{arnold2}$ que si $f \in H^{s+\sigma}$ alors $\Delta_\alpha^{-1}h \in H^{s}$. Plus précisément, que l'opération $\Delta_{\alpha}^{-1}$ induit une perte de régularité de l'ordre de $\sigma$ et que :
 \begin{equation}\label{dio}
 \|\Delta_\alpha^{-1}h\|_{H^s} \leq C_\gamma \|f\|_{H^{s+\sigma}}
 \end{equation}
 \par
 Ce problème de perte de régularité nous empêche d'utiliser les théorèmes de point fixe ou les méthodes itératives traditionnelles pour résoudre cette équation. Face à cela, deux approches s'offrent à nous. La première est l'utilisation d'un schéma de Nash-Moser dont le fonctionnement est détaillé en annexe. La deuxième, que l'on va développer dans la suite consiste à utiliser les théorèmes de paralinéarisation pour régulariser cette équation $\eqref{arnold2}$.
 \subsubsection{Résolution par la para-linéarisation}
+On veux montrer le résultat suivant :
+\begin{thm}[Arnold]
+Soit $\alpha \in \R\setminus \Q$, vérifiant la condition diophantienne \eqref{dio} avec $\gamma > 0, \sigma > 1$. Soient $\varepsilon >0$, $s\geq \sigma + 1.5 + \epsilon$ et $N_s := \lceil s \rceil$. Si $g=R_\alpha + f \in H^{s+\sigma + \varepsilon}\cap C^{N_s+1}$ vérifie $\rho(g)=\alpha$, alors il existe $\tau > 0$ tel que si $\|f\|_{H^{s+\sigma + \varepsilon}} + \|u\|_ {C^{N_s+1}} \leq \tau$ alors il existe $u \in H^s$ tel que $\eta = \text{Id} + u$ conjugue $g$ à $R_\alpha$.
+\end{thm}
+
 On choisit les notations suivantes :
 \begin{equation*}
-\mathbf{F}(f,U)=\Delta_\alpha u - f \cdot (id +u) + \lambda
+\mathbf{F}(f,U) :=\Delta_\alpha u - f \cdot (id +u) + \lambda
 \end{equation*}
-On s'intéresse alors à:
+Et alors, en notant $U:=(u,\lambda)$, l'équation \eqref{arnold2} à résoudre pour prouver le théorème d'Arnold se ré-écrit en :
 \begin{equation}\label{equ_reso}
 \mathbf{F}(f,U)=0
-\end{equation}
-avec $U=(u,\lambda)$. On suppose que $f \in H^{s+\sigma+ \epsilon} \cap C^{N_s}$ avec $s>\sigma +1.5+ \epsilon$. On cherche a priori $u$ dans $H^s$ (et par injection de Sobolev dans $C^r_*$ où $r=s-0.5>1$).\\
-En utilisant la propriété ("de paralinéarisation"):
+\end{equation} 
+
+\begin{proof}
+On suppose que $f \in H^{s+\sigma+ \epsilon} \cap C^{N_s+1}$ avec $s>\sigma +1.5+ \epsilon$. On cherche a priori $u$ dans $H^s$, et par injection de Sobolev il sera également dans $C^r$ où $r=s-0.5>1$.\\
+En utilisant le \fcref{paralin} de paralinéarisation, on obtient :
 \begin{equation}\label{2.1}
 \mathbf{F}(f,U)=\Delta_\alpha u -f-T_{f'(id +u)}u +R_{pl}(f(x+\cdot),u) + \lambda
 \end{equation}
@@ -809,7 +813,7 @@ Or on a l'égalité suivante :
 \begin{equation*}
 f'(id+u)=\frac{\Delta_\alpha u}{1+u'} -\frac{\mathbf{F}(f,U)'}{1+u'}
 \end{equation*}
-En réinjectant dans $\ref{2.1}$ on obtient:
+En réinjectant dans $\eqref{2.1}$ on obtient:
 \begin{equation}\label{2.2}
 \mathbf{F}(f,U)=\Delta_\alpha u -f-T_{\frac{\Delta_\alpha u}{1+u'}}u -T_{\frac{\mathbf{F}(f,U)'}{1+u'}}u +R_{pl}(f(x+\cdot),u) + \lambda
 \end{equation}
@@ -836,8 +840,7 @@ Par le \fcref{paralin_prod}, on a que pour $a:=\frac{1}{1+u'}$ :
 T_a\cdot T_{a^{-1}} -T_1=R(a,a^{-1})
 \end{equation*}
 avec $\|R(a,a^{-1})\|_{\mathbb{L}(H^s,H^{s+r})} \leq_{s,r} \|a\|_{C^r_*} \|a^{-1}\|_{C^r_*}$. On a que $R$ est continu et donc avec $ R(1,1)=0$. On a que $\lim_{u' \to 0} R(a,a^{-1})=0$. \\
-Donc on peut choisir  $\|u'\|_{L^\infty} \leq \delta $  pour que $\|R(a,a^{-1})\|_{\mathbb{L}(H^s,H^{s+r})}<1 $ et utiliser une série de Neumann pour avoir l'inversibilité de $T_a$. \\
-La preuve est identique pour $T_{1+u'\cdot \tau_\alpha }$ et pour $ H^{s+\sigma +\epsilon}$ . 
+Donc on peut choisir  $\|u'\|_{L^\infty} \leq \delta $  pour que $\|R(a,a^{-1})\|_{\mathcal{L}(H^s,H^{s+r})}<1 $ et utiliser une série de Neumann pour avoir l'inversibilité de $T_a$. La preuve est identique pour $T_{1+u'\cdot \tau_\alpha }$ et pour $ H^{s+\sigma +\epsilon}$ . 
 \end{proof}
 \begin{rmq}
 Par injection de Sobolev et par le fait que $u \in C^r_*$ où $r=s-0.5>1$ on peut choisir  $u \in H^s$ tel que $\|u\|_{H^s}$ soit assez petit pour que la condition $\|u'\|_{L^\infty} \leq \delta $ soit satisfaite. On cherchera dans la suite un $u$ avec une telle norme.
@@ -860,13 +863,13 @@ Malgré la perte de régularité imposée par  $\Delta_\alpha^{-1}$, le membre d
 \par
 D'autre part, avec le \fcref{paralin}, on a le contrôle suivant sur les normes :
 \begin{equation*}
-\|R_{\text{pl}}(f(x+\cdot),u)\|_{H^s} \leq C_s \|f\|_{C^r_*} (1+\|u\|_{H^s})
+\|R_{\text{pl}}(f(x+\cdot),u)\|_{H^s} \leq C_s \|f\|_{C^{N_s+1}_*} (1+\|u\|_{H^s})
 \end{equation*} 
 De plus l'une des conséquences de la preuve du \fcref{inversibilite} est que $\tilde{R}(u)$ converge quadratiquement vers 0 lorsque $u$ tend vers 0 dans $H^s$. En prenant donc  $\|u\|_{H^s} \leq \rho $ on a que la norme $H^s$ du membre de gauche $\eqref{equ_reso2}$ est majorée par:
 \begin{equation}
-C(s,\sigma) ( \|f\|_{H^{s+\sigma+\epsilon}} +\|f\|_{C^r_*} (1+\rho) + \rho^2)
+C(s,\sigma) ( \|f\|_{H^{s+\sigma+\epsilon}} +\|f\|_{C^{N_s+1}_*} (1+\rho) + \rho^2)
 \end{equation} 
-Puisqu'on peut prendre $\|f\|_{H^{s+\sigma+\epsilon}}$ et $\|f\|_{C^r_*}$ aussi petits qu'on veut, il existe un $\rho$ tel que le membre de gauche $\ref{equ_reso3}$ envoie $B_\rho$ dans elle-même. En utilisant le point fixe de Schauder on a que l'équation $\ref{equ_reso3}$ a une solution $u$ dans $H^s$ dans $B_{\rho'}$ pour tout $\rho' \leq \rho$. \\
+Puisqu'on peut prendre $\|f\|_{H^{s+\sigma+\epsilon}}$ et $\|f\|_{C^{N_s+1}_*}$ aussi petits qu'on veut, il existe un $\rho$ tel que le membre de gauche $\eqref{equ_reso3}$ envoie $B_\rho$ dans elle-même. En utilisant le point fixe de Schauder on a que l'équation $\eqref{equ_reso3}$ a une solution $u$ dans $H^s$ dans $B_{\rho'}$ pour tout $\rho' \leq \rho$. \\
 \par
 Enfin pour résoudre l'équation $\eqref{equ_reso2}$, on remarque par l'inégalite \eqref{estim1} de la \fcref{tame} :
 \begin{equation}
@@ -876,6 +879,7 @@ En utilisant une nouvelle fois l'argument de la série de Neumann on a bien que 
 \begin{equation}
 \mathbf{F}(f,U)=0
 \end{equation}
+\end{proof}
 
 \newpage
 \section{Annexe sur le théorème de Nash-Moser}
