@@ -78,6 +78,9 @@ Ce nombre est primordial puisque celui-ci permet de classifier les homéomorphis
 \begin{thm}[Poincaré]\label{poincare}
 Soit $f$ un homéomorphisme préservant l'orientation, si son nombre de rotation est un irrationnel alors $f$ est semi-conjugué à la rotation d'angle $\rho_0(f)$.
 \end{thm}
+\begin{rmq}
+La preuve de ce théorème utilise un résultat d'existence de mesure invariante pour une application continue du cercle, souvent appelé Théorème de Krylov-Bogolyubov. Or ce dernier n'est pas prouvé dans \cite{dgv}, et on propose donc une preuve inspirée d'un cours de Patrick Gérard en annexe.
+\end{rmq}
 On peut même dire un peu plus si on a des informations sur la régularité de $f$, c'est l'essence du théorème de Denjoy :
 \begin{thm}[Denjoy]\label{denjoy}
 En plus des hypothèses du théorème de Poincaré, si $f$ est $C^2$ alors il est cette fois-ci conjugué à la rotation d'angle $\rho_0(f)$.
@@ -893,7 +896,7 @@ De telle sorte qu'il existe une fonction régularisante $S$ telle que
 \begin{equation}\label{0.4}
 \left\|\frac{d}{d \theta} S_\theta u\right\|_b \leq C \theta^{b-a-1}\|u\|_a 
 \end{equation}
-
+	
 
 \paragraph{Outil :}
 On prend $\theta_j$ une suite d'indices divergents et on définit $\Delta_j = \theta_{j+1} - \theta_j$ et $R_j u = \left(S_{\theta_{j+1}} u - S_{\theta_j} u\right) / \Delta_j$ si $j > 0$, $R_0 u = S_{\theta_1} u / \Delta_0$.
@@ -1037,6 +1040,62 @@ En notant $T(g) = \sum \Delta_j e_j + \Delta_j e'_j$ et avec $\left\|T(g) \right
 \Phi(u) - \Phi(0) = T(g) + g
 \]
 on conclut bien.
+\newpage
+\section{Annexe sur le Théorème de Krylov-Bogolyubov}
+
+\subsection*{Énoncé du cas particulier}
+On s'intéresse ici à la démonstration du théorème de Krylov-Bogoliubov, c'est-à-dire à l'existence d'une mesure invariante pour un homéomorphisme du cercle. On reprend une preuve de Patrick Bernard, et on admet deux théorème de théorie de la mesure, que l'on rappelle en fin de document.
+
+\subsection*{Démonstration}
+
+\paragraph{Cadre}
+On considère $T$ un homéomorphisme du cercle. Du fait que l'ensemble $\mathbb{S}_1$ est compact, par le \fcref{foo} on a que $C^0(\mathbb{S}_1,\mathbb{S}_1)$ est séparable, i.e. il existe une sous-famille $F$ dénombrable et dense au sens de la norme uniforme.
+
+\paragraph{Construction de la suite}
+Prenons $x \in \mathbb{S}_1$.
+Pour tout $f \in C^0(\mathbb{S}_1,\mathbb{S}_1)$, posons :
+\[
+{S^N}f (x)= \frac{1}{N} \sum_{n=0}^N f(T^n(x))
+\]
+Par extraction diagonale et par compacité de $\mathbb{S}_1$, il existe une extraction $N_k$ telle que $\forall f \in \mathbb{F}, \: S^{N_k}_f (x)$ converge. On note sa limite $S_f (x)$.
+
+\paragraph{Extension de la construction}
+Soit $g \in C^0(\mathbb{S}1,\mathbb{S}_1)$. Prenons une suite $(f_n)_{n \in \mathbb{N}} \in F^\mathbb{N}$ convergeant uniformément vers $g$.
+Montrons que $S_g (x)$ a un sens. Pour cela, considérons $(p, q) \in \mathbb{N}^2$ :
+
+\[
+\begin{aligned}
+|S^{N_p}_g (x) - S^{N_q}_g (x)| &= \left| S^{N_p}_g (x) - S^{N_p}_{f_n} (x) + S^{N_p}_{f_n} (x) - S^{N_q}_{f_n} (x) + S^{N_q}_{f_n} (x) - S^{N_q}_g (x) \right| \\
+&\leq \left| S^{N_p}_g (x) - S^{N_p}_{f_n} (x) \right| + \left| S^{N_p}_{f_n} (x) - S^{N_q}_{f_n} (x) \right| + \left| S^{N_q}_{f_n} (x) - S^{N_q}_g (x) \right| \\
+&\leq 2 \left\| g - f_n \right\|_\infty + \left| S^{N_p}_{f_n} (x) - S^{N_q}_{f_n} (x) \right|
+\end{aligned}
+\]
+Donc $S^{N_p}_g (x)$ est une suite de Cauchy dans $\mathbb{S}_1$, donc elle converge.
+
+\paragraph{Conclusion}
+On pose maintenant 
+\[
+\begin{aligned}
+&L_x: C^0(\mathbb{S}_1,\mathbb{S}_1) \to \mathbb{C} \\
+&g \mapsto S_g(x)
+\end{aligned}
+\]
+$L_x$ est 1-lipschitzienne donc continue. D'après le \fcref{fooo}, il existe alors une mesure borélienne $\mu$ vérifiant :
+\[
+\forall g \in C^0(\mathbb{S}_1), \: \: L_x(g) = \int_{\mathbb{S}_1} g \, d\mu
+\]
+Or, par construction, $L_x(g \circ T) = L_x(g)$, donc $\mu = \mu(T^{-1}(.))$. Avec $T$ bijectif, on a bien $\mu = \mu(T(.))$.
+
+\section*{Rappels}
+\begin{mthm}{1}\label{foo}
+Pour tout métrique compacte $X$, l'espace $C(X)$ est séparable pour la norme uniforme.
+\end{mthm}
+
+\begin{mthm}{2}\label{fooo}
+Il y a une bijection entre les mesures boréliennes et les formes linéaires positives sur $C^0(\mathbb{S}_1,\mathbb{S}_1)$.
+\end{mthm}
+
+
 \newpage
 \printbibliography[heading=bibintoc, title={Références}]
 \end{document}
