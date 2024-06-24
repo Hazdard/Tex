@@ -31,7 +31,7 @@
 
 
 \section{Introduction}
-Ayaya
+En cours ...
 
 \section{Difféomorphismes du cercle}
 Nous allons dans cette section présenter rapidement les homéomorphismes du cercle et énoncer quelques propriétés fondamentales puisque ces objets nous offrent un cadre d'application des techniques de résolution d'équations que nous verrons dans les sections suivantes. On utilise les notations suivantes :
@@ -49,9 +49,9 @@ f \circ \Pi = \Pi \circ F
 Les relèvements permettent de faire le parallèle entre les fonctions du cercle et les fonctions réelles.
 \end{rmq}
 \begin{thm}
-Toute application continue du cercle possède un relèvement continu. De plus, tous ses relèvements continus diffèrent d'une constante entière.
+Toute application continue du cercle possède un relèvement continu. De plus, deux relèvements continus diffèrent d'une constante entière.
 \end{thm}
-Dans la suite, toute propriété qui sera énoncée pour une application continue du cercle concernant ses relèvements, ce dernier sera pris continu.
+Dans la suite, tous les relèvement d'applications continues du cercle seront pris continus.
 \begin{defin}
 Pour une application continue du cercle $f$, on définit son degré $deg(f)= F(1)-F(0)$ avec $F$ un relèvement de $f$.
 \end{defin}
@@ -68,29 +68,30 @@ Prenons $f$ un homéomorphisme préservant l'orientation alors, $deg(f)=1$ et de
 \end{prop}
 
 \begin{prop}
-Soit $f$ un homéomorphisme préservant l'orientation et $F$ un relèvement de $f$. Alors le nombre $\rho (F)= \frac{F^n(x)}{n}$ existe et ne dépend pas de $x$ et ne diffère que d'un entier relatif entre chaque relèvement.
+Soit $f$ un homéomorphisme préservant l'orientation et $F$ un relèvement de $f$. Alors le nombre $\rho (F)=\lim\limits_{n \to +\infty} \frac{F^n(x)}{n}$ existe, ne dépend pas de $x$, et ne diffère que d'un entier relatif entre chaque relèvement.
 \end{prop}
 
 \begin{defin}
-On définit alors le nombre de rotation de $f$ $\rho_0(f) = \rho (F) \mod[1]$
+On définit alors le nombre de rotation de $f$ par $\rho(f) := \rho (F) \mod[1]$
 \end{defin}
-Ce nombre est primordial puisque celui-ci permet de classifier les homéomorphismes préservant l'orientation puisqu'en effet on a le Théorème de Poincaré :
+Cette nombre est fondamentale car elle caractérise le nombre de rotations moyen d'un homéomorphisme. On peut alors se demander si, de manière analogue à la relation de similitude en l'algèbre linéaire, il existe un représentant simple pour un homéomorphisme du cercle donné, i.e : un homéomorphisme du cercle $f$ est-il conjugué à la rotation d'angle $R_{\rho(f)}$ ? La réponse est clairement non si le nombre de rotation est rationnel : il suffit de remarquer qu'un homéomorphisme ayant un point fixe est de nombre de rotation nul, or la rotation d'angle $0$ est l'identité, et cette dernière est seule dans sa classe d'équivalence. Dans le cas irrationnel, le théorème suivant dû à Poincaré apporte une première réponse :
 \begin{thm}[Poincaré]\label{poincare}
-Soit $f$ un homéomorphisme préservant l'orientation, si son nombre de rotation est un irrationnel alors $f$ est semi-conjugué à la rotation d'angle $\rho_0(f)$.
+Soit $f$ un homéomorphisme préservant l'orientation, si son nombre de rotation est un irrationnel alors $f$ est semi-conjugué à la rotation d'angle $\rho_0(f)$, i.e : il existe une fonction du cercle $h$ continue, surjective, ayant un relèvement croissant, telle que $h\circ f = R_{\rho(f)} \circ h$.
 \end{thm}
 \begin{rmq}
-La preuve de ce théorème utilise un résultat d'existence de mesure invariante pour une application continue du cercle, souvent appelé Théorème de Krylov-Bogolyubov. Or ce dernier n'est pas prouvé dans \cite{dgv}, et on propose donc une preuve inspirée d'un cours de Patrick Gérard en annexe.
+La preuve de ce théorème utilise un résultat d'existence de mesure invariante pour une application continue du cercle, souvent appelé Théorème de Krylov-Bogolyubov. Or ce dernier n'est pas prouvé dans \cite{dgv}, et on propose donc une preuve inspirée d'un cours de Patrick Bernard en annexe.
 \end{rmq}
-On peut même dire un peu plus si on a des informations sur la régularité de $f$, c'est l'essence du théorème de Denjoy :
+
+Un critère d'inversibilité de la semi-conjuguaison est ensuite fourni par ce théorème de Denjoy :
 \begin{thm}[Denjoy]\label{denjoy}
 En plus des hypothèses du théorème de Poincaré, si $f$ est $C^2$ alors il est cette fois-ci conjugué à la rotation d'angle $\rho_0(f)$.
 \end{thm}
 
+On peut cependant se questionner sur la nécessité de l'hypothèse $C^2$ qui semble inattendue, et l'objet de la partie suivante sera de montrer que cette condition est optimale en un certain sens.
 
 
 \subsection{Contres-exemples au théorème de Denjoy}
 Cette partie est consacré à l'étude de certains contre-exemples du théorème de Denjoy, qui sont développés par Harold Rosenberg dans \cite{rosenberg}, et surtout par Michael Herman dans sa thèse \cite{herman}, en particulier au chapitre X. 
-\subsubsection{Outils}
 
 On se propose de montrer le théorème suivant :
 
@@ -102,8 +103,10 @@ Pour tout $\alpha \in \mathbb{R} \setminus \mathbb{Q}$, $\forall \epsilon > 0$, 
 Ici, la  régularité non-entière est définie au sens de Hölder, i.e $f$ est $\mathcal{C}^1$, de dérivée $1-\epsilon$-hölderienne.
 \end{rmq}
 
-Pour construire un contre-exemple, on s'inspire de la preuve du théorème dans le cas $\mathcal{C}^2$ : on sait déjà par le théorème de Poincaré qu'un tel $f$ est semi-conjugué à $R_\alpha$ par une fonction continue croissante $h$ du tore. La preuve procède par l'absurde, en montrant que si $h$ n'est pas inversible, alors elle est constante sur un intervalle $I$ non trivial du tore. Les itérés $f^n(I)$ sont alors disjoints (on dit que $I$ est un intervalle errant pour la dynamique de $f$), et on conclut en montrant que la somme de leurs tailles diverge. \\ 
-L'idée ici est donc de construire une fonction $f$ qui admet un intervalle errant mais dont la suite des tailles des itérés de cet intervalle est sommable. \\
+Pour construire un contre-exemple, on s'inspire de la preuve du théorème dans le cas $\mathcal{C}^2$ : on sait déjà par le \hyperref[poincare]{Théorème de Poincaré} qu'un tel $f$ est semi-conjugué à $R_\alpha$ par une fonction continue croissante $h$ du tore. La preuve procède par l'absurde, en montrant que si $h$ n'est pas inversible, alors elle est constante sur un intervalle $I$ non trivial du tore. Les itérés $f^n(I)$ sont alors disjoints (on dit que $I$ est un intervalle errant pour la dynamique de $f$), et on conclut en montrant que la somme de leurs tailles diverge. \\ 
+L'idée ici est donc de construire une fonction $f$ qui admet un intervalle errant mais dont la suite des tailles des itérés de cet intervalle est sommable. 
+
+\subsubsection{Outils}
 
 On se servira de l'invariant de conjuguaison suivant : 
 
@@ -271,8 +274,10 @@ $\displaystyle  \left | \sum_{k = -n}^n (g_k'-1) \right |_{\mathcal{C}^w} \leq 2
 
 La suite $ \displaystyle l_n := \frac{c}{(|n|+k)(log(|n| + k)^{1+\epsilon}}$ vérifie le critère du \fcref{reg_holder} pour le module $w(x)=O(x^{1-\epsilon'})$, pour tout $\epsilon' > \epsilon$, ce qui permet de conclure la preuve du \fcref{cex_denjoy}
 
-\section{Décomposition de Littlewood-Paley}
+\section{Calcul paradifférentiel}
 Cette partie a pour objectif d'exposer les principaux théorèmes de paralinéarisation, avec pour point de départ la décomposition de Littlewood-Paley. On s'appuiera sur \cite{metivier}, \cite{dgv}, et \cite{alinhac_gerard} comme références, en particulier les chapitres 4 et 5 du livre de Métivier.
+
+\subsection{Décomposition de Littlewood-Paley}
 Nous allons dans cette section présenter la décomposition de Littlewood-Paley. C'est une décomposition de fonction dans laquelle chaque terme a un spectre borné. Nous allons également présenter des propriétés sur cette décomposition. 
 \begin{defin}[Transformée de Fourier]
 On note $\mathcal{F} : L^1(\R^d) \to C^0_0(\R^d)$,  $\ \mathcal{F}f(\xi) := \displaystyle \int_{\R^d} e^{-2i\pi \xi \cdot x}f(\xi)\mathrm{d}x$, et on pourra utiliser la notation $\hat{f}$ pour désigner $\mathcal{F}f$. On manipulera de plus le prolongement usuel de $\mathcal{F}$ à l'espace des distributions tempérées $\mathcal{S}'(\R^d)$.
@@ -750,9 +755,9 @@ pas compris pourquoi on coupe. En développant la défintion de $v_j$, et en ré
 \end{proof}
 
 \subsection{Théorème d'Arnold}
-On s'intéresse dans cette section au cas suivant : $g$ difféomorphisme du cercle régulier (au moins $C^2$), préservant les angles et ayant un angle de rotation $\alpha$ irrationnel. On a automatiquement par le \fcref{denjoy} qu'il est conjugué à la rotation d'angle $\alpha$. Le théorème d'Arnold s'intéresse à la régularité de la conjugaison lorsque $g$ est "très proche" de la rotation $r_\alpha$.
+On s'intéresse dans cette section au cas suivant : $g$ difféomorphisme du cercle régulier (au moins $C^2$), préservant les angles et ayant un angle de rotation $\alpha$ irrationnel. On a automatiquement par le \fcref{denjoy} qu'il est conjugué à la rotation d'angle $\alpha$. Le théorème d'Arnold s'intéresse à la régularité de la conjugaison lorsque $g$ est "très proche" de la rotation $R_\alpha$.
 \subsubsection{Description du problème}
-On choisit de réécrire $g$ comme une perturbation de la rotation soit: $g= f + r_\alpha$ avec $f$ "assez petit" (nous définirons ce que cela veut dire dans la suite). On cherche alors naturellement la conjugaison que l'on note $\eta$ sous la forme d'une perturbation de l'identité soit $\eta=id+u$. \\
+On choisit de réécrire $g$ comme une perturbation de la rotation soit: $g= f + R_\alpha$ avec $f$ "assez petit" (nous définirons ce que cela veut dire dans la suite). On cherche alors naturellement la conjugaison que l'on note $\eta$ sous la forme d'une perturbation de l'identité soit $\eta=id+u$. \\
 L'équation à résoudre est alors :
 
 \begin{equation}\label{arnold1}
@@ -848,7 +853,7 @@ u=T_{1+u' \cdot \tau_\alpha}^{-1} \Delta_\alpha^{-1} T_{\frac{1}{1+u'}}^{-1}(\ti
 La valeur de $\lambda$ est alors déterminée dans cette équation puisqu'elle est réglée pour pouvoir appliquer $\Delta_\alpha^{-1}$ (voir condition $\eqref{arnold3}$).
 Considérons le membre de gauche comme une fonction de $u$ et montrons qu'elle envoie $H^s$ dans lui-même.
 En effet d'une part avec $\tilde{R}=R_1(1+u'\cdot \tau_\alpha,\frac{1}{1+u'})u +R'_1 ( 1+u' \cdot \tau_\alpha ,\frac{1}{1+u' \cdot \tau_\alpha})u$ avec les notations du \fcref{paralin_prod}. On a que $\tilde{R}(u) : H^s \to H^{s+r-1} \subset H^{s+\sigma +\epsilon}$. \\
-De plus par le \fcref{paralin}, $R_{\text{pl}}(f(x+\cdot),u):  H^s \to H^{s+r} \subset H^{s+\sigma +\epsilon}$.
+De plus par le \fcref{paralin} de paralinéarisation, $R_{\text{pl}}(f(x+\cdot),u):  H^s \to H^{s+r} \subset H^{s+\sigma +\epsilon}$.
 \\ 
 \\
 Malgré la perte de régularité imposée par  $\Delta_\alpha^{-1}$, le membre de gauche de $\eqref{equ_reso3}$ envoie donc $H^s$ dans lui-même (de manière continue).
@@ -971,7 +976,7 @@ Nous allons démontrer par récurrence les trois inégalités suivantes:
 \end{equation}
 L'initialisation est trivialement vérifiée.
 
-On suppose maintenant les inégalités ($\ref{a}$), ($\ref{c}$) au rang j-1 et l'inégalité ($\ref{c}$) au rang j.
+On suppose maintenant les inégalités ($\ref{a}$), ($\ref{c}$) au rang $j-1$ et l'inégalité ($\ref{c}$) au rang $j$.
 \[
 \begin{aligned}
 \left\|\dot{u}_j \right\|_a = \left\|\Psi(v_j)g_j \right\|_a &\leq C (\left\|g_j \right\|_{\beta + a - \alpha} + \left\|g_j \right\|_0 \left\|v_j \right\|_{\beta + a}) \: \text{en utilisant}  \ \ref{estimation psi} \\
@@ -1088,7 +1093,7 @@ Or, par construction, $L_x(g \circ T) = L_x(g)$, donc $\mu = \mu(T^{-1}(.))$. Av
 
 \section*{Rappels}
 \begin{mthm}{1}\label{foo}
-Pour tout métrique compacte $X$, l'espace $C(X)$ est séparable pour la norme uniforme.
+Pour toute métrique compacte $X$, l'espace $C(X)$ est séparable pour la norme uniforme.
 \end{mthm}
 
 \begin{mthm}{2}\label{fooo}
