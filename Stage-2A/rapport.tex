@@ -75,18 +75,18 @@ Soit $f$ un homéomorphisme préservant l'orientation et $F$ un relèvement de $
 On définit alors le nombre de rotation de $f$ $\rho_0(f) = \rho (F) \mod[1]$
 \end{defin}
 Ce nombre est primordial puisque celui-ci permet de classifier les homéomorphismes préservant l'orientation puisqu'en effet on a le Théorème de Poincaré :
-\begin{thm}[Poincaré]\label{Théorème de Poincaré}
+\begin{thm}[Poincaré]\label{poincare}
 Soit $f$ un homéomorphisme préservant l'orientation, si son nombre de rotation est un irrationnel alors $f$ est semi-conjugué à la rotation d'angle $\rho_0(f)$.
 \end{thm}
 On peut même dire un peu plus si on a des informations sur la régularité de $f$, c'est l'essence du théorème de Denjoy :
-\begin{thm}[Denjoy]\label{Théorème Denjoy}
+\begin{thm}[Denjoy]\label{denjoy}
 En plus des hypothèses du théorème de Poincaré, si $f$ est $C^2$ alors il est cette fois-ci conjugué à la rotation d'angle $\rho_0(f)$.
 \end{thm}
 
 
 
 \subsection{Contres-exemples au théorème de Denjoy}
-est consacré à l'étude de certains contre-exemples du théorème de Denjoy. Dans une première partie nous construirons des contre-exemples de régularité optimale, dus à Denjoy, et qui sont développé par Michael Herman dans sa thèse \cite{herman}, en particulier au chapitre X. 
+Cette partie est consacré à l'étude de certains contre-exemples du théorème de Denjoy, qui sont développés par Harold Rosenberg dans \cite{rosenberg}, et surtout par Michael Herman dans sa thèse \cite{herman}, en particulier au chapitre X. 
 \subsubsection{Outils}
 
 On se propose de montrer le théorème suivant :
@@ -538,7 +538,7 @@ uv &=\sum_{k,j}\Delta_ku\Delta_jv = \sum_{k=-1}^{+\infty}\sum_{j=-1}^{p}\Delta_k
 &= T_vu + T_uv + R(u,v)
 \end{align*}
 Ici, $T_vu$ (resp. $T_uv$) décrit la partie des interactions pour lesquelles la fréquence de $v$ (resp. $u$) est nettement plus faible que celle de $u$ (resp. $v$), tandis que $R(u,v)$ représente la partie où les fréquences sont du même ordre. Le terme $T_vu$ est appelé \textit{paraproduit} de $u$ par $v$.
-\begin{prop}[Estimations douces pour les paraproduits et leur restes] ~\\
+\begin{prop}[Estimations douces pour les paraproduits et leur restes]\label{tame} ~\\
 \begin{itemize}
 \item[•] $\forall s\in \R^+, u \in L^\infty, v\in H^s,$
 \begin{equation}\label{estim1}
@@ -747,7 +747,7 @@ pas compris pourquoi on coupe. En développant la défintion de $v_j$, et en ré
 \end{proof}
 
 \subsection{Théorème d'Arnold}
-On s'intéresse dans cette section au cas suivant : $g$ difféomorphisme du cercle régulier (au moins $C^2$), préservant les angles et ayant un angle de rotation $\alpha$ irrationnel. On a automatiquement par le Théorème de Danjoys (ref) qu'il est conjugué à la rotation d'angle $\alpha$. Le théorème d'Arnold s'intéresse à la régularité de la conjugaison lorsque $g$ est "très proche" de la rotation $r_\alpha$.
+On s'intéresse dans cette section au cas suivant : $g$ difféomorphisme du cercle régulier (au moins $C^2$), préservant les angles et ayant un angle de rotation $\alpha$ irrationnel. On a automatiquement par le \fcref{denjoy} qu'il est conjugué à la rotation d'angle $\alpha$. Le théorème d'Arnold s'intéresse à la régularité de la conjugaison lorsque $g$ est "très proche" de la rotation $r_\alpha$.
 \subsubsection{Description du problème}
 On choisit de réécrire $g$ comme une perturbation de la rotation soit: $g= f + r_\alpha$ avec $f$ "assez petit" (nous définirons ce que cela veut dire dans la suite). On cherche alors naturellement la conjugaison que l'on note $\eta$ sous la forme d'une perturbation de l'identité soit $\eta=id+u$. \\
 L'équation à résoudre est alors :
@@ -760,7 +760,7 @@ Pour plus de généralité on introduit ici un paramètre réel $\lambda$ et en 
 \Delta_\alpha u= f \cdot (id +u) - \lambda \; \text{avec  } \Delta_\alpha u(x)= u(x+\alpha) - u(x)
 \end{equation}
 d'inconnue $u$.
-\par Pour illustrer le problème de régularité que va poser ce type d'équation, intéressons-nous d'abord à l'équation $\ref{arnold2}$ linéarisée:
+\par Pour illustrer le problème de régularité que va poser ce type d'équation, intéressons-nous d'abord à l'équation \eqref{arnold2} linéarisée:
 \begin{equation}\label{arnold3}
 \mu + \Delta_\alpha v = h 
 \end{equation}
@@ -782,16 +782,16 @@ Ce qui induit en notant la solution $v$ de $\ref{arnold2}$ que si $f \in H^{s+\s
 \|\Delta_\alpha^{-1}h\|_{H^s} \leq C_\gamma \|f\|_{H^{s+\sigma}}
 \end{equation}
 \par
-Ce problème de perte de régularité nous empêche d'utiliser les théorèmes de point fixe ou les méthodes itératives traditionnelles pour résoudre cette équation. Face à cela, deux approches s'offrent à nous ; la première est l'utilisation d'un schéma de Nash-Moser dont le fonctionnement est détaillé dans la section (??). La deuxième et celle qu'on va développer dans la suite est d'utiliser de la paralinéarisation pour régulariser cette équation $\ref{arnold2}$.
+Ce problème de perte de régularité nous empêche d'utiliser les théorèmes de point fixe ou les méthodes itératives traditionnelles pour résoudre cette équation. Face à cela, deux approches s'offrent à nous. La première est l'utilisation d'un schéma de Nash-Moser dont le fonctionnement est détaillé en annexe. La deuxième, que l'on va développer dans la suite consiste à utiliser les théorèmes de paralinéarisation pour régulariser cette équation $\eqref{arnold2}$.
 \subsubsection{Résolution par la para-linéarisation}
 On choisit les notations suivantes :
 \begin{equation*}
 \mathbf{F}(f,U)=\Delta_\alpha u - f \cdot (id +u) + \lambda
 \end{equation*}
 On s'intéresse alors à:
-\begin{equation*}\label{equ reso}
+\begin{equation}\label{equ_reso}
 \mathbf{F}(f,U)=0
-\end{equation*}
+\end{equation}
 avec $U=(u,\lambda)$. On suppose que $f \in H^{s+\sigma+ \epsilon} \cap C^{N_s}$ avec $s>\sigma +1.5+ \epsilon$. On cherche a priori $u$ dans $H^s$ (et par injection de Sobolev dans $C^r_*$ où $r=s-0.5>1$).\\
 En utilisant la propriété ("de paralinéarisation"):
 \begin{equation}\label{2.1}
@@ -810,8 +810,8 @@ De plus en utilisant l'identité suivante:
 \begin{align*}
 \Delta_\alpha u - T_{\frac{\Delta_\alpha u}{1+u'}}u &=u\cdot\tau_\alpha + T_{\frac{1+u'}{1+u'}}u - T_{\frac{\Delta_\alpha u}{1+u'}}u \\
 &= u\cdot\tau_\alpha  - T_{\frac{1+u'\cdot \tau_\alpha}{1+u'}}u \\
-&= u\cdot\tau_\alpha - T_{1+u'\cdot \tau_\alpha} T_{\frac{1}{1+u'}}u +R_1(1+u'\cdot \tau_\alpha,\frac{1}{1+u'}) \\ \text{en utilisant "paralinéarisation produit"} \\
-&=T_{1+u' \cdot \tau_\alpha}(T_{\frac{1}{1+u'\cdot \tau_\alpha}}u \cdot \tau_\alpha - T_{\frac{1}{1+u'}}u) +R_1(1+u'\cdot \tau_\alpha,\frac{1}{1+u'}) \\ &+R'_1 ( 1+u' \cdot \tau_\alpha ,\frac{1}{1+u' \cdot \tau_\alpha})  \\ \text{en utilisant "paralinéarisation produit"} \\
+&= u\cdot\tau_\alpha - T_{1+u'\cdot \tau_\alpha} T_{\frac{1}{1+u'}}u +R_1(1+u'\cdot \tau_\alpha,\frac{1}{1+u'}) \\ \text{en utilisant le \fcref{paralin_prod}} \\
+&=T_{1+u' \cdot \tau_\alpha}(T_{\frac{1}{1+u'\cdot \tau_\alpha}}u \cdot \tau_\alpha - T_{\frac{1}{1+u'}}u) +R_1(1+u'\cdot \tau_\alpha,\frac{1}{1+u'}) \\ &+R'_1 ( 1+u' \cdot \tau_\alpha ,\frac{1}{1+u' \cdot \tau_\alpha})  \\ \text{toujours avec le \fcref{paralin_prod}} \\
 &=T_{1+u' \cdot \tau_\alpha} \Delta_\alpha T_{\frac{1}{1+u'}}u +\tilde{R} 
 \end{align*}
 En réinjectant cela, on obtient finalement :
@@ -823,7 +823,7 @@ En réinjectant cela, on obtient finalement :
 Il existe $\delta>0$ tel que si $\|u'\|_{L^\infty} \leq \delta $ alors les opérateurs $T_{\frac{1}{1+u'}}$ et $T_{1+u'\cdot \tau_\alpha}$ sont inversibles de $H^s$ dans lui-même (ou de $ H^{s+\sigma+\epsilon}$).
 \end{lemma}
 \begin{proof}
-Par le théorème ("de paralinéarisation et des produits") on a que en posant $a=\frac{1}{1+u'}$ :
+Par le \fcref{paralin_prod}, on a que pour $a:=\frac{1}{1+u'}$ :
 \begin{equation*}
 T_a\cdot T_{a^{-1}} -T_1=R(a,a^{-1})
 \end{equation*}
@@ -834,34 +834,33 @@ La preuve est identique pour $T_{1+u'\cdot \tau_\alpha }$ et pour $ H^{s+\sigma 
 \begin{rmq}
 Par injection de Sobolev et par le fait que $u \in C^r_*$ où $r=s-0.5>1$ on peut choisir  $u \in H^s$ tel que $\|u\|_{H^s}$ soit assez petit pour que la condition $\|u'\|_{L^\infty} \leq \delta $ soit satisfaite. On cherchera dans la suite un $u$ avec une telle norme.
 \end{rmq}
-On cherche à résoudre pour le moment une version modifiée de l'équation $\ref{equ reso}$ :
-\begin{equation}\label{equ reso'}
+On cherche à résoudre pour le moment une version modifiée de l'équation $\eqref{equ_reso}$ :
+\begin{equation}\label{equ_reso2}
 \mathbf{F}(f,U)-T_{\frac{\mathbf{F}(f,U)'}{1+u'}}u=0
 \end{equation}
-Équation qu'on peut réécrire avec $Lemme \ \ref{inversibilite}$ et l'expression $\ref{2.3}$ :
-\begin{equation}\label{equ reso''}
-u=T_{1+u' \cdot \tau_\alpha}^{-1} \Delta_\alpha^{-1} T_{\frac{1}{1+u'}}^{-1}(\tilde{R} -f +R_{pl}(f(x+\cdot),u) + \lambda)
+Équation qu'on peut réécrire avec le \fcref{inversibilite} et l'expression \eqref{2.3} :
+\begin{equation}\label{equ_reso3}
+u=T_{1+u' \cdot \tau_\alpha}^{-1} \Delta_\alpha^{-1} T_{\frac{1}{1+u'}}^{-1}(\tilde{R} -f +R_{\text{pl}}(f(x+\cdot),u) + \lambda)
 \end{equation}
-La valeur de $\lambda$ est alors déterminée dans cette équation puisqu'elle est réglée pour pouvoir appliquer $\Delta_\alpha^{-1}$ (voir condition $\ref{arnold3}$).
+La valeur de $\lambda$ est alors déterminée dans cette équation puisqu'elle est réglée pour pouvoir appliquer $\Delta_\alpha^{-1}$ (voir condition $\eqref{arnold3}$).
 Considérons le membre de gauche comme une fonction de $u$ et montrons qu'elle envoie $H^s$ dans lui-même.
-En effet d'une part avec $\tilde{R}=R_1(1+u'\cdot \tau_\alpha,\frac{1}{1+u'})u +R'_1 ( 1+u' \cdot \tau_\alpha ,\frac{1}{1+u' \cdot \tau_\alpha})u$ avec les notations du "théorème de paralinéarisation produit". On a que $\tilde{R}(u) : H^s \to H^{s+r-1} \subset H^{s+\sigma +\epsilon}$. \\
-De plus par "le théorème de paralinéarisation 1" $R_{pl}(f(x+\cdot),u):  H^s \to H^{s+r} \subset H^{s+\sigma +\epsilon}$.
+En effet d'une part avec $\tilde{R}=R_1(1+u'\cdot \tau_\alpha,\frac{1}{1+u'})u +R'_1 ( 1+u' \cdot \tau_\alpha ,\frac{1}{1+u' \cdot \tau_\alpha})u$ avec les notations du \fcref{paralin_prod}. On a que $\tilde{R}(u) : H^s \to H^{s+r-1} \subset H^{s+\sigma +\epsilon}$. \\
+De plus par le \fcref{paralin}, $R_{\text{pl}}(f(x+\cdot),u):  H^s \to H^{s+r} \subset H^{s+\sigma +\epsilon}$.
 \\ 
 \\
-Malgré la perte de régularité imposée par  $\Delta_\alpha^{-1}$, le membre de gauche de $\ref{equ reso''}$ envoie donc $H^s$ dans lui-même (de manière continue).
+Malgré la perte de régularité imposée par  $\Delta_\alpha^{-1}$, le membre de gauche de $\eqref{equ_reso3}$ envoie donc $H^s$ dans lui-même (de manière continue).
 \par
-D'autre part, on a le contrôle suivant sur les normes:\\
-Par le "théorème de paralinéarisation":
+D'autre part, avec le \fcref{paralin}, on a le contrôle suivant sur les normes :
 \begin{equation*}
-\|R_{pl}(f(x+\cdot),u)\|_{H^s} \leq C_s \|f\|_{C^r_*} (1+\|u\|_{H^s})
+\|R_{\text{pl}}(f(x+\cdot),u)\|_{H^s} \leq C_s \|f\|_{C^r_*} (1+\|u\|_{H^s})
 \end{equation*} 
-De plus l'une des conséquences de la preuve du $Lemme \ \ref{inversibilite}$ est que $\tilde{R}(u)$ converge quadratiquement vers 0 lorsque $u$ tend vers 0 dans $H^s$. En prenant donc  $\|u\|_{H^s} \leq \rho $ on a que la norme $H^s$ du membre de gauche $\ref{equ reso''}$ est majorée par:
+De plus l'une des conséquences de la preuve du \fcref{inversibilite} est que $\tilde{R}(u)$ converge quadratiquement vers 0 lorsque $u$ tend vers 0 dans $H^s$. En prenant donc  $\|u\|_{H^s} \leq \rho $ on a que la norme $H^s$ du membre de gauche $\eqref{equ_reso2}$ est majorée par:
 \begin{equation}
 C(s,\sigma) ( \|f\|_{H^{s+\sigma+\epsilon}} +\|f\|_{C^r_*} (1+\rho) + \rho^2)
 \end{equation} 
-Puisqu'on peut prendre $\|f\|_{H^{s+\sigma+\epsilon}}$ et $\|f\|_{C^r_*}$ aussi petits qu'on veut, il existe un $\rho$ tel que le membre de gauche $\ref{equ reso''}$ envoie $B_\rho$ dans elle-même. En utilisant le point fixe de Schauder on a que l'équation $\ref{equ reso''}$ a une solution $u$ dans $H^s$ dans $B_{\rho'}$ pour tout $\rho' \leq \rho$. \\
+Puisqu'on peut prendre $\|f\|_{H^{s+\sigma+\epsilon}}$ et $\|f\|_{C^r_*}$ aussi petits qu'on veut, il existe un $\rho$ tel que le membre de gauche $\ref{equ_reso3}$ envoie $B_\rho$ dans elle-même. En utilisant le point fixe de Schauder on a que l'équation $\ref{equ_reso3}$ a une solution $u$ dans $H^s$ dans $B_{\rho'}$ pour tout $\rho' \leq \rho$. \\
 \par
-Enfin pour résoudre l'équation $\ref{equ reso'}$ on remarque par "la proposition 2.1":
+Enfin pour résoudre l'équation $\eqref{equ_reso2}$, on remarque par l'inégalite \eqref{estim1} de la \fcref{tame} :
 \begin{equation}
 \|T_{\frac{\mathbf{F}(f,U)'}{1+u'}}u\|_{H^s} \leq \|\mathbf{F}(f,U)\|_{C^1}\|u\|_{H^s}
 \end{equation}
@@ -870,6 +869,174 @@ En utilisant une nouvelle fois l'argument de la série de Neumann on a bien que 
 \mathbf{F}(f,U)=0
 \end{equation}
 
+\newpage
+\section{Annexe sur le théorème de Nash-Moser}
+\subsection{Cadre théorique}
+
+\paragraph{Espace :}
+On considère ici deux suites d'espaces de Banach $E_\sigma, \lVert \cdot \rVert_\sigma$ et $F_\sigma, \lVert \cdot \rVert_\sigma$.
+
+De telle sorte qu'il existe une fonction régularisante $S$ telle que 
+\[
+\forall \theta \in \mathbb{R}, \quad S : E_0 \to E_\infty 
+\]
+
+\begin{equation}\label{0.1}
+\left\|S_\theta u\right\|_b \leq C\|u\|_a \ \text{,si}  \:  b \leq a 
+\end{equation}
+\begin{equation}\label{0.2}
+\left\|S_\theta u\right\|_b \leq C \theta^{b-a}\|u\|_a  \ \text{,si}  \: a < b
+\end{equation}
+\begin{equation}\label{0.3}
+\left\|u-S_\theta u\right\|_b \leq C \theta^{b-a}\|u\|_a \ \text{,si}  \:a > b
+\end{equation}
+\begin{equation}\label{0.4}
+\left\|\frac{d}{d \theta} S_\theta u\right\|_b \leq C \theta^{b-a-1}\|u\|_a 
+\end{equation}
+
+
+\paragraph{Outil :}
+On prend $\theta_j$ une suite d'indices divergents et on définit $\Delta_j = \theta_{j+1} - \theta_j$ et $R_j u = \left(S_{\theta_{j+1}} u - S_{\theta_j} u\right) / \Delta_j$ si $j > 0$, $R_0 u = S_{\theta_1} u / \Delta_0$.
+
+On obtient alors :
+\[ 
+u = \sum_{j=0}^{\infty} \Delta_j R_j u 
+\]
+Convergente dans $E_a$ si $u \in E_b$ et $a < b$.
+
+Avec de plus :
+\begin{equation}\label{5} 
+\left\|R_j u\right\|_b \leq C_{a, b} \theta_j^{b-a-1}\|u\|_a \quad (\text{en utilisant } (\ref{0.4}))
+\end{equation}
+\paragraph{Espace faible :}
+On généralise l'approche ci-dessus en définissant l'ensemble $E'_b$ : l'ensemble des sommes $\sum \Delta_j u_j$ convergentes dans $E_b$ et satisfaisant 
+\[ 
+\left\|u_j \right\|_b \leq M \theta_j^{b-a-1} \quad \forall a \in [0,b] 
+\]  
+On munit cet espace de la norme $\left\|. \right\|'_b$ l'infimum des constantes $M$ respectant l'inégalité précédente.
+On a de manière immédiate que $\left\|. \right\|'_a > \left\|. \right\|_b$ si $b < a$ et par ($\ref{0.2}$) on a que $\left\|. \right\|'_a \leq C \left\|. \right\|_a$.
+
+\subsection{Théorème de Nash-Moser}
+
+\paragraph{Énoncé :}
+Soit $a_2 \in \mathbb{R}$ et soit $\alpha, \beta \in [0, a_2]$.
+De plus, considérons une application $\Phi : E_\alpha \to F_\beta \: C^2$ vérifiant :
+\begin{equation}\label{phi''} 
+\left\|\Phi''(u)(v,w) \right\|_{\beta + \delta} \leq C (1 + \left\|u \right\|_\alpha) \left\|w \right\|_{\alpha - \frac{\epsilon}{2}} \cdot \left\|v \right\|_{\alpha - \frac{\epsilon}{2}} 
+\end{equation}  
+On a de plus l'existence d'une inverse à droite pour $\Phi'$, c'est-à-dire :
+\[
+\forall v \in E_\infty, \quad \Psi(v) : F_\infty \to E_{a_2}
+\]
+avec 
+\begin{equation}\label{estimation psi}
+\left\| \Psi(v)g \right\|_a \leq C \left\| g \right\|_{\beta + a - \alpha} + \left\| g \right\|_0 \left\| v \right\|_{\alpha + \beta} 
+\end{equation}
+Alors, $\exists \eta > 0$ telle que $\forall f \in F_\beta'$ vérifiant $ \left\| f \right\|_\beta \leq \eta$, il existe $u \in E'_\alpha$ vérifiant $\Phi(u) - \Phi(0) = f$.
+
+\paragraph{Démonstration :}
+Cette démonstration s'appuie sur un schéma de Newton légèrement altéré pour prendre en compte le manque de 'régularité' de l'inverse de la dérivée. En effet, ce schéma calcule uniquement une solution approchée de l'équation :
+\[  
+\Phi^{\prime}\left(u_n\right)\left(u_{n+1} - u_n\right) + \Phi\left(u_n\right) = 0 
+\]
+et compte sur la vitesse du schéma de Newton pour combler l'erreur commise.
+
+Prenons $g \in F'_\beta$
+\[ 
+g = \sum \Delta_j g_j 
+\]
+On a avec ($\ref{5}$)
+\begin{equation}\label{gj}   
+\left\|g_j\right\|_b \leq C_b \theta_j^{b-\beta-1}\|g\|_\beta'
+\end{equation} 
+On construit la suite $u_j$ par récurrence de la manière suivante:
+\[ 
+u_{j+1} = u_j + \Delta_j \dot{u}_j, \quad \dot{u}_j = \Psi\left(v_j\right) g_j, \quad v_j = S_{\theta_j} u_j
+\]
+On prendra $u_0 = 0$ et $\theta_i = 2^i$.
+
+\paragraph{Récurrence}
+Nous allons démontrer par récurrence les trois inégalités suivantes:
+\begin{equation} \label{a}
+\; \left\|\dot{u}_j \right\|_a \leq C_1 \theta^{a-\alpha-1}_j \left\|g \right\|_\beta' \; , \; a \leq a_2 
+\end{equation} 
+\begin{equation} \label{b}
+\left\| v_j \right\|_a \leq C_2 \theta^{a-\alpha-}_j \left\|g \right\|_\beta' \; , \; \alpha < a \leq a_2  
+\end{equation}
+\begin{equation}\label{c} 
+\left\|u_j - v_j \right\|_a \leq C_3 \theta^{a-\alpha-}_j \left\|g \right\|_\beta' \; , \; \alpha < a \leq a_2  
+\end{equation}
+L'initialisation est trivialement vérifiée.
+
+On suppose maintenant les inégalités ($\ref{a}$), ($\ref{c}$) au rang j-1 et l'inégalité ($\ref{c}$) au rang j.
+\[
+\begin{aligned}
+\left\|\dot{u}_j \right\|_a = \left\|\Psi(v_j)g_j \right\|_a &\leq C (\left\|g_j \right\|_{\beta + a - \alpha} + \left\|g_j \right\|_0 \left\|v_j \right\|_{\beta + a}) \: \text{en utilisant}  \ \ref{estimation psi} \\
+&\leq C( C_b \left\|g \right\|_\beta' \theta^{a-\alpha-1}_j + \theta^{-\beta-1}_j \theta^{\beta+a-1}_j {\left\|g \right\|_\beta'}^2 \; \text{en utilisant l'inégalité } \ (\ref{gj}) \text{ et} \ (\ref{a}) \ \text{au rang j}) \\
+&\leq C (C_b + \left\|g \right\|_\beta' C_2) \theta^{a-\alpha-1}_j \left\|g \right\|_\beta'
+\end{aligned}
+\]
+Si on prend $C_1 > C (C_b + \left\|g \right\|_\beta' C_2)$ on a ($\ref{a}$) au rang j.
+On va montrer $\ref{b}$ et $\ref{c}$, pour cela intéressons-nous à la quantité $u_{j+1}$:
+\[
+\begin{aligned}
+\left\|u_{j+1} \right\|_a &\leq \sum^j_{i=1} \left\|\Delta_i \dot{u}_i  \right\|_a \\ 
+&\leq \sum^j_{i=1} |\Delta_i| C_1 \left\|g \right\|_\beta' \theta^{a-\alpha-1}_i \; \text{en utilisant} \ (\ref{a}) \ \text{jusqu'au rang j} \\
+&\leq C \left\|g \right\|_\beta' \theta^{a-\alpha}_i \; \text{pour } a \geq \alpha
+\end{aligned}
+\]
+On obtient donc avec ($\ref{0.1}$) ,($\ref{b}$) et ($\ref{c}$).
+
+\paragraph{Convergence}
+
+1) Convergence de $u_j$
+On a avec $\ref{a}$ que $u = \sum \Delta_j u_j$ appartient à $E_\alpha'$ et que $\left\|u \right\|_\alpha' \leq C \left\|g \right\|_\beta'$
+
+2) Limite de $\Phi(u_j)$
+Par continuité on a que 
+\[
+\Phi(u) - \Phi(0) = \sum^{+\infty}_{j=0} (\Phi(u_{j+1}) - \Phi(u_{j})) 
+\]
+\[
+\begin{aligned}
+\Phi(u_{j+1}) - \Phi(u_j) &= (\Phi(u_j + \Delta_j \dot{u}_j) - \Phi(u_j) - \Phi'(u_j)\Delta_j \dot{u}_j) + (\Phi'(u_j) - \Phi'(u_j))\Delta_j \dot{u}_j + \Delta_j g_j \\
+&= \Delta_j e_j + \Delta_j e'_j + \Delta_j g_j
+\end{aligned}
+\]
+
+Par inégalité de Taylor-Lagrange et en utilisant ($\ref{phi''}$)
+\[
+\begin{aligned}
+\left\|e_j \right\|_{\beta + \delta} &\leq C \Delta_j {\left\|\dot{u}_j \right\|_{\alpha - \frac{\epsilon}{2}}}^2 \\
+&\leq C \left\|g \right\|_\beta'^2 \Delta_j \theta_j^{-\epsilon-2} \; \text{(en utilisant } (\ref{a}) \\
+&\leq C \left\|g \right\|_\beta'^2 \theta_j^{-\epsilon-1}
+\end{aligned}
+\]
+
+\[
+e_j = \int^1_0 \Phi''(v_j + t(u_j - v_j))(\dot{u}_j, u_j - v_j) \, dt
+\]
+
+\[
+\begin{aligned}
+\left\|e'_j \right\|_{\beta + \delta} &\leq C (1 + \left\|v_j + t(u_j - v_j) \right\|_\alpha) \left\|\dot{u}_j \right\|_{\alpha - \frac{\epsilon}{2}} \cdot \left\|u_j - v_j\right\|_{\alpha - \frac{\epsilon}{2}} \\
+&\leq C' \left\|\dot{u}_j \right\|_{\alpha - \frac{\epsilon}{2}} \cdot \left\|u_j - v_j\right\|_{\alpha - \frac{\epsilon}{2}} \\
+&\leq \left\|g \right\|_\beta' \theta_j^{-\frac{\epsilon}{2}-1} \left\|u_j - v_j\right\|_{\alpha - \frac{\epsilon}{2}} \; \text{(en utilisant)} \ \ref{a}
+\end{aligned}
+\]
+On peut utiliser ($\ref{c}$) pour $|\left\|u_j - v_j\right\|_{\alpha + \eta}$ avec $\eta < \frac{\epsilon}{2}$.
+
+On obtient donc 
+\[ 
+\sum \Delta_j \left\|e_j'\right\|_\beta' \leq C \left\|g \right\|_\beta'^2 
+\]
+
+\paragraph{Conclusion}
+En notant $T(g) = \sum \Delta_j e_j + \Delta_j e'_j$ et avec $\left\|T(g) \right\|_\beta' \leq C \left\|g \right\|_\beta'^2$, on peut utiliser le théorème de point fixe de Schauder (pour $T(g) + y$ avec $y \in F_\beta'$) pour montrer la local surjectivité de $T(g) + g$. Puis :
+\[ 
+\Phi(u) - \Phi(0) = T(g) + g
+\]
+on conclut bien.
 \newpage
 \printbibliography[heading=bibintoc, title={Références}]
 \end{document}
