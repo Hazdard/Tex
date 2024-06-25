@@ -14,4 +14,4 @@ mtheme/
 *-blx.bib
 *.axp
 *.ps
-ipynb_checkpoints/*
+./Stage-2A/ipynb_checkpoints/*
