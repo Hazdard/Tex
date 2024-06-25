@@ -782,16 +782,16 @@ On doit alors ici préciser la nature de notre irrationnel $\alpha$. On supposer
 |\frac{q \alpha}{\pi}-p|\geq \frac{1}{\gamma q^\sigma}
 \end{equation} 
 
-Ce qui induit en notant la solution $v$ de $\eqref{arnold2}$ que si $f \in H^{s+\sigma}$ alors $\Delta_\alpha^{-1}h \in H^{s}$. Plus précisément, que l'opération $\Delta_{\alpha}^{-1}$ induit une perte de régularité de l'ordre de $\sigma$ et que :
+Ce qui induit en notant la solution $v$ de $\eqref{arnold2}$ que si $h \in H^{s+\sigma}$ alors $\Delta_\alpha^{-1}h \in H^{s}$. Plus précisément, que l'opération $\Delta_{\alpha}^{-1}$ induit une perte de régularité de l'ordre de $\sigma$ et que :
 \begin{equation}\label{dio}
-\|\Delta_\alpha^{-1}h\|_{H^s} \leq C_\gamma \|f\|_{H^{s+\sigma}}
+\|\Delta_\alpha^{-1}h\|_{H^s} \leq C_\gamma \|h\|_{H^{s+\sigma}}
 \end{equation}
 \par
 Ce problème de perte de régularité nous empêche d'utiliser les théorèmes de point fixe ou les méthodes itératives traditionnelles pour résoudre cette équation. Face à cela, deux approches s'offrent à nous. La première est l'utilisation d'un schéma de Nash-Moser dont le fonctionnement est détaillé en annexe. La deuxième, que l'on va développer dans la suite consiste à utiliser les théorèmes de paralinéarisation pour régulariser cette équation $\eqref{arnold2}$.
 \subsubsection{Résolution par la para-linéarisation}
 On veux montrer le résultat suivant :
 \begin{thm}[Arnold]
-Soit $\alpha \in \R\setminus \Q$, vérifiant la condition diophantienne \eqref{dio} avec $\gamma > 0, \sigma > 1$. Soient $\varepsilon >0$, $s\geq \sigma + 1.5 + \epsilon$ et $N_s := \lceil s \rceil$. Si $g=R_\alpha + f \in H^{s+\sigma + \varepsilon}\cap C^{N_s+1}$ vérifie $\rho(g)=\alpha$, alors il existe $\tau > 0$ tel que si $\|f\|_{H^{s+\sigma + \varepsilon}} + \|u\|_ {C^{N_s+1}} \leq \tau$ alors il existe $u \in H^s$ tel que $\eta = \text{Id} + u$ conjugue $g$ à $R_\alpha$.
+Soit $\alpha \in \R\setminus \Q$, vérifiant la condition diophantienne \eqref{dio} avec $\gamma > 0, \sigma > 1$. Soient $\varepsilon >0$, $s\geq \sigma + 1.5 + \epsilon$ et $N_s := \lceil s \rceil$. Si $g=R_\alpha + f \in H^{s+\sigma + \varepsilon}\cap C^{N_s+1}$ vérifie $\rho(g)=\alpha$, alors il existe $\tau > 0$ tel que si $\|f\|_{H^{s+\sigma + \varepsilon}} + \|f\|_ {C^{N_s+1}} \leq \tau$ alors il existe $u \in H^s$ tel que $\eta = \text{Id} + u$ conjugue $g$ à $R_\alpha$.
 \end{thm}
 
 On choisit les notations suivantes :
