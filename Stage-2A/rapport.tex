@@ -9,10 +9,6 @@
 \date{}
 \author{Sacha Ben-Arous, Mathis Bordet, \\ sous la direction de Thomas Alazard.}
 
-% Citer les sources
-% Rajouter les explications sur les lemmes de caractérisations
-% Remarques sur la décomposition dyadique du bouquin Alinhac-Gérard.
-% DEFINIR LES OBJETS DONT ON PARLE : SOBOLEV FOURIER HOLDER PARAPRODUIT
 % UTILISER GHYS DANS LINTRO
 % \mathscr{F} pour joli Fourier
 
@@ -23,7 +19,15 @@
 \newpage
 
 \section{Introduction}
-En cours ...
+La théorie des systèmes dynamiques est née à la fin du 19ème siècle, sous l'impulsion des travaux d'Henri Poincaré sur le problème à 3 corps. Dans les années 50, Kolmogorov, suivi d'Arnold puis de Moser, bâtit une théorie de la dynamique des systèmes hamiltoniens et de leur perturbations, qui s'applique en particulier à la mécanique céleste. Le problème principal qui émerge de de ce type de dynamique est celui des ``\textit{petits diviseurs}'', qui se traduit par une perte de régularité induite par les opérateurs mis en jeu. La théorie K.A.M (Kolmogorov, Arnold, Moser) développe des outils raffinés d'analyse, en particulier le théorème de Nash-Moser, qui est un schéma de Newton modifié où sont rajoutés des opérateurs régularisants, afin de sumonter cette difficultée. \\
+Ces résultats sont cependant difficiles d'accès de part leur sophistication (on présente en annexe une version succinte du théorème de Nash-Moser dûe à Hörmander \cite{hormander}), et d'autre part, les schémas itératifs utilisés ont pour conséquence de rendre physiquement irréalistes les ordres de grandeurs des perturbations prises en compte par la théorie. \\
+Dans ce contexte, Thomas Alazard et Chengyang Shao publient une nouvelle preuve \cite{alazard} de certains résultats de K.A.M, qui utilise des outils de calcul paradifférentiel. Le principe de cette méthode est de directement régulariser les équations que l'on cherche à résoudre, puis de revenir à l'équation initiale à l'aide de théorèmes de point fixe. Cette approche a d'une part l'avantage d'être relativement élémentaire, et d'autre part les résultats de stabilité sont obtenus à partir de théorème de point fixe classique et non plus avec des schémas itératifs, ce qui pourrait permettre d'améliorer la pertinence physique des bornes autorisées pourles perturbations. \\
+
+Dans la première partie du rapport, nous présentons le cadre et les principaux théorèmes de la dynamique en dimension 1 sur le cercle, ainsi que des contre-exemples au théorème de Denjoy, afin d'observer l'optimalité de ce théorème. Pour cela, nous nous appuyons principalement sur \cite{dgv}, qui a par ailleurs aussi servi de support pour les parties suivantes. Dans la seconde partie, on pose les fondements du calcul paradifférentiel à l'aide de la décomposition de Littlewood-Paley, puis on énonce les théorèmes de paralinéarisation qui vont permettre de prouver un théorème dû à Arnold, qui permet de mettre en évidence le phénomène des petits diviseurs, et sa résolution à l'aide du calcul paradifférentiel.
+
+
+
+
 
 \section{Difféomorphismes du cercle}
 Nous allons dans cette section présenter rapidement les homéomorphismes du cercle et énoncer quelques propriétés fondamentales puisque ces objets nous offrent un cadre d'application des techniques de résolution d'équations que nous verrons dans les sections suivantes. On utilise les notations suivantes :
@@ -83,7 +87,7 @@ On peut cependant se questionner sur la nécessité de l'hypothèse $C^2$ qui se
 
 
 \subsection{Contres-exemples au théorème de Denjoy}
-Cette partie est consacré à l'étude de certains contre-exemples du théorème de Denjoy, qui sont développés par Harold Rosenberg dans \cite{rosenberg}, et surtout par Michael Herman dans sa thèse \cite{herman}, en particulier au chapitre X. 
+Cette partie est consacré à l'étude de certains contre-exemples du théorème de Denjoy, qui sont tirés du cours au Collège de France de Jean-Christophe Yoccoz de l'année 2013-2014, ainsi que du chapitre X de la thèse de Michel Herman \cite{herman} et du séminaire Bourbaki \cite{rosenberg} par Harold Rosenberg.
 
 On se propose de montrer le théorème suivant :
 
@@ -775,7 +779,7 @@ En utilisant les séries de Fourier, on obtient la solution suivante:
 \hat{v}(k)=\frac{\hat{h}(k)}{exp(ik \alpha) - 1}
 \end{equation*}
 
-Cependant, le facteur $exp(ik \alpha) - 1$ peut gêner la convergence de la série de Fourier puisque celui-ci peut arbitrairement s'approcher de zéro en fonction des $k$ du fait que $\alpha$ soit irrationnel. \\
+Cependant, le facteur $exp(ik \alpha) - 1$ peut gêner la convergence de la série de Fourier puisque celui-ci peut arbitrairement s'approcher de zéro en fonction des $k$ du fait que $\alpha$ soit irrationnel. C'est ce qui est communément appelé phénomène des petits diviseurs. \\
 On doit alors ici préciser la nature de notre irrationnel $\alpha$. On supposera en effet dans toute la suite de notre développement que $\alpha$ vérifie la condition diophantienne suivante: \\
  $ \exists \gamma>0,\sigma>1 \ \text{telle que} \ \forall p,q \in \Z^2 $:
 \begin{equation}
@@ -790,9 +794,14 @@ Ce qui induit en notant la solution $v$ de $\eqref{arnold2}$ que si $h \in H^{s+
 Ce problème de perte de régularité nous empêche d'utiliser les théorèmes de point fixe ou les méthodes itératives traditionnelles pour résoudre cette équation. Face à cela, deux approches s'offrent à nous. La première est l'utilisation d'un schéma de Nash-Moser dont le fonctionnement est détaillé en annexe. La deuxième, que l'on va développer dans la suite consiste à utiliser les théorèmes de paralinéarisation pour régulariser cette équation $\eqref{arnold2}$.
 \subsubsection{Résolution par la para-linéarisation}
 On veux montrer le résultat suivant :
-\begin{thm}[Arnold]
+\begin{thm}[Arnold]\label{arnold}
 Soit $\alpha \in \R\setminus \Q$, vérifiant la condition diophantienne \eqref{dio} avec $\gamma > 0, \sigma > 1$. Soient $\varepsilon >0$, $s\geq \sigma + 1.5 + \epsilon$ et $N_s := \lceil s \rceil$. Si $g=R_\alpha + f \in H^{s+\sigma + \varepsilon}\cap C^{N_s+1}$ vérifie $\rho(g)=\alpha$, alors il existe $\tau > 0$ tel que si $\|f\|_{H^{s+\sigma + \varepsilon}} + \|f\|_ {C^{N_s+1}} \leq \tau$ alors il existe $u \in H^s$ tel que $\eta = \text{Id} + u$ conjugue $g$ à $R_\alpha$.
 \end{thm}
+
+On rappelle un résultat qui sera utile par la suite :
+\begin{lemma}[Série de Neumann]
+Soit $f$ application linéaire de $U$ dans $V$ des espaces de Banach. Si la norme subordonnée de $f$ est strictement plus petite que $1$, alors l'opérateur $\text{Id} + f$ est inversible.
+\end{lemma}
 
 On choisit les notations suivantes :
 \begin{equation*}
@@ -803,7 +812,7 @@ Et alors, en notant $U:=(u,\lambda)$, l'équation \eqref{arnold2} à résoudre p
 \mathbf{F}(f,U)=0
 \end{equation} 
 
-\begin{proof}
+\begin{proof}[Preuve du \fcref{arnold}]
 On suppose que $f \in H^{s+\sigma+ \epsilon} \cap C^{N_s+1}$ avec $s>\sigma +1.5+ \epsilon$. On cherche a priori $u$ dans $H^s$, et par injection de Sobolev il sera également dans $C^r$ où $r=s-0.5>1$.\\
 En utilisant le \fcref{paralin} de paralinéarisation, on obtient :
 \begin{equation}\label{2.1}
