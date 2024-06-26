@@ -7,7 +7,7 @@
 
 \title{\textbf{Théorie K.A.M paradifférentielle}}
 \date{}
-\author{Sacha Ben-Arous, Mathis Bordet, \\ sous la direction de Thomas Alazard.}
+\author{Sacha Ben-Arous, Mathis Bordet, \\ sous la direction de Thomas Alazard.\\ Stage de L3, ENS Paris-Saclay.}
 
 % UTILISER GHYS DANS LINTRO
 % \mathscr{F} pour joli Fourier
@@ -15,13 +15,11 @@
 
 \begin{document}
 \maketitle
-\tableofcontents
-\newpage
 
 \section{Introduction}
 La théorie des systèmes dynamiques est née à la fin du 19ème siècle, sous l'impulsion des travaux d'Henri Poincaré sur le problème à 3 corps. Dans les années 50, Kolmogorov, suivi d'Arnold puis de Moser, bâtit une théorie de la dynamique des systèmes hamiltoniens et de leur perturbations, qui s'applique en particulier à la mécanique céleste. Le problème principal qui émerge de de ce type de dynamique est celui des ``\textit{petits diviseurs}'', qui se traduit par une perte de régularité induite par les opérateurs mis en jeu. La théorie K.A.M (Kolmogorov, Arnold, Moser) développe des outils raffinés d'analyse, en particulier le théorème de Nash-Moser, qui est un schéma de Newton modifié où sont rajoutés des opérateurs régularisants, afin de sumonter cette difficultée. \\
 Ces résultats sont cependant difficiles d'accès de part leur sophistication (on présente en annexe une version succinte du théorème de Nash-Moser dûe à Hörmander \cite{hormander}), et d'autre part, les schémas itératifs utilisés ont pour conséquence de rendre physiquement irréalistes les ordres de grandeurs des perturbations prises en compte par la théorie. \\
-Dans ce contexte, Thomas Alazard et Chengyang Shao publient une nouvelle preuve \cite{alazard} de certains résultats de K.A.M, qui utilise des outils de calcul paradifférentiel. Le principe de cette méthode est de directement régulariser les équations que l'on cherche à résoudre, puis de revenir à l'équation initiale à l'aide de théorèmes de point fixe. Cette approche a d'une part l'avantage d'être relativement élémentaire, et d'autre part les résultats de stabilité sont obtenus à partir de théorème de point fixe classique et non plus avec des schémas itératifs, ce qui pourrait permettre d'améliorer la pertinence physique des bornes autorisées pourles perturbations. \\
+Dans ce contexte, Thomas Alazard et Chengyang Shao publient une nouvelle preuve \cite{alazard} de certains résultats de K.A.M, qui utilise des outils de calcul paradifférentiel. Le principe de cette méthode est de directement régulariser les équations que l'on cherche à résoudre, puis de revenir à l'équation initiale à l'aide de théorèmes de point fixe. Cette approche a d'une part l'avantage d'être relativement élémentaire, et d'autre part les résultats de stabilité sont obtenus à partir de théorème de point fixe classiques et non plus avec des schémas itératifs, ce qui pourrait permettre d'améliorer la pertinence physique des bornes autorisées pour les perturbations. \\
 
 Dans la première partie du rapport, nous présentons le cadre et les principaux théorèmes de la dynamique en dimension 1 sur le cercle, ainsi que des contre-exemples au théorème de Denjoy, afin d'observer l'optimalité de ce théorème. Pour cela, nous nous appuyons principalement sur \cite{dgv}, qui a par ailleurs aussi servi de support pour les parties suivantes. Dans la seconde partie, on pose les fondements du calcul paradifférentiel à l'aide de la décomposition de Littlewood-Paley, puis on énonce les théorèmes de paralinéarisation qui vont permettre de prouver un théorème dû à Arnold, qui permet de mettre en évidence le phénomène des petits diviseurs, et sa résolution à l'aide du calcul paradifférentiel.
 
@@ -30,15 +28,13 @@ Dans la première partie du rapport, nous présentons le cadre et les principaux
 
 
 \section{Difféomorphismes du cercle}
-Nous allons dans cette section présenter rapidement les homéomorphismes du cercle et énoncer quelques propriétés fondamentales puisque ces objets nous offrent un cadre d'application des techniques de résolution d'équations que nous verrons dans les sections suivantes. On utilise les notations suivantes :
-On note $\mathbb{S}^1$ le cercle de dimension 1 : $\left\{ z \in \mathbb{C} \mid |z|=1 \right\}$.
-\\
-On note également $\Pi$ l'application $ t \to \exp (2i\pi t) $ (la projection de $\mathbb{R}$ sur $\mathbb{S}^1$).
+Nous allons dans cette section présenter rapidement les difféomorphismes du cercle et énoncer quelques propriétés fondamentales puisque ces objets nous offrent un cadre d'application des techniques de résolution d'équations que nous verrons dans les sections suivantes. On utilise les notations suivantes :
+On note $\mathbb{S}^1$ le cercle de dimension 1 : $\left\{ z \in \mathbb{C} \mid |z|=1 \right\}$ et  $\Pi$ l'application $ t \to \exp (2i\pi t) $ (la projection de $\mathbb{R}$ sur $\mathbb{S}^1$).
 \subsection{Problèmes de conjuguaison}
 \begin{defin}
 Soit $f :\mathbb{S}^1 \to \mathbb{S}^1$. On appelle relèvement de $f$, une application $F :  \mathbb{R} \to \mathbb{R}$ vérifiant :
 \begin{equation*}
-f \circ \Pi = \Pi \circ F
+f \circ \Pi = \Pi \circ F.
 \end{equation*}
 \end{defin}
 \begin{rmq}
@@ -52,7 +48,7 @@ Dans la suite, tous les relèvement d'applications continues du cercle seront pr
 Pour une application continue du cercle $f$, on définit son degré $deg(f) := F(1)-F(0)$ avec $F$ un relèvement de $f$.
 \end{defin}
 \begin{rmq}
-On peut démontrer que ce nombre est un entier relatif et qu'il ne diffère pas selon les relèvements (continus).
+Ce nombre est un entier relatif et il ne diffère pas selon les relèvements (continus).
 \end{rmq}
 \begin{defin}
 On dit que $f$ préserve l'orientation si pour tout triangle avec ses sommets sur $\mathbb{S}^1$, l'image de ses sommets par $f$ n'inverse pas l'ordre de ses sommets.
@@ -78,9 +74,9 @@ Soit $f$ un homéomorphisme préservant l'orientation, si son nombre de rotation
 La preuve de ce théorème utilise un résultat d'existence de mesure invariante pour une application continue du cercle, souvent appelé Théorème de Krylov-Bogolyubov. Or ce dernier n'est pas prouvé dans \cite{dgv}, et on propose donc une preuve inspirée d'un cours de Patrick Bernard en annexe.
 \end{rmq}
 
-Un critère d'inversibilité de la semi-conjuguaison est ensuite fourni par ce théorème de Denjoy :
+Un critère d'inversibilité de la semi-conjuguaison est ensuite fourni par le théorème de Denjoy :
 \begin{thm}[Denjoy]\label{denjoy}
-En plus des hypothèses du théorème de Poincaré, si $f$ est $C^2$ alors il est cette fois-ci conjugué à la rotation d'angle $\rho_0(f)$.
+En plus des hypothèses du théorème de Poincaré, si $f$ est $C^2$ alors $f$ est conjuguée à la rotation d'angle $\rho(f)$.
 \end{thm}
 
 On peut cependant se questionner sur la nécessité de l'hypothèse $C^2$ qui semble inattendue, et l'objet de la partie suivante sera de montrer que cette condition est optimale en un certain sens.
@@ -92,14 +88,14 @@ Cette partie est consacré à l'étude de certains contre-exemples du théorème
 On se propose de montrer le théorème suivant :
 
 \begin{thm}[Denjoy]\label{cex_denjoy}
-Pour tout $\alpha \in \mathbb{R} \setminus \mathbb{Q}$, $\forall \epsilon > 0$, il existe un $\mathcal{C}^{2-\epsilon}$-difféomorphisme $f$ du tore tel que $\rho(f)=\alpha$ et $f$ n'est pas conjugué à la rotation $R_\alpha$.
+Pour tout $\alpha \in \mathbb{R} \setminus \mathbb{Q}$, $\forall \epsilon > 0$, il existe un $\mathcal{C}^{2-\epsilon}$-difféomorphisme $f$ du cercle tel que $\rho(f)=\alpha$ et $f$ n'est pas conjugué à la rotation $R_\alpha$.
 \end{thm}
 
 \begin{rmq}
 Ici, la  régularité non-entière est définie au sens de Hölder, i.e $f$ est $\mathcal{C}^1$, de dérivée $1-\epsilon$-hölderienne.
 \end{rmq}
 
-Pour construire un contre-exemple, on s'inspire de la preuve du théorème dans le cas $\mathcal{C}^2$ : on sait déjà par le \hyperref[poincare]{Théorème de Poincaré} qu'un tel $f$ est semi-conjugué à $R_\alpha$ par une fonction continue croissante $h$ du tore. La preuve procède par l'absurde, en montrant que si $h$ n'est pas inversible, alors elle est constante sur un intervalle $I$ non trivial du tore. Les itérés $f^n(I)$ sont alors disjoints (on dit que $I$ est un intervalle errant pour la dynamique de $f$), et on conclut en montrant que la somme de leurs tailles diverge. \\ 
+Pour construire un contre-exemple, on s'inspire de la preuve du théorème dans le cas $\mathcal{C}^2$ : on sait déjà par le \hyperref[poincare]{Théorème de Poincaré} qu'un tel $f$ est semi-conjugué à $R_\alpha$ par une fonction continue croissante $h$ du cercle. La preuve procède par l'absurde, en montrant que si $h$ n'est pas inversible, alors elle est constante sur un intervalle $I$ non trivial du cercle. Les itérés $f^n(I)$ sont alors disjoints (on dit que $I$ est un intervalle errant pour la dynamique de $f$), et on conclut en montrant que la somme de leurs tailles diverge. \\ 
 L'idée ici est donc de construire une fonction $f$ qui admet un intervalle errant mais dont la suite des tailles des itérés de cet intervalle est sommable. 
 
 \subsubsection{Outils}
@@ -107,7 +103,7 @@ L'idée ici est donc de construire une fonction $f$ qui admet un intervalle erra
 On se servira de l'invariant de conjuguaison suivant : 
 
 \begin{defin} 
-Un homéomorphisme du tore $f$ est dit \textit{minimal} si tout ensemble fermé invariant par  $f$ est vide ou égal au tore tout entier. 
+Un homéomorphisme du cercle $f$ est dit \textit{minimal} si tout ensemble fermé invariant par  $f$ est vide ou égal au cercle tout entier. 
 \end{defin}
 
 
@@ -120,7 +116,7 @@ Un homéomorphisme du tore $f$ est dit \textit{minimal} si tout ensemble fermé 
 
 \begin{proof}
 (1) est immédiat en utilisant la bicontinuité de la conjuguaison. \\
-(2) s'obtient en remarquant que si $\alpha \in \mathbb{R} \setminus \mathbb{Q}$, alors $\alpha\mathbb{Z} + \mathbb{Z}$ est dense dans $\mathbb{R}$, et donc $\alpha\mathbb{Z}/\mathbb{Z}$ est dense dans le tore $\mathbb{R}/\mathbb{Z}$. 
+(2) s'obtient en remarquant que si $\alpha \in \mathbb{R} \setminus \mathbb{Q}$, alors $\alpha\mathbb{Z} + \mathbb{Z}$ est dense dans $\mathbb{R}$, et donc $\alpha\mathbb{Z}/\mathbb{Z}$ est dense dans le cercle $\mathbb{R}/\mathbb{Z}$. 
 \end{proof}
 
 La proposition suivante sera utile dans la suite :
@@ -145,12 +141,12 @@ On note $(l_n)_{n\in \mathbb{Z}}$ la suite des longueurs des intervalles,  qui v
 
 \item[(b)]$\displaystyle \lim\limits_{n \to \pm \infty } \frac{l_{n+1}}{l_n} = 1 $
 
-\end{enumerate} On peut par exemple choisir $l_n = \displaystyle \frac{c}{n^2 + 1}$ où $c$ est une constante bien choisie. \\
+\end{enumerate} On peut par exemple choisir $l_n = \displaystyle \frac{c}{n^2 + 1}$, où $c:=\displaystyle \frac{1}{\displaystyle \sum_{n\in\Z} \frac{1}{n^2+1}}$. \\
 On note alors $ \alpha_n := \alpha n \mod 1$ et on pose $I_n := [b_n , c_n]$ où $\begin{cases} b_n := \displaystyle \sum_{\{m, \ \alpha_m < \alpha_n\}} l_m \\ c_n := \displaystyle \sum_{\{m, \ \alpha_m \leq \alpha_n\}} l_m  = b_n + l_n \end{cases}$ \\
 
 
 \begin{lemma}\label{cantor}
-$\displaystyle K := [0,1] \setminus \bigcup_{n\in \mathbb{Z}} \overset{\circ}I_n$ est un fermé non trivial.
+L'ensemble $\displaystyle K := [0,1] \setminus \bigcup_{n\in \mathbb{Z}} \overset{\circ}I_n$ est un fermé non trivial.
 \end{lemma}
 
 \begin{proof}
@@ -176,7 +172,7 @@ Soient $n_1,n_2 \in \mathbb{Z}$ tels que $\alpha_{n_1} < \alpha_{n_2}$, alors : 
 
 On prolonge maintenant $h$ sur $\mathbb{R}$ par la relation, pour $x\in [0,1]$ et $p\in \mathbb{Z}$, $h(x+p)=h(x)+p$, et on note $I_{n,p}:=h^{-1}(\alpha_n+p)=I_n + p$. Alors $\displaystyle U:= \bigcup_{n,p \in \mathbb{Z}} \overset{\circ}I_{n,p}$ est un ouvert dense de $\mathbb{R}$, et $\mathbb{R}\setminus U$ est encore un ensemble de Cantor. \\
 
-$\forall n \in \mathbb{Z}$, on choisit un homéomorphisme croissant $g_n$ de $I_n$ sur $I_{n+1}$, par exemple la transformation affine : $g_n(x) := \displaystyle \frac{l_n+1}{l_n}x + b_{n+1}-b_n\frac{l_{n+1}}{l_n}$, qui vérifie bien $g_n(b_n)=b_{n+1}$ et $g_n(c_n)=c_{n+1}$. Cela définit alors une application $g$ de $\displaystyle \bigcup_{n\in \mathbb{Z}} I_n$ dans lui-même, strictement croissante, que l'on prolonge sur $\mathbb{R}$ entier de la même manière que $h$. Par la \fcref{dense}, $g$ se prolonge en un homéomorphisme de $\mathbb{R}$ dans lui-même. On a alors par construction $h \circ g = R_\alpha \circ h$ sur $\displaystyle \bigcup_{n,p \in \mathbb{Z}} \overset{\circ}I_{n,p}$, mais cet ensemble est dense dans $\mathbb{R}$ et les fonctions en jeu sont continues, donc l'égalité a lieu sur tout $\mathbb{R}$. Par 1-périodicité de ces fonctions, elles descendent en applications du tore, et on a la propriété suivante :
+$\forall n \in \mathbb{Z}$, on choisit un homéomorphisme croissant $g_n$ de $I_n$ sur $I_{n+1}$, par exemple la transformation affine : $g_n(x) := \displaystyle \frac{l_n+1}{l_n}x + b_{n+1}-b_n\frac{l_{n+1}}{l_n}$, qui vérifie bien $g_n(b_n)=b_{n+1}$ et $g_n(c_n)=c_{n+1}$. Cela définit alors une application $g$ de $\displaystyle \bigcup_{n\in \mathbb{Z}} I_n$ dans lui-même, strictement croissante, que l'on prolonge sur $\mathbb{R}$ entier de la même manière que $h$. Par la \fcref{dense}, $g$ se prolonge en un homéomorphisme de $\mathbb{R}$ dans lui-même. On a alors par construction $h \circ g = R_\alpha \circ h$ sur $\displaystyle \bigcup_{n,p \in \mathbb{Z}} \overset{\circ}I_{n,p}$, mais cet ensemble est dense dans $\mathbb{R}$ et les fonctions en jeu sont continues, donc l'égalité a lieu sur tout $\mathbb{R}$. Par 1-périodicité de ces fonctions, elles descendent en applications du cercle, et on a la propriété suivante :
 
 \begin{thm}\label{cont}
 L'homéomorphisme du cercle $g$ construit précédemment vérifie $\rho(g)=\alpha$, mais $g$ n'est pas conjugué à $R_\alpha$.
@@ -201,7 +197,7 @@ $(*) \begin{cases}\ g_n'(x)=1 \ \text{ si } x \in \partial I_n \\ \displaystyle 
 On considèrera enfin les fonctions $g_n'$ prolongées continuement sur tout l'intervalle [0,1], en les prenant constantes égales à 1 sur le complémentaire de $I_n$
 
 \begin{lemma}
-$\displaystyle g_n : x \mapsto b_{n+1} + \int_{b_n}^x 1 + \frac{6}{l_n^2}(\frac{l_{n+1}}{l_n} -1)(t-b_n)(c_n-t)\mathrm{d}t$ vérifie la condition $(*)$.
+Les fonctions $\displaystyle g_n : x \mapsto b_{n+1} + \int_{b_n}^x 1 + \frac{6}{l_n^2}(\frac{l_{n+1}}{l_n} -1)(t-b_n)(c_n-t)\mathrm{d}t$ vérifient la condition $(*)$.
 \end{lemma}
 
 \begin{proof}
@@ -271,7 +267,7 @@ $\displaystyle  \left | \sum_{k = -n}^n (g_k'-1) \right |_{\mathcal{C}^w} \leq 2
 La suite $ \displaystyle l_n := \frac{c}{(|n|+k)(log(|n| + k)^{1+\epsilon}}$ vérifie le critère du \fcref{reg_holder} pour le module $w(x)=O(x^{1-\epsilon'})$, pour tout $\epsilon' > \epsilon$, ce qui permet de conclure la preuve du \fcref{cex_denjoy}
 
 \section{Calcul paradifférentiel}
-Cette partie a pour objectif d'exposer les principaux théorèmes de paralinéarisation, avec pour point de départ la décomposition de Littlewood-Paley, et comme but de démontrer un théorème dû à Arnold, que l'on énonce dans un second temps. On s'appuiera sur \cite{metivier}, \cite{dgv}, et \cite{alinhac_gerard} comme références, en particulier les chapitres 4 et 5 du livre de Métivier.
+Cette partie a pour objectif d'exposer les principaux théorèmes de paralinéarisation de Bony \cite{bony}, avec pour point de départ la décomposition de Littlewood-Paley, et comme but de démontrer un théorème dû à Arnold, que l'on énonce dans un second temps. On s'appuiera sur \cite{metivier}, \cite{dgv}, et \cite{alinhac_gerard} comme références, en particulier les chapitres 4 et 5 du livre de Métivier.
 
 \subsection{Décomposition de Littlewood-Paley}
 Nous allons dans cette section présenter la décomposition de Littlewood-Paley. C'est une décomposition de fonction dans laquelle chaque terme a un spectre borné. Nous allons également présenter des propriétés sur cette décomposition. 
@@ -324,6 +320,7 @@ Soit $u \in \mathcal{S}'$, en posant :
 \[ S_n u := \sum_{k=-1}^{n-1} \Delta_k u \]
 On a que :
 \[ \lim_{n \to \infty} S_n u = u \]
+où la convergence est au sens de $\mathcal{S}'$.
 \end{prop}
 \begin{rmq}
 Dans la suite, pour simplifier les calculs, il nous arrivera d'écrire $S_{-k}$ pour $k\geq 0$, et dans ce cas on prend comme définition $S_{-k} := S_{0} = \Delta_{-1}$.
@@ -350,9 +347,9 @@ et on admet que c'est un espace de Hilbert muni de la norme $\|u\|_{H^s} := \dis
 \begin{defin}[Espaces de Zygmund]
 Pour tout $\alpha > 0$, on définit 
 \begin{equation*}
-C^\alpha_*(\R^d) := \left\{ u\in L^2(\R^d), \sup_{k \geq -1} 2^{k\alpha}\|\Delta_ku\|_{L^\infty} < +\infty \right\}
+C^\alpha_*(\R^d) := \left\{ u\in L^\infty(\R^d), \sup_{k \geq -1} 2^{k\alpha}\|\Delta_ku\|_{L^\infty} < +\infty \right\}
 \end{equation*}
-et on admet que c'est un espace de Hilbert muni de la norme $\|u\|_{C^\alpha_*} :=  \sup_{k \geq -1} 2^{k\alpha}\|\Delta_ku\|_{L^\infty} $
+et on admet que c'est un espace de Banach muni de la norme $\|u\|_{C^\alpha_*} :=  \sup_{k \geq -1} 2^{k\alpha}\|\Delta_ku\|_{L^\infty} $
 \end{defin}
 
 \begin{lemma}[Inégalité de Bernstein]
@@ -496,7 +493,7 @@ où $(\varepsilon_k)_{k\in \N} \in \ell^2(\N)$, alors la somme $u:=\sum_k u_k \i
 \end{prop}
 
 \begin{proof}
-On remarque que la série de terme général $u_k$ est absolument convergente dans $L^2$, donc par complétude elle converge simplement, et $u$ est bien définit. Ensuite : 
+On remarque que la série de terme général $u_k$ est absolument convergente dans $L^2$, donc par complétude elle converge simplement, et $u$ est bien définie. Ensuite : 
 \begin{equation*}
 2^{js}\|\Delta_ju\|_{L^2} \leq \sum_{k\geq j} 2^{js}\|\Delta_ju_k\|_{L^2} + \sum_{k < j} 2^{js}\|\Delta_ju_k\|_{L^2}
 \end{equation*}
@@ -539,7 +536,7 @@ Pour tout $|\alpha|\leq n$, on a
 Alors, la \fcref{meyer} permet d'aboutir au résultat voulu.
 \end{proof}
 \subsection{Estimations douces et paralinéarisation}
-On va maintenant se servir de la décomposition de Littlewood-Paley pour étudier des produit dans les espaces fonctionnels précédemment utilisés. On remarque que l'on peut écrire, pour $u,v \in \mathcal{S}'(\R^d)$ : 
+On va maintenant se servir de la décomposition de Littlewood-Paley pour étudier des produit dans les espaces fonctionnels précédemment utilisés. On remarque que l'on peut écrire, pour $u,v \in \mathcal{S}(\R^d)$ : 
 \begin{align*}
 uv &=\sum_{k,j}\Delta_ku\Delta_jv = \sum_{k=-1}^{+\infty}\sum_{j=-1}^{p}\Delta_ku\Delta_jv + \sum_{k=-1}^{+\infty}\sum_{j=k+1}^{+\infty}\Delta_ku\Delta_jv \\
 &=\sum_{k=-1}^{+\infty}\Delta_kuS_{k+1}v +  \sum_{j=0}^{+\infty}\sum_{k=-1}^{j-1}\Delta_ku\Delta_jv = \sum_{k=-1}^{+\infty}\Delta_kuS_{k+1}v +  \sum_{j=-1}^{+\infty}\Delta_jvS_{j}u \\
@@ -547,7 +544,7 @@ uv &=\sum_{k,j}\Delta_ku\Delta_jv = \sum_{k=-1}^{+\infty}\sum_{j=-1}^{p}\Delta_k
 &= T_vu + T_uv + R(u,v)
 \end{align*}
 Ici, $T_vu$ (resp. $T_uv$) décrit la partie des interactions pour lesquelles la fréquence de $v$ (resp. $u$) est nettement plus faible que celle de $u$ (resp. $v$), tandis que $R(u,v)$ représente la partie où les fréquences sont du même ordre. Le terme $T_vu$ est appelé \textit{paraproduit} de $u$ par $v$.
-\begin{prop}[Estimations douces pour les paraproduits et leur restes]\label{tame} ~\\
+\begin{prop}[Estimations douces pour les paraproduits et leurs restes]\label{tame} ~\\
 \begin{itemize}
 \item[•] $\forall s\in \R^+, u \in L^\infty, v\in H^s,$
 \begin{equation}\label{estim1}
@@ -758,12 +755,12 @@ pas compris pourquoi on coupe. En développant la défintion de $v_j$, et en ré
 \subsection{Théorème d'Arnold}
 On s'intéresse dans cette section au cas suivant : $g$ difféomorphisme du cercle régulier (au moins $C^2$), préservant les angles et ayant un angle de rotation $\alpha$ irrationnel. On a automatiquement par le \fcref{denjoy} qu'il est conjugué à la rotation d'angle $\alpha$. Le théorème d'Arnold s'intéresse à la régularité de la conjugaison lorsque $g$ est "très proche" de la rotation $R_\alpha$.
 \subsubsection{Description du problème}
-On choisit de réécrire $g$ comme une perturbation de la rotation soit: $g= f + R_\alpha$ avec $f$ "assez petit" (nous définirons ce que cela veut dire dans la suite). On cherche alors naturellement la conjugaison que l'on note $\eta$ sous la forme d'une perturbation de l'identité soit $\eta=id+u$. \\
-L'équation à résoudre est alors :
+On choisit de réecrire $g$ comme une perturbation de la rotation soit: $g= f + R_\alpha$ avec $f$ "assez petit" (nous définirons ce que cela veut dire dans la suite). On cherche alors naturellement la conjugaison que l'on note $\eta$, l'équation à résoudre est alors :
 
 \begin{equation}\label{arnold1}
 \eta(x + \alpha)= \eta(x) + \alpha + f \cdot \eta(x) \\
 \end{equation}
+On écrit la conjuguaison sous la forme d'une perturbation de l'identité soit $\eta=id+u$. \\
 Pour plus de généralité on introduit ici un paramètre réel $\lambda$ et en utilisant les notations de $\eta$ avec $u$, l'équation \eqref{arnold1} devient:
 \begin{equation}\label{arnold2}
 \Delta_\alpha u= f \cdot (id +u) - \lambda \; \text{avec  } \Delta_\alpha u(x)= u(x+\alpha) - u(x)
@@ -807,7 +804,7 @@ On choisit les notations suivantes :
 \begin{equation*}
 \mathbf{F}(f,U) :=\Delta_\alpha u - f \cdot (id +u) + \lambda
 \end{equation*}
-Et alors, en notant $U:=(u,\lambda)$, l'équation \eqref{arnold2} à résoudre pour prouver le théorème d'Arnold se ré-écrit en :
+Alors, en notant $U:=(u,\lambda)$, l'équation \eqref{arnold2} à résoudre pour prouver le théorème d'Arnold se réecrit en :
 \begin{equation}\label{equ_reso}
 \mathbf{F}(f,U)=0
 \end{equation} 
@@ -829,7 +826,7 @@ En réinjectant dans $\eqref{2.1}$ on obtient:
 De plus en utilisant l'identité suivante:
 
 \begin{align*}
-\Delta_\alpha u - T_{\frac{\Delta_\alpha u}{1+u'}}u &=u\cdot\tau_\alpha + T_{\frac{1+u'}{1+u'}}u - T_{\frac{\Delta_\alpha u}{1+u'}}u \\
+\Delta_\alpha u - T_{\frac{\Delta_\alpha u}{1+u'}}u &=u\cdot\tau_\alpha - T_{\frac{1+u'}{1+u'}}u - T_{\frac{\Delta_\alpha u}{1+u'}}u \\
 &= u\cdot\tau_\alpha  - T_{\frac{1+u'\cdot \tau_\alpha}{1+u'}}u \\
 &= u\cdot\tau_\alpha - T_{1+u'\cdot \tau_\alpha} T_{\frac{1}{1+u'}}u +R_1(1+u'\cdot \tau_\alpha,\frac{1}{1+u'}) \\ \text{en utilisant le \fcref{paralin_prod}} \\
 &=T_{1+u' \cdot \tau_\alpha}(T_{\frac{1}{1+u'\cdot \tau_\alpha}}u \cdot \tau_\alpha - T_{\frac{1}{1+u'}}u) +R_1(1+u'\cdot \tau_\alpha,\frac{1}{1+u'}) \\ &+R'_1 ( 1+u' \cdot \tau_\alpha ,\frac{1}{1+u' \cdot \tau_\alpha})  \\ \text{toujours avec le \fcref{paralin_prod}} \\
@@ -848,7 +845,7 @@ Par le \fcref{paralin_prod}, on a que pour $a:=\frac{1}{1+u'}$ :
 \begin{equation*}
 T_a\cdot T_{a^{-1}} -T_1=R(a,a^{-1})
 \end{equation*}
-avec $\|R(a,a^{-1})\|_{\mathbb{L}(H^s,H^{s+r})} \leq_{s,r} \|a\|_{C^r_*} \|a^{-1}\|_{C^r_*}$. On a que $R$ est continu et donc avec $ R(1,1)=0$. On a que $\lim_{u' \to 0} R(a,a^{-1})=0$. \\
+avec $\|R(a,a^{-1})\|_{\mathcal{L}(H^s,H^{s+r})} \leq_{s,r} \|a\|_{C^r_*} \|a^{-1}\|_{C^r_*}$. On a que $R$ est continu et donc avec $ R(1,1)=0$. On a que $\lim_{u' \to 0} R(a,a^{-1})=0$. \\
 Donc on peut choisir  $\|u'\|_{L^\infty} \leq \delta $  pour que $\|R(a,a^{-1})\|_{\mathcal{L}(H^s,H^{s+r})}<1 $ et utiliser une série de Neumann pour avoir l'inversibilité de $T_a$. La preuve est identique pour $T_{1+u'\cdot \tau_\alpha }$ et pour $ H^{s+\sigma +\epsilon}$ . 
 \end{proof}
 \begin{rmq}
