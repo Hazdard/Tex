@@ -717,11 +717,11 @@ où l'on a utilisé \eqref{utillem}, ce qui donne finalement la majoration atten
 \end{proof}
 
 \begin{thm}[Paralinéarisation des produits]\label{paralin_prod}
-Soit $s,r>0$, et $a,b\in C^r_*(\R^d)$. Alors 
+Soit $s,r>0$, et $a,b\in C^r_*(\T^d)$. Alors 
 \begin{equation*}
 R_{CM}(a,b) := T_a \circ T_b - T_{ab}
 \end{equation*}
-est un opérateur continu de $H^s(\R^d)$ dans $H^{s+r}(\R^d)$, et on a :
+est un opérateur continu de $H^s(\T^d)$ dans $H^{s+r}(\T^d)$, et on a :
 \begin{equation*}
 \|R_{CM}(a,b)\|_{\mathcal{L}(H^s,H^{s+r})} \leq C_{s,r} \|a\|_{C^r_*}\|b\|_{C^r_*}
 \end{equation*}
@@ -729,27 +729,35 @@ est un opérateur continu de $H^s(\R^d)$ dans $H^{s+r}(\R^d)$, et on a :
 
 \begin{proof}
 Soit $u\in H^s(\R^d)$, on note $v:=T_bu$ et $v_k:=S_{k-2}b\cdot\Delta_ku$. On observe que :
-\begin{equation}\label{horreur}
-R_1v:=T_av-\sum_k S_{k-4}a\cdot\Delta_kv = \sum_k (\Delta_{k-3}a + \Delta_{k-4}a)\Delta_kv
-\end{equation}
-Or comme $(\Delta_{k-3}a + \Delta_{k-4}a)$ a un spectre inclus dans $B(0,2^k)$, l'inégalité de Bernstein \eqref{bernstein} et la définition des espaces de Zygmund donnent que pour tout $\alpha \in \N^d$ , $|\alpha| \leq r$:
-\begin{equation*}
-\|\partial^\alpha(\Delta_{k-3}a + \Delta_{k-4}a)\|_{L^\infty} \leq C_\alpha 2^{k|\alpha|}\|\Delta_ka\|_{L^\infty} \leq C_\alpha 2^{k(|\alpha|-r)} \|a\|_{C^r_*}
-\end{equation*}
-Alors, le \fcref{true_meyer} et l'inégalité \eqref{estim1} donnent que 
-\begin{equation*}
-\|R_1v\|_{H^{s+r}} \leq C_{s,r} \|a\|_{C^r_*} \|v\|_{H^s} \leq C_{s,r} \|a\|_{C^r_*} \|b\|_{C^r_*} \|u\|_{H^s}
-\end{equation*}
-De plus, en injectant \eqref{horreur}, on remarque que :
+
 \begin{align*}
-T_aT_bu - \sum_j \sum_{k \leq j-3} \Delta_ka\cdot v_j &= R_1T_bu + \sum_j S_{j-2}a\cdot\Delta_jv - \sum_j \sum_{k \leq j-3} \Delta_ka\cdot v_j \\
-&=R_1T_bu + \sum_j \sum_{k \leq j-3} \Delta_ka\cdot (\Delta_jv - v_j) \\
-&=R_1T_bu + \sum_k \Delta_ka \sum_{k+3 \leq j \leq k+5} (\Delta_jv - v_j) 
+T_aT_bu - \sum_j \sum_{k \leq j-3} \Delta_ka\cdot v_j &= \sum_j S_{j-2}a\cdot\Delta_jv - \sum_j \sum_{k \leq j-3} \Delta_ka\cdot v_j \\
+&=\sum_j \sum_{k \leq j-3} \Delta_ka\cdot (\Delta_jv - v_j) \\
+&=\sum_k \Delta_ka \sum_{k+3 \leq j \leq k+5} (\Delta_jv - v_j) 
 \end{align*}
-pas compris pourquoi on coupe. En développant la défintion de $v_j$, et en ré-utilisant le \fcref{true_meyer}, on a :
-\begin{equation}
+Car $\sum_qv_q=\sum_q\Delta_qv$, et que $v_q$ a un spectre inclus dans la boule de rayon $2^q$. En développant la défintion de $v_j$, et en utilisant le \fcref{true_meyer}, on a :
+\begin{equation}\label{aled1}
 \left\| T_aT_bu - \sum_j \sum_{k_1 \leq j-3} \sum_{k_2\leq j-3} \Delta_{k_1}a\cdot \Delta_{k_2}b \cdot \Delta_j u \right\|_{H^{s+r}} \leq C_{s,r} \|a\|_{C^r_*} \|b\|_{C^r_*} \|u\|_{H^s}
 \end{equation}
+De plus, en notant 
+\begin{equation*}
+c_j := \sum_{k_1 \leq j-3}\sum_{k_2 \leq j-3}\Delta_{k_1}a \cdot \Delta_{k_2}b,
+\end{equation*}
+on a :
+\begin{align*}
+\|ab-c_j\|_{L^\infty} &\leq \sum_{k_1\geq j-3 \text{ ou } k_2 \geq j-3}\|\Delta_{k_1}a\|_{L^\infty} \cdot \|\Delta_{k_2}b\|_{L^\infty} \\
+&\leq C_r \|a\|_{C^r_*} \|b\|_{C^r_*} \sum_{k_1+k_2 \geq j-3} 2^{-(k_1+k_2)r} \\
+&\leq C_r \|a\|_{C^r_*} \|b\|_{C^r_*}  2^{-jr} 
+\end{align*}
+Or :
+\begin{equation*}
+T_{ab}u-\sum_jc_j \cdot \Delta_ju = \sum_j(S_{j-2}(ab) - c_q) \cdot \Delta_ju,
+\end{equation*}
+et en utilisant les deux inégalités précédentes avec le \fcref{true_meyer}, il vient :
+\begin{equation}\label{aled2}
+\left\| T_{ab}u-\sum_jc_j\cdot \Delta_ju \right\|_{H^{s+r}} \leq C_{s,r} \|a\|_{C^r_*} \|b\|_{C^r_*} \|u\|_{H^s}
+\end{equation}
+En combinant \eqref{aled1} et \eqref{aled2}, on conclut la démonstration du théorème.
 \end{proof}
 
 \subsection{Théorème d'Arnold}
