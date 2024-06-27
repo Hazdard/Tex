@@ -8,7 +8,11 @@
 \usefonttheme[onlymath]{serif}
 
 
-\title{Difféomorphismes du cercle et théorème de Nash-Moser}
+\def\R{\mathbb R}
+
+\def\T{\mathbb T}
+
+\title{Calcul paradifférentiel et théorème d'Arnold}
 \date{14 Mai 2024}
 \author{Sacha Ben-Arous, Mathis Bordet}
 \institute{ENS Paris-Saclay}
@@ -20,51 +24,63 @@
 
 \section{Calcul paradifférentiel}
 
-\begin{frame}{Multiplicateurs de Fourier}
 
+\begin{frame}{Multiplicateurs de Fourier}
+\begin{figure}
+\includegraphics[width=0.35\textwidth]{psi.png}
+\includegraphics[width=0.35\textwidth]{chi.png}
+\end{figure}
 On définit les opérateurs de la décomposition de Littlewood-Paley de la manière suivante :
 \[
 \text{Pour } u \in \mathcal{S}', \quad \widehat{\Delta_{-1} u} := \psi \cdot \hat{u}, \quad \widehat{\Delta_{k} u} := \chi(2^{-k} \cdot) \cdot \hat{u} \ \text{ si } k \geq 0
 \]
-
+\[ S_n u := \sum_{k=-1}^{n-1} \Delta_k u \]
+On a que :
+\[ \lim_{n \to \infty} S_n u = u \]
 \end{frame}
 
+
 \begin{frame}{Décomposition régularisante}
-
-On définit les opérateurs de la décomposition de Littlewood-Paley de la manière suivante :
-\[
-\text{Pour } u \in \mathcal{S}', \quad \widehat{\Delta_{-1} u} := \psi \cdot \hat{u}, \quad \widehat{\Delta_{k} u} := \chi(2^{-k} \cdot) \cdot \hat{u} \ \text{ si } k \geq 0
-\]
-
+\begin{itemize}
+\item Régularisation: si $u\in L^2$, alors pour tout $n\in \mathbb{N}, S_n \in \mathcal{S}$.
+\item[•] Presque comme une base hilbertienne : pour tout $u\in L^2(\mathbb{R}^d)$, 
+\[\sum_{k \geq -1} \|\Delta_k u \|^2_{L^2} \leq \| u \|^2_{L^2} \leq 2 \sum_{k \geq -1} \|\Delta_k u \|^2_{L^2}. \]
+\end{itemize}
 \end{frame}
 
 
 \begin{frame}{Caractérisations d'espaces fonctionnels}
-
-On définit les opérateurs de la décomposition de Littlewood-Paley de la manière suivante :
-\[
-\text{Pour } u \in \mathcal{S}', \quad \widehat{\Delta_{-1} u} := \psi \cdot \hat{u}, \quad \widehat{\Delta_{k} u} := \chi(2^{-k} \cdot) \cdot \hat{u} \ \text{ si } k \geq 0
-\]
-
+ Pour $s\in \mathbb{R}^+$, $u\in L^2(\mathbb{R}^d)$, on a : \[ u\in H^s(\mathbb{R}^d) \Leftrightarrow \sum_{k\geq -1}2^{2ps}\|\Delta_k u \|_{L^2}^2 < +\infty. \] 
+ Pour $r\in \mathbb{R}^+ \setminus \mathbb{N}$, $u\in L^\infty(\mathbb{R}^d)$, on a : \[ u\in C^r(\mathbb{R}^d) \Leftrightarrow \sup_{k \geq -1} 2^{k\alpha}\|\Delta_ku\|_{L^\infty} < +\infty . \] 
 \end{frame}
 
+
 \begin{frame}{Paraproduits}
+\begin{align*}
+uv &=\sum_{k=-1}^{+\infty}\Delta_kuS_{k-2}v  \ +  \sum_{k=-1}^{+\infty}\Delta_kvS_{k-2}u \ + \sum_{|k-j|\leq 2} \Delta_ku\Delta_ju \\
+&= T_vu + T_uv + R(u,v)
+\end{align*}
 
-On définit les opérateurs de la décomposition de Littlewood-Paley de la manière suivante :
-\[
-\text{Pour } u \in \mathcal{S}', \quad \widehat{\Delta_{-1} u} := \psi \cdot \hat{u}, \quad \widehat{\Delta_{k} u} := \chi(2^{-k} \cdot) \cdot \hat{u} \ \text{ si } k \geq 0
-\]
-
+\begin{itemize}
+\item[•] $\forall s\in \R^+, u \in L^\infty, v\in H^s,$
+\[ \|T_uv\|_{H^s} \leq C_s \|u\|_{L^\infty} \|v\|_{H^s} \]
+\item[•] $\forall \alpha \in \R^+, u \in L^\infty, v\in C^\alpha_*,$
+\[\|T_uv\|_{C^\alpha_*} \leq C_\alpha \|u\|_{L^\infty} \|v\|_{C^\alpha}\]
+\end{itemize}
 \end{frame}
 
 \begin{frame}{Paralinéarisation}
-
-On définit les opérateurs de la décomposition de Littlewood-Paley de la manière suivante :
-\[
-\text{Pour } u \in \mathcal{S}', \quad \widehat{\Delta_{-1} u} := \psi \cdot \hat{u}, \quad \widehat{\Delta_{k} u} := \chi(2^{-k} \cdot) \cdot \hat{u} \ \text{ si } k \geq 0
-\]
-
+\begin{itemize}
+\item[•]Soit $F$ une fonction $C^{\infty}$ de $\R$ telle que $F(0)=0$. Si $u\in H^s(\R^d)$, avec $\rho := s - \frac{d}{2}>0 $, alors 
+\[F(u) - T_{F'(u)}u \in H^{s+\rho}(\R^d).\]
+\item[•]
+Soit $s,r>0$, et $a,b\in C^r_*(\T^d)$. Alors 
+\[R_{CM}(a,b) := T_a \circ T_b - T_{ab} \]
+est un opérateur continu de $H^s(\T^d)$ dans $H^{s+r}(\T^d)$
+\end{itemize}
 \end{frame}
+
+
 
 \section{Difféomorphismes du cercle}
 \begin{frame}{Dynamique en dimension 1}
@@ -80,19 +96,13 @@ Dans la suite, on considèrera a minima des homéomorphismes, ainsi que leur rel
 \begin{frame}{Nombre de rotation et Théorème Poincaré }
     Si $f$ est un homéomorphisme, $F$ un relèvement, et $x\in \mathbb{R}$, la suite $\displaystyle (\frac{F^n(x)}{n})_{n\in \mathbb{N}}$ converge vers une limite indépendante de $x$, notée $\rho(F)$. On définit alors $\rho(f):= \rho(F) \mod 1$. \\~\\
    
-
 \textbf{Théorème (Poincaré) :} Si $f$ est un homéomorphisme de nombre de rotation $\alpha$ irrationnel, alors $f$ est semi-conjugué à $R_\alpha$, i.e il existe $h$ continue telle que $h \circ f = R_\alpha \circ h$. \\~\\
-
 \end{frame}
-
-
-
-
 
 \section{Théorème d'Arnold}
 \begin{frame}
 \frametitle{But}
-Le But du théorème d'Arnold est déterminé la régularité des conjugaison d'un Difféomorphisme g d'angle de rotation $\alpha$ irrationnelle proche de la rotation $R_\alpha$. c'est a dire résoudre :
+Le But du théorème d'Arnold est déterminé la régularité des conjugaison d'un homéomorphisme g d'angle de rotation $\alpha$ irrationnelle proche de la rotation $R_\alpha$. c'est a dire résoudre :
 $$\eta(x + \alpha)= g \cdot \eta(x)$$
 \\
 d'inconnue $\eta$.
@@ -112,13 +122,13 @@ $$ \Delta_\alpha u= f \cdot (id +u)  \; \text{avec  } \Delta_\alpha u(x)= u(x+\a
 
 \begin{frame}
 \frametitle{Perte de régularité}
-Simplement en voulant résoudre
-$$ U(x+ \alpha) - U(x) = \eta (x) $$
+En voulant résoudre
+$$ \Delta_\alpha u = h (x) $$
 On a que 
-\[ (\exp(2 i \pi n \alpha)-1)\widehat{u} (n) = \widehat{f} (n) \]
-Avec la condition diophansiènne :
-$$ \left\| \alpha - \frac{m}{n} \right\| \geq \frac{k}{n^\sigma}$$
-cela induit la perte de régularité suivante, si $f \in H^{s+\sigma}$ alors $\Delta_\alpha^{-1}f \in H^{s}$
+\[ (\exp(2 i \pi n \alpha)-1)\widehat{u} (n) = \widehat{h} (n) \]
+Avec la condition diophantienne:
+$$ \|\frac{q \alpha}{\pi}-p|\geq \frac{1}{\gamma q^\sigma}$$
+cela induit la perte de régularité suivante, si $h \in H^{s+\sigma}$ alors $\Delta_\alpha^{-1}h \in H^{s}$
 
 
 \end{frame}
@@ -126,9 +136,19 @@ cela induit la perte de régularité suivante, si $f \in H^{s+\sigma}$ alors $\D
 
 \begin{frame}
 \frametitle{Enoncé et Preuve}
-Le théorème d'Arnold affirme 
+L'idée de la preuve est de transformer l'équation  :
+$$ \Delta_\alpha u= f \cdot (id +u)$$
+en une equation de la forme:
+$$u = \Delta_\alpha^{-1} Lu$$
+De telle sorte que $L$ compense les pertes de $\Delta_\alpha^{-1}$ grace au théorème de paralinéarisation.
+\\
+On en conclut que pour que la conjugaison soit dans $H^s$, il faut que $f$ soit dans $H^{s+\sigma + \varepsilon}\cap C^{N_s+1}$
 \end{frame}
 
+
+\begin{frame}
+\section{Conclusion}
+\end{frame}
 
 \end{document}
 
