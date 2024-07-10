@@ -12,7 +12,7 @@
 
 %https://tex.stackexchange.com/questions/234676/new-theorem-style
 
-%%=============================================================Appel des packages=====================================================================%%
+%%===============================================================AppelPackages=======================================================================%%
 
 \usepackage[french]{babel}
 \usepackage[T1]{fontenc}
@@ -22,16 +22,16 @@
 \usepackage{cleveref}
 
 
-\textheight245mm
-\textwidth170mm
-\hoffset-21mm
-\voffset-15mm
-\parindent17pt
+\setlength{\textheight}{245mm}
+\setlength{\textwidth}{170mm}
+\setlength{\hoffset}{-21mm}
+\setlength{\voffset}{-15mm}
+\setlength{\parindent}{17pt}
 
 
 \pagestyle{fancy}
 
-%%==============================================================Custom Styles=========================================================================%%
+%%==============================================================CustomStyles==========================================================================%%
 
 \newtheoremstyle{bourbaki_it}%            % Name
   {10pt}%                                 % Space above
@@ -53,7 +53,7 @@
   { }%                                    % Space after theorem head, ' ', or \newline
   {}%                                     % Theorem head spec (can be left empty, meaning `normal')
   
-%%==============================================================Custom Theorems=======================================================================%%
+%%==============================================================CustomTheorems========================================================================%%
 
 \renewcommand{\thesection}{\Roman{section}} 
 
@@ -96,7 +96,7 @@
 % This is a theorem.
 %\end{mthm}
 
-%%==============================================================Custom Names==========================================================================%%
+%%=================================================================Misc==============================================================================%%
 
 \hypersetup{
   colorlinks   = true,    % Colours links instead of ugly boxes
@@ -105,9 +105,10 @@
   citecolor    = black    % Colour of citations
 }
 
+%Remplace proof par preuve
 \addto\captionsfrench{\renewcommand\proofname{Preuve}}
 
-% Configuration pour rendre le texte entier cliquable
+% Configuration pour rendre le texte entier cliquable dans une référence
 \newcommand{\fcref}[1]{\hyperref[#1]{\cref*{#1}}}
 
 % Écrire des limites proprement
