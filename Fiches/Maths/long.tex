@@ -16,6 +16,7 @@
 \begin{center}
 \section{Théorie de la mesure} 
 \end{center}
+Dans tout ce qui suit, on travaille dans un espace mesuré $(E,\mathcal{A},\mu)$.\\ 
 
 \begin{thm}[Dynkin] Le $\pi$-système engendré par un $\sigma$-système est égal à la tribu engendrée par ce dernier.
 \end{thm}
@@ -23,14 +24,34 @@
 \begin{cor}[Unicité des mesures] Soient $\mu$ et $\nu$ deux mesures sur $(E,\mathcal{A})$ qui coïncident sur un $\pi$-système $\mathcal{C}$ tel que $\mathcal{A}=\sigma(\mathcal{C})$. Alors :
 \begin{enumerate}
 \item Si $\mu(E)=\nu(E) < +\infty$, alors $\mu = \nu$.
-\item Si il existe une suite croissante $(A_n)_{n\in\N}$ d'éléments de $\mathcal{C}$ tels que $\displaystyle \bigcup_n A_n = E$, et pour tout $n\in\N$, $\mu(A_n)=\nu(A_n)<+\infty$, alors $\mu = \nu$.
+\item Si il existe une suite croissante $(A_n)_{n\in\N}$ d'éléments de $\mathcal{C}$ tels que $\displaystyle \bigcup_n A_n = E$, et que pour tout $n\in\N$, $\mu(A_n)=\nu(A_n)<+\infty$, alors $\mu = \nu$.
 \end{enumerate}
 \end{cor}
 
-%\begin{rmq}
-%$\mathcal{B}(\R^2) = \mathcal{B}(\R) \otimes \mathcal{B}(\R)$
-%\end{rmq}
+\begin{thm}[Convergence monotone]
+Soit $(f_n)_{n\in\N}$ une suite de fonctions mesurables de $E$ dans $[0,+\infty]$, telle que pour tout $n\geq 0$, $f_{n+1} \geq f_n$. Alors, en notant $f$ la limite simple de cette suite, on a que $f$ est mesurable, et : 
+\[\int f = \lim\limits_{n \to +\infty} \int f_n \]
+\end{thm}
+
+\begin{thm}[Convergence dominée]
+Soit $(f_n)_{n\in\N}$ une suite de fonctions mesurables qui converge simplement vers $f$. Si il existe $g$ mesurable telle que pour tout $n \geq 0$, $\left| f_n \right| \leq g$, alors $f$ est intégrable et :
+\[\int f = \lim\limits_{n \to +\infty} \int f_n \]
+
+\end{thm}
+
+\begin{rmq}
+On peut seulement supposer les conditions ci-dessus vraies presque partout, mais dans ce cas il faut imposer la mesurabilité de la limite simple, ou bien travailler dans la tribue complétée.
+\end{rmq}
 
 \subsection*{Outils :}
+
+\begin{lemma}[Fatou]
+Soit $(f_n)_{n\in\N}$ une suite de fonctions mesurables positives. Alors :
+\[\int \varliminf_n f_n \leq \varliminf_n \int f_n\]
+\end{lemma}
+
+\subsection*{Méthode :}
+
+Toujours se demander : dans quel ensemble je travaille, quelle est la tribue, quelle est la mesure ?
 
 \end{document}
