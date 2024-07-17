@@ -16,7 +16,17 @@
 \begin{center}
 \section{Théorie de la mesure} 
 \end{center}
-Dans tout ce qui suit, on travaille dans un espace mesuré $(E,\mathcal{A},\mu)$, et on pourra utiliser un espace métrique $(T,d)$.\\ 
+
+
+\subsection*{Méthode}
+
+\begin{itemize}
+\item[-] Toujours se demander : dans quel ensemble je travaille, quelle est la tribu, quelle est la mesure ? 
+\item[-] Utiliser les indicatrices, raisonner par densité, par régularité.
+\end{itemize}
+
+\subsection*{Théorèmes}
+Dans tout ce qui suit, on travaille dans un espace mesuré $(E,\mathcal{A},\mu)$, et on pourra utiliser un espace métrique $(T,d)$.
 
 
 \begin{thm}[Dynkin] 
@@ -63,12 +73,6 @@ Dans un espace polonais (métrique séparable complet), on a de plus que la rég
 Si $\mu$ est une mesure de Radon sur un espace métrique localement compact séparable (ex. $\R^d$), alors $\mu$ est régulière, et  la régularité intérieure est sur les compacts. 
 \end{thm}
 
-\subsection*{Méthode :}
-
-Toujours se demander : dans quel ensemble je travaille, quelle est la tribu, quelle est la mesure ? \\
-
-Utiliser les indicatrices, raisonner par densité, par régularité.
-
 \subsection*{Outils :}
 
 
@@ -106,6 +110,8 @@ Soit $I$ un intervalle ouvert de $\R$, $t_0 \in I$, et $f:I \times E \mapsto \ov
 \end{itemize}
 Alors, $t\mapsto \displaystyle \int f(t,x)\mathrm{d}\mu(x)$ est dérivable en $t_0$, de dérivée $\displaystyle \int \frac{\partial f}{\partial t} (t_0,x)\mathrm{d}\mu(x)$.
 \end{prop}
+
+
 \begin{rmq}
 On peut remplacer les deux dernières conditions par les suivantes, plus fortes, qui assurent alors la dérivabilité en tout point de l'intervalle :
 \begin{itemize}
@@ -114,5 +120,14 @@ On peut remplacer les deux dernières conditions par les suivantes, plus fortes,
 \end{itemize}
 \end{rmq}
 
+
+\begin{prop}[Mesure de Stieltjes]
+Il y a une correspondance entre les fonctions croissantes continues à droite, et les mesures de Radon. Plus précisemment :
+\begin{itemize}
+\item[•] Si $\mu$ est une mesure de Radon sur $\R$, alors la fonction $F_{\mu}$ suivante est croissante, continue à droite.
+$\displaystyle F_{\mu}(x) := \begin{cases} \mu(]0;x]) & \text{ si } x \geq 0  \\ -\mu(]x;0]) & \text{ si } x < 0 \end{cases}$
+\item[•] Si $F : \R \mapsto \R$ est croissante, continue à droite, alors il existe une unique mesure de Radon $\mu$ telle que, pour tout $a<b \in \R$, $\mu(]a;b])=F(b)-F(a)$.
+\end{itemize}
+\end{prop}
 
 \end{document}
