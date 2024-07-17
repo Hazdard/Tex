@@ -29,15 +29,19 @@ Soit $(f_n)_{n\in\N}$ une suite de fonctions mesurables de $E$ dans $[0,+\infty]
 
 
 \begin{thm}[Convergence dominée]
-Soit $(f_n)_{n\in\N}$ une suite de fonctions mesurables qui converge simplement vers $f$. Si il existe $g$ mesurable telle que pour tout $n \geq 0$, $\left| f_n \right| \leq g$, alors $f$ est intégrable et :
+Soit $(f_n)_{n\in\N}$ une suite de fonctions mesurables qui converge simplement vers $f$. Si il existe $g$ intégrable telle que pour tout $n \geq 0$, $\left| f_n \right| \leq g$, alors $f$ est intégrable et :
 \[\int f = \lim\limits_{n \to +\infty} \int f_n \]
 \end{thm}
 
 
 \begin{rmq}
-On peut seulement supposer les conditions ci-dessus vraies presque partout, mais dans ce cas il faut imposer la mesurabilité de la limite simple, ou bien travailler dans la tribu complétée.
+On peut seulement supposer les conditions ci-dessus vraies presque partout, mais dans ce cas il faut imposer la mesurabilité de la limite simple, ou bien travailler dans la tribu complétée, comme l'explique la remarque suivante.
 \end{rmq}
 
+
+\begin{rmq}
+Si $\tilde{f} : E \mapsto F$ est presque partout égale à une fonction mesurable $f : (E,\mathcal{A}) \mapsto (F,\mathcal{B})$, alors $\tilde{f}$ est mesurable pour la tribu complétée $\overline{\mathcal{A}}$ sur $E$.
+\end{rmq}
 \subsection*{Méthode :}
 
 Toujours se demander : dans quel ensemble je travaille, quelle est la tribu, quelle est la mesure ?
@@ -73,12 +77,19 @@ Alors, $t\mapsto \displaystyle \int f(t,x)\mathrm{d}\mu(x)$ est continue en $t_0
 \begin{prop}[Dérivation des intégrales]
 Soit $I$ un intervalle ouvert de $\R$, $t_0 \in I$, et $f:I \times E \mapsto \overline{\R}$. Si :
 \begin{itemize}
-\item[•] Pour tout $t\in T$, $x\mapsto f(t,x)$ est mesurable et intégrable.
-\item[•] Pour presque tout $x \in E$, $t\mapsto f(t,x)$ est continue en $t_0$.
-\item[•] Il existe $g$ intégrable telle que pour tout $t\in T$, pour presque tout $x \in E$, on a $\left| f(t,x) \right| \leq g(x)$
+\item[•] Pour tout $t\in I$, $x\mapsto f(t,x)$ est mesurable et intégrable.
+\item[•] Pour presque tout $x \in E$, $t\mapsto f(t,x)$ est dérivable en $t_0$.
+\item[•] Il existe $g$ intégrable telle que pour tout $t\in I$, pour presque tout $x \in E$, on a \[\left| f(t,x) - f(t_0,x) \right| \leq g(x) \left|t-t_0\right|\]
 \end{itemize}
-Alors, $t\mapsto \displaystyle \int f(t,x)\mathrm{d}\mu(x)$ est continue en $t_0$.
+Alors, $t\mapsto \displaystyle \int f(t,x)\mathrm{d}\mu(x)$ est dérivable en $t_0$, de dérivée $\displaystyle \int \frac{\partial f}{\partial t} (t_0,x)\mathrm{d}\mu(x)$.
 \end{prop}
+\begin{rmq}
+On peut remplacer les deux dernières conditions par les suivantes, plus fortes, qui assurent alors la dérivabilité en tout point de l'intervalle :
+\begin{itemize}
+\item[•] Pour presque tout $x \in E$, $t\mapsto f(t,x)$ est dérivable sur tout $I$.
+\item[•] Il existe $g$ intégrable tel que pour presque tout $x\in E$, pour tout $t\in I$, on a $\displaystyle \left| \frac{\partial f}{\partial t}(t,x) \right| \leq g(x)$.
+\end{itemize}
+\end{rmq}
 
 
 \end{document}
