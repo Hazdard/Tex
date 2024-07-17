@@ -18,7 +18,9 @@
 \end{center}
 Dans tout ce qui suit, on travaille dans un espace mesuré $(E,\mathcal{A},\mu)$, et on pourra utiliser un espace métrique $(T,d)$.\\ 
 
-\begin{thm}[Dynkin] Le $\sigma$-système engendré par un $\pi$-système est égal à la tribu engendrée par ce dernier.
+
+\begin{thm}[Dynkin] 
+Le $\sigma$-système engendré par un $\pi$-système est égal à la tribu engendrée par ce dernier.
 \end{thm}
 
 
@@ -42,9 +44,30 @@ On peut seulement supposer les conditions ci-dessus vraies presque partout, mais
 \begin{rmq}
 Si $\tilde{f} : E \mapsto F$ est presque partout égale à une fonction mesurable $f : (E,\mathcal{A}) \mapsto (F,\mathcal{B})$, alors $\tilde{f}$ est mesurable pour la tribu complétée $\overline{\mathcal{A}}$ sur $E$.
 \end{rmq}
+
+
+\begin{thm}[Régularité des mesures boréliennes finies]
+Si $\mu$ est une mesure borélienne finie sur un espace métrique $(T,d)$, alors $\mu$ est régulière, i.e pour tout $A \in \mathcal{B}(T)$:
+\begin{align*}
+\mu(A) &= \inf \left\{ \mu(U) \ \setbar \ U \text{ ouvert},\  A \subset U \right\} \\
+&=\sup \left\{ \mu(F) \ \setbar \ F \text{ fermé}, \ F \subset A \right\}
+\end{align*}
+\end{thm}
+
+
+\begin{rmq}
+Dans un espace polonais (métrique séparable complet), on a de plus que la régularité intérieure est sur les compacts.
+\end{rmq}
+
+\begin{thm}[Régularité des mesures de Radon]
+Si $\mu$ est une mesure de Radon sur un espace métrique localement compact séparable (ex. $\R^d$), alors $\mu$ est régulière, et  la régularité intérieure est sur les compacts. 
+\end{thm}
+
 \subsection*{Méthode :}
 
-Toujours se demander : dans quel ensemble je travaille, quelle est la tribu, quelle est la mesure ?
+Toujours se demander : dans quel ensemble je travaille, quelle est la tribu, quelle est la mesure ? \\
+
+Utiliser les indicatrices, raisonner par densité, par régularité.
 
 \subsection*{Outils :}
 
