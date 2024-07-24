@@ -55,7 +55,6 @@ On peut seulement supposer les conditions ci-dessus vraies presque partout, mais
 Si $\tilde{f} : E \mapsto F$ est presque partout égale à une fonction mesurable $f : (E,\mathcal{A}) \mapsto (F,\mathcal{B})$, alors $\tilde{f}$ est mesurable pour la tribu complétée $\overline{\mathcal{A}}$ sur $E$.
 \end{rmq}
 
-
 \begin{thm}[Régularité des mesures boréliennes finies]
 Si $\mu$ est une mesure borélienne finie sur un espace métrique $(T,d)$, alors $\mu$ est régulière, i.e pour tout $A \in \mathcal{B}(T)$:
 \begin{align*}
@@ -74,7 +73,7 @@ Si $\mu$ est une mesure de Radon sur un espace métrique localement compact sép
 \end{thm}
 
 \begin{thm}[Représentation de Riesz-Markov]
-Si $E$ est un espace métrique localement compact séparable, et $\Lambda : C_c(E) \mapsto \R$ une forme linéaire positive	, alors il existe une unique mesure de Radon $\mu$ sur $E$ telle que, pour tout $f\in C_c(E)$ : 
+Si $E$ est un espace métrique localement compact séparable, et $\Lambda : C_c(E) \mapsto \R$ une forme linéaire positive, alors il existe une unique mesure de Radon $\mu$ sur $E$ telle que, pour tout $f\in C_c(E)$ : 
 \[\Lambda(f) = \int f \mathrm{d}\mu\]
 \end{thm}
 
@@ -92,8 +91,12 @@ Soient $ 1 \leq p,q,r \leq +\infty$, $f\in L^p$, $g \in L^q$, on a les inégalit
 
 \begin{thm}[Riesz-Fischer]
 Si $p \in [1; +\infty]$, alors $L^p(E,\mathcal{A},\mu)$ est un espace de Banach.
-
 \end{thm}
+
+
+\begin{rmq}
+La preuve du théorème ci-dessus donne en particulier que la convergence en norme $L^p$ implique l'existence d'une extraite qui converge presque partout. Le théorème de convergence dominée donne une sorte de réciproque, i.e que la convergence presque partout fournit la convergence $L^p$, sous réserve d'avoir une domination intégrable.
+\end{rmq}
 
 \subsection*{Outils :}
 
