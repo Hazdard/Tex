@@ -118,6 +118,11 @@ Si  $(E,d)$ est une métrique séparable, alors $\mathcal{B}(E)$ est dénombrabl
 Pour le point \textit{2.(a)}, il suffit en fait que la mesure soit extérieurement régulière sur les ouverts, et pour le point \textit{2.(b)}, il suffit qu'elle soit de plus intérieurement régulière sur les compacts.
 \end{rmq}
 
+
+\begin{thm}[Dérivée de Radon-Nikodym]
+Soient $\mu$ et $\nu$ deux mesures $\sigma$-finies sur $(E,\mathcal{A})$. Si $\mu$ est absolument continue par rapport à $\nu$, alors il existe $f : E \mapsto \overline{\R}_+$ mesurable tel que $\mu=f\nu$.
+\end{thm}
+
 \subsection*{Outils :}
 
 
@@ -174,5 +179,10 @@ $\displaystyle F_{\mu}(x) := \begin{cases} \mu(]0;x]) & \text{ si } x \geq 0  \\
 \item[•] Si $F : \R \mapsto \R$ est croissante, continue à droite, alors il existe une unique mesure de Radon $\mu$ telle que, pour tout $a<b \in \R$, $\mu(]a;b])=F(b)-F(a)$.
 \end{itemize}
 \end{prop}
+
+\begin{cor}[Décomposition de Lebesgue]
+Si $\mu$ et $\nu$ sont deux mesures $\sigma$-finies sur $(E,\mathcal{A})$, alors il existe une unique décomposition $\nu = \nu_a + \nu_\bot$ en deux mesures telles que $\nu_a$ est absolument continue par rapport à $\mu$, et $\nu_\bot$ est étrangère à $\mu$. 
+
+\end{cor}
 
 \end{document}
