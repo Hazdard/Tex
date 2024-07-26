@@ -18,13 +18,6 @@
 \end{center}
 
 
-\subsection*{Méthode}
-
-\begin{itemize}
-\item[-] Toujours se demander : dans quel ensemble je travaille, quelle est la tribu, quelle est la mesure ? 
-\item[-] Utiliser les indicatrices, raisonner par densité, par régularité.
-\end{itemize}
-
 \subsection*{Théorèmes}
 Dans tout ce qui suit, on travaille dans un espace mesuré $(E,\mathcal{A},\mu)$, et on pourra utiliser un espace métrique $(T,d)$.
 
@@ -182,7 +175,34 @@ $\displaystyle F_{\mu}(x) := \begin{cases} \mu(]0;x]) & \text{ si } x \geq 0  \\
 
 \begin{cor}[Décomposition de Lebesgue]
 Si $\mu$ et $\nu$ sont deux mesures $\sigma$-finies sur $(E,\mathcal{A})$, alors il existe une unique décomposition $\nu = \nu_a + \nu_s$ en deux mesures telles que $\nu_a$ est absolument continue par rapport à $\mu$, et $\nu_s$ est étrangère à $\mu$. 
-
 \end{cor}
+
+\begin{prop}[Points de Lebesgue]
+Si $f \in L^1(\R^d,\mathcal{B}(\R^d),\lambda_d)$, alors presque tous les points de $\R^d$ sont des points de Lebesgue pour $f$.
+\end{prop}
+
+\begin{cor}
+Si $\mu$ est une mesure de Radon absolument continue par rapport à la mesure de Lebesgue, alors sa dérivée de Radon-Nikodym $f$ est localement intégrable, et pour presque tout $x\in \R^d$ :
+\[\lim\limits_{r \to 0}  \frac{\mu(B(x,r))}{\lambda_d(B(x,r))} = f(x)\]
+\end{cor}
+
+\begin{rmq}
+On peut en fait montrer que pour une mesure étrangère à $\lambda_d$, le taux d'accroissement ci-dessus tend vers 0. On en déduit que pour une mesure borélienne $\sigma$-finie quelconque, la limite de ce taux est presque-partout égal à la dérivée de Radon-Nikodym de la partie absolument continue de la décomposition de Lebesgue de cette mesure.
+\end{rmq}
+
+\begin{cor}
+L'intégrale d'une fonction $f \in L^1(\R,\mathcal{B}(\R),\lambda)$ contre la mesure de Lebesgue est presque partout dérivable, de dérivée $f$.
+\end{cor}
+
+\begin{rmq}
+La réciproque est fausse : une fonction borélienne dérivable presque partout n'est pas forcément égale à l'intégrale de sa dérivée. Par exemple l'escalier de Cantor est croissant continu sur $[0,1]$, de dérivée presque partout nulle, mais $F(1)-F(0)=1$. \\
+En fait, si $f$ est croissante continue, par théorème de Stieltjes elle définie une mesure de Radon, et si la partie singulière dans sa décomposition de Lebesgue est nulle, i.e la mesure est absolument continue par rapport à la mesure de Lebesgue, alors on dit que $f$ est absolument continue. Sinon, il manque la contribution de la partie singulière.
+\end{rmq}
+\subsection*{Méthode et contexte}
+
+\begin{itemize}
+\item[-] Toujours se demander : dans quel ensemble je travaille, quelle est la tribu, quelle est la mesure ? 
+\item[-] Utiliser les indicatrices, raisonner par densité, par régularité.
+\end{itemize}
 
 \end{document}
