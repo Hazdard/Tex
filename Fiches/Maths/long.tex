@@ -130,10 +130,20 @@ Soient $\mu_1$ et $\mu_2$ deux mesures $\sigma$-finies sur $(E_1,\mathcal{E}_1)$
 On dispose aussi de la version Fubini-Lebesgue dans le cas intégrable, qui aboutit aux mêmes conclusions, avec en plus que, pour $|f|$, les deux fonctions de \textit{1.} sont finies presque-partout.
 \end{rmq}
 
+\begin{cor}[Intégration par parties]
+Soient $f$ et $g$ sont deux fonctions mesurables, localement intégrables de $\R$ dans $\R$. On note, pour $x \in \R$ : \[ F(x) := \int_0^x f(t)\mathrm{d}t, \quad \text{et} \quad G(x) := \int_0^x g(t)\mathrm{d}t.\]
+Alors, $F$ et $G$ sont absolument continues, dérivables presque partout, de dérivées presque partout égales respectivement à $f$ et $g$, et de plus, pour tout $a < b$ :
+\[\int_a^b f(t)G(t)\mathrm{d}t = \Big(F(b)G(b)-F(a)G(a)\Big) - \int_a^b F(t)g(t)\mathrm{d}t\]
+\end{cor}
 
-
-%RAJOUTE IPP ET CHG DE VAR
-
+\begin{thm}[Changement de variable]
+Soit $\varphi$ un $C^1$-difféomorphisme entre deux ouvert $U$ et $V$ de $\R^n$. On note $\varphi'(x)$ sa différentielle et $J_\varphi(x):=\det\left(\varphi'(x)\right)$ le jacobien de $\varphi$ au point $x\in U$. On a :
+\begin{enumerate}
+\item Pour toute fonction $f\geq 0$ borélienne et tout borélien $B$ de $V$, on a : 
+\[\int_B f(y)\mathrm{d}y = \int_{\varphi^{-1}(B)}f(\varphi(x)) |J_\varphi(x)|\mathrm{d}x\]
+\item Pour toute fonction borélienne $f$ sur $V$, la condition que $f$ soit intégrable sur $V$ est identique à la condition que la fonction $|J_\varphi(x)|f(\varphi(x))$ soit intégrable sur $U$, et dans ce cas, la formule du changement de variable ci-dessus est encore valide.
+\end{enumerate}
+\end{thm}
 
 \subsection*{Outils :}
 
