@@ -105,13 +105,26 @@
     \end{adjustwidth}
 } % new environment for one column entries
 
+% Swapped columns: Date on the left, Text on the right
 \newenvironment{twocolentry}[2][]{
     \onecolentry
-    \def\secondColumn{#2}
-    \setcolumnwidth{\fill, 4.5 cm}
+    \def\firstColumn{#2}
+    \setcolumnwidth{4.5 cm, \fill}
     \begin{paracol}{2}
+    \raggedright \firstColumn \switchcolumn
 }{
-    \switchcolumn \raggedleft \secondColumn
+    \end{paracol}
+    \endonecolentry
+} % new environment for two column entries
+
+% Swapped columns: Date on the left, Text on the right for the test version
+\newenvironment{twocolentry_test}[2][]{
+    \onecolentry
+    \def\firstColumn{#2}
+    \setcolumnwidth{2.5 cm, \fill}
+    \begin{paracol}{2}
+    \raggedright \firstColumn \switchcolumn
+}{
     \end{paracol}
     \endonecolentry
 } % new environment for two column entries
@@ -179,60 +192,52 @@
 
 		
         \begin{twocolentry}{
-        }
-            \textbf{École Normale Supérieure Paris-Saclay}, Department of Mathematics. \end{twocolentry}
-        \vspace{0.10 cm}
-        \begin{onecolentry}
-            \begin{highlights}
-                \item \begin{twocolentry}{Sept 2024 - July 2025}\textbf{Master 1 :} Master Jacques Hadamard, Paris-Saclay University. \end{twocolentry}
-                \item \begin{twocolentry}{Sept 2023 - July 2024}\textbf{License 3 :} License de Mathématiques renforcée, Paris-Saclay University. \end{twocolentry}
-            \end{highlights}
-        \end{onecolentry}
-
+        July 2024}
+           \textbf{Undergraduate degree in Mathematics} (License renforcée), University Paris-Saclay, ENS Paris-Saclay. \end{twocolentry}
         
+        \vspace{0.2cm}
+        
+        \begin{twocolentry}{
+        July 2023}
+          \textbf{ Undergraduate degree in Computer Science} (License renforcée), University Paris-Saclay, ENS Paris-Saclay. \end{twocolentry}
+
         \vspace{0.2cm}
 
 
        
         \begin{twocolentry}{
-        }
-            \textbf{École Normale Supérieure Paris-Saclay}, Department of Computer Science. \end{twocolentry}
-        \vspace{0.10 cm}
-        \begin{onecolentry}
-            \begin{highlights}
-                \item \begin{twocolentry}{Sept 2022 - July 2023}\textbf{License 3 :} License d'Informatique renforcée, Paris-Saclay University. \end{twocolentry} 
-            \end{highlights}
-        \end{onecolentry}
+        July 2022}
+            \textbf{École Normale Supérieure Paris-Saclay}, admission to the competitive national entrance exam. \end{twocolentry}
+       
         
         
-        \vspace{0.2cm}        
-        
-        
-        \begin{twocolentry}{
-        }
-            \textbf{Lycée Janson de Sailly}, Classes préparatoires aux grandes écoles (CPGE), Paris. \end{twocolentry}
-        \vspace{0.10 cm}
-        \begin{onecolentry}
-            \begin{highlights}
-                \item \begin{twocolentry}{Sept 2020 – July 2022} MPSI, MP* : Mathematics, Physics, Computer Science.\end{twocolentry}
-            \end{highlights}
-        \end{onecolentry}
-        
-        
-
-		
-		\vspace{0.2cm}
+%        \vspace{0.2cm}        
+%        
+%        
+%        \begin{twocolentry}{
+%        }
+%            \textbf{Lycée Janson de Sailly}, Classes préparatoires aux grandes écoles (CPGE), Paris. \end{twocolentry}
+%        \vspace{0.10 cm}
+%        \begin{onecolentry}
+%            \begin{highlights}
+%                \item \begin{twocolentry}{Sept 2020 – July 2022} MPSI, MP* : Mathematics, Physics, Computer Science.\end{twocolentry}
+%            \end{highlights}
+%        \end{onecolentry}
+%        
+%        
+%
+%		
+%		\vspace{0.2cm}
 		
 
 
     
-    \section{Interships}
+    \section{Internships}
 
 
 
         \begin{twocolentry}{
-            April 2023 – June 2023
-        }
+            April 2024 – June 2024}
             \textbf{Paradifferential K.A.M theory}, supervised by Thomas Alazard, E.N.S Paris-Saclay. \end{twocolentry}
 
         \vspace{0.10 cm}
@@ -247,8 +252,7 @@
         
         
         \begin{twocolentry}{
-            June 2022 – July 2022
-        }
+            June 2023 – July 2023}
             \textbf{The MP-LWE problem}, supervised by Alice Pellet-Mary, University of Bordeaux. \end{twocolentry}
 
         \vspace{0.10 cm}
@@ -257,14 +261,15 @@
                 \item Study of the Learning With Errors (LWE) problem and reduction of some of its polynomial variants.
             \end{highlights}
         \end{onecolentry}
+        
+        
 
         
     \section{Projects}
 
         
-        \begin{twocolentry}{
-        }
-            \textbf{Go language compiler}\end{twocolentry}
+        \begin{onecolentry}
+            \textbf{Go language compiler}\end{onecolentry}
 
         \vspace{0.10 cm}
         \begin{onecolentry}
@@ -280,9 +285,8 @@
         
         
         
-        \begin{twocolentry}{
-             }
-            \textbf{Automatic proofs of first order predicates}\end{twocolentry}
+        \begin{onecolentry}
+            \textbf{Automatic proofs of first order predicates}\end{onecolentry}
 
         \vspace{0.10 cm}
         \begin{onecolentry}
@@ -296,10 +300,8 @@
 
         \vspace{0.2 cm}
         
-        \begin{twocolentry}{
-            \href{}{}
-        }
-            \textbf{Minimal computer}\end{twocolentry}
+        \begin{onecolentry}
+            \textbf{Minimal computer}\end{onecolentry}
 
         \vspace{0.10 cm}
         \begin{onecolentry}
@@ -311,10 +313,8 @@
 
         \vspace{0.2 cm}        
         
-        \begin{twocolentry}{
-            \href{}{}
-        }
-            \textbf{Custom shell}\end{twocolentry}
+        \begin{onecolentry}
+            \textbf{Custom shell}\end{onecolentry}
 
         \vspace{0.10 cm}
         \begin{onecolentry}
@@ -326,15 +326,13 @@
 
         \vspace{0.2 cm}
         
-        \begin{twocolentry}{
-            \href{}{}
-        }
-            \textbf{Syntaxic analyser}\end{twocolentry}
+        \begin{onecolentry}
+            \textbf{Syntactic analyzer}\end{onecolentry}
 
         \vspace{0.10 cm}
         \begin{onecolentry}
             \begin{highlights}
-                \item Wrote a syntaxic analyser for a toy language that checks if a program is syntactically correct, then pretty print it and performs random specification tests.
+                \item Wrote a syntactic analyzer for a toy language that checks if a program is syntactically correct, then pretty print it and performs random specification tests.
                 \item Tools Used: C, Flex.
             \end{highlights}
         \end{onecolentry}
@@ -355,4 +353,3 @@
     
 
 \end{document}
-
