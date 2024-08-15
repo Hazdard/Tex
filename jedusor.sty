@@ -1,4 +1,12 @@
-%%=================================================================Roadmap============================================================================%%
+%
+%====================TodoInit====================%
+
+% Mettre des users tags pour les commandes récurrentes
+% Utiliser Customize Completion pour rajouter les begin et end des nouveaux theoremes et leurs versions star ; red ; sequence
+% Rajouter des raccourcis clavier pour mathbb, mathcal, et autres
+
+
+%====================Roadmap====================%
 % Raccourcis utiles
 % Indentation première ligne des th, rmq, cor, def, lem, etc ...
 
@@ -12,7 +20,7 @@
 
 %https://tex.stackexchange.com/questions/234676/new-theorem-style
 
-%%===============================================================AppelPackages=======================================================================%%
+%====================AppelPackages====================%
 
 \usepackage[french]{babel}
 \usepackage[T1]{fontenc}
@@ -31,7 +39,7 @@
 
 \pagestyle{fancy}
 
-%%==============================================================CustomStyles==========================================================================%%
+%====================CustomStyles====================%
 
 \newtheoremstyle{bourbaki_it}%            % Name
   {10pt}%                                 % Space above
@@ -53,7 +61,7 @@
   { }%                                    % Space after theorem head, ' ', or \newline
   {}%                                     % Theorem head spec (can be left empty, meaning `normal')
   
-%%==============================================================CustomTheorems========================================================================%%
+%====================CustomTheorems====================%
 
 \renewcommand{\thesection}{\Roman{section}} 
 
@@ -65,23 +73,31 @@
 \theoremstyle{bourbaki_plain}
 
 \newtheorem{defin}{Définition}[section]
-\renewcommand{\thedefin}{\thesection -\arabic{defin}}
+\renewcommand{\thedefin}{\thesection-\arabic{defin}}
 
 \newtheorem*{rmq}{Remarque}
 
 \theoremstyle{bourbaki_it}
 
 \newtheorem{thm}{Théorème}[section]
-\renewcommand{\thethm}{\thesection -\arabic{thm}} %Met un - a la place du .
+\renewcommand{\thethm}{\thesection-\arabic{thm}} %Met un - a la place du .
+\newtheorem{thmstar}{Théorème}[section]
+\renewcommand{\thethmstar}{\arabic{thmstar}} % Retire le tirer pour les sections * sans numéro
 
 \newtheorem{cor}[thm]{Corollaire}
-\renewcommand{\thecor}{\thesection -\arabic{cor}}
+\renewcommand{\thecor}{\thesection-\arabic{cor}}
+\newtheorem{corstar}[thmstar]{Corollaire}
+\renewcommand{\thecorstar}{\arabic{corstar}}
 
 \newtheorem{lemma}[thm]{Lemme}
-\renewcommand{\thelemma}{\thesection -\arabic{lemma}}
+\renewcommand{\thelemma}{\thesection-\arabic{lemma}}
+\newtheorem{lemmastar}[thmstar]{Lemme}
+\renewcommand{\thelemmastar}{\arabic{lemmastar}}
 
 \newtheorem{prop}[thm]{Proposition}
-\renewcommand{\theprop}{\thesection -\arabic{prop}}
+\renewcommand{\theprop}{\thesection-\arabic{prop}}
+\newtheorem{propstar}[thmstar]{Proposition}
+\renewcommand{\thepropstar}{\arabic{propstar}}
 
 
 \newtheorem{mtheoreminner}{Théorème}
@@ -96,7 +112,7 @@
 % This is a theorem.
 %\end{mthm}
 
-%%=================================================================Misc==============================================================================%%
+%====================Misc====================%
 
 \hypersetup{
   colorlinks   = true,    % Colours links instead of ugly boxes
@@ -127,7 +143,7 @@
 \crefname{prop}{Proposition}{Propositions}
 \crefname{mtheoreminner}{Théorème}{Théorèmes} 
 
-%%================================================================Shortcuts===========================================================================%%
+%====================Shortcuts====================%
 
 \def\C{\mathbb C}
 \def\R{\mathbb R}

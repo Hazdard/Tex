@@ -18,25 +18,25 @@
 \end{center}
 
 
-\subsection*{Théorèmes}
+\subsection*{Résultats principaux}
 Dans tout ce qui suit, on travaille dans un espace mesuré $(E,\mathcal{A},\mu)$, et on pourra utiliser un espace métrique $(T,d)$.
 
 
-\begin{thm}[Dynkin] 
+\begin{thmstar}[Dynkin] 
 Le $\sigma$-système engendré par un $\pi$-système est égal à la tribu engendrée par ce dernier.
-\end{thm}
+\end{thmstar}
 
 
-\begin{thm}[Convergence monotone]
+\begin{thmstar}[Convergence monotone]
 Soit $(f_n)_{n\in\N}$ une suite de fonctions mesurables de $E$ dans $[0,+\infty]$, telle que pour tout $n\geq 0$, $f_n \leq f_{n+1}  $. Alors, en notant $f$ la limite simple de cette suite, on a que $f$ est mesurable, et : 
 \[\int f = \lim\limits_{n \to +\infty} \int f_n \]
-\end{thm}
+\end{thmstar}
 
 
-\begin{thm}[Convergence dominée]
+\begin{thmstar}[Convergence dominée]
 Soit $(f_n)_{n\in\N}$ une suite de fonctions mesurables qui converge simplement vers $f$. Si il existe $g$ intégrable telle que pour tout $n \geq 0$, $\left| f_n \right| \leq g$, alors $f$ est intégrable et :
 \[\int f = \lim\limits_{n \to +\infty} \int f_n \]
-\end{thm}
+\end{thmstar}
 
 
 \begin{rmq}
@@ -48,50 +48,50 @@ On peut seulement supposer les conditions ci-dessus vraies presque partout, mais
 Si $\tilde{f} : E \mapsto F$ est presque partout égale à une fonction mesurable $f : (E,\mathcal{A},\mu) \mapsto (F,\mathcal{B})$, alors $\tilde{f}$ est mesurable pour la tribu complétée $\overline{\mathcal{A}}$ de $\mu$ sur $E$.
 \end{rmq}
 
-\begin{thm}[Régularité des mesures boréliennes finies]
+\begin{thmstar}[Régularité des mesures boréliennes finies]
 Si $\mu$ est une mesure borélienne finie sur un espace métrique $(T,d)$, alors $\mu$ est régulière, i.e pour tout $A \in \mathcal{B}(T)$:
 \begin{align*}
 \mu(A) &= \inf \left\{ \mu(U) \ \setbar \ U \text{ ouvert},\  A \subset U \right\} \\
 &=\sup \left\{ \mu(F) \ \setbar \ F \text{ fermé}, \ F \subset A \right\}
 \end{align*}
-\end{thm}
+\end{thmstar}
 
 
 \begin{rmq}
 Dans un espace polonais (métrique séparable complet), on a de plus que la régularité intérieure est sur les compacts.
 \end{rmq}
 
-\begin{thm}[Régularité des mesures de Radon]
+\begin{thmstar}[Régularité des mesures de Radon]
 Si $\mu$ est une mesure de Radon sur un espace métrique localement compact séparable (ex. $\R^d$), alors $\mu$ est régulière, et  la régularité intérieure est sur les compacts. 
-\end{thm}
+\end{thmstar}
 
-\begin{thm}[Représentation de Riesz-Markov]
+\begin{thmstar}[Représentation de Riesz-Markov]
 Si $E$ est un espace métrique localement compact séparable, et $\Lambda : C_c(E) \mapsto \R$ une forme linéaire positive, alors il existe une unique mesure de Radon $\mu$ sur $E$ telle que, pour tout $f\in C_c(E)$ : 
 \[\Lambda(f) = \int f \mathrm{d}\mu\]
-\end{thm}
+\end{thmstar}
 
 \begin{rmq}
 Avec ce qui précède, on obtient de plus que la mesure $\mu$ est régulière.
 \end{rmq}
 
-\begin{thm}[Inégalités d'Hölder et de Young]
+\begin{thmstar}[Inégalités d'Hölder et de Young]
 Soient $ 1 \leq p,q,r \leq +\infty$, $f\in L^p$, $g \in L^q$, on a les inégalités :
 \begin{itemize}
 \item[•] Si $p$ et $q$ sont des exposants conjugués, i.e : $\frac{1}{p} + \frac{1}{q} = 1$, alors $\|fg\|_{L^1} \leq \|f\|_{L^p}\|g\|_{L^q}$.
 \item[•] Si $\frac{1}{p} + \frac{1}{q} = 1 + \frac{1}{r}$, alors $\|f*g\|_{L^r} \leq \|f\|_{L^p}\|g\|_{L^q}$.
 \end{itemize}
-\end{thm}
+\end{thmstar}
 
-\begin{thm}[Riesz-Fischer]
+\begin{thmstar}[Riesz-Fischer]
 Si $p \in [1; +\infty]$, alors $L^p(E,\mathcal{A},\mu)$ est un espace de Banach.
-\end{thm}
+\end{thmstar}
 
 
 \begin{rmq}
 La preuve du théorème ci-dessus donne en particulier que la convergence en norme $L^p$ implique l'existence d'une extraite qui converge presque partout. Le théorème de convergence dominée fournit une sorte de réciproque, i.e que la convergence presque partout entraine la convergence $L^p$, sous réserve d'avoir une domination intégrable.
 \end{rmq}
 
-\begin{thm}[Densité]
+\begin{thmstar}[Densité]
 Soit $p \in [1;+\infty[$.
 \begin{enumerate}
 \item Les fonctions étagées sont denses dans $L^p$. De plus, si $\mathcal{A}$ est généré par une famille dénombrable dense et si $\mu$ est $\sigma$-finie, alors $L^p(E,\mathcal{A}, \mu)$ est séparable.
@@ -101,7 +101,7 @@ Soit $p \in [1;+\infty[$.
 \item Si de plus $(E,d)$ est localement compact séparable et $\mu$ est une mesure de Radon, alors les fonctions lipschitziennes à support compact sont denses dans $L^p$.
 \end{enumerate}
 \end{enumerate}
-\end{thm}
+\end{thmstar}
 
 \begin{rmq}
 Si  $(E,d)$ est une métrique séparable, alors $\mathcal{B}(E)$ est dénombrablement généré.
@@ -112,68 +112,68 @@ Pour le point \textit{2.(a)}, il suffit en fait que la mesure soit extérieureme
 \end{rmq}
 
 
-\begin{thm}[Dérivée de Radon-Nikodym]
+\begin{thmstar}[Dérivée de Radon-Nikodym]
 Soient $\mu$ et $\nu$ deux mesures $\sigma$-finies sur $(E,\mathcal{A})$. Si $\mu$ est absolument continue par rapport à $\nu$, alors il existe $f : E \mapsto \overline{\R}_+$ mesurable tel que $\mu=f\nu$.
-\end{thm}
+\end{thmstar}
 
 
-\begin{thm}[Fubini-Tonelli]
+\begin{thmstar}[Fubini-Tonelli]
 Soient $\mu_1$ et $\mu_2$ deux mesures $\sigma$-finies sur $(E_1,\mathcal{E}_1)$ et $(E_2,\mathcal{E}_2)$. Si $f : E_1 \times E_2 \mapsto [0,+\infty]$ est mesurable, alors : 
 \begin{enumerate}
 \item $\displaystyle x\mapsto \int_{E_2} f(x,y) \mathrm{d}\mu_2(y)$ est mesurable pour $\mathcal{E}_1$, et $\displaystyle y\mapsto \int_{E_1} f(x,y) \mathrm{d}\mu_1(x)$ est mesurable pour $\mathcal{E}_2$. 
 \item On a :
 \[\int f(x,y)\mathrm{d}(\mu_1 \otimes \mu_2)(x,y)=\int_{E_1}\left(\int_{E_2} f(x,y) \mathrm{d}\mu_2(y)\right)\mathrm{d}\mu_1(x)=\int_{E_2}\left(\int_{E_1} f(x,y) \mathrm{d}\mu_1(x)\right)\mathrm{d}\mu_2(y) \]
 \end{enumerate}
-\end{thm}
+\end{thmstar}
 
 \begin{rmq}
 On dispose aussi de la version Fubini-Lebesgue dans le cas intégrable, qui aboutit aux mêmes conclusions, avec en plus que, pour $|f|$, les deux fonctions de \textit{1.} sont finies presque-partout.
 \end{rmq}
 
-\begin{cor}[Intégration par parties]
+\begin{corstar}[Intégration par parties]
 Soient $f$ et $g$ sont deux fonctions mesurables, localement intégrables de $\R$ dans $\R$. On note, pour $x \in \R$ : \[ F(x) := \int_0^x f(t)\mathrm{d}t, \quad \text{et} \quad G(x) := \int_0^x g(t)\mathrm{d}t.\]
 Alors, $F$ et $G$ sont absolument continues, dérivables presque partout, de dérivées presque partout égales respectivement à $f$ et $g$, et de plus, pour tout $a < b$ :
 \[\int_a^b f(t)G(t)\mathrm{d}t = \Big(F(b)G(b)-F(a)G(a)\Big) - \int_a^b F(t)g(t)\mathrm{d}t\]
-\end{cor}
+\end{corstar}
 
-\begin{thm}[Changement de variable]
+\begin{thmstar}[Changement de variable]
 Soit $\varphi$ un $C^1$-difféomorphisme entre deux ouvert $U$ et $V$ de $\R^n$. On note $\varphi'(x)$ sa différentielle et $J_\varphi(x):=\det\left(\varphi'(x)\right)$ le jacobien de $\varphi$ au point $x\in U$. On a :
 \begin{enumerate}
 \item Pour toute fonction $f\geq 0$ borélienne et tout borélien $B$ de $V$, on a : 
 \[\int_B f(y)\mathrm{d}y = \int_{\varphi^{-1}(B)}f(\varphi(x)) |J_\varphi(x)|\mathrm{d}x\]
 \item Pour toute fonction borélienne $f$ sur $V$, la condition que $f$ soit intégrable sur $V$ est identique à la condition que la fonction $|J_\varphi(x)|f(\varphi(x))$ soit intégrable sur $U$, et dans ce cas, la formule du changement de variable ci-dessus est encore valide.
 \end{enumerate}
-\end{thm}
+\end{thmstar}
 
-\begin{thm}[Décomposition de Jordan]
+\begin{thmstar}[Décomposition de Jordan]
 
-\end{thm}
+\end{thmstar}
 
 \begin{rmq}
 Version signée/complexe de représentation de Riesz.
 \end{rmq}
 
-\begin{thm}
+\begin{thmstar}
 Si $p$ et $q$ sont deux exposants conjugués finis, alors $L^q$ est le dual topologique de $L^p$.
-\end{thm}
-\subsection*{Outils :}
+\end{thmstar}
+\subsection*{Outils importants}
 
 
-\begin{cor}[Unicité des mesures] Soient $\mu$ et $\nu$ deux mesures sur $(E,\mathcal{A})$ qui coïncident sur un $\pi$-système $\mathcal{C}$ tel que $\mathcal{A}=\sigma(\mathcal{C})$. Alors :
+\begin{corstar}[Unicité des mesures] Soient $\mu$ et $\nu$ deux mesures sur $(E,\mathcal{A})$ qui coïncident sur un $\pi$-système $\mathcal{C}$ tel que $\mathcal{A}=\sigma(\mathcal{C})$. Alors :
 \begin{enumerate}
 \item Si $\mu(E)=\nu(E) < +\infty$, alors $\mu = \nu$.
 \item Si il existe une suite croissante $(A_n)_{n\in\N}$ d'éléments de $\mathcal{C}$ tels que $\displaystyle \bigcup_n A_n = E$, et que pour tout $n\in\N$, $\mu(A_n)=\nu(A_n)<+\infty$, alors $\mu = \nu$.
 \end{enumerate}
-\end{cor}
+\end{corstar}
 
 
-\begin{lemma}[Fatou]
+\begin{lemmastar}[Fatou]
 Soit $(f_n)_{n\in\N}$ une suite de fonctions mesurables positives. Alors :
 \[\int \varliminf_n f_n \leq \varliminf_n \int f_n\]
-\end{lemma}
+\end{lemmastar}
 
 
-\begin{prop}[Continuité des intégrales]
+\begin{propstar}[Continuité des intégrales]
 Soit $t_0 \in T$  et $f : T \times E \mapsto \overline{\R} $. Si :
 \begin{itemize}
 \item[•] Pour tout $t\in T$, $x\mapsto f(t,x)$ est mesurable.
@@ -181,10 +181,10 @@ Soit $t_0 \in T$  et $f : T \times E \mapsto \overline{\R} $. Si :
 \item[•] Il existe $g$ intégrable telle que pour tout $t\in T$, pour presque tout $x \in E$, on a $\left| f(t,x) \right| \leq g(x)$
 \end{itemize}
 Alors, $t\mapsto \displaystyle \int f(t,x)\mathrm{d}\mu(x)$ est continue en $t_0$.
-\end{prop}
+\end{propstar}
 
 
-\begin{prop}[Dérivation des intégrales]
+\begin{propstar}[Dérivation des intégrales]
 Soit $I$ un intervalle ouvert de $\R$, $t_0 \in I$, et $f:I \times E \mapsto \overline{\R}$. Si :
 \begin{itemize}
 \item[•] Pour tout $t\in I$, $x\mapsto f(t,x)$ est mesurable et intégrable.
@@ -192,7 +192,7 @@ Soit $I$ un intervalle ouvert de $\R$, $t_0 \in I$, et $f:I \times E \mapsto \ov
 \item[•] Il existe $g$ intégrable telle que pour tout $t\in I$, pour presque tout $x \in E$, on a \[\left| f(t,x) - f(t_0,x) \right| \leq g(x) \left|t-t_0\right|\]
 \end{itemize}
 Alors, $t\mapsto \displaystyle \int f(t,x)\mathrm{d}\mu(x)$ est dérivable en $t_0$, de dérivée $\displaystyle \int \frac{\partial f}{\partial t} (t_0,x)\mathrm{d}\mu(x)$.
-\end{prop}
+\end{propstar}
 
 
 \begin{rmq}
@@ -204,41 +204,50 @@ On peut remplacer les deux dernières conditions par les suivantes, plus fortes,
 \end{rmq}
 
 
-\begin{prop}[Mesure de Stieltjes]
+\begin{propstar}[Mesure de Stieltjes]
 Il y a une correspondance entre les fonctions croissantes continues à droite, et les mesures de Radon. Plus précisemment :
 \begin{itemize}
 \item[•] Si $\mu$ est une mesure de Radon sur $\R$, alors la fonction $F_{\mu}$ suivante est croissante, continue à droite.
 $\displaystyle F_{\mu}(x) := \begin{cases} \mu(]0;x]) & \text{ si } x \geq 0  \\ -\mu(]x;0]) & \text{ si } x < 0 \end{cases}$
 \item[•] Si $F : \R \mapsto \R$ est croissante, continue à droite, alors il existe une unique mesure de Radon $\mu$ telle que, pour tout $a<b \in \R$, $\mu(]a;b])=F(b)-F(a)$.
 \end{itemize}
-\end{prop}
+\end{propstar}
 
-\begin{cor}[Décomposition de Lebesgue]
+\begin{corstar}[Décomposition de Lebesgue]
 Si $\mu$ et $\nu$ sont deux mesures $\sigma$-finies sur $(E,\mathcal{A})$, alors il existe une unique décomposition $\nu = \nu_a + \nu_s$ en deux mesures telles que $\nu_a$ est absolument continue par rapport à $\mu$, et $\nu_s$ est étrangère à $\mu$. 
-\end{cor}
+\end{corstar}
 
-\begin{prop}[Points de Lebesgue]
+\begin{propstar}[Points de Lebesgue]
 Si $f \in L^1(\R^d,\mathcal{B}(\R^d),\lambda_d)$, alors presque tous les points de $\R^d$ sont des points de Lebesgue pour $f$.
-\end{prop}
+\end{propstar}
 
-\begin{cor}
+\begin{corstar}
 Si $\mu$ est une mesure de Radon absolument continue par rapport à la mesure de Lebesgue, alors sa dérivée de Radon-Nikodym $f$ est localement intégrable, et pour presque tout $x\in \R^d$ :
 \[\lim\limits_{r \to 0}  \frac{\mu(B(x,r))}{\lambda_d(B(x,r))} = f(x)\]
-\end{cor}
+\end{corstar}
 
 \begin{rmq}
 On peut en fait montrer que pour une mesure étrangère à $\lambda_d$, le taux d'accroissement ci-dessus tend vers 0. On en déduit que pour une mesure borélienne $\sigma$-finie quelconque, la limite de ce taux est presque-partout égal à la dérivée de Radon-Nikodym de la partie absolument continue de la décomposition de Lebesgue de cette mesure.
 \end{rmq}
 
-\begin{cor}
+\begin{corstar}
 L'intégrale d'une fonction $f \in L^1(\R,\mathcal{B}(\R),\lambda)$ contre la mesure de Lebesgue est presque partout dérivable, de dérivée $f$.
-\end{cor}
+\end{corstar}
 
 \begin{rmq}
 La réciproque est fausse : une fonction borélienne dérivable presque partout n'est pas forcément égale à l'intégrale de sa dérivée. Par exemple l'escalier de Cantor est croissant continu sur $[0,1]$, de dérivée presque partout nulle, mais $F(1)-F(0)=1$. \\
 En fait, si $f$ est croissante continue, par théorème de Stieltjes elle définie une mesure de Radon, et si la partie singulière dans sa décomposition de Lebesgue est nulle, i.e la mesure est absolument continue par rapport à la mesure de Lebesgue, alors on dit que $f$ est absolument continue. Sinon, il manque la contribution de la partie singulière.
 \end{rmq}
 
+
+\subsection*{Autres théorèmes}
+\begin{thmstar}
+[Egoroff] Soit $(E,\mathcal{A},\mu)$ est un espace mesuré fini. Si $(f_n)_{n\in \N}$ est une suite de fonctions mesurables réelles convergeant $\mu$-presque-partout vers $f$ mesurable, alors pour tout $\varepsilon > 0$, il existe $A\in \mathcal{A}$ tel que $(f_n)_{n\in \N}$ converge uniformément vers $f$ sur $A$, et $\mu(E\setminus A) \leq \varepsilon $. 
+\end{thmstar}
+
+\begin{thmstar}
+[Lusin] Soit $f : [a,b] \mapsto \R$ borélienne. Pour tout $\varepsilon>0$, il existe un compact $K\subset [a,b]$ avec $\lambda([a,b]\setminus K) \leq \varepsilon$, tel que la restriction de $f$ à $K$ est continue.
+\end{thmstar}
 
 \subsection*{Méthode et contexte}
 
