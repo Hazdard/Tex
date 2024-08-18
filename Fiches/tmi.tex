@@ -1,6 +1,6 @@
 \documentclass[11pt,a4paper]{article}
 
-\usepackage{../../jedusor}	
+\usepackage{../jedusor}	
 
 \renewcommand{\headrulewidth}{0pt} 
 \renewcommand{\footrulewidth}{1pt}
@@ -137,6 +137,10 @@ Soient $\mu_1$ et $\mu_2$ deux mesures $\sigma$-finies sur $(E_1,\mathcal{E}_1)$
 On dispose aussi de la version Fubini-Lebesgue dans le cas intégrable, qui aboutit aux mêmes conclusions, avec en plus que, pour $|f|$, les deux fonctions de \textit{1.} sont finies presque-partout.
 \end{rmq}
 
+\begin{rmq}
+Les égalités des théorèmes de Fubini reposent entièrement sur le théorème de la classe monotone, d'où l'importance de l'hypothèse de $\sigma$-finitude.
+\end{rmq}
+
 \begin{corstar}[Intégration par parties]
 Soient $f$ et $g$ sont deux fonctions mesurables, localement intégrables de $\R$ dans $\R$. On note, pour $x \in \R$ : \[ F(x) := \int_0^x f(t)\mathrm{d}t, \quad \text{et} \quad G(x) := \int_0^x g(t)\mathrm{d}t.\]
 Alors, $F$ et $G$ sont absolument continues, dérivables presque partout, de dérivées presque partout égales respectivement à $f$ et $g$, et de plus, pour tout $a < b$ :
@@ -144,7 +148,7 @@ Alors, $F$ et $G$ sont absolument continues, dérivables presque partout, de dé
 \end{corstar}
 
 \begin{thmstar}[Changement de variable]
-Soit $\varphi$ un $C^1$-difféomorphisme entre deux ouvert $U$ et $V$ de $\R^n$. On note $\varphi'(x)$ sa différentielle et $J_\varphi(x):=\det\left(\varphi'(x)\right)$ le jacobien de $\varphi$ au point $x\in U$. On a :
+Soit $\varphi$ un $C^1$-difféomorphisme entre deux ouverts $U$ et $V$ de $\R^n$. On note $\varphi'(x)$ sa différentielle et $J_\varphi(x):=\det\left(\varphi'(x)\right)$ le jacobien de $\varphi$ au point $x\in U$. On a :
 \begin{enumerate}
 \item Pour toute fonction $f\geq 0$ borélienne et tout borélien $B$ de $V$, on a : 
 \[\int_B f(y)\mathrm{d}y = \int_{\varphi^{-1}(B)}f(\varphi(x)) |J_\varphi(x)|\mathrm{d}x\]
