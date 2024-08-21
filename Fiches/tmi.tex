@@ -17,11 +17,13 @@
 \section*{Théorie de la mesure} 
 \end{center}
 
+%Théorème de Haar ?
+
 \subsection*{Méthode et contexte}
 
 \begin{itemize}
 \item[-] Toujours se demander : dans quel ensemble je travaille, quelle est la tribu, quelle est la mesure ? 
-\item[-] Utiliser les indicatrices, raisonner par densité, par régularité.
+\item[-] Raisonner par régularité, par densité : indicatrices $\rightarrow$ fonctions étagées $\rightarrow$ positives (limite croissante) $\rightarrow$ mesurables (partie positive et négative).
 \item[-] User et abuser des $\limsup$ et $\liminf$.
 \end{itemize}
 
@@ -251,7 +253,7 @@ En fait, si $f$ est croissante continue, par théorème de Stieltjes elle défin
 
 \subsection*{Autres théorèmes}
 \begin{thmstar}
-[Egoroff] Soit $(E,\mathcal{A},\mu)$ est un espace mesuré fini. Si $(f_n)_{n\in \N}$ est une suite de fonctions mesurables réelles convergeant $\mu$-presque-partout vers $f$ mesurable, alors pour tout $\varepsilon > 0$, il existe $A\in \mathcal{A}$ tel que $(f_n)_{n\in \N}$ converge uniformément vers $f$ sur $A$, et $\mu(E\setminus A) \leq \varepsilon $. 
+[Egorov] Si $\mu$ est une mesure finie, et $(f_n)_{n\in \N}$ est une suite de fonctions mesurables réelles convergeant $\mu$-presque-partout vers $f$ mesurable, alors pour tout $\varepsilon > 0$, il existe $A\in \mathcal{A}$ tel que $(f_n)_{n\in \N}$ converge uniformément vers $f$ sur $A$, et $\mu(E\setminus A) \leq \varepsilon $. 
 \end{thmstar}
 
 \begin{thmstar}
