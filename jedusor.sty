@@ -1,13 +1,13 @@
 %====================TodoInit====================%
 
 % Mettre des users tags pour les commandes récurrentes
-% Utiliser Customize Completion pour rajouter les begin et end des nouveaux theoremes et leurs versions star ; red ; sequence
-% Rajouter des raccourcis clavier pour mathbb, mathcal, et autres
+% Utiliser Customize Completion pour rajouter les begin des nouveaux theoremes (les ends sont mis automatiquement) et leurs versions star ; les alias en fin de fichier ; la coloration du texte ;
+% Rajouter des raccourcis clavier pour : mathbb, mathcal, et autres ; la coloration du texte ;
 
 
 %====================Roadmap====================%
-% Raccourcis utiles
-% Indentation première ligne des th, rmq, cor, def, lem, etc ...
+
+% Rajouter des alias utiles
 
 % Liens utiles :
 
@@ -73,6 +73,8 @@
 
 \newtheorem{defin}{Définition}[section]
 \renewcommand{\thedefin}{\thesection-\arabic{defin}}
+\newtheorem{definstar}{Définition}[section]
+\renewcommand{\thedefinstar}{\arabic{definstar}}
 
 \newtheorem*{rmq}{Remarque}
 
@@ -150,4 +152,5 @@
 \def\Z{\mathbb Z}
 \def\N{\mathbb N}
 \def\T{\mathbb T}
-\def\setbar{\middle|}
+\def\P{\mathbb P}
+\def\setbar{\ \middle| \ }
