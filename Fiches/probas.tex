@@ -18,7 +18,7 @@
 \end{center}
 
 %Fekete
-%Chap 6 : Jensen ;  Injectivité de Fourier ; (Bonus : les classiques Markov, Bienaymé-Chebyshev )
+%Chap 6 : Jensen ;  Injectivité de Fourier ; (Bonus : les classiques Markov, Bienaymé-Tchebychef )
 %
 %Chap 7 : Coalitions ; WLLN ; 
 %
@@ -28,22 +28,82 @@
 
 
 \subsection*{Méthode et contexte}
--LES LP SONT EMBOITES 
+\begin{itemize}
+\item[-] Une mesure de probabilité étant en particulier finie, on a dans ce cadre que les espaces $L^p$ sont emboités, i.e : $L^\infty \subseteq \dots \subseteq L^1$.
+\end{itemize}
 
 \subsection*{Résultats principaux}
-Dans tout ce qui suit, on travaille dans un espace probabilisé $(\Omega, \mathcal{F}, \P)$, et on pourra utiliser un espace mesurable $(E,\mathcal{E})$.
+Dans tout ce qui suit, on travaille dans un espace probabilisé $(\Omega, \mathcal{F}, P)$, et on pourra utiliser un espace mesurable $(E,\mathcal{E})$.
 
 \begin{definstar} ~
 \begin{enumerate}
-\item Si $X: \Omega \mapsto E$ est mesurable, alors $X$ est appelée \textit{variable aléatoire} (v.a) à valeurs dans $E$.
-\item Si $X$ est une v.a à valeurs dans E, on appelle loi de $X$ la mesure image de $\P$ par $X$, notée $\P_X$ et vérifiant \[\P_X(A) = \P\left(X^{-1}(A)\right)=\P\left(\left\{ \omega\in \Omega \setbar X(\omega)\in A \right\}\right) =\P(X\in A).\]
+\item Si $X: \Omega \mapsto E$ est mesurable, alors $X$ est appelée \textit{variable aléatoire} (v.a.) à valeurs dans $E$.
+\item Si $X$ est une v.a. à valeurs dans E, on appelle loi de $X$ la mesure image de $P$ par $X$, notée $P_X$ et vérifiant \[P_X(A) = P\left(X^{-1}(A)\right)=P\left(\left\{ \omega\in \Omega \setbar X(\omega)\in A \right\}\right) =P(X\in A).\]
 \end{enumerate}
 \end{definstar}
+
+\begin{definstar}
+Pour toute v.a.r $X$, on appelle \textit{fonction de répartition} de $X$ la donnée de $F_X :\R \mapsto [0,1]$ définie par $F_X(t) = P(X\leq t) = P_X(]-\infty,t])$.
+\end{definstar}
+
+\begin{rmq}
+$F_X$ est continue à droite, limitée à gauche (càdlàg), croissante, tend vers $0$ en $-\infty$, $1$ en $+\infty$, et caractérise $P_X$.
+\end{rmq}
+
+\begin{definstar}
+Soit $X$ une v.a. à valeurs dans $\R^d$. On appelle fonction caractéristique de $X$, notée $\Phi_X$, la fonction de $\R^d$ dans $\C$ définie par \[\Phi_X(\xi) := \int_{\R^d} e^{i\left<x,\xi\right>}\mathrm{d}P_X(x) = E\left(e^{i\left<X,\xi\right>}\right).\]
+\end{definstar}
+
+\begin{rmq}
+$\Phi_X$ est en fait la transformée de Fourier de la loi $P_X$. C'est une fonction uniformément continue, dont le module est borné par $1$. $\Phi_X$ a autant de dérivées que $X$ a de moments finis.
+\end{rmq}
+
+\begin{propstar}
+Soient $X_1$ et $X_2$ des v.a. à valeurs dans $\R^d$. Si $\Phi_{X_1}=\Phi_{X_2}$, alors $P_{X_1}=P_{X_2}$.
+\end{propstar}
+
+\begin{rmq}
+Si $X\sim \mathcal{N}(\mu,\sigma^2)$, alors $\Phi_X(\xi)=exp(i\xi\mu - \frac{\xi^2\sigma^2}{2})$.
+\end{rmq}
+\begin{thmstar}
+[Inégalité de Jensen] Soient $X\in L^1$, et $\Phi$ une fonction convexe sur un intervalle $I$ tel que $P(X\in I)=1$ et $E(|\Phi(X)|)<\infty$. Alors $\Phi(E(X)) \leq E(\Phi(X))$. Si $\Phi$ est de plus strictement convexe, alors il y a égalité si et seulement si $X$ est p.s constante.
+\end{thmstar}
+
+\begin{thmstar}
+[Inégalité de Markov] Soit $X$ une v.a.r presque surement positive, alors pour $\alpha>0$ : \[P(X \geq \alpha) \leq \frac{E(X)}{\alpha}\]
+\end{thmstar}
+
+\begin{corstar}
+[Inégalité de Bienaymé-Tchebychef] Si $X\in L^2$ est une v.a.r, alors pour tout $\varepsilon >0$ :
+\[P(|X-E(X)| \geq \varepsilon) \leq \frac{V(X)}{\varepsilon^2}\]
+\end{corstar}
 
 
 \subsection*{Outils importants}
 
+\begin{propstar}
+[Changement de variable] Soit $X$ une v.a. à valeurs dans $(E,\mathcal{E})$, et $f :E\mapsto \overline{\R}$ une fonction mesurable telle que $f\geq0$ p.p. ou $E\big( \left|f(X)\right| \big) <\infty$, alors :
+\[E(f(X))=\int_E f(x)\mathrm{d}P_X(x).\]
+\end{propstar}
 
+\begin{definstar}
+Si $X$ est une v.a. à valeurs dans $\N$, on appelle fonction génératrice de $X$, la fonction $G_X : [0,1] \mapsto \R^+$ définie par : \[G_X(t) := E(t^X) = \sum_{n=0}^{+\infty} t^nP(X=n).\]
+\end{definstar}
+
+\begin{rmq}
+$G_X$ caractérise la loi de $X$, et détermine tous les moments de $X$ comme l'explique la proposition suivante :
+\end{rmq}
+
+\begin{propstar}
+Soit $X$ une v.a. à valeurs dans $\N$, alors pour tout $k\geq 1$ :\[E\left(\prod_{i=0}^{k-1}(X-i)\right) = \lim_{t\to 1^-}G_X^{(k)}(t).\]
+\end{propstar}
+
+\subsection*{Autres résultats}
+
+\begin{lemmastar}
+Soit $I$ un intervalle de $\R$. Si $ \Phi :I \mapsto \R$ est une fonction convexe, alors pour tout $x\in \mathring{I}$ :
+\[\Phi(x) = \sup_{a,b \ | \ l_{a,b} \leq \Phi } l_{a,b}(x)\]
+\end{lemmastar}
 
 %\subsection*{Autres théorèmes}
 
