@@ -32,7 +32,7 @@
 \item[-] Une mesure de probabilité étant en particulier finie, on a dans ce cadre que les espaces $L^p$ sont emboités, i.e : $L^\infty \subseteq \dots \subseteq L^1$.
 \end{itemize}
 
-\subsection*{Résultats principaux}
+\subsection*{Définitions et propriétés élémentaires}
 Dans tout ce qui suit, on travaille dans un espace probabilisé $(\Omega, \mathcal{F}, P)$, et on pourra utiliser un espace mesurable $(E,\mathcal{E})$.
 
 \begin{definstar} ~
@@ -58,26 +58,36 @@ Soit $X$ une v.a. à valeurs dans $\R^d$. On appelle fonction caractéristique d
 $\Phi_X$ est en fait la transformée de Fourier de la loi $P_X$. C'est une fonction uniformément continue, dont le module est borné par $1$. $\Phi_X$ a autant de dérivées que $X$ a de moments finis.
 \end{rmq}
 
-\begin{propstar}
-Soient $X_1$ et $X_2$ des v.a. à valeurs dans $\R^d$. Si $\Phi_{X_1}=\Phi_{X_2}$, alors $P_{X_1}=P_{X_2}$.
-\end{propstar}
-
 \begin{rmq}
 Si $X\sim \mathcal{N}(\mu,\sigma^2)$, alors $\Phi_X(\xi)=exp(i\xi\mu - \frac{\xi^2\sigma^2}{2})$.
 \end{rmq}
-\begin{thmstar}
-[Inégalité de Jensen] Soient $X\in L^1$, et $\Phi$ une fonction convexe sur un intervalle $I$ tel que $P(X\in I)=1$ et $E(|\Phi(X)|)<\infty$. Alors $\Phi(E(X)) \leq E(\Phi(X))$. Si $\Phi$ est de plus strictement convexe, alors il y a égalité si et seulement si $X$ est p.s constante.
-\end{thmstar}
+
+\begin{definstar}
+Si $X$ est une v.a. à valeurs dans $\N$, on appelle fonction génératrice de $X$, la fonction $G_X : [0,1] \mapsto \R^+$ définie par : \[G_X(t) := E(t^X) = \sum_{n=0}^{+\infty} t^nP(X=n).\]
+\end{definstar}
+
+\begin{rmq}
+$G_X$ caractérise la loi de $X$, et détermine tous les moments de $X$ comme l'explique la proposition suivante.
+\end{rmq}
+
+\begin{propstar}
+Soit $X$ une v.a. à valeurs dans $\N$, alors pour tout $k\geq 1$ :\[E\left(\prod_{i=0}^{k-1}(X-i)\right) = \lim_{t\to 1^-}G_X^{(k)}(t).\]
+\end{propstar}
+
+\newpage
+\subsection*{Résultats principaux}
 
 \begin{thmstar}
 [Inégalité de Markov] Soit $X$ une v.a.r presque surement positive, alors pour $\alpha>0$ : \[P(X \geq \alpha) \leq \frac{E(X)}{\alpha}\]
 \end{thmstar}
 
-\begin{corstar}
-[Inégalité de Bienaymé-Tchebychef] Si $X\in L^2$ est une v.a.r, alors pour tout $\varepsilon >0$ :
-\[P(|X-E(X)| \geq \varepsilon) \leq \frac{V(X)}{\varepsilon^2}\]
-\end{corstar}
+\begin{thmstar}
+[Inégalité de Jensen] Soient $X\in L^1$, et $\Phi$ une fonction convexe sur un intervalle $I$ tel que $P(X\in I)=1$ et $E(|\Phi(X)|)<\infty$. Alors $\Phi(E(X)) \leq E(\Phi(X))$. Si $\Phi$ est de plus strictement convexe, alors il y a égalité si et seulement si $X$ est p.s constante.
+\end{thmstar}
 
+\begin{thmstar}
+Soient $X_1$ et $X_2$ des v.a. à valeurs dans $\R^d$. Si $\Phi_{X_1}=\Phi_{X_2}$, alors $P_{X_1}=P_{X_2}$.
+\end{thmstar}
 
 \subsection*{Outils importants}
 
@@ -86,17 +96,10 @@ Si $X\sim \mathcal{N}(\mu,\sigma^2)$, alors $\Phi_X(\xi)=exp(i\xi\mu - \frac{\xi
 \[E(f(X))=\int_E f(x)\mathrm{d}P_X(x).\]
 \end{propstar}
 
-\begin{definstar}
-Si $X$ est une v.a. à valeurs dans $\N$, on appelle fonction génératrice de $X$, la fonction $G_X : [0,1] \mapsto \R^+$ définie par : \[G_X(t) := E(t^X) = \sum_{n=0}^{+\infty} t^nP(X=n).\]
-\end{definstar}
-
-\begin{rmq}
-$G_X$ caractérise la loi de $X$, et détermine tous les moments de $X$ comme l'explique la proposition suivante :
-\end{rmq}
-
-\begin{propstar}
-Soit $X$ une v.a. à valeurs dans $\N$, alors pour tout $k\geq 1$ :\[E\left(\prod_{i=0}^{k-1}(X-i)\right) = \lim_{t\to 1^-}G_X^{(k)}(t).\]
-\end{propstar}
+\begin{corstar}
+[Inégalité de Bienaymé-Tchebychef] Si $X\in L^2$ est une v.a.r, alors pour tout $\varepsilon >0$ :
+\[P(|X-E(X)| \geq \varepsilon) \leq \frac{V(X)}{\varepsilon^2}\]
+\end{corstar}
 
 \subsection*{Autres résultats}
 
