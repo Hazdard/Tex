@@ -17,11 +17,6 @@
 \section*{Probabilités} 
 \end{center}
 
-%Fekete
-%Chap 6 : Jensen ;  Injectivité de Fourier ; (Bonus : les classiques Markov, Bienaymé-Tchebychef )
-%
-%Chap 7 : Coalitions ; WLLN ; 
-%
 %Chap 8 : Borel-Cantelli et notion de lim sup/inf; Loi du 0-1 ; SLLN ; TCL (et Levy par la même occasion !)
 
 % Parler des liens entre les différents modes de convergence
@@ -51,7 +46,7 @@ $F_X$ est continue à droite, limitée à gauche (càdlàg), croissante, tend ve
 \end{rmq}
 
 \begin{definstar}
-Soit $X$ une v.a. à valeurs dans $\R^d$. On appelle fonction caractéristique de $X$, notée $\Phi_X$, la fonction de $\R^d$ dans $\C$ définie par \[\Phi_X(\xi) := \int_{\R^d} e^{i\left<x,\xi\right>}\mathrm{d}P_X(x) = E\left(e^{i\left<X,\xi\right>}\right).\]
+Soit $X$ une v.a. à valeurs dans $\R^d$. On appelle \textit{fonction caractéristique} de $X$, notée $\Phi_X$, la fonction de $\R^d$ dans $\C$ définie par \[\Phi_X(\xi) := \int_{\R^d} e^{i\left<x,\xi\right>}\mathrm{d}P_X(x) = E\left(e^{i\left<X,\xi\right>}\right).\]
 \end{definstar}
 
 \begin{rmq}
@@ -63,7 +58,7 @@ Si $X\sim \mathcal{N}(\mu,\sigma^2)$, alors $\Phi_X(\xi)=exp(i\xi\mu - \frac{\xi
 \end{rmq}
 
 \begin{definstar}
-Si $X$ est une v.a. à valeurs dans $\N$, on appelle fonction génératrice de $X$, la fonction $G_X : [0,1] \to \R^+$ définie par : \[G_X(t) := E(t^X) = \sum_{n=0}^{+\infty} t^nP(X=n).\]
+Si $X$ est une v.a. à valeurs dans $\N$, on appelle \textit{fonction génératrice} de $X$, la fonction $G_X : [0,1] \to \R^+$ définie par : \[G_X(t) := E(t^X) = \sum_{n=0}^{+\infty} t^nP(X=n).\]
 \end{definstar}
 
 \begin{rmq}
@@ -97,8 +92,8 @@ La vérification de l'indépendance des $(X_i)_{i\in I}$ se rammène à montrer 
 \item Les  $(X_i)_{ 1 \leq i \leq n}$ sont indépendants si et seulement si $P_X=\otimes_{i=1}^n P_{X_i}$, ce qui équivaut à $\Phi_X=\otimes_{i=1}^n \Phi_{X_i}$.
 \item 
 \begin{enumerate}
-\item Si les $(X_i)_{ 1 \leq i \leq n}$ sont indépendants, et possèdent toutes une densité $f_{X_i}$ par rapport à la mesure de Lebesgue, alors $P_X \ll \lambda_n$ et a pour densité $f_X(x_1,\dots,x_n)=f_{X_1}(x_1)\dots f_{X_n}(x_n)$.
-\item Réciproquement, si $P_X \ll \lambda_n$, de densité s'écrivant $f_X(x_1,\dots,x_n)=f_{X_1}(x_1)\dots f_{X_n}(x_n)$, alors les $(X_i)_{ 1 \leq i \leq n}$ sont indépendants, et $X_i$ a pour densité $f_{X_i}$.
+\item Si les $(X_i)_{ 1 \leq i \leq n}$ sont indépendants, et ont $(f_{X_i})_{1\leq i \leq n}$ comme densités respectives par rapport à la mesure de Lebesgue, alors $P_X \ll \lambda_n$ et a pour densité $f_X(x_1,\dots,x_n)=f_{X_1}(x_1)\dots f_{X_n}(x_n)$.
+\item Réciproquement, si $P_X \ll \lambda_n$, de densité s'écrivant $f_X(x_1,\dots,x_n)=f_{X_1}(x_1)\dots f_{X_n}(x_n)$, alors les $(X_i)_{ 1 \leq i \leq n}$ sont indépendants, de densités respectives $(f_{X_i})_{1\leq i \leq n}$.
 \end{enumerate}
 \end{enumerate}
 \end{propstar}
@@ -133,6 +128,10 @@ Soient $X_1$ et $X_2$ des variables aléatoires à valeurs dans $\R^d$. Si $\Phi
 \end{thmstar}
 
 \subsection*{Outils importants}
+
+\begin{lemmastar}
+[Fekete] Si $(u_n)_{n\in\N}$ est une suite sous additive, i.e $\forall n,m\in \N, \ u_{n+m} \leq u_n + u_m$, alors $\displaystyle (\frac{u_n}{n})_{n\in\N}$ converge, et on a l'égalité:  $\displaystyle \lim\limits_{n\to \infty} \frac{u_n}{n}=\inf_{n\geq 1} \frac{u_n}{n} \in \R \cup \{ -\infty\}$.
+\end{lemmastar}
 
 \begin{propstar}
 [Changement de variable] Soit $X$ une v.a. à valeurs dans $(E,\mathcal{E})$, et $f :E\to \overline{\R}$ une fonction mesurable telle que $f\geq0$ p.p. ou $E\big( \left|f(X)\right| \big) <\infty$, alors :
