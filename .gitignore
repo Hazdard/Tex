@@ -16,3 +16,4 @@ mtheme/
 *.ps
 Stage-2A/.ipynb_checkpoints/*
 temp_build/*
+*.DS_Store
