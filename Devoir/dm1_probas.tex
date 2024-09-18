@@ -1,0 +1,29 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage{../jedusor}
+	
+\renewcommand{\headrulewidth}{1pt} 
+\renewcommand{\footrulewidth}{1pt}	
+\fancyhead[C]{DM1}
+\fancyhead[L]{Probabilités}
+\fancyhead[R]{M1 Hadamard 2024-2025}
+\fancyfoot[C]{\thepage} 
+\fancyfoot[L]{Sacha Ben-Arous}
+\fancyfoot[R]{E.N.S Paris-Saclay}
+
+\begin{document}
+\textbf{Exercice 1.}\\
+
+Quitte à retirer un ensemble de mesure nulle, on suppose que la convergence simple a lieu sur tout $\Omega$. On se donne un $\varepsilon > 0$. Pour $N\in \N$ et $k \in \N^* $, on note $\displaystyle B_{k,N} := \bigcap_{n\geq N} \left\{|X_n-X | \leq \frac{1}{k} \right \}$. La mesurabilité des fonctions en jeu donne immédiatement la mesurabilité des $B_{k,N}$. \\ 
+
+\noindent Par définition, l'hypothèse de convergence simple donne que : \[ \forall k \in \N^*, \forall \omega \in \Omega, \exists N \in \N^*, \forall n\geq N, |X_n(\omega)-X(\omega) | \leq \frac{1}{k},   \] ce qui se traduit par l'égalité :
+\[\forall k \in \N^*, \bigcup_{N\in \N}B_{k,N} = \Omega.\]
+De plus, cette union étant croissante, la propriété de continuité croissante donne que : \[\forall k \in \N^*, \  P(B_{k,N}) \xrightarrow[N \to \infty]{} P(\Omega)=1, \]
+et alors, on a en particulier que : \[\forall k \in \N^*, \exists N_k, P(B_{k,N_k}) \geq 1-\frac{\varepsilon}{2^{k-1}}.\]
+En notant maintenant $\displaystyle A:=\bigcap_{k\in\N^*}B_{k,N_k}$, on a l'inégalité suivante :
+\[P(\Omega\setminus A) \leq \sum_{k\geq 1} P(\Omega\setminus B_{k,N_k}) \leq \varepsilon\sum_{k\geq 1} \frac{1}{2^{k-1}} \leq \varepsilon. \]
+Finalement, on remarque que, si $\eta$ est un réel strictement positif, alors en notant $k_0 := \lfloor \frac{1}{\eta}\rfloor +1$, le fait que $A \subset B_{k_0,N_{k_0}}$ donne :
+\[\forall \omega \in A, \forall n \geq N_{k_0}, |X_n(\omega)-X(\omega) | \leq \frac{1}{k_0} \leq \eta, \]
+ce qui permet de conclure que la convergence sur $A$ est bien uniforme.  \\ \qed
+
+\end{document}
