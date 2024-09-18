@@ -16,7 +16,7 @@
 
 Quitte à retirer un ensemble de mesure nulle, on suppose que la convergence simple a lieu sur tout $\Omega$. On se donne un $\varepsilon > 0$. Pour $N\in \N$ et $k \in \N^* $, on note $\displaystyle B_{k,N} := \bigcap_{n\geq N} \left\{|X_n-X | \leq \frac{1}{k} \right \}$. La mesurabilité des fonctions en jeu donne immédiatement la mesurabilité des $B_{k,N}$. \\ 
 
-\noindent Par définition, l'hypothèse de convergence simple donne que : \[ \forall k \in \N^*, \forall \omega \in \Omega, \exists N \in \N^*, \forall n\geq N, |X_n(\omega)-X(\omega) | \leq \frac{1}{k},   \] ce qui se traduit par l'égalité :
+\noindent Par définition, l'hypothèse de convergence simple donne que : \[ \forall k \in \N^*, \forall \omega \in \Omega, \exists N \in \N, \forall n\geq N, |X_n(\omega)-X(\omega) | \leq \frac{1}{k},   \] ce qui se traduit par l'égalité :
 \[\forall k \in \N^*, \bigcup_{N\in \N}B_{k,N} = \Omega.\]
 De plus, cette union étant croissante, la propriété de continuité croissante donne que : \[\forall k \in \N^*, \  P(B_{k,N}) \xrightarrow[N \to \infty]{} P(\Omega)=1, \]
 et alors, on a en particulier que : \[\forall k \in \N^*, \exists N_k, P(B_{k,N_k}) \geq 1-\frac{\varepsilon}{2^{k-1}}.\]
