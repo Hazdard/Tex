@@ -129,16 +129,24 @@ Soient $X_1$ et $X_2$ des variables aléatoires à valeurs dans $\R^d$. Si $\Phi
 \end{thmstar}
 
 \begin{thmstar}
-[Coalitions] Soient $(X_i)_{i\in I}$ une famille de variables aléatoires indépendantes, et $(I_k)_{k\in K}$ une partition de $I$. Alors les tribus $\big(\sigma\left(X_i,\ i\in I_k\right)\big)_{k\in K}$ sont indépendantes.
+[Coalitions] Soit $(\mathcal{A}_i)_{i\in I}$ une famille de tribus engendrées par les $\pi$-systèmes $(C_i)_{i\in I}$. Alors ces tribus sont indépendantes si et seulement si les $\pi$-systèmes générateurs le sont. En particulier, si $(X_i)_{i\in I}$ est une famille de variables aléatoires indépendantes, et $(I_k)_{k\in K}$ une partition de $I$, alors les tribus $\big(\sigma\left(X_i,\ i\in I_k\right)\big)_{k\in K}$ sont indépendantes.
 \end{thmstar}
 
 \begin{thmstar}
-[Loi faible des grands nombres] Soient $(X_i)_{i\in \N^*}$ une famille de variables aléatoires indépendantes de $L^2$, telles que $\lim\limits_{n\to +\infty} \frac{1}{n}\sum_{i=1}^n E(X_i) = \mu$ et $\sup_i V(X_i) = \sigma^2$. Alors : 
+[Loi faible des grands nombres] Soit $(X_i)_{i\in \N^*}$ une famille de variables aléatoires indépendantes de $L^2$, telles que $\lim\limits_{n\to +\infty} \frac{1}{n}\sum_{i=1}^n E(X_i) = \mu$ et $\sup_i V(X_i) = \sigma^2$. Alors : 
 \begin{enumerate}
 \item La moyenne empirique $\displaystyle \overline{X}_n := \frac{1}{n}\sum_{i=1}^n X_i$ converge dans $L^2$ vers la moyenne théorique $\mu$.
 \item Pour $\varepsilon >0$, on a l'estimation suivante : \[P(|\overline{X}_n - E(\overline{X}_n)| \geq \varepsilon) \leq \frac{\sigma^2}{n\varepsilon^2}.\]
 \end{enumerate}
 \end{thmstar}
+
+\begin{lemmastar}
+[Borel-Cantelli] Soit $(A_n)_{n\geq 0}$ une suite d'évènements. On note $\limsup A_n := \displaystyle \bigcap_{n\geq 0} \bigcup_{k\geq n} A_k$, qui correspond à l'évènement ``être dans une infinité de $A_n$''. On a alors la dichotomie suivante :
+\begin{enumerate}
+\item Si $\displaystyle \sum_n P(A_n) < \infty$, alors $P(\limsup A_n)=0$, i.e. $\sum_n \mathds{1}_{A_n} < +\infty$ presque sûrement.
+\item Si $\displaystyle \sum_n P(A_n) = \infty$ et que les $(A_n)_{n\geq 0}$ sont indépendants, alors $P(\limsup A_n)=1$.
+\end{enumerate}
+\end{lemmastar}
 
 \subsection*{Outils importants}
 
