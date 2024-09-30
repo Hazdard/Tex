@@ -21,12 +21,20 @@
 
 % Parler des liens entre les différents modes de convergence
 
-% Rajouter la méthode pour calculer la loi d'un couple (ou en fait d'une fonction d'une v.a. déjà connue).
+%Rajouter TDs de 1A
 
 
-\subsection*{Méthode et contexte}
+\subsection*{Contexte}
 \begin{itemize}
 \item[-] Une mesure de probabilité étant en particulier finie, on a dans ce cadre que les espaces $L^p$ sont emboités, i.e : $L^\infty \subseteq \dots \subseteq L^1$. Cela se traduit par le fait que si une variable aléatoire possède un moment d'ordre $k$, tous ses moments d'ordre inférieur sont également finis.
+\item[-] Des variables indépendantes sont de covariance nulle, mais la réciproque est très fausse ! Par exemple en considérant une loi gaussienne et son produit par une v.a. de Rademacher, leur covariance est nulle mais elles ne sont pas indépendantes, sinon leurs valeurs absolues le seraient, et donc la gaussienne serait indépendante d'elle même, i.e. constante.
+\item[-] À l'inverse, des variables a priori corrélées peuvent êtres indépendantes : si $U$ est une loi exponentielle et $V$ une loi uniforme sur $[0,1]$, alors $\sqrt{U}\cos(2\pi V)$ et $\sqrt{U}\sin(2\pi V)$ sont indépendantes et suivent chacune la loi $\mathcal{N}(0,1/2)$.
+\end{itemize}
+
+\subsection*{Méthode}
+\begin{itemize}
+\item[-] Utiliser les outils adaptés : pour étudier une somme de v.a. indépendantes on utilise la transformée de Fourier, pour étudier leur $\min$ on utilise la fonction de répartition, etc $\dots$
+\item[-] Pour calculer la loi d'un couple $(X,Y)$ de v.a., on prend $f$ mesurable positive et on essaye d'écrire $\displaystyle E\left(f(X,Y)\right) = \int f(x,y) \mathrm{d}\mu(x,y)$, et alors le couple est de loi $\mu$.
 \end{itemize}
 
 \subsection*{Définitions et propriétés élémentaires}
@@ -89,18 +97,21 @@ La vérification de l'indépendance des $(X_i)_{i\in I}$ se rammène à montrer 
 \end{rmq}
 
 \begin{propstar}
-[Caractérisations de l'indépendance] Soit $(X_i)_{ 1 \leq i \leq n}$ une famille de variables aléatoires avec $X_i : (\Omega,\mathcal{F}) \to (E_i,\mathcal{E}_i)$. Soit $X:=(X_1,\dots,X_n) : (\Omega,\mathcal{F}) \to (\prod_{i=1}^nE_i, \otimes_{i=1}^n \mathcal{E}_i)$. 
-\begin{enumerate}
-\item Les  $(X_i)_{ 1 \leq i \leq n}$ sont indépendants si et seulement si $P_X=\otimes_{i=1}^n P_{X_i}$, ce qui équivaut à $\Phi_X=\otimes_{i=1}^n \Phi_{X_i}$.
-\item 
+[Caractérisations de l'indépendance] Soit $(X_i)_{ 1 \leq i \leq n}$ une famille de variables aléatoires réelles, et $X:=(X_1,\dots,X_n)$. 
 \begin{enumerate}
 \item Si les $(X_i)_{ 1 \leq i \leq n}$ sont indépendants, et ont $(f_{X_i})_{1\leq i \leq n}$ comme densités respectives par rapport à la mesure de Lebesgue, alors $P_X \ll \lambda_n$ et a pour densité $f_X(x_1,\dots,x_n)=f_{X_1}(x_1)\dots f_{X_n}(x_n)$.
-\item Réciproquement, si $P_X \ll \lambda_n$, de densité s'écrivant $f_X(x_1,\dots,x_n)=f_{X_1}(x_1)\dots f_{X_n}(x_n)$, alors les $(X_i)_{ 1 \leq i \leq n}$ sont indépendants, de densités respectives $(f_{X_i})_{1\leq i \leq n}$.
-\end{enumerate}
+\item Réciproquement, si $P_X \ll \lambda_n$, de densité s'écrivant $f_X(x_1,\dots,x_n)=f_{X_1}(x_1)\dots f_{X_n}(x_n)$ où les $(f_i)_{1\leq i \leq n}$ sont des densités de probabilité (i.e. positives, d'intégrale valant $1$), alors les $(X_i)_{ 1 \leq i \leq n}$ sont indépendants, de densités respectives $(f_{X_i})_{1\leq i \leq n}$.
 \end{enumerate}
 \end{propstar}
 
-
+\begin{corstar} Soit $(X_i)_{ 1 \leq i \leq n}$ des variables aléatoires réelles, les propriétés suivantes sont équivalentes :
+\begin{enumerate}
+\item  $(X_i)_{ 1 \leq i \leq n}$ est une famille de variables aléatoires indépendantes ; 
+\item $P_X=\otimes_{i=1}^n P_{X_i}$
+\item Pour toute famille $(f_i)_{1\leq i \leq n}$ de fonctions boréliennes positives, $\displaystyle E\left(\prod_{i=1}^n f_i(X_i)\right) = \prod_{i=1}^n E\left(f_i(X_i)\right)$
+\item $\Phi_X=\otimes_{i=1}^n \Phi_{X_i}$
+\end{enumerate}
+\end{corstar}
 
 
 \subsection*{Résultats principaux}
@@ -158,8 +169,7 @@ Soit $I$ un intervalle de $\R$. Si $ \Phi :I \to \R$ est une fonction convexe, a
 \[\Phi(x) = \sup_{a,b \ | \ l_{a,b} \leq \Phi } l_{a,b}(x)\]
 \end{lemmastar}
 
-%\subsection*{Astuces calculatoires}
-
-% Pour une v.a. à valeurs dans \N ou \R^+, E(X)=\int_0^\infty P(X \geq x) \mathrm{d}x, car X=\int_0^\infty 1_(x\leq X) dx
-
+\begin{lemmastar}
+Pour une v.a. à valeurs dans $\R^+$, $\displaystyle E(X)=\int_0^\infty P(X \geq x) \mathrm{d}x$, car $\displaystyle X=\int_0^\infty 1_{x\leq X} \mathrm{d}x$
+\end{lemmastar} 
 \end{document}
