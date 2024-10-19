@@ -17,17 +17,15 @@
 \section*{Probabilités} 
 \end{center}
 
-%Chap 8 : Borel-Cantelli et notion de lim sup/inf; Loi du 0-1 ; SLLN ; TCL (et Levy par la même occasion !)
+%Rajouter la cv en loi et ses props (cf chap 8)
 
-% Parler des liens entre les différents modes de convergence
+% Schéma des implications de cv (version Trouvé et LeGall) + Scheffé 
+
+% Commentaire que cv L1 et p.s sont de natures différentes, et p.s est plus naturelle pour les probas.
 
 %Rajouter TDs de 1A et 2A why not
 
-% Cv dominée marche aussi en remplcant l'hyp de cvs par une cv en proba (cf début chap 10) (pas dans le cours mais utiliser la distance).
-
-% Schéma des implications de cv (version Trouvé et LeGall) + Scheffé + commentaire que cv L1 et p.s sont de natures différentes, et p.s est plus naturelle pour les probas.
-
-% Il y a aussi cv dans L^1 dans la loi forte des grands nombres, avec 12.5 du poly.
+% Inégalité max de Kolmogorov, cv de séries aléatoires ?
 
 \subsection*{Contexte}
 \begin{itemize}
@@ -118,15 +116,10 @@ La vérification de l'indépendance des $(X_i)_{i\in I}$ se rammène à montrer 
 \end{enumerate}
 \end{corstar}
 
-
 \subsection*{Résultats principaux}
 
 \begin{thmstar}
 [Inégalité de Markov] Soit $X$ une variable aléatoire réelle presque surement positive, alors pour $\alpha>0$ : \[P(X \geq \alpha) \leq \frac{E(X)}{\alpha}\]
-\end{thmstar}
-
-\begin{thmstar}
-[Inégalité de Jensen] Soient $X\in L^1$, et $\Phi$ une fonction convexe sur un intervalle $I$ tel que $P(X\in I)=1$ et $E(|\Phi(X)|)<\infty$. Alors $\Phi(E(X)) \leq E(\Phi(X))$. Si $\Phi$ est de plus strictement convexe, alors il y a égalité si et seulement si $X$ est p.s constante.
 \end{thmstar}
 
 \begin{thmstar}[Injectivité de la transformée de Fourier]
@@ -153,6 +146,28 @@ Soient $X_1$ et $X_2$ des variables aléatoires à valeurs dans $\R^d$. Si $\Phi
 \end{enumerate}
 \end{lemmastar}
 
+\begin{thmstar}
+[Loi du 0-1] Si $(X_n)_{n\in\N}$ est une famille de variables aléatoires indépendantes, on note $\mathcal{F}_n^+ := \sigma(X_k, k\geq n)$ et $\displaystyle \mathcal{F}_\infty^+ := \bigcap_{n=1}^\infty \mathcal{F}_n^+$ la tribu asymptotique. Alors pour tout $A\in \mathcal{F}_\infty^+,  P(A)\in \{0,1\}$.
+\end{thmstar}
+
+\begin{rmq}
+On en déduit qu'une variable aléatoire $ \mathcal{F}_\infty^+ $-mesurable est presque sûrement constante en considérant sa fonction de répartition. En particulier, les liminf et limsup d'une suite de v.a. indépendantes sont constantes presque sûrement, donc soit cette suite converge p.s. vers une constante, soit la limite n'existe p.s. jamais.
+\end{rmq}
+
+\begin{thmstar}
+[Loi forte des grands nombres] Si $(X_n)_{n\in\N}$ est une suite de v.a. i.i.d. telle que $E(|X_1|)<\infty$, alors $P$ p.s. on a :
+\[\frac{X_1 + \dots + X_n}{n} \to E(X_1) \]
+\end{thmstar}
+
+\begin{rmq}
+Avec des résultats sur les espérances conditionnelles, on peut aussi obtenir la convergence au sens $L^1$ dans le théorème ci-dessus.
+\end{rmq}
+
+\begin{thmstar}
+[Théorème central limite] Si $(X_n)_{n\in\N}$ est une suite de v.a. i.i.d. telle que $E(X_1^2)<\infty$, alors en notant $m := E(X_1)$ et $\sigma^2 := V(X_1)$, on a :
+\[ \sqrt{n}(\overline{X}_n-m) \xrightarrow[]{\mathcal{L}} \mathcal{N}(0,\sigma^2) \]
+\end{thmstar}
+
 \subsection*{Outils importants}
 
 \begin{lemmastar}
@@ -160,9 +175,13 @@ Soient $X_1$ et $X_2$ des variables aléatoires à valeurs dans $\R^d$. Si $\Phi
 \end{lemmastar}
 
 \begin{propstar}
-[Changement de variable] Soit $X$ une v.a. à valeurs dans $(E,\mathcal{E})$, et $f :E\to \overline{\R}$ une fonction mesurable telle que $f\geq0$ p.p. ou $E\big( \left|f(X)\right| \big) <\infty$, alors :
+[Formule de transfert] Soit $X$ une v.a. à valeurs dans $(E,\mathcal{E})$, et $f :E\to \overline{\R}$ une fonction mesurable telle que $f\geq0$ p.p. ou $E\big( \left|f(X)\right| \big) <\infty$, alors :
 \[E(f(X))=\int_E f(x)\mathrm{d}P_X(x).\]
 \end{propstar}
+
+\begin{thmstar}
+[Inégalité de Jensen] Soient $X\in L^1$, et $\Phi$ une fonction convexe sur un intervalle $I$ tel que $P(X\in I)=1$ et $E(|\Phi(X)|)<\infty$. Alors $\Phi(E(X)) \leq E(\Phi(X))$. Si $\Phi$ est de plus strictement convexe, alors il y a égalité si et seulement si $X$ est p.s constante.
+\end{thmstar}
 
 \begin{corstar}
 [Inégalité de Bienaymé-Tchebychef] Si $X\in L^2$ est une v.a.r., alors pour tout $\varepsilon >0$ :
@@ -175,6 +194,9 @@ Soient $(X_i)_{i\in \N^*}$ une famille de v.a. indépendantes à valeurs dans $[
 \[P( |\overline{X}_n - E(\overline{X}_n) | \geq \epsilon) \leq 2 \exp(-2\frac{n\varepsilon^2}{(b-a)^2})\]
 \end{propstar}
 
+\begin{thmstar}
+[Lévy] Soit $(X_n)_{n\in \N^*}$ une suite de v.a. à valeurs dans $\R^d$, alors : $X_n \xrightarrow[]{\mathcal{L}} X_\infty$ si et seulement si $\Phi_{X_n} \to \Phi_{X_\infty}$ simplement.
+\end{thmstar}
 \subsection*{Autres résultats}
 
 \begin{lemmastar}
