@@ -1,4 +1,4 @@
-\documentclass[11pt,a4paper]{article}
+\documentclass[12pt,a4paper]{article}
 
 \usepackage{../jedusor}	
 
@@ -34,11 +34,20 @@ Soit $E$ un ensemble, et $\mathcal{T} \subset \mathcal{P}(E)$.  On dit que $(E,\
 Les éléments de $\mathcal{T}$ sont appelés des ouverts, et leurs complémentaires sont des fermés.
 \end{definstar}
 \begin{rmq}
-Une intersection de topologie étant encore une topologie, on en 
+Une intersection de topologies étant encore une topologie, on en déduit la validité de la définition suivante.
 \end{rmq}
 \begin{definstar}
-
+Soit $A \subset \mathcal{P}(E)$, on note $\mathcal{T}(A)$ la plus petite topologie contenant $A$, dite \textit{topologie engendrée}. Cette topologie est obtenue en prenant les unions quelconques d'intersections finies
+d'éléments de A.
 \end{definstar}
+
+\begin{definstar}
+Soit $(E,\mathcal{T})$ un espace topologique, on dit que $\mathcal{B}\subset \mathcal{T}$ est une base si tout élément de $\mathcal{T}$ s'écrit comme union d'éléments de $\mathcal{B}$.
+\end{definstar}
+\begin{rmq}
+Attention, en général $A$ n'est pas une base de $\mathcal{T}(A)$ !
+\end{rmq}
+
 \subsection*{Résultats principaux}
 
 \subsection*{Outils importants}
