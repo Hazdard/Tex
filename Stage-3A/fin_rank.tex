@@ -1,7 +1,9 @@
 \documentclass[11pt,a4paper]{article}
 
 \usepackage{../jedusor}
-	
+\usepackage{mathabx}
+\DeclareSymbolFont{yhlargesymbols}{OMX}{yhex}{m}{n} 
+\DeclareMathAccent{\yhwidehat}{\mathord}{yhlargesymbols}{"62}
 \renewcommand{\headrulewidth}{1pt} 
 \renewcommand{\footrulewidth}{1pt}	
 \fancyhead[C]{}
@@ -97,9 +99,19 @@ Combining those results yield the following energy estimate :\[\langle Lz, z \ra
 
 \subsection{Base case}
 
-We want to find $M_0$ such that $\langle M_0z, z \rangle_{H^3} =  \langle \varphi_0 z, z \rangle$. We will use the Fourier transform, with the following convention :
+We want to find $M_0$ such that
+\begin{equation}\label{c0}
+ \langle M_0z, z \rangle_{H^3} =  \langle \varphi_0 z, z \rangle\
+\end{equation} 
+We will use the Fourier transform, with the following convention :
 \[
-\hat{f}(\xi) = \int_{-\infty}^{\infty} f(x) \, e^{-2\pi i x \xi} \, dx
+\hat{f}(\xi) := \mathcal{F}(f)(\xi) = \int_{-\infty}^{\infty} f(x) \, e^{-2\pi i x \xi} \, dx
 \]
+and we will denote \[\mathcal{F}^{-1}(f)(x) := \int_{-\infty}^{\infty} f(\xi) \, e^{2\pi i x \xi} \, d\xi\]
+the inverse Fourier transform.
+The Parseval equality gives : \[\int \hat{z}(\xi) \widehat{M_0z}(\xi)(1+\xi^2)^3 \mathrm{d}\xi= \int \hat{z}(\xi)\widehat{\varphi_0z}(\xi)\mathrm{d}\xi \]
 
+Thus, choosing $M_0$ such that $\widehat{M_0z}(\xi)= \frac{1}{(1+\xi^2)^3}\widehat{\varphi_0z}(\xi)$ would give the equality. \\
+Defining $\theta(\xi) := \frac{1}{(1+\xi^2)^3}$, this condition is equivalent to : \[\widehat{M_0z}= \widehat{\mathcal{F}^{-1}(\theta)}\widehat{\varphi_0z}=\yhwidehat{\mathcal{F}^{-1}(\theta)*\varphi_0z}\]
+i.e. $M_0z = \mathcal{F}^{-1}(\theta)*\varphi_0z$ satisfies \fcref{c0}.
 \end{document}
