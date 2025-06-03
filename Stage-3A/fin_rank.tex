@@ -90,7 +90,7 @@ Thus, we have in $H^3$ :
 \end{align*}
 
 \section{Compact part of the quadratic form}
-
+%TODO Montrer que les fonctions en jeu sont intégrables, L^2, dérivable et toutes les props nécessaires à l'étude ci-dessous.
 We proved in the previous section that the quadratic form associated with $L$ in $H^3$ is of the form :
 \[ \langle Lz, z \rangle_{H^3} =  \langle \varphi_0 z, z \rangle +\langle \varphi_1 z', z' \rangle +\langle \varphi_2 z'', z'' \rangle +\langle \varphi_3 z^{(3)}, z^{(3)} \rangle\]
 
@@ -98,6 +98,12 @@ In the next section, we will show that $\varphi_3$ has a sign and is bounded. Th
 \[\langle Mz, z \rangle_{H^3} =  \langle \varphi_0 z, z \rangle +\langle \varphi_1 z', z' \rangle +\langle \varphi_2 z'', z'' \rangle\]
 
 Combining those results yield the following energy estimate :\[\langle Lz, z \rangle_{H^3} \leq -\delta \|z\|_{H^3}  + \langle Mz, z \rangle_{H^3}  \]
+We will use the Fourier transform, with the following convention :
+\[
+\hat{f}(\xi) := \mathcal{F}(f)(\xi) = \int_{-\infty}^{\infty} f(x) \, e^{-2\pi i x \xi} \, dx
+\]
+and we will denote \[\mathcal{F}^{-1}(f)(x) := \int_{-\infty}^{\infty} f(\xi) \, e^{2\pi i x \xi} \, d\xi\]
+the inverse Fourier transform.
 
 \subsection{Base case}
 
@@ -105,17 +111,24 @@ We want to find $M_0$ such that
 \begin{equation}\label{c0}
  \langle M_0z, z \rangle_{H^3} =  \langle \varphi_0 z, z \rangle\
 \end{equation} 
-We will use the Fourier transform, with the following convention :
-\[
-\hat{f}(\xi) := \mathcal{F}(f)(\xi) = \int_{-\infty}^{\infty} f(x) \, e^{-2\pi i x \xi} \, dx
-\]
-and we will denote \[\mathcal{F}^{-1}(f)(x) := \int_{-\infty}^{\infty} f(\xi) \, e^{2\pi i x \xi} \, d\xi\]
-the inverse Fourier transform.
-The Parseval equality gives : \[\int \hat{z}(\xi) \widehat{M_0z}(\xi)(1+\xi^2)^3 \mathrm{d}\xi= \int \hat{z}(\xi)\widehat{\varphi_0z}(\xi)\mathrm{d}\xi \]
+
+The Parseval identity gives : \[\int \hat{z}(\xi) \widehat{M_0z}(\xi)(1+\xi^2)^3 \mathrm{d}\xi= \int \hat{z}(\xi)\widehat{\varphi_0z}(\xi)\mathrm{d}\xi \]
 
 Thus, choosing $M_0$ such that $\widehat{M_0z}(\xi)= \frac{1}{(1+\xi^2)^3}\widehat{\varphi_0z}(\xi)$ would give the equality. \\
 Defining $\theta(\xi) := \frac{1}{(1+\xi^2)^3}$, this condition is equivalent to : \[\widehat{M_0z}= \widehat{\mathcal{F}^{-1}(\theta)}\widehat{\varphi_0z}=\yhwidehat{\mathcal{F}^{-1}(\theta)*\varphi_0z}\]
 i.e. $M_0z = \mathcal{F}^{-1}(\theta)*\varphi_0z$ satisfies \fcref{c0}.
 
+\subsection{First order case}
 
+We want to find $M_1$ such that
+\begin{equation}\label{c1}
+ \langle M_1z, z \rangle_{H^3} =  \langle \varphi_1 z', z' \rangle\
+\end{equation} 
+
+Integrating by parts and applying the Parseval identity, we have the equivalence 
+\begin{eqnarray*}
+\langle M_1z, z \rangle_{H^3} &=& -  \langle \varphi_1' z'+\varphi_1 z'', z \rangle = -  \langle \varphi_1'z, z' \rangle - \langle \varphi_1z, z'' \rangle \\
+\Leftrightarrow \int \hat{z}(\xi) \widehat{M_1z}(\xi)(1+\xi^2)^3 \mathrm{d}\xi &=& - \int (2\pi i \xi) \hat{z}(\xi)\yhwidehat{\varphi_1'z}(\xi)\mathrm{d}\xi + \int (4\pi^2 \xi^2)\hat{z}(\xi)\yhwidehat{\varphi_1z}(\xi)\mathrm{d}\xi \\
+\Leftrightarrow \int \hat{z}(\xi) \widehat{M_1z}(\xi)(1+\xi^2)^3 \mathrm{d}\xi &=& - \int\hat{z} \left[(2\pi i \xi) (\xi)\yhwidehat{\varphi_1'z}(\xi) + (4\pi^2 \xi^2)\hat{z}(\xi)\yhwidehat{\varphi_1z}(\xi) \right]\mathrm{d}\xi 
+\end{eqnarray*}
 \end{document}
