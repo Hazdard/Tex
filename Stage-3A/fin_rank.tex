@@ -106,7 +106,7 @@ and we will denote \[\mathcal{F}^{-1}(f)(x) := \int_{-\infty}^{\infty} f(\xi) \,
 the inverse Fourier transform.
 
 \subsection{Base case}
-%TODO check si il manque pas une conjuguaison dans ma def du prod L^2 pour appliquer parseval
+%TODO check si il manque pas une conjuguaison dans ma def du prod L^2 pour appliquer parseval, et vérifier que les calculs ont du sens car z est dérivé une fois de trop à la fin des IPP.
 We want to find $M_0$ such that
 \begin{equation}\label{c0}
  \langle M_0z, z \rangle_{H^3} =  \langle \varphi_0 z, z \rangle\
@@ -115,8 +115,8 @@ We want to find $M_0$ such that
 The Parseval identity gives : \[\int \hat{z}(\xi) \widehat{M_0z}(\xi)(1+\xi^2)^3 \mathrm{d}\xi= \int \hat{z}(\xi)\widehat{\varphi_0z}(\xi)\mathrm{d}\xi \]
 
 Thus, choosing $M_0$ such that $\widehat{M_0z}(\xi)= \frac{1}{(1+\xi^2)^3}\widehat{\varphi_0z}(\xi)$ would give the equality. \\
-Defining $\theta(\xi) := \frac{1}{(1+\xi^2)^3}$, this condition is equivalent to : \[\widehat{M_0z}= \widehat{\mathcal{F}^{-1}(\theta)}\widehat{\varphi_0z}=\yhwidehat{\mathcal{F}^{-1}(\theta)*\varphi_0z}\]
-i.e. $M_0z = \mathcal{F}^{-1}(\theta)*\varphi_0z$ satisfies \fcref{c0}.
+Defining $\lambda_0(\xi) := \frac{1}{(1+\xi^2)^3}$, this condition is equivalent to : \[\widehat{M_0z}= \widehat{\mathcal{F}^{-1}(\lambda_0)}\widehat{\varphi_0z}=\yhwidehat{\mathcal{F}^{-1}(\lambda_0)*\varphi_0z}\]
+i.e. $M_0z = \mathcal{F}^{-1}(\lambda_0)*\varphi_0z$ satisfies \fcref{c0}.
 
 \subsection{First order case}
 
@@ -149,7 +149,7 @@ Integrating by parts twice and applying the Parseval identity, we have the equiv
 \Leftrightarrow \int \hat{z}(\xi) \widehat{M_2z}(\xi)(1+\xi^2)^3 \mathrm{d}\xi &=& -  \int (4\pi^2 \xi^2)\hat{z}(\xi)\yhwidehat{\varphi_2''z}(\xi)\mathrm{d}\xi - \int (i16\pi^3\xi^3)\hat{z}(\xi)\yhwidehat{\varphi_2'z}(\xi)\mathrm{d}\xi + \int (16\pi^4\xi^4)\hat{z}(\xi)\yhwidehat{\varphi_2z}(\xi)\mathrm{d}\xi \\
 \Leftrightarrow \int \hat{z}(\xi) \widehat{M_2z}(\xi)(1+\xi^2)^3 \mathrm{d}\xi &=&  \int\hat{z} \left[-(4\pi^2 \xi^2) \yhwidehat{\varphi_2''z}(\xi) - (i16\pi^3\xi^3)\hat{z}(\xi)\yhwidehat{\varphi_2'z}(\xi) + (16\pi^4\xi^4)\yhwidehat{\varphi_2z}(\xi)\right]\mathrm{d}\xi 
 \end{eqnarray*}
-Defining $\mu_1(\xi):= - \frac{4\pi^2 \xi^2}{(1+\xi^2)^3 }$, $\mu_2(\xi) := - \frac{i16\pi^3\xi^3}{(1+\xi^2)^3 }$ and $\mu_3(\xi) :=  \frac{16\pi^4\xi^4}{(1+\xi^2)^3 }$ , we have that 
-\[M_2z :=  \left(\mathcal{F}^{-1}(\mu_1)*\varphi_2''z\right)+\left(\mathcal{F}^{-1}(\mu_2)*\varphi_2'z\right)+\left(\mathcal{F}^{-1}(\mu_3)*\varphi_2z\right) \]
+Defining $\lambda_3(\xi) := - \frac{i16\pi^3\xi^3}{(1+\xi^2)^3 }$ and $\lambda_4(\xi) :=  \frac{16\pi^4\xi^4}{(1+\xi^2)^3 }$ , we have that 
+\[M_2z :=  \left(-\mathcal{F}^{-1}(\lambda_2)*\varphi_2''z\right)+\left(\mathcal{F}^{-1}(\lambda_3)*\varphi_2'z\right)+\left(\mathcal{F}^{-1}(\lambda_4)*\varphi_2z\right) \]
 satisfies \fcref{c2}.
 \end{document}
