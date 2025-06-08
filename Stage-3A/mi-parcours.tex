@@ -1,0 +1,46 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage{../jedusor}
+
+\usepackage[maxalphanames=99, maxnames=99, backend=bibtex, style=alphabetic, sorting=ynt]{biblatex}
+\addbibresource{stage3A.bib}
+
+
+\renewcommand{\headrulewidth}{1pt} 
+\renewcommand{\footrulewidth}{1pt}	
+\fancyhead[C]{}
+\fancyhead[L]{}
+\fancyhead[R]{}
+\fancyfoot[C]{\thepage} 
+\fancyfoot[L]{Sacha Ben-Arous}
+\fancyfoot[R]{E.N.S Paris-Saclay}
+
+
+\title{\textbf{Rapport mi-parcours}}
+\date{\today}
+\author{Sacha Ben-Arous}
+
+\begin{document}
+\maketitle
+
+\section{Mise en place du stage}
+
+Mon stage a débuté le 23 avril, sous la direction de Tristan Buckmaster au Courant Institute de l'Université de New York, sur le thème de la formation de singularités auto-similaires dans les fluides. Du point de vue pratique, j'ai la chance d'être logé proche de mon lieu de stage. J'ai un bureau que je partage avec deux thésards, et j'ai tous les accès nécessaires au bon déroulement de mon stage : bibliothèques, imprimantes, cafétéria, etc. J'ai au minimum un rendez-vous chaque semaine avec mon maître de stage et ses étudiants afin de faire le point sur les avancées et définir de nouveaux objectifs.
+
+\section{Déroulement du stage}
+Durant le premier mois, j'ai principalement découvert et appris les bases de la mécanique des fluides et des edp non linéaires, les références principales étant \cite{majda2001vorticity} et \cite{tao2006dispersive}. J'ai plus particulièrement étudié les singularités en mécanique des fluides qui sont dites auto-similaires, i.e. il existe un changement d'échelle pour lequel la singularité est invariante (comportement fractal) ; ma référence principale étant \cite{eggers2015singularities}. J'ai alors commencé à étudier deux articles de mon maître de stage : \cite{buckmaster2019formation} puis \cite{buckmaster2022imploding} qui portent sur la construction de solutions d'une certaine variante de l'équation d'Euler, qui forment une singularité auto-similaire en temps fini, le premier article étant en 2D et le second en 3D. \\
+Les solutions explosives construites ont la particularité d'être stables, au sens où une perturbation (au sens d'une certaine norme $\mathcal{C^k}$) ne change pas la géométrie (typiquement la courbure) auto-similaire de la singularité qui survient. Cela a été l'occasion d'apprendre et de maîtriser la méthode dite de "bootstrap" ou de "continuité", qui consiste à montrer qu'il existe une barrière d'énergie infranchissable pour les solutions à une edp donnée, et que les solutions qui sont "en dessous" de cette barrière y restent pour tout temps. Ce genre de résultat parait contre-productif lorsque l'on veut faire exploser des solutions, mais est en réalité fondamental car il permet de maitriser l'explosion : toutes les variables du problème sont contrôlées, sauf une (typiquement un des invariants de Riemann du problème) qui produira la singularité en temps voulu, et de la bonne manière. Le bootstrap permet donc de prouver que la singularité a lieu à un temps donné et pas avant, avec une certaine géométrie et pas une autre. \\
+Durant les deux dernières semaines du stage, mon travail s'est concentré sur l'adaptation d'une partie du papier en 3D qui est l'analyse de l'équation linéarisée autour de la solution auto-similaire de référence (la partie non linéaire étant traitée avec le bootstrap). Dans le papier, l'analyse de la stabilité de la singularité est obtenue modulo un certain nombre fini de fréquences, qui sont ensuite éliminées car le problème traité dans le papier a beaucoup de structure, et l'on connait assez bien une solution explosive de référence. Cependant, pour des problèmes plus généraux et moins maitrisés, cela n'est plus possible et il faut faire autrement.\\
+Dans cet objectif, mon maître de stage essaye de bâtir une méthodologie systématique et générale pour ce genre de problème, en rendant complètement explicite les opérateurs et approximations de rang fini en jeu, puis en traitant la partie de rang fini à l'aide d'outils numériques qui donnent des bornes "exactes" dans la mesure où une borne sur l'incertitude sur les calculs, liée à la précision de l'ordinateur, est explicitement donnée par le programme. De nombreux problèmes se posent tout de même : même en travaillant en dimension 1, si l'on choisit une base classique pour décomposer le problème (typiquement des polynômes d'Hermite), le traitement numérique de plusieurs milliers de fonctions propres sont requises par les bornes théoriques, ce qui rend la méthode quasiment impraticable, et empêche son extension aux dimensions supérieures. \\
+Ainsi, ma tâche principale est de raffiner l'analyse théorique en trouvant une décomposition dans une base adaptée au problème, afin de rendre praticable les méthodes numériques. Pour l'instant la piste que m'a donné mon maître de stage est celle d'une base de fonctions gaussiennes, qui munissent le problème d'une structure "d'espace de Hilbert à noyau reproduisant" ce qui numériquement semble être une approche pertinente car très peu de fonctions propres semblent nécessaires pour contrôler l'équation linéarisée.
+
+\section{Perspectives}
+En plus d'avoir un intérêt numérique, la base de fonctions gaussiennes a de très forts liens avec les probabilités, et en particulier les réseaux de neurones. Or une approche étudiée en parallèle par mon maître de stage consiste à utiliser des "Physically informed neural networks" (PINNs) (qui consiste plus ou moins à rajouter l'edp dans la fonction de perte que l'on optimise) pour analyser certaines solutions singulières d'EDP, et les continuer après la singularité. \\
+Je ne connais presque rien aux réseaux de neurones et encore moins à cette variante, mais il semblerait que cela permette de trouver de nouvelles pistes de solutions auto-similaires à explorer, et avec un peu de chance des liens théoriques apparaitront entre ces réseaux et les bases étudiées, ce qui permettra de mieux appréhender le problème abstrait.
+
+
+
+
+\newpage
+\printbibliography[heading=bibintoc, title={Références}]
+\end{document}
