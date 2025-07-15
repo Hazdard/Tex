@@ -97,7 +97,10 @@ We proved in the previous section that the quadratic form associated with $L$ in
 In the next section, we will show that $\varphi_3$ has a sign and is bounded. This leaves to study the lower order terms, and we will prove that there exists a compact operator $M$ such that 
 \[\langle Mz, z \rangle_{H^3} =  \langle \varphi_0 z, z \rangle +\langle \varphi_1 z', z' \rangle +\langle \varphi_2 z'', z'' \rangle\]
 
-Combining those results yield the following energy estimate :\[\langle Lz, z \rangle_{H^3} \leq -\delta \|z\|_{H^3}  + \langle Mz, z \rangle_{H^3}  \]
+Combining those results yield the following energy estimate :
+\begin{equation}\label{energy}
+\langle Lz, z \rangle_{H^3} \leq -\delta \|z\|_{H^3}  + \langle Mz, z \rangle_{H^3} 
+\end{equation}
 We will use the Fourier transform, with the following convention :
 \[
 \hat{f}(\xi) := \mathcal{F}(f)(\xi) = \int_{-\infty}^{\infty} f(x) \, e^{-2\pi i x \xi} \, dx
@@ -152,5 +155,26 @@ Integrating by parts twice and applying the Parseval identity, we have the equiv
 Defining $\lambda_3(\xi) := - \frac{i16\pi^3\xi^3}{(1+\xi^2)^3 }$ and $\lambda_4(\xi) :=  \frac{16\pi^4\xi^4}{(1+\xi^2)^3 }$ , we have that 
 \[M_2z :=  \left(-\mathcal{F}^{-1}(\lambda_2)*\varphi_2''z\right)+\left(\mathcal{F}^{-1}(\lambda_3)*\varphi_2'z\right)+\left(\mathcal{F}^{-1}(\lambda_4)*\varphi_2z\right) \]
 satisfies \fcref{c2}.
+
+\newpage
+
+\section{Quality of the approximation}
+%TODO We only used that f is in L2, and not that it is in H3
+The compact operators that we are studying are of the form: \[K(f)(x) = \int K(x,y)f(y)\mathrm{d}y \]
+Assuming that we can bound the growth of the kernel at infinity, a natural choice of finite rank approximation on a bounded domain $[-A,A]$ would be to use a Riemann sum : \[K_n(f)(x) := \sum_{i=1}^n \delta K(x,y_i)f(y_i)\]
+where $\delta := \frac{2A}{n}$ is the integration step. \\
+
+Now, we want to get a precise bound on the quality of this approximation in order to compute a relevant upper bound in the energy estimate \ref{energy}. \\
+Assuming that $f\in H^3(\R)$ is also in $L^1(\R)$, we can use the inversion formula and work in Fourier space :
+\begin{equation}\label{int_finite}
+K_n(f)(x) =  \sum_{i=1}^n\delta K(x,y_i)f(y_i) = \int_\R \hat{f}(\xi)\sum_{i=1}^n \delta K(x,y_i) e^{2i\pi\xi y_i}\mathrm{d}\xi
+\end{equation}
+On the other hand, the operator can be written as :
+\begin{eqnarray*}
+K(f)(x) &=& \int K(x,y)f(y)\mathrm{d}y = \int \hat{K}(x,\xi)\hat{f}(\xi)\mathrm{d}\xi \\
+&=& \int \hat{f}(\xi) \int K(x,y)e^{-2i\pi\xi y}\mathrm{d}y \mathrm{d}\xi 
+\end{eqnarray*}
+
+There is a sign problem in the phase of the exponential, but if we can assume that the function $f$ is even, then we can also reverse the sign in the approximate kernel formula, and now the difference between the kernel and its approximation is easily bounded using the mean value theorem on $[-A,A]$, and by giving an explicit bound on the decay of the kernel away from zero. 
 
 \end{document}
