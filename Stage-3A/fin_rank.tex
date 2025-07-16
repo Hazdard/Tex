@@ -191,11 +191,11 @@ Let's first bound the difference on the compact domain $[-A,A]$ by applying the 
 &\leq&   \int_\R \left| \hat{f}(\xi) \right|  \sum_{i=0}^n \left(\int_{y_i}^{y_{i+1}}  \delta \sup_{y\in[-A,A]} {\left|\partial_yK(x,y)e^{-2i\pi\xi y} -2i\pi\xi K(x,y)e^{-2i\pi\xi y} \right|} \mathrm{d}y \right)\mathrm{d}\xi \\
 &\leq&  n  \delta^2  \int_\R \left| \hat{f}(\xi) \right|  \sup_{y\in[-A,A]}\Big( {\left|\partial_yK(x,y)\right|+ \left|2\pi\xi K(x,y)\right|}\Big) \mathrm{d}\xi \\
 &\leq&  n  \delta^2 \Big(\| \hat{f}\|_{L^1}  \sup_{y\in[-A,A]}{\left|\partial_yK(x,y)\right|} +  \| \xi\hat{f}(\xi)\|_{L^1} \sup_{y\in[-A,A]}{2\pi|K(x,y)|} \Big) \\
-&\leq&  C\frac{4A^2}{n}  \sup_{y\in[-A,A]}{\Big(\left|\partial_yK(x,y)\right| + \left|2\pi K(x,y)\right| \Big)} \| f\|_{H^3} \\
+&\leq&  C\frac{4A^2}{n}  \Big(\sup_{y\in[-A,A]}\left|\partial_yK(x,y)\right| + \sup_{y\in[-A,A]}\left|2\pi K(x,y)\right| \Big) \| f\|_{H^2} \\
 \end{eqnarray*}
 
-Where $C := \max\Big(\displaystyle \int_\R \frac{1}{(1+\xi^2)^2} \mathrm{d}\xi,\int_\R \frac{\xi^2}{(1+\xi^2)^3} \mathrm{d}\xi\Big)$ and we used the fact that, because $f\in H^3(\R)$, we have: \[\| \hat{f}(\xi)\|_{L^1} = \| \frac{1}{(1+\xi^2)}(1+\xi^2)\hat{f}(\xi)\|_{L^1} \leq \| \frac{1}{(1+\xi^2)}\|_{L^2} \|(1+\xi^2)\hat{f}(\xi)\|_{L^2} = \| \frac{1}{(1+\xi^2)}\|_{L^2} \| f\|_{H^2}  \] 
-and  \[\| \xi\hat{f}(\xi)\|_{L^1} = \| \frac{\xi}{(1+\xi^2)^{3/2}}(1+\xi^2)^{3/2}\hat{f}(\xi)\|_{L^1} \leq \| \frac{\xi}{(1+\xi^2)^{3/2}}\|_{L^2} \|(1+\xi^2)^{3/2}\hat{f}(\xi)\|_{L^2} = \| \frac{\xi}{(1+\xi^2)^{3/2}}\|_{L^2} \| f\|_{H^3}  \] 
+Where $C := \max\Big(\displaystyle \int_\R \frac{1}{(1+\xi^2)} \mathrm{d}\xi,\int_\R \frac{\xi^2}{(1+\xi^2)^2} \mathrm{d}\xi\Big)$ and we used the fact that, because $f\in H^3(\R)$, we have: \[\| \hat{f}(\xi)\|_{L^1} = \| \frac{1}{(1+\xi^2)^{1/2}}(1+\xi^2)^{1/2}\hat{f}(\xi)\|_{L^1} \leq \| \frac{1}{(1+\xi^2)^{1/2}}\|_{L^2} \|(1+\xi^2)^{1/2}\hat{f}(\xi)\|_{L^2} = \| \frac{1}{(1+\xi^2)^{1/2}}\|_{L^2} \| f\|_{H^1}  \] 
+and  \[\| \xi\hat{f}(\xi)\|_{L^1} = \| \frac{\xi}{(1+\xi^2)}(1+\xi^2)\hat{f}(\xi)\|_{L^1} \leq \| \frac{\xi}{(1+\xi^2)}\|_{L^2} \|(1+\xi^2)\hat{f}(\xi)\|_{L^2} = \| \frac{\xi}{(1+\xi^2)}\|_{L^2} \| f\|_{H^2}  \] 
 
 
 
