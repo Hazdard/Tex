@@ -179,16 +179,15 @@ There is a sign problem in the phase of the exponential, but if we can assume th
 Now, taking the difference of the two expressions, we have :
 
 \begin{eqnarray*}
-\left| K(f)(x) - K_n(f)(x)\right| &\leq& \left|  \int_\R \hat{f}(\xi) \left(\int_{-A}^A K(x,y)e^{-2i\pi\xi y}\mathrm{d}y - \sum_{i=0}^n \delta K(x,y_i) e^{-2i\pi\xi y_i} \right)\mathrm{d}\xi \right| + \\ \left|  \int_\R \hat{f}(\xi) \int_{\R \setminus [-A,A]} K(x,y)e^{-2i\pi\xi y}\mathrm{d}y\mathrm{d}\xi \right| \\
+\left| K(f)(x) - K_n(f)(x)\right| &\leq& \left|  \int_\R \hat{f}(\xi) \left(\int_{-A}^A K(x,y)e^{-2i\pi\xi y}\mathrm{d}y - \sum_{i=0}^n \delta K(x,y_i) e^{2i\pi\xi y_i} \right)\mathrm{d}\xi \right| \\ + \left|\int_\R \hat{f}(\xi) \int_{\R \setminus [-A,A]} K(x,y)e^{2i\pi\xi y}\mathrm{d}y\mathrm{d}\xi \right| \\
 &\leq& (I) + (II)
-% &\leq&  \left|  \int_\R \hat{f}(\xi)  \sum_{i=1}^n \left(\int_{x_i}^{x_{i+1}} K(x,y)e^{-2i\pi\xi y} - \delta K(x,y_i) e^{2i\pi\xi y_i}\mathrm{d}y \right)\mathrm{d}\xi \right| + \\ \left|  \int_\R \hat{f}(\xi) \int_{\R \setminus [-A,A]} K(x,y)e^{-2i\pi\xi y}\mathrm{d}y\mathrm{d}\xi \right| \\
 \end{eqnarray*}
 
 Let's first bound the difference on the compact domain $[-A,A]$ by applying the mean value theorem:
 
 \begin{eqnarray*}
-(I) &\leq&  \left|  \int_\R \hat{f}(\xi)  \sum_{i=0}^n \left(\int_{y_i}^{y_{i+1}} K(x,y)e^{-2i\pi\xi y} - K(x,y_i) e^{-2i\pi\xi y_i}\mathrm{d}y \right)\mathrm{d}\xi \right| \\
-&\leq&   \int_\R \left| \hat{f}(\xi) \right|  \sum_{i=0}^n \left(\int_{y_i}^{y_{i+1}}  \delta \sup_{y\in[-A,A]} {\left|\partial_yK(x,y)e^{-2i\pi\xi y} -2i\pi\xi K(x,y)e^{-2i\pi\xi y} \right|} \mathrm{d}y \right)\mathrm{d}\xi \\
+(I) &\leq&  \left|  \int_\R \hat{f}(\xi)  \sum_{i=0}^n \left(\int_{y_i}^{y_{i+1}} K(x,y)e^{2i\pi\xi y} - K(x,y_i) e^{2i\pi\xi y_i}\mathrm{d}y \right)\mathrm{d}\xi \right| \\
+&\leq&   \int_\R \left| \hat{f}(\xi) \right|  \sum_{i=0}^n \left(\int_{y_i}^{y_{i+1}}  \delta \sup_{y\in[-A,A]} {\left|\partial_yK(x,y)e^{2i\pi\xi y} +2i\pi\xi K(x,y)e^{2i\pi\xi y} \right|} \mathrm{d}y \right)\mathrm{d}\xi \\
 &\leq&  n  \delta^2  \int_\R \left| \hat{f}(\xi) \right|  \sup_{y\in[-A,A]}\Big( {\left|\partial_yK(x,y)\right|+ \left|2\pi\xi K(x,y)\right|}\Big) \mathrm{d}\xi \\
 &\leq&  n  \delta^2 \Big(\| \hat{f}\|_{L^1}  \sup_{y\in[-A,A]}{\left|\partial_yK(x,y)\right|} +  \| \xi\hat{f}(\xi)\|_{L^1} \sup_{y\in[-A,A]}{2\pi|K(x,y)|} \Big) \\
 &\leq&  C\frac{4A^2}{n}  \Big(\sup_{y\in[-A,A]}\left|\partial_yK(x,y)\right| + \sup_{y\in[-A,A]}\left|2\pi K(x,y)\right| \Big) \| f\|_{H^2} \\
@@ -197,10 +196,17 @@ Let's first bound the difference on the compact domain $[-A,A]$ by applying the 
 Where $C := \max\Big(\displaystyle \int_\R \frac{1}{(1+\xi^2)} \mathrm{d}\xi,\int_\R \frac{\xi^2}{(1+\xi^2)^2} \mathrm{d}\xi\Big)$ and we used the fact that, because $f\in H^3(\R)$, we have: \[\| \hat{f}(\xi)\|_{L^1} = \| \frac{1}{(1+\xi^2)^{1/2}}(1+\xi^2)^{1/2}\hat{f}(\xi)\|_{L^1} \leq \| \frac{1}{(1+\xi^2)^{1/2}}\|_{L^2} \|(1+\xi^2)^{1/2}\hat{f}(\xi)\|_{L^2} = \| \frac{1}{(1+\xi^2)^{1/2}}\|_{L^2} \| f\|_{H^1}  \] 
 and  \[\| \xi\hat{f}(\xi)\|_{L^1} = \| \frac{\xi}{(1+\xi^2)}(1+\xi^2)\hat{f}(\xi)\|_{L^1} \leq \| \frac{\xi}{(1+\xi^2)}\|_{L^2} \|(1+\xi^2)\hat{f}(\xi)\|_{L^2} = \| \frac{\xi}{(1+\xi^2)}\|_{L^2} \| f\|_{H^2}  \] 
 
-
-
-
-
+~\\
+Then for the second part, by Fubini's property:
+\begin{eqnarray*}
+(II) &=&  \left|\int_{\R \setminus [-A,A]} K(x,y) \int_\R \hat{f}(\xi) e^{2i\pi\xi y}\mathrm{d}\xi \mathrm{d}y\right|  =\left| \int_{\R \setminus [-A,A]} K(x,y) f(y)\mathrm{d}y \right|  \\
+&=& \left| \int_{\R \setminus [-A,A]} \lambda(x-y)\varphi(y) f(y)\mathrm{d}y \right| = \left| \int_{\R \setminus [x-A,x+A]} \lambda(u)\varphi(x-u) f(x-u)\mathrm{d}u \right| 
+\end{eqnarray*}
+Assuming we can show that $\varphi$ is bounded, we have :
+\begin{eqnarray*}
+(II) &\leq& \|\varphi\|_{L^\infty} \|f\|_{L^2} \int_{\R \setminus [x-A,x+A]} \lambda(u)^2\mathrm{d}u
+\end{eqnarray*}
+Since we can show that $\lambda(x)=\frac{\pi}{4}e^{-2\pi \lvert x\rvert}\left(2\pi^2x^2+3\pi \lvert x\rvert +\frac{3}{2}\right)$,
 
 
 
