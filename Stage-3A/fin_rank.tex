@@ -197,16 +197,22 @@ Where $C := \max\Big(\displaystyle \int_\R \frac{1}{(1+\xi^2)} \mathrm{d}\xi,\in
 and  \[\| \xi\hat{f}(\xi)\|_{L^1} = \| \frac{\xi}{(1+\xi^2)}(1+\xi^2)\hat{f}(\xi)\|_{L^1} \leq \| \frac{\xi}{(1+\xi^2)}\|_{L^2} \|(1+\xi^2)\hat{f}(\xi)\|_{L^2} = \| \frac{\xi}{(1+\xi^2)}\|_{L^2} \| f\|_{H^2}  \] 
 
 ~\\
-Then for the second part, by Fubini's property:
+Then for the second part, by Fubini's theorem:
 \begin{eqnarray*}
 (II) &=&  \left|\int_{\R \setminus [-A,A]} K(x,y) \int_\R \hat{f}(\xi) e^{2i\pi\xi y}\mathrm{d}\xi \mathrm{d}y\right|  =\left| \int_{\R \setminus [-A,A]} K(x,y) f(y)\mathrm{d}y \right|  \\
-&=& \left| \int_{\R \setminus [-A,A]} \lambda(x-y)\varphi(y) f(y)\mathrm{d}y \right| = \left| \int_{\R \setminus [x-A,x+A]} \lambda(u)\varphi(x-u) f(x-u)\mathrm{d}u \right| 
+&=& \left| \int_{\R \setminus [-A,A]} \lambda(x-y)\varphi(y) f(y)\mathrm{d}y \right| 
 \end{eqnarray*}
+
+Since we can show that $\lambda(x)=\frac{\pi}{4}e^{-2\pi \lvert x\rvert}\left(2\pi^2x^2+3\pi \lvert x\rvert +\frac{3}{2}\right)$, we have the following bound :
+\begin{lemma}
+Ayaya
+\end{lemma}
+
 Assuming we can show that $\varphi$ is bounded, we have :
+% We can also integrate by part here, since f is in H^3
 \begin{eqnarray*}
 (II) &\leq& \|\varphi\|_{L^\infty} \|f\|_{L^2} \int_{\R \setminus [x-A,x+A]} \lambda(u)^2\mathrm{d}u
 \end{eqnarray*}
-Since we can show that $\lambda(x)=\frac{\pi}{4}e^{-2\pi \lvert x\rvert}\left(2\pi^2x^2+3\pi \lvert x\rvert +\frac{3}{2}\right)$,
 
 
 

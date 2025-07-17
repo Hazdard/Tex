@@ -1,0 +1,150 @@
+%====================TodoInit====================%
+
+% Importer le .ini dans ~/.config/xm1/
+% Mettre des users tags pour les commandes récurrentes.
+% Utiliser Customize Completion pour rajouter les begin des nouveaux theoremes (les ends sont mis automatiquement) et leurs versions star ; les alias en fin de fichier ; la coloration du texte ;
+% Rajouter des raccourcis clavier pour : mathbb, mathcal, et autres ; la coloration du texte ;
+
+
+%====================Roadmap====================%
+
+% Rajouter des alias utiles
+
+% Liens utiles :
+
+%https://cedricvillani.org/sites/dev/files/old_images/2012/10/ecriture.pdf
+
+%https://www.overleaf.com/learn/latex/Theorems_and_proofs
+  
+%https://tex.stackexchange.com/questions/391443/new-theorem-environment-with-manual-theorem-number
+
+%https://tex.stackexchange.com/questions/234676/new-theorem-style
+
+%====================AppelPackages====================%
+
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+% Une page A4 fait 210mm de large pour 297mm de haut.
+\usepackage[a4paper,total={180mm,275mm},left=15mm,top=10mm,includeheadfoot]{geometry}
+\usepackage{graphicx,amsmath,amsfonts,amssymb,amsthm,fancyhdr,caption,dsfont,mathrsfs}
+\usepackage[hidelinks,pdfstartview=FitH,bookmarksopen=false,pdfpagemode=UseNone,pdftoolbar=false,pdfmenubar=false]{hyperref}
+\usepackage{cleveref}
+\pagestyle{fancy}
+
+%====================CustomStyles====================%
+
+\newtheoremstyle{bourbaki_it}%            % Name
+  {10pt}%                                 % Space above
+  {10pt}%                                 % Space below
+  {\itshape}%                             % Body font
+  {17pt}%                                 % Indent amount
+  {\scshape}%                             % Theorem head font
+  {.~---}%                                % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\newtheoremstyle{bourbaki_plain}%         % Name
+  {10pt}%                                 % Space above
+  {10pt}%                                 % Space below
+  {}%                                     % Body font
+  {17pt}%                                 % Indent amount
+  {\scshape}%                             % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {}%                                     % Theorem head spec (can be left empty, meaning `normal')
+  
+%====================CustomTheorems====================%
+
+\renewcommand{\thesection}{\Roman{section}} 
+
+\renewenvironment{proof}[1][\proofname]{{\scshape #1. }}{~\\ \qed}
+
+\numberwithin{equation}{section}  %Numero des equations en fonction de la section
+\renewcommand{\theequation}{\arabic{section}.\arabic{equation}}
+
+\theoremstyle{bourbaki_plain}
+
+\newtheorem{defin}{Definition}[section]
+\renewcommand{\thedefin}{\thesection-\arabic{defin}}
+\newtheorem{definstar}{Definition}[section]
+\renewcommand{\thedefinstar}{\arabic{definstar}}
+
+\newtheorem*{rmq}{Remark}
+
+\theoremstyle{bourbaki_it}
+
+\newtheorem{thm}{Theorem}[section]
+\renewcommand{\thethm}{\thesection-\arabic{thm}} %Met un - a la place du .
+\newtheorem{thmstar}{Theorem}[section]
+\renewcommand{\thethmstar}{\arabic{thmstar}} % Retire le tirer pour les sections * sans numéro
+
+\newtheorem{cor}[thm]{Corollary}
+\renewcommand{\thecor}{\thesection-\arabic{cor}}
+\newtheorem{corstar}[thmstar]{Corollary}
+\renewcommand{\thecorstar}{\arabic{corstar}}
+
+\newtheorem{lemma}[thm]{Lemma}
+\renewcommand{\thelemma}{\thesection-\arabic{lemma}}
+\newtheorem{lemmastar}[thmstar]{Lemma}
+\renewcommand{\thelemmastar}{\arabic{lemmastar}}
+
+\newtheorem{prop}[thm]{Proposition}
+\renewcommand{\theprop}{\thesection-\arabic{prop}}
+\newtheorem{propstar}[thmstar]{Proposition}
+\renewcommand{\thepropstar}{\arabic{propstar}}
+
+
+\newtheorem{mtheoreminner}{Theorem}
+\newenvironment{mthm}[1]{%
+  \renewcommand\themtheoreminner{#1}%
+  \mtheoreminner
+}{\endmtheoreminner}
+
+%% Exemple :
+
+%\begin{mthm}{A}[title]\label{foo}
+% This is a theorem.
+%\end{mthm}
+
+%====================Misc====================%
+
+\hypersetup{
+  colorlinks   = true,    % Colours links instead of ugly boxes
+  urlcolor     = blue,    % Colour for external hyperlinks
+  linkcolor    = black,   % Colour of internal links
+  citecolor    = black    % Colour of citations
+}
+
+%Remplace proof par preuve
+\addto\captionsfrench{\renewcommand\proofname{Proof}}
+
+% Configuration pour rendre le texte entier cliquable dans une référence
+\newcommand{\fcref}[1]{\hyperref[#1]{\cref*{#1}}}
+
+% Écrire des limites proprement
+\newcommand{\Lim}[1]{\raisebox{0.5ex}{\scalebox{0.8}{$\displaystyle \lim_{#1}\;$}}}
+% Sinon \lim\limits_{x \to y}
+
+% Pour écrire des chiffres romains
+\newcommand*{\rom}[1]{\expandafter\@slowromancap\romannumeral #1@}
+
+%Majuscules pour cleveref
+\crefname{defin}{Definition}{Definitions}
+\crefname{rmq}{Remark}{Remarks} 
+\crefname{thm}{Theorem}{Theorems}
+\crefname{cor}{Corollary}{Corollaries}
+\crefname{lemma}{Lemma}{Lemmas}
+\crefname{prop}{Proposition}{Propositions}
+\crefname{mtheoreminner}{Theorem}{Theorems} 
+
+%====================Shortcuts====================%
+
+\def\C{\mathbb C}
+\def\R{\mathbb R}
+\def\Q{\mathbb Q}
+\def\Z{\mathbb Z}
+\def\N{\mathbb N}
+\def\T{\mathbb T}
+\def\P{\mathbb P}
+\def\setbar{\ \middle| \ }
