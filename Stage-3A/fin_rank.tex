@@ -1,6 +1,6 @@
 \documentclass[11pt,a4paper]{article}
 
-\usepackage{../jedusor}
+\usepackage{../riddle}
 \usepackage{mathabx}
 \DeclareSymbolFont{yhlargesymbols}{OMX}{yhex}{m}{n} 
 \DeclareMathAccent{\yhwidehat}{\mathord}{yhlargesymbols}{"62}
@@ -203,18 +203,32 @@ Then for the second part, by Fubini's theorem:
 &=& \left| \int_{\R \setminus [-A,A]} \lambda(x-y)\varphi(y) f(y)\mathrm{d}y \right| 
 \end{eqnarray*}
 
-Since we can show that $\lambda(x)=\frac{\pi}{4}e^{-2\pi \lvert x\rvert}\left(2\pi^2x^2+3\pi \lvert x\rvert +\frac{3}{2}\right)$, we have the following bound :
-\begin{lemma}
-Ayaya
-\end{lemma}
+We can show that $\lambda(x)=\frac{\pi}{4}e^{-2\pi \lvert x\rvert}\left(2\pi^2x^2+3\pi \lvert x\rvert +\frac{3}{2}\right)$, defining $P(x):=2\pi^2x^2+3\pi|x|+\tfrac32$ we can bound the lambda term: \\
+Since
+\(|x+y|\le|x|+|y|\) and \((x+y)^2\le2x^2+2y^2\):
+\[
+P(x+y)
+\le2\pi^2(2x^2+2y^2)+3\pi(|x|+|y|)+\tfrac32
+=2P(x)+2P(y).
+\]
+Hence
+\[
+\lambda(x+y)
+=\tfrac\pi4e^{-2\pi|x+y|}P(x+y)
+\le\tfrac\pi4e^{-2\pi|x+y|}(2P(x)+2P(y))
+\]
+\[
+\leq 2e^{-2\pi|y|}\lambda(x)+2e^{-2\pi|x|}\lambda(y)
+\]
 
-Assuming we can show that $\varphi$ is bounded, we have :
+
+Assuming we can show that $\varphi$ is bounded, we now have :
 % We can also integrate by part here, since f is in H^3
 \begin{eqnarray*}
-(II) &\leq& \|\varphi\|_{L^\infty} \|f\|_{L^2} \int_{\R \setminus [x-A,x+A]} \lambda(u)^2\mathrm{d}u
+(II) &\leq& \|\varphi\|_{L^\infty} \int_{\R \setminus [-A,A]} \Big( 2e^{-2\pi|y|}\lambda(x)+2e^{-2\pi|x|}\lambda(y)\Big)|f(y)|\mathrm{d}y \\
+&\leq&  \|\varphi\|_{L^\infty} \left( \lambda(x) \int_{\R \setminus [-A,A]} 2e^{-2\pi|y|}|f(y)|\mathrm{d}y +   2e^{-2\pi|x|}\int_{\R \setminus [-A,A]} \lambda(y)|f(y)|\mathrm{d}y\right)\\
+&\leq&  \|\varphi\|_{L^\infty} \left( \lambda(x) \left(\int_{\R \setminus [-A,A]} 2e^{-4\pi|y|}\mathrm{d}y\right)^\frac{1}{2} \|f\|_{L^2} +   2e^{-2\pi|x|}\int_{\R \setminus [-A,A]} \lambda(y)^2\mathrm{d}y\|f\|_{L^2}\right)\\
 \end{eqnarray*}
-
-
 
 
 
