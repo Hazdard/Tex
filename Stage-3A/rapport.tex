@@ -21,9 +21,8 @@
 % Pourquoi le papier sur la dim3 est aussi gros ? La p7 sur la linéarisation revient à avoir une borne type lemme A.1 dans le premier papier ?
 
 % Majda-Bertozzi avec fiches -> Eggers-Fontelos -> Tao chap1 et annexe -> papier et articles connexes 
+
 % https://www.youtube.com/watch?v=mw_hhOqKDx4 (T.B. intro papier 2D)
-% https://www.youtube.com/watch?v=g-qyjXOLV4o  (László Székelyhidi) 
-% https://www.youtube.com/watch?v=o3NYsxCr7eg&list=PLmsGGxFhM5bzUCRCjQbQtolk-yzB2eFqn&index=27  (Max Planck Science)
 % https://vimeo.com/539376697/bbc4763e80 (T.B. intro papier 3D)
 % https://www.youtube.com/watch?app=desktop&v=JRBwdVFmcE4 (T.B. exemple conf avec op linéarisé) (en chercher d'autres)
 
@@ -35,12 +34,18 @@
 \section{Introduction}
 TODO
 % Pour l'intro : 
+%TODO : Classification AMS
 % Utiliser mi-parcours
 % Noms à citer pour l'histoire de méca flux et évolution des chocs et la tradition : Morawetz, Lax, Nirenberg, Majda, et maintenant Buckmaster, Vicol et Shatah.
 % Parler du retirement de Varadhan, 60 ans (!!!!) à Courant, l'image que ça t'as donné d'avoir une grande carrière, avoir pleins d'élèves, ouvrir des sujets, donner naissance à un pan de la recherche, continuer à bosser tard, animé par ses problèmes.
-% Parler de Princeton ?
+% Parler de Princeton !
 % Dire que on veut comprendre les sources de singularités dans NS, car ces équations sont une simplification des fluides réels (qui n'ont bien sur pas de singularités), et donc la caractérisation de ces blowup permet de mettre en exergue les points cruciaux qui ne sont pas pris en compte dans NS.
-% Le résultat qu'on veut montrer est beaucoup plus fort que simplement cette equation a une donnée initiale bizarre qui engendre une singularité. On prouve qu'il y a un ouvert de données initiales qui génèrent TOUTES la MÊME singularité vue asymptotiquement via le changement de variable auto-similaire ! Ce n'est donc pas un phénomène illusoire, négligeable (cf triadique de cantor pour faire péter Euler), et de plus Tristan semble penser que le comportement pour Burgers est universel, quitte a bien changer les variables. % Deux trucs dans le papier 1 : géométrie de la singularité stable (au sens C^4 pour la géométrie asymptotique auto similaire du choc) ; et purement azymuthale (en se ramenant à la sol 1D) ; et viscosite non nulle et bornee.
+% Le résultat qu'on veut montrer est beaucoup plus fort que simplement cette equation a une donnée initiale bizarre qui engendre une singularité. On prouve qu'il y a un ouvert de données initiales qui génèrent TOUTES la MÊME singularité vue asymptotiquement via le changement de variable auto-similaire ! Ce n'est donc pas un phénomène illusoire, négligeable (cf tr\begin{equation}
+•
+\end{equation}iadique de cantor pour faire péter Euler), et de plus Tristan semble penser que le comportement pour Burgers est universel, quitte a bien changer les variables. % Deux trucs dans le papier 1 : géométrie de la singularité stable (au sens C^4 pour la géométrie asymptotique auto similaire du choc) ; et purement azymuthale (en se ramenant à la sol 1D) ; et viscosite non nulle et bornee.
+% Citer Chen/Hou blow up cylindrical boundary for smooth inital data.
+% Interet de self-smilarity : universallité, unifie. Et deja présent chez Leray ?
+% On veut du stable car on fait du numerique et donc si instable alors les erreurs numeriques nous emmène loin. (En fait ps sur, gros trouver une vrai def)
 
 % Parler de la vision probabiliste système de particules en intéraction, 6ème problème de Hilbert et article récent (+ filiation Bardos, Bodineau, Gallagher, Golse, Saint-Raymond)
 
@@ -68,7 +73,38 @@ b
 
 % DIRE QUE LES MODES QU'IL RESTE À LA FIN SONT TRAITÉS DANS LA PARTIE NON LINÉAIRE, EN CHOISISSANT BIEN LA DONNÉE INITIALE.
 
-\section{Bootstrap method}
+\subsection{ Quality of the approximation}
+%TODO : Faire un première partie sur les calculs de eta et gamma et dire que gamma_i(j)=gamma_j(i)=gamma_0(i-j)=gamma_0(j-i) car paire.
+The compact operators that we are studying are of the form: \[K(f)(x) = \int_\R K(x,y)f(y)\mathrm{d}y \]
+Assuming that we can bound the growth of the kernel at infinity, a natural choice of a finite rank approximation on a bounded domain $[-A,A]$ would be to use a Riemann sum : \[K_n(f)(x) := \sum_{i=0}^n \delta K(x,y_i)f(y_i)\]
+where $\delta := \frac{2A}{n}$ is the integration step and $\begin{cases} y_0=-A \\ y_{i+1}=y_i + \delta \end{cases}$ are the sample points. \\
+
+Now, we want to get a precise bound on the quality of this approximation in order to compute a relevant upper bound in the energy estimate \ref{energy}. \\
+We want to use the following result to get a precise bound on the convergence in the operator norm.
+\begin{lemma}[Schur test]\label{schur}
+Let $K: \R^2 \mapsto \R$ be a square integrable kernel, and $T$ be the operator defined by 
+\[ T: L^2(\R) \longrightarrow L^2(\R), \qquad \big(Tf\big)(x) := \int_{\R}K(x,y) f(y)\mathrm{d}y. \] 
+Then \[\displaystyle \|T\|_{L^2\mapsto L^2} \leq \sup_{x\in \R} \int_\R |K(x,y)|\mathrm{d}y\times  \sup_{y\in \R} \int_\R |K(x,y)|\mathrm{d}x.\] 
+\end{lemma}
+
+Let's now rewrite the operators to apply this lemma. Recall that the Fourier multiplier $(1-\Delta)^\frac{3}{2}$ defines an isometric isomorphism from $H^3(\R)$ to $L^2(\R)$, and also that the Dirac function that evaluates a function at a given point $x$ has a representation in $H^3(\R)$, that we denote $\eta_x$. Now, for a function $f$ in $H^3(\R)$, defining $g:=(1-\Delta)^\frac{3}{2}f$, we have: 
+\[K(f)(x) = \int_\R K(x,y)f(y)\mathrm{d}y = \int_\R(1-\Delta_y)^\frac{-3}{2} K(x,y)g(y)\mathrm{d}y\]
+and 
+\begin{eqnarray*}
+K_n(f)(x) &=& \sum_{i=0}^n \delta K(x,y_i)f(y_i) = \sum_{i=0}^n \delta K(x,y_i)\langle f, \eta_{y_i} \rangle_{H^3} =   \sum_{i=0}^n \delta K(x,y_i)\langle g, (1-\Delta_y)^\frac{3}{2}\eta_{y_i} \rangle_{L^2} \\
+&=&\int_\R \sum_{i=0}^n \delta K(x,y_i)(1-\Delta_y)^\frac{3}{2}\eta_{y_i}(y)g(y)\mathrm{d}y 
+\end{eqnarray*} 
+
+\subsection{Conclusion for the linear part}
+% Avec les notes de Gonzalo.
+%Prendre f2(0)=0 dans notre cas
+%Prendre f dans l'orthogonal de l'image de M_n
+%(On peut meme faire mieux en gardant que les espaces propres de vp trop grandes)
+%(En fait la bonne façon de faire est de montrer numériquement que l’intégrale décroit. Je peux court-circuiter avec la preuve bootstrap des slides ?)
+
+
+
+\section{Bootstrap method for the non-linear part}
 c
 % La méthode de bootstrap /continuité revient à montrer qu'une zone "barrière" est interdite, et comme le système évolue continuement, il reste forcément d'un des côtés de la barrière, qui dépend juste de l'état initial.
 % expliquer pourquoi le damping damp : lutte contre la dérivéée temporelle, et lemme A.1 donne une estimée précise.
@@ -90,6 +126,7 @@ and define $Lz := -az - b\frac{\partial z}{\partial x} $, where $a(x):= 1+\frac{
 \subsection{Computation in Sobolev spaces}
 %TODO : Problème de nb de dérivées dans le calcul de la fq ? Prendre la partir sym ? 
 %TODO : PARTIE SYMÉTRIQUE 
+%TODO :Vraiment faire la forme quadratique
 
 Let $\langle f, g \rangle := \langle f, g \rangle_{L^2} = \displaystyle \int_\R  f(x)g(x)\,dx$ be the usual inner product of $L^2(\R)$.
 
@@ -222,29 +259,10 @@ Defining $\lambda_3(\xi) := - \frac{i16\pi^3\xi^3}{(1+\xi^2)^3 }$ and $\lambda_4
 \[M_2z :=  \left(-\mathcal{F}^{-1}(\lambda_2)*\varphi_2''z\right)+\left(\mathcal{F}^{-1}(\lambda_3)*\varphi_2'z\right)+\left(\mathcal{F}^{-1}(\lambda_4)*\varphi_2z\right) \]
 satisfies \fcref{c2}.
 
-\newpage
 
-\subsection{ Quality of the approximation}
-%TODO : Faire un première partie sur les calculs de eta et gamma et dire que gamma_i(j)=gamma_j(i)=gamma_0(i-j)=gamma_0(j-i) car paire.
-The compact operators that we are studying are of the form: \[K(f)(x) = \int_\R K(x,y)f(y)\mathrm{d}y \]
-Assuming that we can bound the growth of the kernel at infinity, a natural choice of a finite rank approximation on a bounded domain $[-A,A]$ would be to use a Riemann sum : \[K_n(f)(x) := \sum_{i=0}^n \delta K(x,y_i)f(y_i)\]
-where $\delta := \frac{2A}{n}$ is the integration step and $\begin{cases} y_0=-A \\ y_{i+1}=y_i + \delta \end{cases}$ are the sample points. \\
+\end{document}
 
-Now, we want to get a precise bound on the quality of this approximation in order to compute a relevant upper bound in the energy estimate \ref{energy}. \\
-We want to use the following result to get a precise bound on the convergence in the operator norm.
-\begin{lemma}[Schur test]\label{schur}
-Let $K: \R^2 \mapsto \R$ be a square integrable kernel, and $T$ be the operator defined by 
-\[ T: L^2(\R) \longrightarrow L^2(\R), \qquad \big(Tf\big)(x) := \int_{\R}K(x,y) f(y)\mathrm{d}y. \] 
-Then \[\displaystyle \|T\|_{L^2\mapsto L^2} \leq \sup_{x\in \R} \int_\R |K(x,y)|\mathrm{d}y\times  \sup_{y\in \R} \int_\R |K(x,y)|\mathrm{d}x.\] 
-\end{lemma}
 
-Let's now rewrite the operators to apply this lemma. Recall that the Fourier multiplier $(1-\Delta)^\frac{3}{2}$ defines an isometric isomorphism from $H^3(\R)$ to $L^2(\R)$, and also that the Dirac function that evaluates a function at a given point $x$ has a representation in $H^3(\R)$, that we denote $\eta_x$. Now, for a function $f$ in $H^3(\R)$, defining $g:=(1-\Delta)^\frac{3}{2}f$, we have: 
-\[K(f)(x) = \int_\R K(x,y)f(y)\mathrm{d}y = \int_\R(1-\Delta_y)^\frac{-3}{2} K(x,y)g(y)\mathrm{d}y\]
-and 
-\begin{eqnarray*}
-K_n(f)(x) &=& \sum_{i=0}^n \delta K(x,y_i)f(y_i) = \sum_{i=0}^n \delta K(x,y_i)\langle f, \eta_{y_i} \rangle_{H^3} =   \sum_{i=0}^n \delta K(x,y_i)\langle g, (1-\Delta_y)^\frac{3}{2}\eta_{y_i} \rangle_{L^2} \\
-&=&\int_\R \sum_{i=0}^n \delta K(x,y_i)(1-\Delta_y)^\frac{3}{2}\eta_{y_i}(y)g(y)\mathrm{d}y 
-\end{eqnarray*} 
 
 
 
@@ -312,19 +330,6 @@ K_n(f)(x) &=& \sum_{i=0}^n \delta K(x,y_i)f(y_i) = \sum_{i=0}^n \delta K(x,y_i)\
 %&\leq&  \|\varphi\|_{L^\infty} \left( \lambda(x) \int_{\R \setminus [-A,A]} 2e^{-2\pi|y|}|f(y)|\mathrm{d}y +   2e^{-2\pi|x|}\int_{\R \setminus [-A,A]} \lambda(y)|f(y)|\mathrm{d}y\right)\\
 %&\leq&  \|\varphi\|_{L^\infty} \left( \lambda(x) \left(\int_{\R \setminus [-A,A]} 2e^{-4\pi|y|}\mathrm{d}y\right)^\frac{1}{2} \|f\|_{L^2} +   2e^{-2\pi|x|}\int_{\R \setminus [-A,A]} \lambda(y)^2\mathrm{d}y\|f\|_{L^2}\right)\\
 %\end{eqnarray*}
-
-
-\section{Numerical approximation by Gaussians}
-
-
-
-
-\end{document}
-
-
-
-
-
 
 
 
