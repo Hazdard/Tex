@@ -24,6 +24,8 @@
 
 %TODO SE REFERER AU DOCUMENT DE F PI !!!!!!!!!
 
+%TODO : Classification AMS
+
 
 \begin{document}
 
@@ -59,10 +61,12 @@ Par ailleurs, j'ai dès le début de mon stage été marqué par la pluridiscipl
 Un autre fait marquant a été d'assister à la conférence célébrant la retraite de S.R.S. Varadhan, monument des probabilités modernes, ayant passé 60 ans (!!!) au Courant Institute, en ayant été deux fois son directeur. Ce dernier est à l'origine de l'autre tradition majeure de Courant : l'étude et le développement de la théorie des probabilités modernes, en particulier des phénomènes de grandes déviations, ainsi que de l'étude des processus de diffusion. Cette conférence a été l'occasion pour moi de découvrir des facettes souvent négligées dans les description des grandes carrières scientifiques : Varadhan a bien sur été extrêment prolifique sur le plan des découvertes mathématiques, mais il s'est aussi et surtout massivement investi dans la construction d'une culture de la recherche en probabilité qui porte encore ses fruits aujourd'hui, par exemple avec l'étude des matrices aléatoires citée ci-dessus, mais aussi avec l'intelligence artificielle, qui est aujourd'hui sans conteste le domaine le plus actif de la recherche mathématique, et dans lequel le Courant Institute est un lieu d'avant garde. \\
 Finalement, j'ai aussi eu la chance de participer  à la fin de mon stage à une summer school organisée par la National Science Foundation, portant précisemment sur le thème de mon stage, qui se déroulait au département de mathématiques de Princeton. Cela m'a permit d'avoir d'être exposé à des travaux actuels, d'avoir de très nombreuses discussions avec les différents participants, qu'ils soient professeurs ou élèves, et d'observer comment se coordonne un groupe de recherche en établissant une stratégie à long terme pour résoudre un problème important. \\
 
-Concernant le contenu de mon stage, j'ai été initié à une stratégie très générale employée par Tristan Buckmaster et ses collaborateurs afin d'étudier l'existence de solutions régulières aux équations de la mécanique des fluides, telles que l'équation d'Euler ou l'équation de Navier-Stokes (incompressibles). Ce problème est bien sur très célèbre, car il est mis à prix par le Clay Institute pour un million de dollars, David Hilbert l'ayant décrit comme l'un des problèmes devant guider les recherches des mathématiciens au cours de notre millénaire. Ce problème peut à première vu sembler dénué d'interêt aujourd'hui, tant les modélisations utilisées dans des domaines appliquées tels que la météorologie ou l'étude de la dynamique des océans sont infiniments plus compliqués. Cependant, ce qui motive une telle question n'est pas d'évaluer la pertinence des équations d'Euler ou de Navier-Stokes pour décrire la réalité, mais est plutôt de permettre, via l'abstraction induite par le cadre mathématique, de mettre en évidence les potentielles incohérences et défauts de nos modélisations intuives des fluides conduisant à des absurdités physiques, et donc de repenser à un niveau fondamental notre conception et appréhension des fluides. Le premier résultat majeur sur ce sujet a été publié par Jean Leray en 1934 \cite{leray1934} dans lequel est établit l'existence globale de solutions faibles, "turbulentes", aux équations de Navier-Stokes, aujourd'hui appelées solutions de Leray-Hopf. Ce sujet a été largement étudié depuis, et une avancée importante récente est l'existence de données initiales lisses qui conduisent à une singularité pour l'équation d'Euler à frontière cylindrique, publiée par Chen et Hou en 2023 dans une série d'articles \cite{chen_hou1},\cite{chen_hou2}, et qui utilise une stratégie semblable à celle décrite dans ce rapport. \\
+Concernant le contenu de mon stage, j'ai été initié à une stratégie très générale employée par Tristan Buckmaster et ses collaborateurs permettant de prouver l'existence de solutions singulières aux équations de la mécanique des fluides, telles que l'équation d'Euler ou l'équation de Navier-Stokes (incompressibles). Ce problème est bien sur très célèbre, car il est mis à prix par le Clay Institute pour un million de dollars, David Hilbert l'ayant décrit comme l'un des problèmes devant guider les recherches des mathématiciens au cours de notre millénaire. Ce problème peut à première vu sembler dénué d'interêt aujourd'hui, tant les modélisations utilisées dans des domaines appliquées tels que la météorologie ou l'étude de la dynamique des océans sont infiniments plus compliqués. Cependant, ce qui motive une telle question n'est pas d'évaluer la pertinence des équations d'Euler ou de Navier-Stokes pour décrire la réalité, mais est plutôt de permettre, via l'abstraction induite par le cadre mathématique, de mettre en évidence les potentielles incohérences et défauts de nos modélisations intuives des fluides conduisant à des absurdités physiques, et donc de repenser à un niveau fondamental notre conception et appréhension des fluides. Le premier résultat majeur sur ce sujet a été publié par Jean Leray en 1934 \cite{leray1934} dans lequel est établit l'existence globale de solutions faibles, "turbulentes", aux équations de Navier-Stokes, aujourd'hui appelées solutions de Leray-Hopf. Ce sujet a été largement étudié depuis, et une avancée importante récente est l'existence de données initiales lisses qui conduisent à une singularité pour l'équation d'Euler à frontière cylindrique, publiée par Chen et Hou en 2023 dans une série d'articles \cite{chen_hou1},\cite{chen_hou2}, et qui utilise une stratégie semblable à celle décrite dans ce rapport. \\
 Il faut aussi noter le récent progrès dans la résolution du 6ème problème de Hilbert, qui concerne la dérivation probabiliste des équations de la physique (en particulier de la mécanique des fluides), obtenu par Deng, Hani, Ma \cite{deng_hani_ma_2025_hilbert6}. Ce résultat s'inscrit dans une série de travaux menés par Bodineau, Gallagher, Golse, Saint-Raymond, et offre une approche potentiellement différente de la vision analytique classique, car elle s'appuie sur des outils probabiliste, et est motivée physiquement par la description atomique, moléculaire, des fluides. Cette vision probabiliste des fluides comme étant la limite d'un ensemble de particules en intéraction ne sera cependant pas abordée ici. \\
 
-D'un point de vue pratique, j'ai d'abord commencé par apprendre les résultats classiques de la mécanique des fluides et de l'auto-similarité dans des livres tels que \cite{majda2001vorticity}, \cite{eggers2015singularities}, \cite{tao2006dispersive}, j'ai ensuite lu les articles \cite{buckmaster2019formation},\cite{buckmaster2022imploding} afin de découvrir les différentes technique utilisées pour résoudre le type de problème auquel j'étais confronté. J'ai ensuite expérimenté avec les approximations numériques et l'utilisation des bibliothèques Python de calcul formel et de calculs rigoureux, puis j'ai appliqué la méthode générale précedemment mentionnée dans le cas de l'équation de Burgers.
+D'un point de vue pratique, j'ai d'abord commencé par apprendre les résultats classiques de la mécanique des fluides et de l'auto-similarité dans des livres tels que \cite{majda2001vorticity}, \cite{eggers2015singularities}, \cite{tao2006dispersive}, j'ai ensuite lu les articles \cite{buckmaster2019formation},\cite{buckmaster2022imploding} afin de découvrir les différentes technique utilisées pour résoudre le type de problème auquel j'étais confronté. J'ai ensuite expérimenté avec les approximations numériques et l'utilisation des bibliothèques Python de calcul formel et de calculs rigoureux, puis j'ai appliqué la méthode générale précedemment mentionnée dans le cas de l'équation de Burgers. \\
+
+Finalement, je souhaite remercier les doctorants avec lesquels j'ai été ammené à travailler : Grayson Davis, Chen Li, et Kaiwen Zhang. Ils m'ont accompagné tout au long du stage, et les résultats présentés dans ce document sont issus d'un travail de groupe que nous avons mené ensemble.
 
 \newpage
 {\centering
@@ -71,43 +75,61 @@ D'un point de vue pratique, j'ai d'abord commencé par apprendre les résultats 
 }
 
 \newpage
-{\centering
-\section*{Introduction}
-
-}
-\section{Introduction}
-
-%TODO : Classification AMS
-% Le résultat qu'on veut montrer est beaucoup plus fort que simplement cette equation a une donnée initiale bizarre qui engendre une singularité. On prouve qu'il y a un ouvert de données initiales qui génèrent TOUTES la MÊME singularité vue asymptotiquement via le changement de variable auto-similaire ! Ce n'est donc pas un phénomène illusoire, négligeable (cf triadique de cantor pour faire péter Euler), et de plus Tristan semble penser que le comportement pour Burgers est universel, quitte a bien changer les variables. % Deux trucs dans le papier 1 : géométrie de la singularité stable (au sens C^4 pour la géométrie asymptotique auto similaire du choc) ; et purement azymuthale (en se ramenant à la sol 1D) ; et viscosite non nulle et bornee.
-% Citer Chen/Hou blow up cylindrical boundary for smooth inital data.
-% Interet de self-smilarity : universallité, unifie. Et deja présent chez Leray ?
-% On veut du stable car on fait du numerique et donc si instable alors les erreurs numeriques nous emmène loin. (En fait ps sur, gros trouver une vrai def)
-
-% Parler de la vision probabiliste système de particules en intéraction, 6ème problème de Hilbert et article récent (+ filiation Bardos, Bodineau, Gallagher, Golse, Saint-Raymond)
-
-\section{Analysis of shock and self-similar singularities in a fluid}
-% Pour le contenu :
-% Se servir des présentations de Tristan !
-% On prend une EDP, on veut montrer que des solutions forment des singularités en temps fini, stables, non triviales (densité non nulle). 
-% On s'intéresse aux singularités self similaire. Expliquer pourquoi et faire la présentation
-% Pour cela on a en fait besoin de montrer que quasimment tout reste bornée, c'est contre intuitif, expliquer.
-% Faire l'intro DES papiers des doc.
-%Faire un résumé des grandes lignes des techniques ci-dessus avant de les mettre en pratique. Inégalité d'énergie pour opérateur linéarisé au début, bootstrap pour partie non linéaire à la fin
-% Étape 0 : partir de Burgers et expliquer self-similar.
-% Étape 1 : premier papier facile car même pas besoin d'étudier l'op linéarisé car lemme appendice equation de forcing.  Second papier plus dur car 3d et pas Riemann. Cette fois il faut l'inégalité d'énergie mais on peut s'en sortir théoriquement.
-% Étape 2 : mon stage. Cette fois il faut mettre en place des méthodes numériques. Quand même facile car on connait très bien l'équation (on a carrément la solution explicite).
-% Étape 3 : Maintenant on ne connait même pas la solution autour de laquelle linéariser. Utilisation des PINNs et approximation par gaussienne(RKHS)/Hermite.
-% Étape 4 : premier papier. Décrire méthode barrière.
-%TODO : Préciser si on est dans le cas incompressible, visqueux, etc ...
-%TODO : donner les références des livres
-In this section, I will present the concepts of shock formation and self-similar blow-up for a nonlinear partial differential equation, illustrated by the fundamental example of Burgers' equation.
+{\centering\section*{Abstract}}
+In this document, I will present a general method to prove the existence of a large set of initial data that leads to the blowup of some PDE, by exhibiting a "universal" blowup profile. This type of result is remarkable since it suggests that the structure of the blowup has some physical meaning, as opposed to some famous blowup results where the initial data is crafted using non-measurable sets, or functions that are not even in the category of distributions.
+In the first section, I will present basic results about the Burgers equation, which will be the example studied throughout the report. In the second part, I will present the core of the strategy and apply it to Burgers' equation. This constitutes my personal work during the internship, with the collaboration of the aforementioned phd students. In the last part, I will briefly discuss the strategy in the setting of a harder equation, and what are the new tools used in such cases. \\
 
 
-\section{Energy inequality for the linearized operator}
-b
-%TODO : Où intervient la partie symétrique de l'opérateur ???? (Normalement on peut IPP donc tout est déjà symétrique)
+\section{Introduction to self-similar analysis}
+In this section, I will present the concepts of shock formation and self-similar blow-up for a nonlinear partial differential equation, illustrated by the fundamental example of Burgers' equation. The references for this section are  \cite{majda2001vorticity} and \cite{eggers2015singularities}.
 
-% DIRE QUE LES MODES QU'IL RESTE À LA FIN SONT TRAITÉS DANS LA PARTIE NON LINÉAIRE, EN CHOISISSANT BIEN LA DONNÉE INITIALE.
+\subsection{Characteristics in the case of Burgers' equation}
+I will say that there is a blowup or a singularity when a quantity of the equation goes to infinity. Recall Burgers' equation:
+\label{burgers}
+\begin{equation}
+\begin{cases} \partial_t u + u\partial_x u = 0 \\ u(x,0)=u_0 \end{cases}
+\end{equation}
+
+\noindent This is the simplest case of a nonlinear transport equation. Indeed, if one changes the term $u\partial_x u$ by $v\partial_x u$ where $v$ is some positive constant, then the solution to this equation is juste the initial profile $u_0$ shifted at speed $v$ in time: $u(x,t) = u_0(x - v t)$.
+In the general nonlinear case, one can solve this equation by the method of characteristics. For some $x_0\in \R$, define the characteristics curve:  \[\eta_{x_0}(t) :=x_0+ u_0(x_0)t.\]
+
+\noindent Apply the chain rule along this trajectory to the composition $t\mapsto u(\eta_{x_0}(t),t)$:
+\[
+\frac{\mathrm{d}}{\mathrm{d}t} \Big(u\big(\eta_{x_0}(t),t\big)\Big)
+=\partial_t u\big(\eta_{x_0}(t),t\big)+\eta_{x_0}'(t)\,\partial_x u\big(\eta_{x_0}(t),t\big).
+\]
+Using the PDE \eqref{burgers}, we obtain
+\[
+\frac{\mathrm{d}}{\mathrm{d}t}u\big(\eta_{x_0}(t),t\big)
+=\partial_t u + u\,\partial_x u = 0.
+\]
+Therefore $u$ is constant along each characteristic, and
+\begin{equation}\label{const_along}
+u\big(\eta_{x_0}(t),t\big)=u_0(x_0)\quad\text{for all }t\ge0.
+\end{equation}
+
+\noindent When characteristics intersects, the function $u$ is multi-valued, implying that there is a singularity. This first happends when the map
+\[x_0\mapsto x=x_0+u_0(x_0)t\]
+is no longer injective, since it is required in order to recover $x_0$ from $(x,t)$ and thus define $u(x,t)$ by \eqref{const_along}. Its derivative with respect to $x_0$ is
+\[
+\frac{\partial x}{\partial x_0}=1+t\,u_0'(x_0).
+\]
+Consequently the classical solution exists while
+\[1+t\,u_0'(x_0)>0\quad\text{for all }x_0.
+\]
+If $u_0'$ takes negative values, characteristics intersects and a shock forms. In that case, the earliest time of breakdown is
+\begin{equation}\label{break_time}
+t_* = \min_{\{x_0:\;u_0'(x_0)<0\}}\left(-\frac{1}{u_0'(x_0)}\right)
+= -\frac{1}{\inf_{x_0}u_0'(x_0)}\qquad\text{(provided }\inf_{x_0}u_0'(x_0)<0\;).
+\end{equation}
+
+\noindent Denoting $x_m$ the point where the minimum is reached,  \eqref{const_along} tells us that the singularity will form at the point $x_* := x_0 - \frac{u_0(x_m)}{u_0'(x_m)}$. \\
+After $t_*$ one must pass to entropy solutions and use methods such as the Rankine--Hugoniot condition to determine the shock speed and the continuation of the solution, but we will not discuss this.
+
+\subsection{The self-similar equation}
+The notion of self-similarity goes back to Leray's seminal paper \cite{leray1934}. It's main purpose is to transform a singular problem into a smooth one.
+
+
 
 \subsection{ Quality of the approximation}
 %TODO : Faire un première partie sur les calculs de eta et gamma et dire que gamma_i(j)=gamma_j(i)=gamma_0(i-j)=gamma_0(j-i) car paire.
@@ -147,10 +169,7 @@ c
 % La méthode de bootstrap /continuité revient à montrer qu'une zone "barrière" est interdite, et comme le système évolue continuement, il reste forcément d'un des côtés de la barrière, qui dépend juste de l'état initial.
 % expliquer pourquoi le damping damp : lutte contre la dérivéée temporelle, et lemme A.1 donne une estimée précise.
 % Deux trucs dans le papier : géométrie de la singularité stable (au sens C^4 pour la géométrie asymptotique auto similaire du choc) ; et purement azymuthale (en se ramenant à la sol 1D) ; et viscosite non nulle et bornee.
-\newpage
-\printbibliography[heading=bibintoc]
-\newpage
-\appendix
+
 \section{Computation of the kernel}
 
 \subsection{Definitions}
@@ -362,6 +381,12 @@ Assuming we can show that $\varphi$ is bounded, we now have :
 &\leq&  \|\varphi\|_{L^\infty} \left( \lambda(x) \int_{\R \setminus [-A,A]} 2e^{-2\pi|y|}|f(y)|\mathrm{d}y +   2e^{-2\pi|x|}\int_{\R \setminus [-A,A]} \lambda(y)|f(y)|\mathrm{d}y\right)\\
 &\leq&  \|\varphi\|_{L^\infty} \left( \lambda(x) \left(\int_{\R \setminus [-A,A]} 2e^{-4\pi|y|}\mathrm{d}y\right)^\frac{1}{2} \|f\|_{L^2} +   2e^{-2\pi|x|}\int_{\R \setminus [-A,A]} \lambda(y)^2\mathrm{d}y\|f\|_{L^2}\right)\\
 \end{eqnarray*}
+
+\newpage
+\printbibliography[heading=bibintoc]
+\newpage
+\appendix
+
 \end{document}
 
 
