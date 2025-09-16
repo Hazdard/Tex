@@ -287,45 +287,6 @@ Si $p$ et $q$ sont deux exposants conjugués finis, alors $L^q$ est le dual topo
 \section*{Probabilités} 
 \end{center}
 
-%Rajouter la cv en loi et ses props (cf chap 8), en particulier "portmanteau"
-
-% Schéma des implications de cv (version Trouvé et LeGall) + Scheffé (i.e. super théorème de cv dom)
-
-% Commentaire que cv L1 et p.s sont de natures différentes, et p.s est plus naturelle pour les probas.
-
-%Rajouter TDs de 1A et 2A why not
-
-% Inégalité max de Kolmogorov, cv de séries aléatoires ?
-
-% A rajouter du cours de JF Le Gall :
-
-
-% TF DES LOIS USUELLES
-
-% Portmanteau ? (Chap 8 prop 26 Trouvé)
-
-% Interprétation loi et espérance conditionnelle : valeur moyenne de X quand B est réalisé ??
-
-% Réfléchir aux interprétations pour avoir de manière intuitive que E( E(X | B) ) = E(X)
-
-% Prop début cours 8.1.3
-
-% 10.1.3 (voir lien avec 12.5 ?)
-
-% 12.5
-
-% 10.3.1 et globalement relire tout le cours.
-
-% Scheffé
-
-% Espace L^0 est complet
-
-% pour les (sur/sous)-martingales, borné dans L1 => cv p.s
-%
-%\item calculs effectifs d'espérance et de loi conditionnelle 
-%\item Props sur l'uniforme intégrabilité
-%\item Super cv dominée
-%\item Lemme de Scheffé
 \subsection*{Contexte}
 \begin{itemize}
 \item[-] Une mesure de probabilité étant en particulier finie, on a dans ce cadre que les espaces $L^p$ sont emboités, i.e : $L^\infty \subseteq \dots \subseteq L^1$. Cela se traduit par le fait que si une variable aléatoire possède un moment d'ordre $k$, tous ses moments d'ordre inférieur sont également finis.
@@ -507,6 +468,65 @@ Soit $I$ un intervalle de $\R$. Si $ \Phi :I \to \R$ est une fonction convexe, a
 Pour une v.a. à valeurs dans $\R^+$, $\displaystyle E(X)=\int_0^\infty P(X \geq x) \mathrm{d}x$, car $\displaystyle X=\int_0^\infty 1_{x\leq X} \mathrm{d}x$
 \end{lemmastar} 
 
+
+\newpage
+\begin{center}
+\section*{Martingales et processus aléatoires}
+\end{center}
+
+% Lire les lemmes écrits pas dans le poly de LeGall
+
+% def esperance conditionelle
+% Vision projection
+% lemme : si z est y mesurable, il existe phi tq z = phi(y)  8.1.3
+% version markov avec U non decreasing (car U(x) >= U(a) 1(x>=a) )
+% Chernoff inequality (application de markov ci dessus avec U=exp )
+% Rajouter partie dualité L^p L^q
+% X et Y indep ssi E(g(X)f(Y))=E(g(X))E(f(Y)) (vérifier l'énoncé exact, ça utilise l'esperance conditionelle)
+% Propriété de reflexion ?????? C'est quoi ce bordel ??????????????
+% gaussienne dans la nature car c'est la loi d'entropie maximale ?
+% Lebesgue est, à une constante près, l'unique mesure de Radon de R^d invariante par translation. La formule de Cameron-Martin donne en un certain sens un résultat du même type pour la mesure de Wiener, ce qui explique pourquoi cette dernière est décrite comme étant l'analogue de la mesure de Lebesgue en dimension infinie.
+
+
+%Rajouter la cv en loi et ses props (cf chap 8), en particulier "portmanteau"
+
+% Schéma des implications de cv (version Trouvé et LeGall) + Scheffé (i.e. super théorème de cv dom)
+
+% Commentaire que cv L1 et p.s sont de natures différentes, et p.s est plus naturelle pour les probas.
+
+%Rajouter TDs de 1A et 2A why not
+
+% Inégalité max de Kolmogorov, cv de séries aléatoires ?
+
+% A rajouter du cours de JF Le Gall :
+
+
+% TF DES LOIS USUELLES
+
+% Portmanteau ? (Chap 8 prop 26 Trouvé)
+
+% Interprétation loi et espérance conditionnelle : valeur moyenne de X quand B est réalisé ??
+
+% Réfléchir aux interprétations pour avoir de manière intuitive que E( E(X | B) ) = E(X)
+
+% Prop début cours 8.1.3
+
+% 10.1.3 (voir lien avec 12.5 ?)
+
+% 12.5
+
+% 10.3.1 et globalement relire tout le cours.
+
+% Scheffé
+
+% Espace L^0 est complet
+
+% pour les (sur/sous)-martingales, borné dans L1 => cv p.s
+%
+%\item calculs effectifs d'espérance et de loi conditionnelle 
+%\item Props sur l'uniforme intégrabilité
+%\item Super cv dominée
+%\item Lemme de Scheffé
 
 \newpage
 \begin{center}
