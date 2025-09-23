@@ -10,14 +10,16 @@
 \fancyfoot[C]{\thepage} 
 \fancyfoot[L]{Sacha Ben-Arous}
 \fancyfoot[R]{E.N.S Paris-Saclay}
-	
+
 \begin{document}
 \newpage
 \begin{center}  
+
 \section*{Bestiaire} 
 \end{center}
 
-
+\tableofcontents
+\newpage
 %Tools/Bestiaire : Formule de Vandermonde avec preuve polynomes. Th de Weierstrass avec probas. Thm de Helly. Encadrement integral, equivalent log, transfo d’abel, regle de bioche, methode de la phase stationnaire (Laplace) ; Zorn ; Vitali ; Cantor-Bernstein, Césaro, interpolation dans les espaces fonctionnels. Kirszbraun theorem. Banach–Mazur theorem. CV ps n'est pas topologisable. Preuve krein-millman villani. Monotone au plus discontinuités dénombrables avec preuve TMI.
 % Gronwall avec variantes et preuves.
 %Classification groupes R
@@ -46,5 +48,10 @@
 %Alain Connes sur France Inter avec Étienne Klein : https://www.radiofrance.fr/franceculture/podcasts/science-en-questions/comment-et-a-quoi-les-mathematiciens-revent-ils-2364346
 %Hugo Duminil-Copin sur France Inter : https://www.radiofrance.fr/franceculture/podcasts/la-conversation-scientifique/etre-mathematicien-qu-est-ce-faire-7738990
 
+\section{Théorie de la mesure}
+
+\begin{rmq}
+Une composée de fonctions Riemann-intégrables n'est pas forcément Riemann-intégrable : En se plaçant sur $[0,1]$, on considère $f$ la fonction qui à un irrationnel associe $0$, et à un élément irréductible $\frac p q$ de $\Q$ associe $\frac 1 q$. Cette fonction est réglée (limite uniforme de fonctions étagées) car elle admet une limite à droite et à gauche en tout point (c'est un caractérisation), et elle est donc Riemann-intégrable. Maintenant, soit $g$ l'indicatrice de $]0,1]$ (qui est bien sur Riemann-intégrable), on observe que $g \circ f$ est la fonction indicatrice des rationnels, qui n'est classiquement pas Riemann-intégrable.
+\end{rmq}
 
 \end{document}

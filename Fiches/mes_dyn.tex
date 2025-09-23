@@ -26,6 +26,21 @@
 \item[-] User et abuser des $\limsup$ et $\liminf$.
 \end{itemize}
 
+\subsection*{Motivations}
+Le problème de l'intégrale de Riemann est que la propriété de Riemann-intégrabilité n'est pas stable par limite simple, ce qui pose donc problème pour établir des théorèmes de limite intégrale généraux. De plus, même si l'on se restreint à une situation ne comportant que des fonctions continues (par morceaux), la preuve est très pénible.  Une illustration concrète de ce phénomène est le résultat suivant :
+\begin{mthm}{}
+Soit $f:[a,b] \mapsto \R$ une fonction bornée. Alors $f$ est Riemann-intégrable si et seulement si l'ensemble de ses points de discontinuité est négligeable.
+\end{mthm}
+\noindent où l'on peut définir la notion de négligeabilité sans avoir recours à la théorie de la mesure :
+\begin{definstar}
+Une partie $A$ de $\R$ est négligeable si pour tout $\varepsilon > 0$, il existe une famille d'intervalles $(I_i)_{i\in \N}$ telle que $A\subset \bigcup_{i\in \N} I_i$ et $\displaystyle \sum_{i\in \N} l(I_i) \leq \varepsilon$, où $l(I_i)$ est la longueur de l'intervalle $I_i$.
+\end{definstar}
+Le prototype de fonction non intégrable au sens de Riemann est la fonction indicatrice des rationnels, qui bien que limite simple de fonctions en escalier, n'est pas Riemann-intégrable d'après le théorème précédent. Historiquement, ce furent plutôt les travaux de Fourier sur l'équation de la chaleur qui motivèrent le développement de la théorie de la mesure afin de rendre rigoureuses les manipulations du noyau de la chaleur. \\
+
+Ainsi, il a fallu changer de méthode d'intégration, en intégrant par tranches rectangulaires horizontales, dont la base peut alors être un ensemble plus complexe qu'un simple intervalle. La limite simple de fonctions mesurables sera alors mesurable, mais on sera attentif aux subtilités induites par la convergence presque partout, qui sont discrètement évacuées grâce à la notion de complétion d'une tribu, qui permet justement de rendre mesurables les ensembles négligeables.
+
+\subsection*{Définitions}
+
 \subsection*{Résultats principaux}
 Dans tout ce qui suit, on travaille dans un espace mesuré $(E,\mathcal{A},\mu)$, et on pourra utiliser un espace métrique $(T,d)$.
 
